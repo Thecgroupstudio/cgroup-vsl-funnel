@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Strategy Call | The CGroup Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- TODO: PASTE META PIXEL CODE HERE -->
+    <!-- TODO: PASTE GOOGLE GLOBAL SITE TAG (gtag.js) CODE HERE -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Calendly link widget -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <style>
+        .calendly-container {
+            height: 800px;
+            min-height: 100vh;
+            width: 100%;
+            padding: 20px 0;
+        }
+        .back-button {
+            display: inline-block;
+            margin: 20px 0;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-button:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>The CGroup <span style="color: var(--accent-color);">Studio</span></h1>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="vsl-page.html" class="back-button" style="color: var(--accent-color);">← Back to Video</a>
+            </div>
+        </header>
+
+        <main style="max-width: 1000px; margin: 0 auto; padding: 20px;">
+            <div class="hero-section" style="padding: 20px 0; margin-bottom: 10px; text-align: center;">
+                <h1 style="font-size: 2.2rem; margin-bottom: 10px;">Schedule Your <span style="color: #4169e1;">Free Strategy Call</span></h1>
+            </div>
+            
+            <!-- Calendly inline widget -->
+            <div class="calendly-inline-widget" 
+                 data-url="https://calendly.com/kathrynficarra/mastermind-intro" 
+                 style="min-width:320px; height:750px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); border-radius: 8px; margin: 0 auto;">
+            </div>
+            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+            
+            <div style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: #666;">
+                <p>Your information is secure. We respect your privacy.</p>
+            </div>
+        </main>
+
+    </div><!-- End of container -->
+    
+    <footer style="background-color: #2B2B2B; color: #ffffff; padding: 40px 0; margin-top: 60px; width: 100%;">
+        <div class="container">
+            <p>© 2025 The CGroup Studio. All rights reserved. | <a href="#" style="color: #ffffff;">Privacy Policy</a> | <a href="#" style="color: #ffffff;">Terms</a> | <a href="#" style="color: #ffffff;">Disclaimer</a></p>
+        </div>
+    </footer>
+    <script>
+        // Fire Schedule conversion event for Meta Pixel and Google Ads
+        document.addEventListener('DOMContentLoaded', function() {
+            // TODO: Add Meta Pixel 'Schedule' event code
+            // TODO: Add Google Ads 'Appointment' event code
+            
+            // Pre-fill Calendly with email if available
+            const urlParams = new URLSearchParams(window.location.search);
+            const email = urlParams.get('email');
+            const name = urlParams.get('name');
+            
+            if (email) {
+                // This requires Calendly's prefill functionality
+                // You'll need to update the Calendly URL to include these parameters
+                // Example: https://calendly.com/your-username/event?email=user@example.com&name=User%20Name
+                console.log('Email prefilled:', email);
+            }
+        });
+    </script>
+</body>
+</html>

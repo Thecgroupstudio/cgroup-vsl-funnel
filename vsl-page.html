@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock Your Authentic Leadership Power | The CGroup Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- TODO: PASTE META PIXEL CODE HERE -->
+    <!-- TODO: PASTE GOOGLE GLOBAL SITE TAG (gtag.js) CODE HERE -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>The CGroup <span style="color: var(--accent-color);">Studio</span></h1>
+            </div>
+        </header>
+
+        <main class="vsl-container">
+            <div class="hero-section" style="padding: 30px 20px;">
+                <p class="pre-headline" style="color: #ff0000;">EXECUTIVE PRESENCE IMMERSION</p>
+                <h1 style="text-transform: uppercase; font-size: 2.5rem; margin-bottom: 15px;">UNLOCK YOUR AUTHENTIC LEADERSHIP POWER</h1>
+                <p class="tagline" style="color: #ff0000; font-weight: bold; margin: 10px auto;">YOUR PRESENCE IS YOUR POWER. OWN IT. LIVE IT. LEAD WITH IT.</p>
+            </div>
+            
+            <section class="video-section">
+                <div class="video-container" style="max-width: 900px; margin: 0 auto 40px;">
+                    <iframe 
+                        width="100%" 
+                        height="550" 
+                        src="https://www.youtube.com/embed/wuW7RTCf3Jw?autoplay=1&rel=0&modestbranding=1" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                
+                <p class="subheadline" style="text-align: center; max-width: 800px; margin: 20px auto 40px; font-size: 1.1rem;">
+                    Discover the proven framework that has transformed hundreds of executives into confident, influential leaders who command attention and drive results.
+                </p>
+
+                <div class="cta-section">
+                    <h2 style="text-transform: uppercase; font-weight: bold; margin-bottom: 20px;">READY TO TRANSFORM YOUR LEADERSHIP PRESENCE?</h2>
+                    <p style="margin-bottom: 15px;">Book your <strong>free 30-minute strategy call</strong> with our executive presence coach to:</p>
+                    <div style="text-align: center; margin: 20px auto; max-width: 600px;">
+                        <p style="margin: 10px 0; text-align: center;">• Uncover your unique leadership presence style</p>
+                        <p style="margin: 10px 0; text-align: center;">• Identify what's holding you back from maximum impact</p>
+                        <p style="margin: 10px 0; text-align: center;">• Get a personalized roadmap to elevate your executive presence</p>
+                    </div>
+                    <a href="calendar.html" class="cta-button" id="book-call-btn">Book Your Strategy Call Now</a>
+                    <p class="guarantee"><i class="fas fa-lock"></i> Your information is 100% secure. We respect your privacy.</p>
+                </div>
+            </section>
+            
+            <section class="social-proof" style="margin: 40px auto; text-align: center;">
+                <p class="as-seen-text" style="font-size: 0.85rem; color: #777; letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase; font-weight: 600;">AS SEEN ON</p>
+                <img src="images/as seen on tv 1.png" alt="As Seen On TV" style="max-width: 100%; height: auto; margin: 0 auto; display: block;">
+            </section>
+        </main>
+
+    </div><!-- End of container -->
+    
+    <footer style="background-color: #2B2B2B; color: #ffffff; padding: 40px 0; margin-top: 60px; width: 100%;">
+        <div class="container">
+            <p>© 2025 The CGroup Studio. All rights reserved. | <a href="#" style="color: #ffffff;">Privacy Policy</a> | <a href="#" style="color: #ffffff;">Terms</a> | <a href="#" style="color: #ffffff;">Disclaimer</a></p>
+        </div>
+    </footer>
+    <script>
+        // Fire Lead conversion event for Meta Pixel and Google Ads
+        document.addEventListener('DOMContentLoaded', function() {
+            // TODO: Add Meta Pixel 'Lead' event code
+            // TODO: Add Google Ads 'Opt-In' event code
+            
+            // Add email and name to calendar link if available
+            const urlParams = new URLSearchParams(window.location.search);
+            const email = urlParams.get('email');
+            const name = urlParams.get('name');
+            
+            if (email || name) {
+                const calendarLink = new URL('calendar.html', window.location.href);
+                if (email) calendarLink.searchParams.append('email', email);
+                if (name) calendarLink.searchParams.append('name', name);
+                document.getElementById('book-call-btn').href = calendarLink.toString();
+            }
+        });
+    </script>
+</body>
+</html>
