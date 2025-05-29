@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Log the data being sent (for debugging)
             console.log('Sending form data:', formValues);
             
-            // Send data to n8n webhook
+            // Send data to production n8n webhook
             fetch('https://cgroup.app.n8n.cloud/webhook/3e216d40-d18c-44cb-8a70-122a4acaa275', {
                 method: 'POST',
                 headers: {
@@ -99,11 +99,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify(formValues)
             })
             .then(response => {
-                console.log('Response status:', response.status);
+                console.log('Production webhook response status:', response.status);
                 return response.text();
             })
             .then(data => {
-                console.log('Success:', data);
+                console.log('Production webhook success:', data);
+                
+                // Also send to test webhook
+                return fetch('https://cgroup.app.n8n.cloud/webhook-test/3e216d40-d18c-44cb-8a70-122a4acaa275', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    },
+                    body: JSON.stringify(formValues)
+                });
+            })
+            .then(response => {
+                if (response) {
+                    console.log('Test webhook response status:', response.status);
+                    return response.text();
+                }
+            })
+            .then(data => {
+                if (data) {
+                    console.log('Test webhook success:', data);
+                }
                 // Add a small delay before redirect to ensure the request completes
                 setTimeout(() => {
                     window.location.href = 'vsl-page.html';
