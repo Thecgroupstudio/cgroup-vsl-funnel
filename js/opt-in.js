@@ -10,24 +10,63 @@ document.addEventListener('DOMContentLoaded', function() {
         return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     }
     
+    // Function to get referrer information if UTM is not present
+    function getReferrerInfo() {
+        const referrer = document.referrer;
+        if (!referrer) return null;
+        
+        try {
+            const url = new URL(referrer);
+            return {
+                domain: url.hostname,
+                path: url.pathname,
+                full: referrer
+            };
+        } catch (e) {
+            return null;
+        }
+    }
+    
     // Set UTM parameters from URL to hidden form fields
     const utmParams = ['source', 'medium', 'campaign', 'term', 'content'];
+    let hasUtmParams = false;
     
+    // First check URL for UTM parameters
     utmParams.forEach(param => {
         const value = getUrlParameter('utm_' + param);
         const input = document.getElementById('utm_' + param);
         if (input && value) {
             input.value = value;
+            localStorage.setItem('utm_' + param, value); // Store in localStorage
+            hasUtmParams = true;
         }
     });
     
-    // Store UTM parameters in localStorage for cross-page tracking
-    utmParams.forEach(param => {
-        const value = getUrlParameter('utm_' + param);
-        if (value) {
-            localStorage.setItem('utm_' + param, value);
+    // If no UTM parameters in URL, check localStorage for previously stored values
+    if (!hasUtmParams) {
+        utmParams.forEach(param => {
+            const storedValue = localStorage.getItem('utm_' + param);
+            const input = document.getElementById('utm_' + param);
+            if (input && storedValue) {
+                input.value = storedValue;
+            }
+        });
+    }
+    
+    // If still no UTM parameters, use referrer information
+    const sourceInput = document.getElementById('utm_source');
+    const mediumInput = document.getElementById('utm_medium');
+    if (sourceInput && mediumInput && !sourceInput.value && !mediumInput.value) {
+        const referrerInfo = getReferrerInfo();
+        if (referrerInfo) {
+            sourceInput.value = referrerInfo.domain;
+            mediumInput.value = 'referral';
+        } else {
+            // If no referrer, mark as direct traffic
+            sourceInput.value = 'direct';
+            mediumInput.value = 'none';
         }
-    });
+    }
     
     // Form submission handler
     if (form) {
@@ -43,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function() {
             formValues.timestamp = new Date().toISOString();
             
             // Log the data being sent (for debugging)
-            console.log('Sending form data:', formValues);
             
             // Send data to n8n webhook
             fetch('https://cgroup.app.n8n.cloud/webhook-test/3e216d40-d18c-44cb-8a70-122a4acaa275', {

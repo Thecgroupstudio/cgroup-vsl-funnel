@@ -27,41 +27,51 @@
         .back-button:hover {
             text-decoration: underline;
         }
+        /* Fix for scrolling issue */
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .calendly-inline-widget {
+            position: relative;
+            min-width: 320px;
+            height: 750px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
+        <header style="padding: 10px 0 5px;">
             <div class="logo">
-                <h1>The CGroup <span style="color: var(--accent-color);">Studio</span></h1>
+                <h1 style="margin: 0; font-size: 1.8rem;">The CGroup <span style="color: var(--accent-color);">Studio</span></h1>
             </div>
-            <div style="text-align: center; margin-top: 20px;">
-                <a href="vsl-page.html" class="back-button" style="color: var(--accent-color);">← Back to Video</a>
+            <div style="text-align: center; margin-top: 5px;">
+                <a href="vsl-page.html" class="back-button" style="color: var(--accent-color); margin: 5px 0;">← Back to Video</a>
             </div>
         </header>
 
-        <main style="max-width: 1000px; margin: 0 auto; padding: 20px;">
-            <div class="hero-section" style="padding: 20px 0; margin-bottom: 10px; text-align: center;">
-                <h1 style="font-size: 2.2rem; margin-bottom: 10px;">Schedule Your <span style="color: #4169e1;">Free Strategy Call</span></h1>
+        <main style="max-width: 1000px; margin: 0 auto; padding: 10px 20px;">
+            <div class="hero-section" style="padding: 5px 0; margin-bottom: 5px; text-align: center;">
+                <h1 style="font-size: 1.8rem; margin-bottom: 5px;">Schedule Your <span style="color: #4169e1;">Free Strategy Call</span></h1>
             </div>
             
-            <!-- Calendly inline widget -->
-            <div class="calendly-inline-widget" 
-                 data-url="https://calendly.com/kathrynficarra/mastermind-intro" 
-                 style="min-width:320px; height:750px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); border-radius: 8px; margin: 0 auto;">
-            </div>
+            <!-- Calendly inline widget begin -->
+            <div class="calendly-inline-widget" data-url="https://calendly.com/kathrynficarra/mastermind-intro?primary_color=ff0004" style="min-width:320px;height:1200px;"></div>
             <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+            <!-- Calendly inline widget end -->
             
-            <div style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: #666;">
-                <p>Your information is secure. We respect your privacy.</p>
+            <div style="text-align: center; margin-top: 5px; font-size: 0.8rem; color: #666;">
+                <p style="margin: 5px 0;">Your information is secure. We respect your privacy.</p>
             </div>
         </main>
 
     </div><!-- End of container -->
     
-    <footer style="background-color: #2B2B2B; color: #ffffff; padding: 40px 0; margin-top: 60px; width: 100%;">
+    <footer style="background-color: #2B2B2B; color: #ffffff; padding: 20px 0; width: 100%;">
         <div class="container">
-            <p>© 2025 The CGroup Studio. All rights reserved. | <a href="#" style="color: #ffffff;">Privacy Policy</a> | <a href="#" style="color: #ffffff;">Terms</a> | <a href="#" style="color: #ffffff;">Disclaimer</a></p>
+            <p style="margin: 0;">© 2025 The CGroup Studio. All rights reserved. | <a href="#" style="color: #ffffff;">Privacy Policy</a> | <a href="#" style="color: #ffffff;">Terms</a> | <a href="#" style="color: #ffffff;">Disclaimer</a></p>
         </div>
     </footer>
     <script>
