@@ -75,38 +75,28 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Get form data
             const formData = new FormData(form);
+            const formValues = Object.fromEntries(formData.entries());
             
-            // Create data object in the format expected by n8n Form Submission node
-            const data = {
-                data: {}
-            };
+            // Add page URL and timestamp
+            formValues.page_url = window.location.href;
+            formValues.timestamp = new Date().toISOString();
             
-            // Add all form fields to the data object
-            for (const [key, value] of formData.entries()) {
-                data.data[key] = value;
-            }
+            // Add a unique identifier to prevent caching issues
+            formValues.requestId = Date.now() + Math.random().toString(36).substring(2);
             
-            // Add additional metadata
-            data.data.page_url = window.location.href;
-            data.data.timestamp = new Date().toISOString();
-            
-            // Add UTM parameters to data object
-            utmParams.forEach(param => {
-                const input = document.getElementById('utm_' + param);
-                if (input && input.value) {
-                    data.data['utm_' + param] = input.value;
-                }
-            });
-            
-            console.log('Sending data:', data); // For debugging
+            // Log the data being sent (for debugging)
+            console.log('Sending form data:', formValues);
             
             // Send data to n8n webhook
-            fetch('https://cgroup.app.n8n.cloud/form/8a8fc37d-e5d9-4c1d-8b82-1e60d04fa406', {
+            fetch('https://cgroup.app.n8n.cloud/webhook/3e216d40-d18c-44cb-8a70-122a4acaa275', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache',
+                    'Expires': '0'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(formValues)
             })
             .then(response => {
                 console.log('Response status:', response.status);
@@ -114,13 +104,17 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(data => {
                 console.log('Success:', data);
-                // Redirect to VSL page regardless of response
-                window.location.href = 'vsl-page.html';
+                // Add a small delay before redirect to ensure the request completes
+                setTimeout(() => {
+                    window.location.href = 'vsl-page.html';
+                }, 300);
             })
             .catch(error => {
                 console.error('Error:', error);
-                // Redirect to VSL page even if there's an error with the webhook
-                window.location.href = 'vsl-page.html';
+                // Add a small delay before redirect to ensure the request completes
+                setTimeout(() => {
+                    window.location.href = 'vsl-page.html';
+                }, 300);
             });
         });
     }
