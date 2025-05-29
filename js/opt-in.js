@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Log the data being sent (for debugging)
             
             // Send data to n8n webhook
-            fetch('https://cgroup.app.n8n.cloud/webhook-test/3e216d40-d18c-44cb-8a70-122a4acaa275', {
+            fetch('https://cgroup.app.n8n.cloud/webhook/3e216d40-d18c-44cb-8a70-122a4acaa275', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
