@@ -211,7 +211,7 @@
             </script>
                 
                 <!-- CTA Button for Popup Form -->
-                <div style="text-align: center; margin: 40px auto;">
+                <div style="text-align: center; padding: 20px 0 0 0; background: #fff; display: block;">
                     <button onclick="showPopup()" 
                             class="cta-button"
                             style="padding: 16px 40px;
@@ -255,22 +255,7 @@
                             </div>
                         </div>
                         
-                        <button onclick="showPopup()" 
-                                class="cta-button"
-                                style="padding: 16px 40px;
-                                       font-size: 1.2rem;
-                                       font-weight: 600;
-                                       color: white;
-                                       background: linear-gradient(90deg, #4169e1, #ff0004);
-                                       border: none;
-                                       border-radius: 4px;
-                                       cursor: pointer;
-                                       box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3);
-                                       transition: all 0.3s ease 0s;
-                                       display: inline-block;
-                                       margin-top: 20px;">
-                            JOIN NOW &rarr;
-                        </button>
+                        <!-- Second CTA button removed -->
                     </div>
                 </div>
                 
@@ -298,5 +283,79 @@
         </div>
     </footer>
     <script src="js/opt-in.js"></script>
+    
+    <!-- Popup Overlay -->    
+    <div id="popupOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center;">
+        <div id="floatingOptin" style="display: none; background: white; padding: 30px; border-radius: 8px; width: 90%; max-width: 500px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            <button id="closePopup" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 24px; cursor: pointer; color: #999;">&times;</button>
+            <h3 style="margin-top: 0; color: #333; font-size: 1.5rem; text-align: center;">Reserve Your Spot</h3>
+            <p style="margin-bottom: 20px; text-align: center; color: #666;">Limited availability for the Executive Presence Immersion</p>
+            
+            <form id="vsl-optin-form" action="#" method="post">
+                <!-- Hidden UTM fields -->
+                <input type="hidden" id="utm_source" name="utm_source" value="">
+                <input type="hidden" id="utm_medium" name="utm_medium" value="">
+                <input type="hidden" id="utm_campaign" name="utm_campaign" value="">
+                <input type="hidden" id="utm_term" name="utm_term" value="">
+                <input type="hidden" id="utm_content" name="utm_content" value="">
+                
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="name" style="display: block; margin-bottom: 5px; font-weight: 500; color: #555;">Full Name</label>
+                    <input type="text" id="name" name="name" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="email" style="display: block; margin-bottom: 5px; font-weight: 500; color: #555;">Email Address</label>
+                    <input type="email" id="email" name="email" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="phone" style="display: block; margin-bottom: 5px; font-weight: 500; color: #555;">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
+                </div>
+                
+                <button type="submit" style="width: 100%; padding: 14px; background: linear-gradient(90deg, #4169e1, #ff0004); color: white; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 14px; margin-top: 10px;">RESERVE MY SPOT</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Function to show popup
+        function showPopup() {
+            // Close any open keyboard on mobile
+            if (document.activeElement) {
+                document.activeElement.blur();
+            }
+            
+            // Show the popup
+            document.getElementById('popupOverlay').style.display = 'flex';
+            document.getElementById('floatingOptin').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when popup is open
+            
+            // Scroll to top of form on mobile
+            setTimeout(function() {
+                document.getElementById('floatingOptin').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        }
+        
+        // Close popup when clicking the X or outside the form
+        document.addEventListener('DOMContentLoaded', function() {
+            // Close button handler
+            document.getElementById('closePopup').addEventListener('click', function() {
+                document.getElementById('popupOverlay').style.display = 'none';
+                document.getElementById('floatingOptin').style.display = 'none';
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+            });
+            
+            // Close when clicking outside the form
+            document.getElementById('popupOverlay').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    document.getElementById('popupOverlay').style.display = 'none';
+                    document.getElementById('floatingOptin').style.display = 'none';
+                    document.body.style.overflow = 'auto'; // Re-enable scrolling
+                }
+            });
+        });
+    </script>
 </body>
 </html>
