@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Freezing in High-Stakes Meetings | Executive Presence Immersion</title>
+    <link rel="icon" href="images/cgroup-logo.webp">
+    <style>
+        /* Spinner animation for video loading */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Pulse animation for play button */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 0, 4, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(255, 0, 4, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 0, 4, 0);
+            }
+        }
+        
+        .pulse-play-button {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Button hover effect */
+        .cta-button:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(65, 105, 225, 0.4);
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .cta-button {
+                padding: 18px 40px !important;
+                font-size: 1.3rem !important;
+                width: 90% !important;
+                max-width: 300px;
+            }
+        }
+        
+        /* Hide logo in mobile and tablet view - separate rule for higher specificity */
+        @media (max-width: 1024px) {
+            .header-container, .logo-container {
+                display: none !important;
+            }
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: flex-start;
+            padding: 15px 25px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            z-index: 10000;
+        }
+        .logo {
+            width: 30px;
+            height: 30px;
+            background-color: #4169e1;
+            border-radius: 8px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #000;
+            line-height: 1.1;
+            white-space: nowrap;
+        }
+        .logo-text span {
+            color: #000;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- TODO: PASTE META PIXEL CODE HERE -->
+    <!-- TODO: PASTE GOOGLE GLOBAL SITE TAG (gtag.js) CODE HERE -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/footer-fix.css">
+    <style>
+        /* Centered Popup Overlay */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer; /* Show pointer cursor to indicate clickable */
+        }
+        
+        /* Centered Popup Form */
+        .floating-optin {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            padding: 25px;
+            z-index: 10000; /* Higher than overlay to prevent clicks through */
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .floating-optin h3 {
+            margin-top: 0;
+            color: #333;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+        
+        .floating-optin .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .floating-optin label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .floating-optin input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .floating-optin button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #4169e1, #ff0004);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .floating-optin-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            font-weight: 300;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        
+        .floating-optin-close:hover {
+            color: #ff0004;
+        }
+        
+        @media (max-width: 768px) {
+            .floating-optin {
+                width: 95%;
+                padding: 20px 15px;
+            }
+            
+            .floating-optin-close {
+                top: 10px;
+                right: 15px;
+            }
+            
+            .floating-optin h3 {
+                font-size: 1.2rem;
+            }
+            
+            .floating-optin input {
+                padding: 10px;
+            }
+            
+            .floating-optin button[type="submit"] {
+                padding: 16px !important;
+                font-size: 16px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- Popup Overlay and Form (Hidden by default) -->
+        <div class="popup-overlay" id="popupOverlay" onclick="closePopup()">
+            <!-- Empty overlay div that closes when clicked -->
+        </div>
+        <div class="floating-optin" id="floatingOptin">
+            <span class="floating-optin-close" onclick="closePopup()">&times;</span>
+            <div style="background: linear-gradient(90deg, #4169e1, #ff0004); padding: 12px; text-align: center; margin: -25px -25px 15px -25px;">
+                <h3 style="color: white; margin: 0; font-size: 1.2rem; font-weight: 500;">Ready to Transform Your Leadership?</h3>
+            </div>
+            <form id="vsl-optin-form-floating" class="optin-form">
+                <input type="hidden" name="source" value="floating">
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 5px; text-align: center; line-height: 1.4;">
+                    Secure your spot for the Executive Presence Immersion
+                </p>
+                <p style="font-size: 0.9rem; color: #ff0004; font-weight: 600; margin-bottom: 15px; text-align: center; line-height: 1.4;">
+                    JULY 20-23, 2024 | SANCTUARY BEACH RESORT, MONTEREY, CA
+                </p>
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your First Name" required 
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 12px; font-size: 14px;">
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your Email Address" required
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 15px; font-size: 14px;">
+                </div>
+                <button type="submit" 
+                    style="width: 100%; padding: 12px; background: linear-gradient(90deg, #4169e1, #ff0004); color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 14px; cursor: pointer; margin-top: 5px;">
+                    JOIN NOW
+                </button>
+                <p style="font-size: 0.7rem; color: #999; margin: 12px 0 0; text-align: center; line-height: 1.4; font-style: italic;">
+                    You'll be redirected to schedule your call
+                </p>
+            </form>
+        </div>
+
+        <main class="vsl-container" style="background: #fff; padding: 0;">
+            <div style="text-align: center; margin: 40px 0 10px;">
+                <p style="color: #ff0004; font-weight: 600; margin-bottom: 5px; font-size: 1rem; text-transform: uppercase;">EXECUTIVE PRESENCE IMMERSION</p>
+                <h2 style="font-size: 2.5rem; color: #000; margin: 15px 0; font-weight: 800; text-transform: uppercase; line-height: 1.2;">SECURE YOUR SPOT NOW</h2>
+                <p style="font-size: 1.2rem; color: #333; max-width: 700px; margin: 0 auto 10px; line-height: 1.6; font-weight: 400; letter-spacing: 0.01em;">
+                    Secure your spot for the Executive Presence Immersion (July 20-23, 2024)<br>
+                    <span style="color: #4169e1; font-weight: 600;">SANCTUARY BEACH RESORT, MONTEREY, CA</span>
+                </p>
+            </div>
+            <!-- Video Container with Custom Preview -->
+            <div style="width: 100%; max-width: 650px; margin: 0 auto; background: #000; font-size: 0; line-height: 0;">
+                <div id="videoContainer" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
+                    <!-- YouTube thumbnail with play button overlay -->
+                    <div id="videoThumbnail" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; cursor: pointer;">
+                        <img src="https://img.youtube.com/vi/CZ5D2KWzmhM/maxresdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;" alt="Video Thumbnail">
+                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2);"></div>
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
+                            <div class="pulse-play-button" style="background: linear-gradient(135deg, #9b59b6, #e74c3c); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; position: relative; box-shadow: 0 0 20px rgba(155, 89, 182, 0.6); animation: pulse 2s infinite;">
+                                <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Hidden YouTube player div -->
+                    <div id="youtubePlayerDiv" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none;"></div>
+                </div>
+                    <style>
+                        @keyframes pulse {
+                            0% { box-shadow: 0 0 0 0 rgba(255, 0, 4, 0.7); }
+                            70% { box-shadow: 0 0 0 20px rgba(255, 0, 4, 0); }
+                            100% { box-shadow: 0 0 0 0 rgba(255, 0, 4, 0); }
+                        }
+                    </style>
+                </div>
+            </div>
+            
+            <!-- YouTube API Implementation -->
+            <script>
+                // Load YouTube API
+                var tag = document.createElement('script');
+                tag.src = "https://www.youtube.com/iframe_api";
+                var firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                
+                var player;
+                var playerReady = false;
+                
+                function onYouTubeIframeAPIReady() {
+                    // Initialize player but don't load video yet
+                    playerReady = true;
+                }
+                
+                // Function to initialize and play video when thumbnail is clicked
+                function initializeVideo() {
+                    // Show the player div
+                    document.getElementById('youtubePlayerDiv').style.display = 'block';
+                    // Hide the thumbnail
+                    document.getElementById('videoThumbnail').style.display = 'none';
+                    
+                    // Create the player
+                    player = new YT.Player('youtubePlayerDiv', {
+                        videoId: 'CZ5D2KWzmhM',
+                        playerVars: {
+                            'autoplay': 1,
+                            'mute': 0, // Start with sound
+                            'controls': 1,
+                            'modestbranding': 1,
+                            'rel': 0,
+                            'showinfo': 0
+                        },
+                        events: {
+                            'onReady': function(event) {
+                                // Video will autoplay with sound
+                                event.target.playVideo();
+                            },
+                            'onStateChange': function(event) {
+                                // If video ends, show thumbnail again
+                                if (event.data === YT.PlayerState.ENDED) {
+                                    document.getElementById('youtubePlayerDiv').style.display = 'none';
+                                    document.getElementById('videoThumbnail').style.display = 'block';
+                                }
+                            }
+                        }
+                    });
+                }
+                
+                // Add click handler to thumbnail
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.getElementById('videoThumbnail').addEventListener('click', function() {
+                        if (playerReady) {
+                            initializeVideo();
+                        } else {
+                            // If API isn't ready yet, wait a bit and try again
+                            setTimeout(function() {
+                                if (playerReady) {
+                                    initializeVideo();
+                                } else {
+                                    console.error('YouTube API not ready');
+                                }
+                            }, 1000);
+                        }
+                    });
+                });
+            </script>
+                
+                <!-- CTA Button for Popup Form -->
+                <div style="width: 100%; max-width: 650px; margin: 0 auto; padding: 20px 0 0 0; background: #fff;">
+                    <button onclick="showPopup()" 
+                            class="cta-button"
+                            style="padding: 16px 40px;
+                                   font-size: 1.2rem;
+                                   font-weight: 600;
+                                   color: white;
+                                   background: linear-gradient(90deg, #4169e1, #ff0004);
+                                   border: none;
+                                   border-radius: 4px;
+                                   cursor: pointer;
+                                   box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3);
+                                   transition: all 0.3s ease 0s;
+                                   width: 100%;">
+                        JOIN NOW &rarr;
+                    </button>
+                </div>
+                
+                <!-- Trusted By Leaders Section -->
+                <div style="text-align: center; margin: 40px auto 20px; padding: 0 20px;">
+                    <p style="font-size: 0.9rem; color: #777; letter-spacing: 1px; margin-bottom: 20px; text-transform: uppercase; font-weight: 600;">TRUSTED BY LEADERS FROM</p>
+                    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 25px; align-items: center; max-width: 900px; margin: 0 auto;">
+                        <img src="images/client-company-logo.avif" alt="Trusted Companies" style="max-width: 100%; height: auto; width: 90%;"> 
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Headline Section -->
+            <div style="text-align: center; max-width: 900px; margin: 40px auto 30px; padding: 0 20px;">
+                <h2 style="font-size: 2.5rem; color: #000; margin: 0 0 20px; font-weight: 800; text-transform: uppercase; line-height: 1.2;">STOP FREEZING IN HIGH-STAKES<br>MEETINGS</h2>
+                <h3 style="font-size: 1.4rem; color: #333; margin: 0 0 25px; font-weight: 600; line-height: 1.4;">DISCOVER HOW TO DEVELOP UNSHAKABLE EXECUTIVE<br>PRESENCE IN JUST 3 DAYS</h3>
+                <p style="color: #ff0004; font-weight: 600; margin: 0 0 20px; font-size: 1.2rem;">JULY 20-23, 2024 | SANCTUARY BEACH RESORT, MONTEREY, CA</p>
+                <p style="font-size: 1.1rem; color: #555; line-height: 1.6; max-width: 700px; margin: 0 auto 30px;">
+                    Join Kathryn Ficarra's Executive Presence Immersion and learn the neuroscience-backed system to command respect,<br>get promoted, and earn what you deserve
+                </p>
+            </div>
+            
+            <!-- What You'll Learn Section -->
+            <div style="max-width: 900px; margin: 0 auto 40px; padding: 0 20px;">
+                <h3 style="text-align: center; font-size: 1.3rem; margin-bottom: 30px; color: #333;">WHAT YOU'LL LEARN IN THIS TRAINING:</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                    <!-- Feature 1 -->
+                    <div style="flex: 1; min-width: 250px; background: #f9f9f9; border-radius: 8px; padding: 20px; border-left: 4px solid #ff0004;">
+                        <h4 style="color: #ff0004; margin-top: 0; margin-bottom: 10px; font-size: 1.1rem;">✓ The Freeze Response</h4>
+                        <p style="margin: 0; color: #555; font-size: 0.95rem; line-height: 1.5;">
+                            Understand why high-performers freeze when it matters most and how to overcome it
+                        </p>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div style="flex: 1; min-width: 250px; background: #f9f9f9; border-radius: 8px; padding: 20px; border-left: 4px solid #ff0004;">
+                        <h4 style="color: #ff0004; margin-top: 0; margin-bottom: 10px; font-size: 1.1rem;">✓ Nervous System Mastery</h4>
+                        <p style="margin: 0; color: #555; font-size: 0.95rem; line-height: 1.5;">
+                            Learn the science behind nervous system regulation for unshakable confidence
+                        </p>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div style="flex: 1; min-width: 250px; background: #f9f9f9; border-radius: 8px; padding: 20px; border-left: 4px solid #ff0004;">
+                        <h4 style="color: #ff0004; margin-top: 0; margin-bottom: 10px; font-size: 1.1rem;">✓ The 3-Day Transformation</h4>
+                        <p style="margin: 0; color: #555; font-size: 0.95rem; line-height: 1.5;">
+                            Discover what's included in the Executive Presence Immersion experience
+                        </p>
+                    </div>
+                </div>
+            </div>
+                
+                <div class="social-proof" style="margin: 30px auto; text-align: center; max-width: 800px;">
+                    <h3 style="font-size: 1.6rem; margin-bottom: 15px; color: #333; font-weight: 600;">WHAT EXECUTIVES ARE SAYING</h3>
+                    <p style="font-size: 1.1rem; color: #555; max-width: 700px; margin: 0 auto 25px; line-height: 1.5;">
+                        Leaders who have experienced the Executive Presence Immersion report remarkable transformations in their careers
+                    </p>
+                    <div class="testimonial-carousel" style="position: relative; margin: 10px 0 20px; padding: 20px; background-color: #f9f9f9; border-radius: 8px; min-height: 180px;">
+                        <!-- Testimonial 1 -->
+                        <div class="testimonial-slide" style="opacity: 1; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "Kathryn's approach to executive presence transformed how I show up in the boardroom. The nervous system techniques were a game-changer for my confidence."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— Michael T., Director of Operations</p>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "I used to dread board presentations until I learned Kathryn's executive presence techniques. Now I actually look forward to these opportunities to showcase my leadership."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— Jennifer L., Chief Financial Officer</p>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "The immersion experience was transformative. I've attended many leadership programs, but none addressed the physiological aspects of executive presence like Kathryn's approach."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— David R., VP of Marketing</p>
+                        </div>
+                        
+                        <!-- Testimonial 4 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "As a woman in tech leadership, I often struggled with being heard. The techniques I learned at the Executive Presence Immersion have completely changed how others perceive my authority."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— Sarah K., CTO</p>
+                        </div>
+                        
+                        <!-- Testimonial 5 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "I was skeptical at first, but the ROI on this program has been incredible. My team has noticed a significant difference in how I handle high-pressure situations."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— Robert P., Managing Director</p>
+                        </div>
+                        
+                        <!-- Testimonial 6 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "The nervous system regulation techniques have applications far beyond the boardroom. I'm using these skills in client meetings, media interviews, and even family discussions."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— Amanda J., Chief Communications Officer</p>
+                        </div>
+                        
+                        <!-- Testimonial 7 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "After the immersion, I secured the biggest deal of my career. I attribute this success directly to the presence and confidence I developed through Kathryn's program."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— Thomas B., Enterprise Sales Director</p>
+                        </div>
+                        
+                        <!-- Testimonial 8 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "The Executive Presence Immersion gave me tools I didn't even know I needed. Now I understand why some executives command attention the moment they walk into a room."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— Elizabeth W., Senior VP of Operations</p>
+                        </div>
+                        
+                        <!-- Testimonial 9 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "As someone who's struggled with imposter syndrome throughout my career, this program was transformative. I finally feel like I belong at the executive table."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— James H., Chief Strategy Officer</p>
+                        </div>
+                        
+                        <!-- Testimonial 10 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "The beach resort setting created the perfect environment for transformation. I returned to work with practical tools and a completely new perspective on leadership presence."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— Michelle C., Regional Director</p>
+                        </div>
+                        
+                        <!-- Navigation dots -->
+                        <div class="testimonial-dots" style="position: absolute; bottom: -15px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px;">
+                            <span class="dot active" style="height: 8px; width: 8px; background-color: #4169e1; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div><!-- End of container -->
+    
+
+    <script>
+        // Add UTM parameters to forms
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+            
+            utmParams.forEach(param => {
+                const value = urlParams.get(param);
+                if (value) {
+                    document.querySelectorAll(`input[name="${param}"]`).forEach(input => {
+                        input.value = value;
+                    });
+                }
+            });
+        });
+
+        // Function to show popup
+        function showPopup() {
+            // Close any open keyboard on mobile
+            if (document.activeElement) {
+                document.activeElement.blur();
+            }
+            
+            // Show the popup
+            document.getElementById('popupOverlay').style.display = 'flex';
+            document.getElementById('floatingOptin').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when popup is open
+            
+            // Scroll to top of form on mobile
+            setTimeout(function() {
+                document.getElementById('floatingOptin').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        }
+        
+        // Show popup after 30 seconds
+        setTimeout(showPopup, 30000);
+        
+        // Close popup function
+        function closePopup() {
+            document.getElementById('popupOverlay').style.display = 'none';
+            document.getElementById('floatingOptin').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+        
+        // Testimonial carousel functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.testimonial-dots .dot');
+            let currentSlide = 0;
+            let interval;
+            
+            // Function to show a specific slide
+            function showSlide(index) {
+                // Hide all slides
+                slides.forEach(slide => {
+                    slide.style.opacity = 0;
+                });
+                
+                // Remove active class from all dots
+                dots.forEach(dot => {
+                    dot.style.backgroundColor = '#bbb';
+                    dot.classList.remove('active');
+                });
+                
+                // Show the selected slide
+                slides[index].style.opacity = 1;
+                
+                // Add active class to the corresponding dot
+                dots[index].style.backgroundColor = '#4169e1';
+                dots[index].classList.add('active');
+                
+                // Update current slide index
+                currentSlide = index;
+            }
+            
+            // Function to show the next slide
+            function nextSlide() {
+                let next = currentSlide + 1;
+                if (next >= slides.length) {
+                    next = 0;
+                }
+                showSlide(next);
+            }
+            
+            // Start automatic slideshow
+            function startSlideshow() {
+                interval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+            }
+            
+            // Add click event to dots for manual navigation
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    clearInterval(interval); // Stop automatic slideshow
+                    showSlide(index);
+                    startSlideshow(); // Restart automatic slideshow
+                });
+            });
+            
+            // Initialize slideshow
+            startSlideshow();
+        });
+        
+        // Prevent clicks on the form from closing the popup
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('floatingOptin');
+            if (form) {
+                form.addEventListener('click', function(event) {
+                    event.stopPropagation(); // Prevent click from bubbling up to overlay
+                });
+            }
+        });
+        
+        function toggleFAQ(element) {
+            // conversion event for Meta Pixel and Google Ads
+            document.addEventListener('DOMContentLoaded', function() {
+                // TODO: Add Meta Pixel 'Lead' event code
+                // TODO: Add Google Ads 'Opt-In' event code
+                
+                // Add email and name to calendar link if available
+                const urlParams = new URLSearchParams(window.location.search);
+                const email = urlParams.get('email');
+                const name = urlParams.get('name');
+                
+                if (email || name) {
+                    const calendarLink = new URL('calendar.html', window.location.href);
+                    if (email) calendarLink.searchParams.append('email', email);
+                    if (name) calendarLink.searchParams.append('name', name);
+                    document.getElementById('book-call-btn').href = calendarLink.toString();
+                }
+            });
+        }
+    </script>
+    <script src="js/opt-in.js"></script>
+    <script src="js/vsl-optin.js"></script>
+    
+    <footer>
+        <div class="container">
+            <div class="logo-container">
+                <img src="images/cgroup-logo.webp" alt="The CGroup Studio">
+            </div>
+            <p>© 2025 The CGroup Studio. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms</a> | <a href="#">Disclaimer</a></p>
+        </div>
+    </footer>
+</body>
+</html>
