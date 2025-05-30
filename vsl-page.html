@@ -41,6 +41,79 @@
     <!-- TODO: PASTE META PIXEL CODE HERE -->
     <!-- TODO: PASTE GOOGLE GLOBAL SITE TAG (gtag.js) CODE HERE -->
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Floating Opt-in Form */
+        .floating-optin {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            width: 300px;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            padding: 25px;
+            z-index: 1000;
+            display: none;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .floating-optin h3 {
+            margin-top: 0;
+            color: #333;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+        
+        .floating-optin .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .floating-optin label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .floating-optin input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .floating-optin button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #4169e1, #ff0004);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .floating-optin-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 20px;
+            color: #999;
+        }
+        
+        @media (max-width: 1200px) {
+            .floating-optin {
+                display: none !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -50,6 +123,24 @@
                 <div class="logo-text">The CGroup <span>Studio</span></div>
             </div>
         </header>
+        
+        <!-- Floating Opt-in Form (Hidden by default) -->
+        <div class="floating-optin" id="floatingOptin">
+            <span class="floating-optin-close" onclick="document.getElementById('floatingOptin').style.display='none'">&times;</span>
+            <h3>Watch the Free Training</h3>
+            <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px; text-align: center;">Enter your details to access the video</p>
+            <form id="vsl-optin-form-floating" class="optin-form">
+                <input type="hidden" name="source" value="floating">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your First Name" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px;">
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your Email Address" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px;">
+                </div>
+                <button type="submit">WATCH NOW</button>
+                <p style="font-size: 0.7rem; color: #999; margin-top: 10px; text-align: center;">We respect your privacy. Unsubscribe at any time.</p>
+            </form>
+        </div>
 
         <main class="vsl-container">
             <section class="video-section" style="margin-top: 20px;">
@@ -62,6 +153,36 @@
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                             allowfullscreen>
                         </iframe>
+                    </div>
+                </div>
+                
+                <!-- Inline Opt-in Form -->
+                <div style="max-width: 500px; margin: 30px auto 40px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; border: 1px solid #e0e0e0;">
+                    <div style="background: linear-gradient(90deg, #4169e1, #ff0004); padding: 15px; text-align: center;">
+                        <h3 style="color: white; margin: 0; font-size: 1.3rem;">Watch the Free Training</h3>
+                    </div>
+                    <div style="padding: 25px;">
+                        <p style="text-align: center; color: #666; margin-bottom: 20px; font-size: 0.95rem;">
+                            Enter your details below to access the video and secure your spot for the Executive Presence Immersion.
+                        </p>
+                        <form id="vsl-optin-form-inline" class="optin-form">
+                            <input type="hidden" name="source" value="inline">
+                            <div style="margin-bottom: 15px;">
+                                <input type="text" name="name" placeholder="Your First Name" required 
+                                    style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 15px;">
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <input type="email" name="email" placeholder="Your Email Address" required
+                                    style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 15px;">
+                            </div>
+                            <button type="submit" 
+                                style="width: 100%; padding: 14px; background: linear-gradient(90deg, #4169e1, #ff0004); color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 15px; cursor: pointer;">
+                                WATCH FREE TRAINING NOW
+                            </button>
+                            <p style="font-size: 0.7rem; color: #999; margin-top: 15px; text-align: center; line-height: 1.4;">
+                                Your information is secure and will never be shared. Unsubscribe anytime.
+                            </p>
+                        </form>
                     </div>
                 </div>
                 
@@ -151,27 +272,46 @@
     
     <footer style="background-color: #2B2B2B; color: #ffffff; padding: 40px 0; margin-top: 60px; width: 100%;">
         <div class="container">
-            <p>© 2025 The CGroup Studio. All rights reserved. | <a href="#" style="color: #ffffff;">Privacy Policy</a> | <a href="#" style="color: #ffffff;">Terms</a> | <a href="#" style="color: #ffffff;">Disclaimer</a></p>
+            <p> 2025 The CGroup Studio. All rights reserved. | <a href="#" style="color: #ffffff;">Privacy Policy</a> | <a href="#" style="color: #ffffff;">Terms</a> | <a href="#" style="color: #ffffff;">Disclaimer</a></p>
         </div>
     </footer>
     <script>
-        // Fire Lead conversion event for Meta Pixel and Google Ads
+        // Add UTM parameters to forms
         document.addEventListener('DOMContentLoaded', function() {
-            // TODO: Add Meta Pixel 'Lead' event code
-            // TODO: Add Google Ads 'Opt-In' event code
-            
-            // Add email and name to calendar link if available
             const urlParams = new URLSearchParams(window.location.search);
-            const email = urlParams.get('email');
-            const name = urlParams.get('name');
+            const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
             
-            if (email || name) {
-                const calendarLink = new URL('calendar.html', window.location.href);
-                if (email) calendarLink.searchParams.append('email', email);
-                if (name) calendarLink.searchParams.append('name', name);
-                document.getElementById('book-call-btn').href = calendarLink.toString();
-            }
+            utmParams.forEach(param => {
+                const value = urlParams.get(param);
+                if (value) {
+                    document.querySelectorAll(`input[name="${param}"]`).forEach(input => {
+                        input.value = value;
+                    });
+                }
+            });
         });
+
+        function toggleFAQ(element) {
+            // conversion event for Meta Pixel and Google Ads
+            document.addEventListener('DOMContentLoaded', function() {
+                // TODO: Add Meta Pixel 'Lead' event code
+                // TODO: Add Google Ads 'Opt-In' event code
+                
+                // Add email and name to calendar link if available
+                const urlParams = new URLSearchParams(window.location.search);
+                const email = urlParams.get('email');
+                const name = urlParams.get('name');
+                
+                if (email || name) {
+                    const calendarLink = new URL('calendar.html', window.location.href);
+                    if (email) calendarLink.searchParams.append('email', email);
+                    if (name) calendarLink.searchParams.append('name', name);
+                    document.getElementById('book-call-btn').href = calendarLink.toString();
+                }
+            });
+        }
     </script>
+    <script src="js/opt-in.js"></script>
+    <script src="js/vsl-optin.js"></script>
 </body>
 </html>
