@@ -125,20 +125,31 @@
         </header>
         
         <!-- Floating Opt-in Form (Hidden by default) -->
-        <div class="floating-optin" id="floatingOptin">
-            <span class="floating-optin-close" onclick="document.getElementById('floatingOptin').style.display='none'">&times;</span>
-            <h3>Watch the Free Training</h3>
-            <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px; text-align: center;">Enter your details to access the video</p>
+        <div class="floating-optin" id="floatingOptin" style="width: 320px;">
+            <span class="floating-optin-close" onclick="document.getElementById('floatingOptin').style.display='none'" style="top: 10px; right: 15px; position: absolute; cursor: pointer; font-size: 22px; color: #999;">&times;</span>
+            <div style="background: linear-gradient(90deg, #4169e1, #ff0004); padding: 12px; text-align: center; margin: -25px -25px 15px -25px;">
+                <h3 style="color: white; margin: 0; font-size: 1.2rem; font-weight: 500;">Ready to Transform Your Leadership?</h3>
+            </div>
             <form id="vsl-optin-form-floating" class="optin-form">
                 <input type="hidden" name="source" value="floating">
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px; text-align: center; line-height: 1.4;">
+                    Secure your spot for the Executive Presence Immersion (July 20-23, 2024)
+                </p>
                 <div class="form-group">
-                    <input type="text" name="name" placeholder="Your First Name" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px;">
+                    <input type="text" name="name" placeholder="Your First Name" required 
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 12px; font-size: 14px;">
                 </div>
                 <div class="form-group">
-                    <input type="email" name="email" placeholder="Your Email Address" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px;">
+                    <input type="email" name="email" placeholder="Your Email Address" required
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 15px; font-size: 14px;">
                 </div>
-                <button type="submit">WATCH NOW</button>
-                <p style="font-size: 0.7rem; color: #999; margin-top: 10px; text-align: center;">We respect your privacy. Unsubscribe at any time.</p>
+                <button type="submit" 
+                    style="width: 100%; padding: 12px; background: linear-gradient(90deg, #4169e1, #ff0004); color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 14px; cursor: pointer; margin-top: 5px;">
+                    BOOK MY STRATEGY CALL NOW
+                </button>
+                <p style="font-size: 0.7rem; color: #999; margin: 12px 0 0; text-align: center; line-height: 1.4; font-style: italic;">
+                    You'll be redirected to schedule your call
+                </p>
             </form>
         </div>
 
@@ -261,9 +272,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="calendar.html" class="cta-button" id="book-call-btn" style="font-size: 1.2rem; padding: 15px 30px;">Secure Your Spot Now - Only 15 Seats Available</a>
-                    <p style="font-size: 0.9rem; margin: 10px 0 0; color: #ff0004; font-weight: 600;">JULY 20-23, 2024 | MONTEREY, CA</p>
-                    <p class="guarantee"><i class="fas fa-lock"></i> Your information is 100% secure. We respect your privacy.</p>
+                    <!-- Date and privacy notice removed as they're already in the form section -->
                 </div>
             </section>
             
