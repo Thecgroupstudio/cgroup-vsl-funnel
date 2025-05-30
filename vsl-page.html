@@ -48,10 +48,12 @@
                 width: 90% !important;
                 max-width: 300px;
             }
-            
-            /* Hide logo in mobile view */
-            .header-container {
-                display: none;
+        }
+        
+        /* Hide logo in mobile view - separate rule for higher specificity */
+        @media (max-width: 768px) {
+            .header-container, .logo-container {
+                display: none !important;
             }
         }
         

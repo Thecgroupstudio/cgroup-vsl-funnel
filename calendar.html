@@ -8,13 +8,15 @@
     <style>
         /* Mobile optimizations */
         @media (max-width: 768px) {
-            /* Hide logo in mobile view */
-            .header-container {
-                display: none;
-            }
-            
             .calendly-inline-widget {
                 height: 700px;
+            }
+        }
+        
+        /* Hide logo in mobile view - separate rule for higher specificity */
+        @media (max-width: 768px) {
+            .header-container, .logo-container {
+                display: none !important;
             }
         }
         
