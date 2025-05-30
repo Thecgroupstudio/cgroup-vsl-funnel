@@ -48,20 +48,29 @@ function handleFormSubmit(form, formId) {
             floatingOptin.style.display = 'none';
         }
         
-        // Redirect to video page or auto-play the video
+        // Redirect to calendar page
         setTimeout(function() {
-            // If you want to redirect to another page:
-            // window.location.href = 'video-page.html';
+            // Get form data to pass to calendar page
+            const formData = new FormData(form);
+            const params = new URLSearchParams();
             
-            // Or if you want to auto-play the video on the same page:
-            const videoIframe = document.querySelector('iframe');
-            if (videoIframe) {
-                videoIframe.src += "&autoplay=1";
-                window.scrollTo({
-                    top: videoIframe.offsetTop - 50,
-                    behavior: 'smooth'
-                });
+            // Add form data to URL params
+            for (let [key, value] of formData.entries()) {
+                if (key !== 'source') {  // Don't include internal fields
+                    params.append(key, value);
+                }
             }
+            
+            // Add UTM parameters if they exist
+            const urlParams = new URLSearchParams(window.location.search);
+            const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+            utmParams.forEach(param => {
+                const value = urlParams.get(param);
+                if (value) params.append(param, value);
+            });
+            
+            // Redirect to calendar page with all parameters
+            window.location.href = 'calendar.html?' + params.toString();
         }, 1500);
     });
 }
