@@ -102,6 +102,125 @@
     <!-- TODO: PASTE META PIXEL CODE HERE -->
     <!-- TODO: PASTE GOOGLE GLOBAL SITE TAG (gtag.js) CODE HERE -->
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Centered Popup Overlay */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer; /* Show pointer cursor to indicate clickable */
+        }
+        
+        /* Centered Popup Form */
+        .floating-optin {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            padding: 25px;
+            z-index: 10000; /* Higher than overlay to prevent clicks through */
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .floating-optin h3 {
+            margin-top: 0;
+            color: #333;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+        
+        .floating-optin .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .floating-optin label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .floating-optin input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .floating-optin button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #4169e1, #ff0004);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .floating-optin-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            font-weight: 300;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        
+        .floating-optin-close:hover {
+            color: #ff0004;
+        }
+        
+        @media (max-width: 768px) {
+            .floating-optin {
+                width: 95%;
+                padding: 20px 15px;
+            }
+            
+            .floating-optin-close {
+                top: 10px;
+                right: 15px;
+            }
+            
+            .floating-optin h3 {
+                font-size: 1.2rem;
+            }
+            
+            .floating-optin input {
+                padding: 10px;
+            }
+            
+            .floating-optin button[type="submit"] {
+                padding: 16px !important;
+                font-size: 16px !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -110,6 +229,41 @@
                 <div class="logo">C</div>
                 <div class="logo-text">The CGroup <span>Studio</span></div>
             </div>
+        </div>
+        
+        <!-- Popup Overlay and Form (Hidden by default) -->
+        <div class="popup-overlay" id="popupOverlay" onclick="closePopup()">
+            <!-- Empty overlay div that closes when clicked -->
+        </div>
+        <div class="floating-optin" id="floatingOptin">
+            <span class="floating-optin-close" onclick="closePopup()">&times;</span>
+            <div style="background: linear-gradient(90deg, #4169e1, #ff0004); padding: 12px; text-align: center; margin: -25px -25px 15px -25px;">
+                <h3 style="color: white; margin: 0; font-size: 1.2rem; font-weight: 500;">Ready to Transform Your Leadership?</h3>
+            </div>
+            <form id="vsl-optin-form-floating" class="optin-form">
+                <input type="hidden" name="source" value="floating">
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 5px; text-align: center; line-height: 1.4;">
+                    Secure your spot for the Executive Presence Immersion
+                </p>
+                <p style="font-size: 0.9rem; color: #ff0004; font-weight: 600; margin-bottom: 15px; text-align: center; line-height: 1.4;">
+                    JULY 20-23, 2024 | SANCTUARY BEACH RESORT, MONTEREY, CA
+                </p>
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your First Name" required 
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 12px; font-size: 14px;">
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Your Email Address" required
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 15px; font-size: 14px;">
+                </div>
+                <button type="submit" 
+                    style="width: 100%; padding: 12px; background: linear-gradient(90deg, #4169e1, #ff0004); color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 14px; cursor: pointer; margin-top: 5px;">
+                    JOIN NOW
+                </button>
+                <p style="font-size: 0.7rem; color: #999; margin: 12px 0 0; text-align: center; line-height: 1.4; font-style: italic;">
+                    You'll be redirected to schedule your call
+                </p>
+            </form>
         </div>
 
         <main class="vsl-container" style="background: #fff; padding: 0;">
@@ -282,44 +436,22 @@
             <p>© 2025 The CGroup Studio. All rights reserved. | <a href="#" style="color: #ffffff;">Privacy Policy</a> | <a href="#" style="color: #ffffff;">Terms</a> | <a href="#" style="color: #ffffff;">Disclaimer</a></p>
         </div>
     </footer>
-    <script src="js/opt-in.js"></script>
-    
-    <!-- Popup Overlay -->    
-    <div id="popupOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center;">
-        <div id="floatingOptin" style="display: none; background: white; padding: 30px; border-radius: 8px; width: 90%; max-width: 500px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-            <button id="closePopup" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 24px; cursor: pointer; color: #999;">&times;</button>
-            <h3 style="margin-top: 0; color: #333; font-size: 1.5rem; text-align: center;">Reserve Your Spot</h3>
-            <p style="margin-bottom: 20px; text-align: center; color: #666;">Limited availability for the Executive Presence Immersion</p>
-            
-            <form id="vsl-optin-form" action="#" method="post">
-                <!-- Hidden UTM fields -->
-                <input type="hidden" id="utm_source" name="utm_source" value="">
-                <input type="hidden" id="utm_medium" name="utm_medium" value="">
-                <input type="hidden" id="utm_campaign" name="utm_campaign" value="">
-                <input type="hidden" id="utm_term" name="utm_term" value="">
-                <input type="hidden" id="utm_content" name="utm_content" value="">
-                
-                <div class="form-group" style="margin-bottom: 15px;">
-                    <label for="name" style="display: block; margin-bottom: 5px; font-weight: 500; color: #555;">Full Name</label>
-                    <input type="text" id="name" name="name" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
-                </div>
-                
-                <div class="form-group" style="margin-bottom: 15px;">
-                    <label for="email" style="display: block; margin-bottom: 5px; font-weight: 500; color: #555;">Email Address</label>
-                    <input type="email" id="email" name="email" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
-                </div>
-                
-                <div class="form-group" style="margin-bottom: 15px;">
-                    <label for="phone" style="display: block; margin-bottom: 5px; font-weight: 500; color: #555;">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px;">
-                </div>
-                
-                <button type="submit" style="width: 100%; padding: 14px; background: linear-gradient(90deg, #4169e1, #ff0004); color: white; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 14px; margin-top: 10px;">RESERVE MY SPOT</button>
-            </form>
-        </div>
-    </div>
-    
     <script>
+        // Add UTM parameters to forms
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+            
+            utmParams.forEach(param => {
+                const value = urlParams.get(param);
+                if (value) {
+                    document.querySelectorAll(`input[name="${param}"]`).forEach(input => {
+                        input.value = value;
+                    });
+                }
+            });
+        });
+
         // Function to show popup
         function showPopup() {
             // Close any open keyboard on mobile
@@ -338,24 +470,47 @@
             }, 100);
         }
         
-        // Close popup when clicking the X or outside the form
+        // Show popup after 30 seconds
+        setTimeout(showPopup, 30000);
+        
+        // Close popup function
+        function closePopup() {
+            document.getElementById('popupOverlay').style.display = 'none';
+            document.getElementById('floatingOptin').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+        
+        // Prevent clicks on the form from closing the popup
         document.addEventListener('DOMContentLoaded', function() {
-            // Close button handler
-            document.getElementById('closePopup').addEventListener('click', function() {
-                document.getElementById('popupOverlay').style.display = 'none';
-                document.getElementById('floatingOptin').style.display = 'none';
-                document.body.style.overflow = 'auto'; // Re-enable scrolling
-            });
-            
-            // Close when clicking outside the form
-            document.getElementById('popupOverlay').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    document.getElementById('popupOverlay').style.display = 'none';
-                    document.getElementById('floatingOptin').style.display = 'none';
-                    document.body.style.overflow = 'auto'; // Re-enable scrolling
+            const form = document.getElementById('floatingOptin');
+            if (form) {
+                form.addEventListener('click', function(event) {
+                    event.stopPropagation(); // Prevent click from bubbling up to overlay
+                });
+            }
+        });
+        
+        function toggleFAQ(element) {
+            // conversion event for Meta Pixel and Google Ads
+            document.addEventListener('DOMContentLoaded', function() {
+                // TODO: Add Meta Pixel 'Lead' event code
+                // TODO: Add Google Ads 'Opt-In' event code
+                
+                // Add email and name to calendar link if available
+                const urlParams = new URLSearchParams(window.location.search);
+                const email = urlParams.get('email');
+                const name = urlParams.get('name');
+                
+                if (email || name) {
+                    const calendarLink = new URL('calendar.html', window.location.href);
+                    if (email) calendarLink.searchParams.append('email', email);
+                    if (name) calendarLink.searchParams.append('name', name);
+                    document.getElementById('book-call-btn').href = calendarLink.toString();
                 }
             });
-        });
+        }
     </script>
+    <script src="js/opt-in.js"></script>
+    <script src="js/vsl-optin.js"></script>
 </body>
 </html>
