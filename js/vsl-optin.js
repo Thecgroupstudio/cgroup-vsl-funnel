@@ -16,6 +16,31 @@ document.addEventListener('click', function(e) {
     }
 });
 
+// Function to get URL parameters
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    const results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+// Function to get referrer information if UTM is not present
+function getReferrerInfo() {
+    const referrer = document.referrer;
+    if (!referrer) return null;
+    
+    try {
+        const url = new URL(referrer);
+        return {
+            domain: url.hostname,
+            path: url.pathname,
+            full: referrer
+        };
+    } catch (e) {
+        return null;
+    }
+}
+
 // Handle form submissions
 function handleFormSubmit(form, formId) {
     form.addEventListener('submit', function(e) {
@@ -25,28 +50,95 @@ function handleFormSubmit(form, formId) {
         const formData = new FormData(form);
         const formProps = Object.fromEntries(formData);
         
-        // Here you would typically send this data to your email marketing service
-        console.log('Form submitted:', formProps);
+        // Add additional data for n8n
+        formProps.page_url = window.location.href;
+        formProps.timestamp = new Date().toISOString();
+        formProps.form_id = formId;
+        formProps.requestId = Date.now() + Math.random().toString(36).substring(2);
         
-        // Show success message
-        const successMessage = document.createElement('div');
-        successMessage.innerHTML = `
-            <div style="text-align: center; padding: 20px;">
-                <h3 style="color: #4CAF50;">Thank You!</h3>
-                <p>You'll be redirected to the video shortly...</p>
-            </div>
-        `;
+        // Add UTM parameters if available
+        const utmParams = ['source', 'medium', 'campaign', 'term', 'content'];
+        utmParams.forEach(param => {
+            const value = getUrlParameter('utm_' + param);
+            if (value) {
+                formProps['utm_' + param] = value;
+            } else {
+                // Check localStorage
+                const storedValue = localStorage.getItem('utm_' + param);
+                if (storedValue) {
+                    formProps['utm_' + param] = storedValue;
+                }
+            }
+        });
         
-        form.parentNode.replaceChild(successMessage, form);
-        
-        // Store in localStorage to prevent showing the form again
-        localStorage.setItem('formSubmitted', 'true');
-        
-        // Hide floating form if it's visible
-        const floatingOptin = document.getElementById('floatingOptin');
-        if (floatingOptin) {
-            floatingOptin.style.display = 'none';
+        // If no UTM source/medium, use referrer info
+        if (!formProps.utm_source && !formProps.utm_medium) {
+            const referrerInfo = getReferrerInfo();
+            if (referrerInfo) {
+                formProps.utm_source = referrerInfo.domain;
+                formProps.utm_medium = 'referral';
+            } else {
+                formProps.utm_source = 'direct';
+                formProps.utm_medium = 'none';
+            }
         }
+        
+        console.log('Sending form data to n8n:', formProps);
+        
+        // Send data to n8n webhook
+        fetch('https://cgroup.app.n8n.cloud/webhook/3e216d40-d18c-44cb-8a70-122a4acaa275', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
+            },
+            body: JSON.stringify(formProps)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Continue with redirect even if n8n submission fails
+        })
+        .finally(() => {
+            // Show success message
+            const successMessage = document.createElement('div');
+            successMessage.innerHTML = `
+                <div style="text-align: center; padding: 20px;">
+                    <h3 style="color: #4CAF50;">Thank You!</h3>
+                    <p>You'll be redirected to schedule your call shortly...</p>
+                </div>
+            `;
+            
+            form.parentNode.replaceChild(successMessage, form);
+            
+            // Store in localStorage to prevent showing the form again
+            localStorage.setItem('formSubmitted', 'true');
+            
+            // Hide floating form if it's visible
+            const floatingOptin = document.getElementById('floatingOptin');
+            if (floatingOptin) {
+                floatingOptin.style.display = 'none';
+            }
+            
+            // Close popup overlay
+            const popupOverlay = document.getElementById('popupOverlay');
+            if (popupOverlay) {
+                popupOverlay.style.display = 'none';
+            }
+            
+            // Re-enable scrolling
+            document.body.style.overflow = 'auto';
+        });
         
         // Redirect to calendar page
         setTimeout(function() {
@@ -100,6 +192,31 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll(`.optin-form input[name="${param}"]`).forEach(input => {
                 input.value = value;
             });
+            
+            // Store in localStorage for future use
+            localStorage.setItem(param, value);
+        } else {
+            // Check localStorage for previously stored values
+            const storedValue = localStorage.getItem(param);
+            if (storedValue) {
+                document.querySelectorAll(`.optin-form input[name="${param}"]`).forEach(input => {
+                    input.value = storedValue;
+                });
+            }
         }
+    });
+    
+    // Add hidden UTM fields to forms if they don't exist
+    document.querySelectorAll('.optin-form').forEach(form => {
+        utmParams.forEach(param => {
+            if (!form.querySelector(`input[name="${param}"]`)) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = param;
+                const value = urlParams.get(param) || localStorage.getItem(param) || '';
+                input.value = value;
+                form.appendChild(input);
+            }
+        });
     });
 });
