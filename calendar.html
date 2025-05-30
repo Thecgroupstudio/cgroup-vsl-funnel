@@ -105,7 +105,7 @@
             </div>
             
             <!-- Calendly inline widget begin -->
-            <div class="calendly-inline-widget" data-url="https://calendly.com/kathrynficarra/executive-presence-immersion-call?primary_color=ff0004" style="min-width:320px;height:1200px;overflow:hidden;"></div>
+            <div class="calendly-inline-widget" data-url="https://calendly.com/kathrynficarra/mastermind-intro?primary_color=ff0004" style="min-width:320px;height:1200px;overflow:hidden;"></div>
             <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
             <!-- Calendly inline widget end -->
             
@@ -114,7 +114,7 @@
                 <h2 style="text-align: center; color: #333; margin-bottom: 25px; font-size: 1.6rem;">Frequently Asked Questions</h2>
                 
                 <div style="margin-bottom: 20px; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden;">
-                    <div style="padding: 15px 20px; background-color: #f9f9f9; cursor: pointer; font-weight: 600; color: #333; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="padding: 15px 20px; background-color: #f9f9f9; cursor: pointer; font-weight: 600; color: #333; display: flex; justify-content: space-between; align-items: center;" onclick="toggleFAQ(this)">
                         <span>What happens after I book my call?</span>
                         <span style="font-size: 1.2rem;">+</span>
                     </div>
@@ -124,17 +124,38 @@
                 </div>
                 
                 <div style="margin-bottom: 20px; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden;">
-                    <div style="padding: 15px 20px; background-color: #f9f9f9; cursor: pointer; font-weight: 600; color: #333; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="padding: 15px 20px; background-color: #f9f9f9; cursor: pointer; font-weight: 600; color: #333; display: flex; justify-content: space-between; align-items: center;" onclick="toggleFAQ(this)">
                         <span>What's the investment for the Executive Presence Immersion?</span>
                         <span style="font-size: 1.2rem;">+</span>
                     </div>
                     <div style="padding: 15px 20px; background: white; display: none;">
-                        <p style="margin: 0; color: #555; line-height: 1.5;">Investment details will be discussed during your strategy call. We offer different packages based on your specific needs and goals.</p>
+                        <p style="margin: 0 0 15px 0; color: #555; line-height: 1.5; font-weight: 600;">Mastermind Executive Presence Immersion</p>
+                        <p style="margin: 0 0 15px 0; color: #555; line-height: 1.5;"><strong>Cost:</strong> $3,900</p>
+                        
+                        <div style="background: #f8f9fa; border-radius: 6px; padding: 15px; margin-bottom: 15px;">
+                            <p style="margin: 0 0 10px 0; font-weight: 600; color: #333;">Payment Options:</p>
+                            
+                            <div style="margin-bottom: 15px;">
+                                <p style="margin: 0 0 5px 0; color: #555;"><strong>Mastermind Deposit:</strong> $500</p>
+                                <a href="https://buy.stripe.com/fZu3cvchT9UL5f0dD0f7i00" target="_blank" style="display: inline-block; background-color: #4169e1; color: white; text-decoration: none; padding: 8px 15px; border-radius: 4px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">
+                                    Pay Deposit Now
+                                </a>
+                            </div>
+                            
+                            <div>
+                                <p style="margin: 0 0 5px 0; color: #555;"><strong>Mastermind Full Payment:</strong> $3,900</p>
+                                <a href="https://buy.stripe.com/eVq3cv3LnaYP0YKcyWf7i01" target="_blank" style="display: inline-block; background-color: #ff0004; color: white; text-decoration: none; padding: 8px 15px; border-radius: 4px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease;">
+                                    Pay in Full Now
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <p style="margin: 15px 0 0 0; color: #555; font-size: 0.9rem; font-style: italic;">*All payments are processed securely through Stripe. Your payment information is encrypted and never stored on our servers.</p>
                     </div>
                 </div>
                 
                 <div style="margin-bottom: 20px; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden;">
-                    <div style="padding: 15px 20px; background-color: #f9f9f9; cursor: pointer; font-weight: 600; color: #333; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="padding: 15px 20px; background-color: #f9f9f9; cursor: pointer; font-weight: 600; color: #333; display: flex; justify-content: space-between; align-items: center;" onclick="toggleFAQ(this)">
                         <span>What if I can't make the July 20-23 dates?</span>
                         <span style="font-size: 1.2rem;">+</span>
                     </div>
@@ -261,7 +282,7 @@
     
     <footer style="background-color: #2B2B2B; color: #ffffff; padding: 20px 0; width: 100%;">
         <div class="container">
-            <p style="margin: 0;">© 2025 The CGroup Studio. All rights reserved. | <a href="#" style="color: #ffffff;">Privacy Policy</a> | <a href="#" style="color: #ffffff;">Terms</a> | <a href="#" style="color: #ffffff;">Disclaimer</a></p>
+            <p style="margin: 0;"> 2025 The CGroup Studio. All rights reserved. | <a href="#" style="color: #ffffff;">Privacy Policy</a> | <a href="#" style="color: #ffffff;">Terms</a> | <a href="#" style="color: #ffffff;">Disclaimer</a></p>
         </div>
     </footer>
     <script>
@@ -283,5 +304,29 @@
             }
         });
     </script>
+    <script>
+        // Toggle FAQ function
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('span:last-child');
+            
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                icon.textContent = '+';
+            } else {
+                answer.style.display = 'block';
+                icon.textContent = '−';
+            }
+        }
+        
+        // Initialize first FAQ as open by default
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstFAQ = document.querySelector('.faq-item');
+            if (firstFAQ) {
+                firstFAQ.click();
+            }
+        });
+    </script>
+    <script src="js/opt-in.js"></script>
 </body>
 </html>
