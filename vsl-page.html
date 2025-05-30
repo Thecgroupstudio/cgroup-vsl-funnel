@@ -199,8 +199,11 @@
             </div>
             <form id="vsl-optin-form-floating" class="optin-form">
                 <input type="hidden" name="source" value="floating">
-                <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px; text-align: center; line-height: 1.4;">
-                    Secure your spot for the Executive Presence Immersion (July 20-23, 2024)
+                <p style="font-size: 0.9rem; color: #666; margin-bottom: 5px; text-align: center; line-height: 1.4;">
+                    Secure your spot for the Executive Presence Immersion
+                </p>
+                <p style="font-size: 0.9rem; color: #ff0004; font-weight: 600; margin-bottom: 15px; text-align: center; line-height: 1.4;">
+                    JULY 20-23, 2024 | SANCTUARY BEACH RESORT, MONTEREY, CA
                 </p>
                 <div class="form-group">
                     <input type="text" name="name" placeholder="Your First Name" required 
@@ -229,17 +232,10 @@
                 </p>
             </div>
             
-            <!-- Video Container with Preview Functionality -->
+            <!-- Video Container with Custom Preview -->
             <div style="width: 100%; max-width: 650px; margin: 0 auto; background: #000; font-size: 0; line-height: 0;">
                 <div id="videoContainer" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
-                    <!-- YouTube iframe will be loaded here by JavaScript -->
-                    <iframe id="youtubeVideo"
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; border: none;"
-                        src="https://www.youtube.com/embed/wuW7RTCf3Jw?autoplay=1&mute=1&rel=0&modestbranding=1&showinfo=0&controls=1&enablejsapi=1" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen
-                    ></iframe>
+                    <div id="youtubePlayerDiv" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
                     
                     <!-- Overlay that appears after preview -->
                     <div id="videoOverlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); cursor: pointer; z-index: 10;">
@@ -256,8 +252,9 @@
                 </div>
             </div>
             
+            <!-- Simpler Alternative Implementation -->
             <script>
-                // Wait for YouTube API to load
+                // Load YouTube API
                 var tag = document.createElement('script');
                 tag.src = "https://www.youtube.com/iframe_api";
                 var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -267,7 +264,16 @@
                 var previewDuration = 10; // Preview duration in seconds
                 
                 function onYouTubeIframeAPIReady() {
-                    player = new YT.Player('youtubeVideo', {
+                    player = new YT.Player('youtubePlayerDiv', {
+                        videoId: 'wuW7RTCf3Jw',
+                        playerVars: {
+                            'autoplay': 1,
+                            'mute': 1,
+                            'controls': 1,
+                            'modestbranding': 1,
+                            'rel': 0,
+                            'showinfo': 0
+                        },
                         events: {
                             'onReady': onPlayerReady,
                             'onStateChange': onPlayerStateChange
@@ -276,12 +282,13 @@
                 }
                 
                 function onPlayerReady(event) {
-                    // Start playing muted
-                    event.target.playVideo();
+                    console.log('Player ready');
+                    // Player is already set to autoplay from the playerVars
                     
-                    // Set a timeout to pause after preview duration
+                    // Set timeout to pause video after preview duration
                     setTimeout(function() {
-                        if (player && player.getPlayerState() === 1) { // 1 = playing
+                        console.log('Preview finished');
+                        if (player) {
                             player.pauseVideo();
                             document.getElementById('videoOverlay').style.display = 'block';
                         }
@@ -289,8 +296,9 @@
                 }
                 
                 function onPlayerStateChange(event) {
+                    console.log('Player state changed:', event.data);
                     // If video ends, show overlay
-                    if (event.data === 0) { // 0 = ended
+                    if (event.data === YT.PlayerState.ENDED) {
                         document.getElementById('videoOverlay').style.display = 'block';
                     }
                 }
@@ -298,6 +306,7 @@
                 // Add click handler to overlay
                 document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('videoOverlay').addEventListener('click', function() {
+                        console.log('Overlay clicked');
                         this.style.display = 'none';
                         if (player) {
                             player.unMute();
