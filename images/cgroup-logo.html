@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Convert SVG to PNG</title>
+    <script>
+        window.onload = function() {
+            // Get the SVG element
+            var svg = document.getElementById('logo');
+            
+            // Create a canvas element
+            var canvas = document.createElement('canvas');
+            canvas.width = 240;  // Higher resolution for better quality
+            canvas.height = 240;
+            var ctx = canvas.getContext('2d');
+            
+            // Create an image element from the SVG
+            var img = new Image();
+            var svgData = new XMLSerializer().serializeToString(svg);
+            var svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+            var url = URL.createObjectURL(svgBlob);
+            
+            img.onload = function() {
+                // Draw the image on the canvas
+                ctx.drawImage(img, 0, 0, 240, 240);
+                
+                // Convert canvas to PNG
+                var png = canvas.toDataURL('image/png');
+                
+                // Display the PNG
+                document.getElementById('png-container').innerHTML = '<img src="' + png + '" width="120" height="120">';
+                document.getElementById('download-link').href = png;
+                document.getElementById('download-link').style.display = 'block';
+            }
+            
+            img.src = url;
+        }
+    </script>
+</head>
+<body>
+    <h1>CGroup Logo PNG Converter</h1>
+    
+    <svg id="logo" width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <rect width="120" height="120" fill="#222222"/>
+        <g fill="#ffffff">
+            <path d="M35,40 C42,30 55,30 60,40 C65,50 60,65 50,70 C40,75 30,70 25,60 L35,55 C38,60 42,62 47,60 C52,58 55,50 52,45 C49,40 42,40 38,45 L35,40 Z"/>
+            <path d="M65,40 C70,30 85,30 90,40 C95,50 95,70 90,80 C85,90 70,90 65,80 L75,75 C78,80 82,80 85,75 C88,70 88,55 85,50 C82,45 78,45 75,50 L65,40 Z"/>
+            <text x="95" y="25" font-family="Arial" font-size="8" fill="#ffffff">THE CGROUP STUDIO</text>
+        </g>
+    </svg>
+    
+    <div id="png-container"></div>
+    
+    <a id="download-link" href="#" download="cgroup-logo.png" style="display:none; margin-top: 20px;">Download PNG</a>
+    
+    <p>Instructions: Right-click on the image above and select "Save Image As..." to save the PNG file.</p>
+</body>
+</html>
