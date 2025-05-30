@@ -285,17 +285,22 @@
                     <div id="youtubePlayerDiv" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
                     
                     <!-- Overlay that appears after preview -->
-                    <div id="videoOverlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); cursor: pointer; z-index: 10;">
+                    <div id="videoOverlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); cursor: pointer; z-index: 10;">
                         <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
-                            <div class="pulse-play-button" style="background: rgba(255,0,4,0.8); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; position: relative; box-shadow: 0 0 0 rgba(255,0,4,0.4);">
-                                <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+                            <div class="pulse-play-button" style="background: linear-gradient(90deg, #4169e1, #ff0004); width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; position: relative; box-shadow: 0 0 30px rgba(255,0,4,0.6); animation: pulse 2s infinite;">
+                                <svg width="50" height="50" viewBox="0 0 24 24" fill="white">
                                     <path d="M8 5v14l11-7z"/>
                                 </svg>
                             </div>
-                            <h3 style="margin: 0 0 10px; font-size: 1.2rem; font-weight: 600;">Continue Watching</h3>
-                            <p style="margin: 0; font-size: 0.9rem;">Click to unmute and watch the full training</p>
                         </div>
                     </div>
+                    <style>
+                        @keyframes pulse {
+                            0% { box-shadow: 0 0 0 0 rgba(255, 0, 4, 0.7); }
+                            70% { box-shadow: 0 0 0 20px rgba(255, 0, 4, 0); }
+                            100% { box-shadow: 0 0 0 0 rgba(255, 0, 4, 0); }
+                        }
+                    </style>
                 </div>
             </div>
             
@@ -382,13 +387,6 @@
                                    display: inline-block;">
                         JOIN NOW &rarr;
                     </button>
-                    <p style="color: #666; margin-top: 10px; font-size: 0.9rem; margin-bottom: 5px; line-height: 1.6; letter-spacing: 0.01em;">
-                        Secure your spot for the Executive Presence Immersion (July 20-23, 2024)
-                        <br><span style="color: #4169e1; font-weight: 600;">SANCTUARY BEACH RESORT, MONTEREY, CA</span>
-                    </p>
-                    <p style="color: #ff0004; font-weight: 600; font-size: 0.9rem; margin-bottom: 0; line-height: 1.2;">
-                        Only 15 spots available - Apply now to secure your place
-                    </p>
                 </div>
                 
                 <!-- Trusted By Leaders Section -->
@@ -423,16 +421,100 @@
                 </div>
                 
                 <div class="social-proof" style="margin: 30px auto; text-align: center; max-width: 800px;">
-                    <p class="as-seen-text" style="font-size: 0.8rem; color: #777; letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; font-weight: 600;">TRUSTED BY LEADERS FROM</p>
-                    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; align-items: center; margin: 0 auto; max-width: 100%;">
-                        <img src="images/client-company-logo.avif" alt="Trusted Companies" style="max-width: 100%; height: auto; max-height: 40px; filter: grayscale(100%) opacity(0.7); transition: all 0.3s ease;">
-                    </div>
-                    
-                    <div style="margin: 30px 0 20px; padding: 20px; background-color: #f9f9f9; border-radius: 8px;">
-                        <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
-                            "Kathryn's approach to executive presence transformed how I show up in the boardroom. The nervous system techniques were a game-changer for my confidence."
-                        </p>
-                        <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— Michael T., Director of Operations</p>
+                    <div class="testimonial-carousel" style="position: relative; margin: 30px 0 20px; padding: 20px; background-color: #f9f9f9; border-radius: 8px; min-height: 180px;">
+                        <!-- Testimonial 1 -->
+                        <div class="testimonial-slide" style="opacity: 1; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "Kathryn's approach to executive presence transformed how I show up in the boardroom. The nervous system techniques were a game-changer for my confidence."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— Michael T., Director of Operations</p>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "I used to dread board presentations until I learned Kathryn's executive presence techniques. Now I actually look forward to these opportunities to showcase my leadership."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— Jennifer L., Chief Financial Officer</p>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "The immersion experience was transformative. I've attended many leadership programs, but none addressed the physiological aspects of executive presence like Kathryn's approach."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— David R., VP of Marketing</p>
+                        </div>
+                        
+                        <!-- Testimonial 4 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "As a woman in tech leadership, I often struggled with being heard. The techniques I learned at the Executive Presence Immersion have completely changed how others perceive my authority."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— Sarah K., CTO</p>
+                        </div>
+                        
+                        <!-- Testimonial 5 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "I was skeptical at first, but the ROI on this program has been incredible. My team has noticed a significant difference in how I handle high-pressure situations."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— Robert P., Managing Director</p>
+                        </div>
+                        
+                        <!-- Testimonial 6 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "The nervous system regulation techniques have applications far beyond the boardroom. I'm using these skills in client meetings, media interviews, and even family discussions."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— Amanda J., Chief Communications Officer</p>
+                        </div>
+                        
+                        <!-- Testimonial 7 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "After the immersion, I secured the biggest deal of my career. I attribute this success directly to the presence and confidence I developed through Kathryn's program."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— Thomas B., Enterprise Sales Director</p>
+                        </div>
+                        
+                        <!-- Testimonial 8 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "The Executive Presence Immersion gave me tools I didn't even know I needed. Now I understand why some executives command attention the moment they walk into a room."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— Elizabeth W., Senior VP of Operations</p>
+                        </div>
+                        
+                        <!-- Testimonial 9 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "As someone who's struggled with imposter syndrome throughout my career, this program was transformative. I finally feel like I belong at the executive table."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— James H., Chief Strategy Officer</p>
+                        </div>
+                        
+                        <!-- Testimonial 10 -->
+                        <div class="testimonial-slide" style="position: absolute; top: 20px; left: 20px; right: 20px; opacity: 0; transition: opacity 0.5s ease;">
+                            <p style="font-style: italic; color: #555; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                                "The beach resort setting created the perfect environment for transformation. I returned to work with practical tools and a completely new perspective on leadership presence."
+                            </p>
+                            <p style="font-weight: 600; color: #333; margin: 0; font-size: 0.95rem;">— Michelle C., Regional Director</p>
+                        </div>
+                        
+                        <!-- Navigation dots -->
+                        <div class="testimonial-dots" style="position: absolute; bottom: -15px; left: 0; right: 0; display: flex; justify-content: center; gap: 8px;">
+                            <span class="dot active" style="height: 8px; width: 8px; background-color: #4169e1; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                            <span class="dot" style="height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer;"></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -494,6 +576,64 @@
             document.getElementById('floatingOptin').style.display = 'none';
             document.body.style.overflow = 'auto'; // Re-enable scrolling
         }
+        
+        // Testimonial carousel functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.testimonial-dots .dot');
+            let currentSlide = 0;
+            let interval;
+            
+            // Function to show a specific slide
+            function showSlide(index) {
+                // Hide all slides
+                slides.forEach(slide => {
+                    slide.style.opacity = 0;
+                });
+                
+                // Remove active class from all dots
+                dots.forEach(dot => {
+                    dot.style.backgroundColor = '#bbb';
+                    dot.classList.remove('active');
+                });
+                
+                // Show the selected slide
+                slides[index].style.opacity = 1;
+                
+                // Add active class to the corresponding dot
+                dots[index].style.backgroundColor = '#4169e1';
+                dots[index].classList.add('active');
+                
+                // Update current slide index
+                currentSlide = index;
+            }
+            
+            // Function to show the next slide
+            function nextSlide() {
+                let next = currentSlide + 1;
+                if (next >= slides.length) {
+                    next = 0;
+                }
+                showSlide(next);
+            }
+            
+            // Start automatic slideshow
+            function startSlideshow() {
+                interval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+            }
+            
+            // Add click event to dots for manual navigation
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    clearInterval(interval); // Stop automatic slideshow
+                    showSlide(index);
+                    startSlideshow(); // Restart automatic slideshow
+                });
+            });
+            
+            // Initialize slideshow
+            startSlideshow();
+        });
         
         // Prevent clicks on the form from closing the popup
         document.addEventListener('DOMContentLoaded', function() {
