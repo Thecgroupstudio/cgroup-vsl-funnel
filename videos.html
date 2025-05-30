@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leadership Videos | The CGroup Studio</title>
+    <link rel="icon" href="images/cgroup-logo.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/footer-fix.css">
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: flex-start;
+            padding: 15px 25px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            z-index: 10000;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .video-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #fff;
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .video-info {
+            padding: 20px;
+        }
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0 0 10px;
+            color: #333;
+            line-height: 1.4;
+        }
+        .video-description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .page-title {
+            text-align: center;
+            margin: 100px 0 20px;
+        }
+        .page-title h1 {
+            font-size: 2.2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .page-title p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        .back-button {
+            display: inline-block;
+            background-color: #4169e1;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        .back-button:hover {
+            background-color: #3050b5;
+        }
+        .category-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-container {
+                justify-content: center;
+                padding: 15px 0;
+            }
+            .page-title {
+                margin: 80px 0 20px;
+            }
+            .page-title h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="images/cgroup-logo.webp" alt="The CGroup Studio" style="width: 120px; height: auto;">
+                </a>
+            </div>
+        </div>
+
+        <div class="page-title">
+            <h1>Leadership on Purpose: Video Library</h1>
+            <p>Explore our collection of inspiring interviews and insights from leadership experts, entrepreneurs, and visionaries.</p>
+        </div>
+
+        <main style="max-width: 1200px; margin: 0 auto; padding: 0 20px 50px;">
+            <h2 class="category-title">Featured Leadership Interviews</h2>
+            
+            <div class="video-grid">
+                <!-- Video 1 -->
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/qz25q6wI3qA?rel=0&modestbranding=1" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Juliet Sosa on Leadership on Purpose</h3>
+                        <p class="video-description">Join us as Juliet Sosa shares her insights on purposeful leadership and how it transforms organizations.</p>
+                    </div>
+                </div>
+                
+                <!-- Video 2 -->
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/LV63r0NpY1U?rel=0&modestbranding=1" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Jan Lucanus on Leadership on Purpose</h3>
+                        <p class="video-description">Jan Lucanus discusses the intersection of creativity and leadership in this inspiring conversation.</p>
+                    </div>
+                </div>
+                
+                <!-- Video 3 -->
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/8NULLECVusU?rel=0&modestbranding=1" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Merrick McCartha on Leadership On Purpose!</h3>
+                        <p class="video-description">Discover Merrick McCartha's powerful perspective on purpose-driven leadership and its impact.</p>
+                    </div>
+                </div>
+                
+                <!-- Video 4 -->
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/qYZy1F7r5u0?rel=0&modestbranding=1" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Karola Raimond Reveals the SECRET to Rewriting Your Story for Joy!</h3>
+                        <p class="video-description">Karola Raimond shares transformative insights on how to rewrite your personal narrative for greater joy and fulfillment.</p>
+                    </div>
+                </div>
+                
+                <!-- Video 5 -->
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/iXFvZ24tbUU?rel=0&modestbranding=1" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Unlock Your Power with Sat Devbir: Mastering Choices, Quantum Energy & Manifestation</h3>
+                        <p class="video-description">Sat Devbir explores the powerful connection between quantum energy, conscious choice, and manifestation in leadership.</p>
+                    </div>
+                </div>
+                
+                <!-- Video 6 -->
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/BPkvYKCsXhw?rel=0&modestbranding=1" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Divorce to Self-Discovery: Adriana Sorgi's Journey | Episode #06</h3>
+                        <p class="video-description">Adriana Sorgi shares her powerful journey from divorce to self-discovery and how it shaped her leadership approach.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="category-title">Leadership Masterclasses</h2>
+            
+            <div class="video-grid">
+                <!-- Video 7 -->
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/8X7Fw9ijtuw?rel=0&modestbranding=1" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Gabrielle Bosché Reveals the HIDDEN Secrets to Fearless LEADERSHIP</h3>
+                        <p class="video-description">Gabrielle Bosché uncovers the hidden secrets that transform ordinary leaders into fearless visionaries.</p>
+                    </div>
+                </div>
+                
+                <!-- Video 8 -->
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/wuW7RTCf3Jw?rel=0&modestbranding=1" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">The Free Masterclass</h3>
+                        <p class="video-description">Discover essential leadership strategies in this comprehensive masterclass designed to elevate your executive presence.</p>
+                    </div>
+                </div>
+                
+                <!-- Video 9 -->
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/aSoqRyLqbS4?rel=0&modestbranding=1" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">2025 Global Women's Tech Conference: Elevating Executive Presence on the World Stage</h3>
+                        <p class="video-description">Highlights from the 2025 Global Women's Tech Conference focusing on executive presence for women leaders in technology.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="thank-you.html" class="back-button">Back to Confirmation Page</a>
+            </div>
+        </main>
+
+        <footer>
+            <div class="container">
+                <div class="logo-container">
+                    <img src="images/cgroup-logo.webp" alt="The CGroup Studio">
+                </div>
+                <p>© 2025 The CGroup Studio. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms</a> | <a href="#">Disclaimer</a></p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
