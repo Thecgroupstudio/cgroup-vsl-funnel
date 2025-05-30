@@ -6,32 +6,47 @@
     <title>Stop Freezing in High-Stakes Meetings | Executive Presence Immersion</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%234169e1'/><text x='50%' y='60%' font-family='Arial' font-size='60' text-anchor='middle' fill='white'>C</text></svg>">
     <style>
+        .header-container {
+            display: flex;
+            justify-content: flex-start;
+            padding: 15px 25px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
         .logo-container {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
         }
         .logo {
-            width: 50px;
-            height: 50px;
+            width: 30px;
+            height: 30px;
             background-color: #4169e1;
-            border-radius: 12px;
+            border-radius: 8px;
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 18px;
             font-weight: bold;
             font-family: Arial, sans-serif;
-            margin-right: 15px;
+            margin-right: 10px;
+            flex-shrink: 0;
         }
         .logo-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: #333;
-            line-height: 1;
+            line-height: 1.1;
+            white-space: nowrap;
         }
         .logo-text span {
             color: #4169e1;
@@ -44,24 +59,55 @@
 </head>
 <body>
     <div class="container">
-        <header>
+        <div class="header-container">
             <div class="logo-container">
                 <div class="logo">C</div>
                 <div class="logo-text">The CGroup <span>Studio</span></div>
             </div>
+        </div>
+        <header style="margin-top: 100px;">
         </header>
 
-        <main>
-            <div class="hero-section" style="text-align: center; padding: 20px 0 10px;">
-                <p class="pre-headline" style="color: #ff0004; font-weight: 600; margin-bottom: 5px; font-size: 1rem;">EXECUTIVE PRESENCE IMMERSION</p>
-                <h1 style="font-size: 2rem; margin: 10px 0; line-height: 1.2;">Stop Freezing in <span style="color: #4169e1;">High-Stakes Meetings</span></h1>
-                <p class="subheadline" style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 15px; color: #333; line-height: 1.4;">
-                    Discover how to develop unshakable executive presence and command any room with confidence in just 3 days
-                </p>
-                <p class="tagline" style="color: #ff0004; font-weight: 600; font-size: 1.1rem; margin: 15px 0 10px;">
-                    JULY 20-23, 2024 | MONTEREY, CA
+        <main class="vsl-container">
+            <div style="text-align: center; margin: 40px 0 20px;">
+                <h2 style="font-size: 2rem; color: #333; margin-bottom: 10px; font-weight: 600;">Watch the Free Training</h2>
+                <p style="font-size: 1.2rem; color: #666; max-width: 700px; margin: 0 auto 20px; line-height: 1.5;">
+                    Learn how to develop unshakable executive presence in this exclusive training
                 </p>
             </div>
+            <section class="video-section" style="margin-top: 20px;">
+                <div class="video-container" style="max-width: 800px; margin: 0 auto 0;">
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-radius: 8px;">
+                        <iframe 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                            src="https://www.youtube.com/embed/wuW7RTCf3Jw?autoplay=1&rel=0&modestbranding=1" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+                
+                <!-- CTA Button for Popup Form -->
+                <div style="text-align: center; margin: 40px auto;">
+                    <button onclick="showPopup()" 
+                            style="padding: 16px 40px;
+                                   font-size: 1.2rem;
+                                   font-weight: 600;
+                                   color: white;
+                                   background: linear-gradient(90deg, #4169e1, #ff0004);
+                                   border: none;
+                                   border-radius: 4px;
+                                   cursor: pointer;
+                                   box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3);
+                                   transition: all 0.3s ease;">
+                        BOOK MY STRATEGY CALL NOW
+                    </button>
+                    <p style="color: #666; margin-top: 15px; font-size: 0.9rem;">
+                        Secure your spot for the Executive Presence Immersion (July 20-23, 2024)
+                    </p>
+                </div>
+            </section>
 
                 <div class="form-container" style="max-width: 500px; margin: 0 auto 30px;">
                     <div style="background: white; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); border: 1px solid #e0e0e0; padding: 30px; border-radius: 8px; position: relative; overflow: hidden;">
