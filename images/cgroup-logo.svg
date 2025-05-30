@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-  <rect width="120" height="120" fill="#222222"/>
-  <g fill="#ffffff">
-    <path d="M35,40 C42,30 55,30 60,40 C65,50 60,65 50,70 C40,75 30,70 25,60 L35,55 C38,60 42,62 47,60 C52,58 55,50 52,45 C49,40 42,40 38,45 L35,40 Z"/>
-    <path d="M65,40 C70,30 85,30 90,40 C95,50 95,70 90,80 C85,90 70,90 65,80 L75,75 C78,80 82,80 85,75 C88,70 88,55 85,50 C82,45 78,45 75,50 L65,40 Z"/>
-    <text x="95" y="25" font-family="Arial" font-size="8" fill="#ffffff">THE CGROUP STUDIO</text>
-  </g>
-</svg>
