@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Your Spot | Executive Presence Immersion</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%234169e1'/><text x='50%' y='60%' font-family='Arial' font-size='60' text-anchor='middle' fill='white'>C</text></svg>">
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: flex-start;
+            padding: 15px 25px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            z-index: 10000;
+        }
+        .payment-option {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 15px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border: 1px solid #e0e0e0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .payment-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .payment-button {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        .primary-button {
+            background-color: #ff0004;
+            color: white;
+        }
+        .primary-button:hover {
+            background-color: #e60004;
+        }
+        .secondary-button {
+            background-color: #4169e1;
+            color: white;
+        }
+        .secondary-button:hover {
+            background-color: #3a5ecc;
+        }
+        .feature-list {
+            margin: 20px 0;
+            padding-left: 0;
+            list-style-type: none;
+        }
+        .feature-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .feature-list li:before {
+            content: "✓";
+            color: #4169e1;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .payment-options {
+                grid-template-columns: 1fr !important;
+            }
+            .header-container {
+                justify-content: center;
+                position: relative;
+                padding: 15px 0;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- TODO: PASTE META PIXEL CODE HERE -->
+    <!-- TODO: PASTE GOOGLE GLOBAL SITE TAG (gtag.js) CODE HERE -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/footer-fix.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="images/cgroup-logo.webp" alt="The CGroup Studio" style="width: 120px; height: auto;">
+            </div>
+        </div>
+        <header style="margin-top: 60px; text-align: center;">
+        </header>
+
+        <main style="max-width: 1000px; margin: 20px auto; padding: 10px 20px;">
+            <section style="margin-top: 0;">
+                <!-- Payment Header -->
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <p style="color: #ff0004; font-size: 0.9rem; font-weight: 600; margin-bottom: 5px; text-transform: uppercase;">Executive Presence Immersion</p>
+                    <h1 style="font-size: 2rem; margin-bottom: 15px;">Secure Your Spot</h1>
+                    <p style="font-size: 1.1rem; margin: 5px 0 20px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                        Thank you for your interest in the Executive Presence Immersion. Choose your preferred payment option below to reserve your place.
+                    </p>
+                </div>
+                
+                <!-- Event Details -->
+                <div style="background-color: #f8f9fa; border-radius: 8px; padding: 25px; margin: 30px 0; text-align: center; border: 1px solid #e0e0e0;">
+                    <h3 style="color: #333; font-size: 1.3rem; margin: 0 0 15px;">Event Details</h3>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0;">
+                        <div>
+                            <p style="font-weight: 600; color: #4169e1; margin-bottom: 5px;">When</p>
+                            <p style="margin: 0;">July 20-23, 2024</p>
+                        </div>
+                        <div>
+                            <p style="font-weight: 600; color: #4169e1; margin-bottom: 5px;">Where</p>
+                            <p style="margin: 0;">Sanctuary Beach Resort, Monterey, CA</p>
+                        </div>
+                        <div>
+                            <p style="font-weight: 600; color: #4169e1; margin-bottom: 5px;">Spots Available</p>
+                            <p style="margin: 0;">Only 15 spots total</p>
+                        </div>
+                    </div>
+                    
+                    <p style="font-style: italic; color: #666; font-size: 0.9rem; margin-top: 15px;">
+                        *Meals and materials included. Accommodation not included.
+                    </p>
+                </div>
+                
+                <!-- What's Included -->
+                <div style="margin: 40px 0;">
+                    <h3 style="text-align: center; font-size: 1.3rem; margin-bottom: 25px; color: #333;">What's Included in Your Investment</h3>
+                    
+                    <ul class="feature-list">
+                        <li>3 full days of immersive executive presence training</li>
+                        <li>Personalized nervous system regulation techniques</li>
+                        <li>Executive presence assessment and roadmap</li>
+                        <li>All meals and refreshments during the program</li>
+                        <li>Comprehensive workbook and digital resources</li>
+                        <li>30-day post-immersion support</li>
+                        <li>Certificate of completion</li>
+                        <li>Exclusive alumni network access</li>
+                    </ul>
+                </div>
+                
+                <!-- Payment Options -->
+                <div style="margin: 40px 0;">
+                    <h3 style="text-align: center; font-size: 1.3rem; margin-bottom: 25px; color: #333;">Select Your Payment Option</h3>
+                    
+                    <div class="payment-options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+                        <!-- Full Payment Option -->
+                        <div class="payment-option">
+                            <h4 style="font-size: 1.2rem; margin: 0 0 5px; color: #333;">Full Payment</h4>
+                            <p style="font-size: 2rem; font-weight: 700; color: #333; margin: 10px 0;">$3,900</p>
+                            <p style="color: #666; margin-bottom: 20px;">Complete payment secures your spot immediately</p>
+                            
+                            <ul style="padding-left: 20px; margin: 15px 0;">
+                                <li style="margin-bottom: 8px;">Secure your spot instantly</li>
+                                <li style="margin-bottom: 8px;">Immediate access to pre-immersion materials</li>
+                                <li style="margin-bottom: 8px;">Priority seating selection</li>
+                            </ul>
+                            
+                            <a href="https://buy.stripe.com/eVq3cv3LnaYP0YKcyWf7i01" target="_blank" class="payment-button primary-button" style="width: 100%;">
+                                Pay in Full Now
+                            </a>
+                        </div>
+                        
+                        <!-- Deposit Option -->
+                        <div class="payment-option">
+                            <h4 style="font-size: 1.2rem; margin: 0 0 5px; color: #333;">Deposit</h4>
+                            <p style="font-size: 2rem; font-weight: 700; color: #333; margin: 10px 0;">$500</p>
+                            <p style="color: #666; margin-bottom: 20px;">Reserve your spot with a deposit today</p>
+                            
+                            <ul style="padding-left: 20px; margin: 15px 0;">
+                                <li style="margin-bottom: 8px;">Reserve your spot now</li>
+                                <li style="margin-bottom: 8px;">Balance due 30 days before the event</li>
+                                <li style="margin-bottom: 8px;">Flexible payment arrangement</li>
+                            </ul>
+                            
+                            <a href="https://buy.stripe.com/fZu3cvchT9UL5f0dD0f7i00" target="_blank" class="payment-button secondary-button" style="width: 100%;">
+                                Pay Deposit Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Secure Payment Notice -->
+                <div style="background-color: #f8f9fa; border-radius: 8px; padding: 20px; margin: 30px 0; text-align: center; border: 1px solid #e0e0e0;">
+                    <p style="margin: 0; font-size: 0.9rem;">
+                        <img src="https://cdn.jsdelivr.net/gh/stripe/stripe-meta@4e3f77e3fc2c9d8e6d5d7d8a5726a6b3b1a01bca/icons/v1/icon-stripe-secure.svg" alt="Secure Payment" style="height: 20px; vertical-align: middle; margin-right: 10px;">
+                        All payments are processed securely through Stripe. Your payment information is encrypted and never stored on our servers.
+                    </p>
+                </div>
+                
+                <!-- FAQ Section -->
+                <div style="margin: 40px 0;">
+                    <h3 style="text-align: center; font-size: 1.3rem; margin-bottom: 25px; color: #333;">Frequently Asked Questions</h3>
+                    
+                    <div style="margin-bottom: 15px; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden;">
+                        <div style="padding: 15px 20px; background-color: #f9f9f9; font-weight: 600; color: #333;">
+                            What's your refund policy?
+                        </div>
+                        <div style="padding: 15px 20px; background: white;">
+                            <p style="margin: 0; color: #555; line-height: 1.5;">Full refunds are available up to 30 days before the event. After that, your payment can be transferred to a future immersion event.</p>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden;">
+                        <div style="padding: 15px 20px; background-color: #f9f9f9; font-weight: 600; color: #333;">
+                            What if I can't make these dates?
+                        </div>
+                        <div style="padding: 15px 20px; background: white;">
+                            <p style="margin: 0; color: #555; line-height: 1.5;">We host the Executive Presence Immersion quarterly. If you can't make the July dates, your payment can be applied to a future event.</p>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden;">
+                        <div style="padding: 15px 20px; background-color: #f9f9f9; font-weight: 600; color: #333;">
+                            Is accommodation included?
+                        </div>
+                        <div style="padding: 15px 20px; background: white;">
+                            <p style="margin: 0; color: #555; line-height: 1.5;">Accommodation is not included in the price. However, we have negotiated special rates at the Sanctuary Beach Resort for participants. Details will be provided after registration.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Section -->
+                <div style="text-align: center; margin: 40px 0 20px;">
+                    <p style="font-size: 1rem;">
+                        Questions about payment? Email us at 
+                        <a href="mailto:kathryn@thecgroupstudio.com" style="color: #4169e1; text-decoration: none; font-weight: 500;">kathryn@thecgroupstudio.com</a>
+                    </p>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 5px;">
+                        We typically respond within 24 hours.
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container">
+                <div class="logo-container">
+                    <img src="images/cgroup-logo.webp" alt="The CGroup Studio">
+                </div>
+                <p>© 2025 The CGroup Studio. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms</a> | <a href="#">Disclaimer</a></p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Fire Purchase conversion event for Meta Pixel and Google Ads
+        document.addEventListener('DOMContentLoaded', function() {
+            // TODO: Add Meta Pixel 'Purchase' event code
+            // TODO: Add Google Ads 'Purchase' event code
+        });
+    </script>
+</body>
+</html>
