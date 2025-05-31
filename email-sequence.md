@@ -42,7 +42,7 @@ This document outlines the email sequence that will be sent to prospects after t
     
     <p style="font-size: 12px; color: #666;">
         © 2025 The CGroup Studio. All rights reserved.<br>
-        This email was sent to [Email] because you registered for information about our Executive Presence Immersion program.
+        This email was sent to your email address because you registered for information about our Executive Presence Immersion program.
     </p>
 </div>
 ```
