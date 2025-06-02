@@ -129,14 +129,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 // Add a small delay before redirect to ensure the request completes
                 setTimeout(() => {
-                    window.location.href = 'vsl-page.html';
+                    window.location.href = 'masterclass.html';
                 }, 300);
             })
             .catch(error => {
                 console.error('Error:', error);
                 // Add a small delay before redirect to ensure the request completes
                 setTimeout(() => {
-                    window.location.href = 'vsl-page.html';
+                    window.location.href = 'masterclass.html';
                 }, 300);
             });
         });
