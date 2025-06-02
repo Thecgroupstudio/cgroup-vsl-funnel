@@ -328,4 +328,168 @@ Leveraging both entry points allows for targeting different audience segments wi
 
 ---
 
+## Ad Scripts for Dual-Entry Points
+
+Based on our analysis of the complete funnel, we've developed tailored ad scripts for each entry point that align with their specific audience segments and objectives.
+
+### Entry Point A: Masterclass Page Ad Scripts
+
+#### Video Ad Script 1: "The Science of Executive Presence" (15 seconds)
+
+```
+[Visual: Kathryn speaking directly to camera with professional backdrop]
+
+KATHRYN: "Why do some executives command attention the moment they walk in, while others struggle to be heard?"
+
+[Visual: Quick montage of business meetings with confident vs. hesitant executives]
+
+KATHRYN: "It's not charisma. It's a science."
+
+[Text Overlay: "Discover the Neuroscience of Executive Presence"]
+
+KATHRYN: "Learn the framework in my free masterclass."
+
+[CTA Button: "Watch Free Masterclass"]
+```
+
+#### Video Ad Script 2: "Leadership Transformation" (30 seconds)
+
+```
+[Visual: Kathryn in professional setting]
+
+KATHRYN: "After working with Fortune 500 executives for over 15 years, I discovered something surprising..."
+
+[Visual: Split screen showing before/after transformation]
+
+KATHRYN: "Executive presence isn't something you're born with—it's a skill you can develop through understanding your nervous system."
+
+[Visual: Brief clips of executives in leadership moments]
+
+KATHRYN: "In my free masterclass, I'll reveal the three hidden barriers preventing you from commanding the room..."
+
+[Visual: Kathryn speaking directly to camera]
+
+KATHRYN: "...and the exact framework I use to help leaders transform their presence in just three days."
+
+[Text Overlay: "Free Executive Presence Masterclass"]
+
+[CTA Button: "Watch Now"]
+```
+
+#### Image Ad Copy (For Facebook/Instagram)
+
+**Headline:** The Neuroscience Behind Executive Presence
+
+**Primary Text:** Why do some leaders instantly command respect while others struggle to be heard? The difference isn't charisma or confidence—it's understanding the science of executive presence.
+
+In this free masterclass, leadership expert Kathryn Ficarra reveals:
+
+✓ The 3 hidden barriers blocking your leadership impact
+✓ The nervous system regulation technique used by top CEOs
+✓ How to command attention in any room without saying a word
+
+Watch the free masterclass now and discover how to transform your executive presence in just 3 days.
+
+**CTA:** Watch Free Masterclass
+
+---
+
+### Entry Point B: Executive Immersion Registration Ad Scripts
+
+#### Video Ad Script 1: "Exclusive Napa Valley Immersion" (15 seconds)
+
+```
+[Visual: Stunning footage of Alila Napa Valley resort]
+
+VOICEOVER: "Transform your leadership presence in three days at the exclusive Executive Presence Immersion."
+
+[Visual: Elegant meeting spaces and luxurious accommodations]
+
+VOICEOVER: "July 20-23 at Alila Napa Valley. Only 15 spots available."
+
+[Text Overlay: "Executive Presence Immersion"]
+
+[Visual: Kathryn speaking briefly]
+
+KATHRYN: "Apply now to secure your spot."
+
+[CTA Button: "Apply Now"]
+```
+
+#### Video Ad Script 2: "Leadership Transformation Retreat" (30 seconds)
+
+```
+[Visual: Montage of Alila Napa Valley resort]
+
+VOICEOVER: "Imagine stepping away from the demands of leadership for just three days..."
+
+[Visual: Professional development workshop setting]
+
+VOICEOVER: "...and returning with an executive presence that transforms how others respond to you."
+
+[Visual: Kathryn facilitating a session]
+
+KATHRYN: "The Executive Presence Immersion is limited to just 15 senior leaders who are ready to elevate their leadership impact."
+
+[Visual: Participants engaged in workshop activities]
+
+KATHRYN: "Join us July 20-23 at the luxurious Alila Napa Valley for three days that will transform your leadership forever."
+
+[Text Overlay: "Only 15 Spots Available"]
+
+[CTA Button: "Secure Your Spot"]
+```
+
+#### Image Ad Copy (For LinkedIn/Facebook)
+
+**Headline:** Executive Presence Immersion: July 20-23, 2024
+
+**Primary Text:** Three days that will transform your leadership presence forever.
+
+Join leadership expert Kathryn Ficarra for an exclusive immersion experience at the luxurious Alila Napa Valley resort. Limited to just 15 senior leaders.
+
+Your $4,200 investment includes:
+✓ 3-day immersive executive presence program
+✓ Personalized nervous system regulation techniques
+✓ Executive presence assessment and roadmap
+✓ All meals during the program
+✓ 3 nights luxury accommodation at Alila Napa Valley
+
+Only 15 spots available. Senior executives only.
+
+**CTA:** Apply Now
+
+---
+
+### Carousel Ad Script (For Both Entry Points)
+
+**Card 1:**
+[Image: Professional headshot of Kathryn]
+Headline: Transform Your Executive Presence
+Description: Discover the science behind commanding leadership presence
+
+**Card 2:**
+[Image: Alila Napa Valley resort]
+Headline: Exclusive 3-Day Immersion
+Description: July 20-23, 2024 at Alila Napa Valley
+
+**Card 3:**
+[Image: Executive in leadership moment]
+Headline: Science-Backed Methodology
+Description: Nervous system regulation techniques for lasting impact
+
+**Card 4:**
+[Image: Small group workshop setting]
+Headline: Limited to 15 Participants
+Description: Personalized attention and executive-level networking
+
+**Card 5:**
+[Image: Call-to-action with Kathryn]
+Headline: Reserve Your Spot
+Description: Complete investment: $4,200 (includes accommodation)
+
+**Primary Text:** The Executive Presence Immersion is designed exclusively for senior leaders ready to transform how they're perceived and received. Learn more in our free masterclass or apply directly for one of the 15 available spots.
+
+**CTA:** Learn More
+
 This comprehensive review and strategy document provides a roadmap for launching effective advertising campaigns that will drive qualified prospects to the Executive Presence Immersion funnel. The multi-platform approach ensures maximum visibility among the target executive audience, while the detailed measurement framework will allow for continuous optimization to improve ROI.
