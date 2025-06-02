@@ -34,6 +34,7 @@
 - Calendar Booking: [https://mastermind.thecgroupstudio.com/calendar.html](https://mastermind.thecgroupstudio.com/calendar.html)
 - Thank You Page: [https://mastermind.thecgroupstudio.com/thank-you.html](https://mastermind.thecgroupstudio.com/thank-you.html)
 - Payment Page: [https://mastermind.thecgroupstudio.com/payment.html](https://mastermind.thecgroupstudio.com/payment.html)
+- Video Library: [https://mastermind.thecgroupstudio.com/videos.html](https://mastermind.thecgroupstudio.com/videos.html)
 
 
 #### Masterclass Page (masterclass.html)
@@ -50,6 +51,12 @@
 - **Purpose:** Process payment and secure event registration
 - **Key Elements:** Event details, pricing, what's included, schedule, FAQs
 - **Conversion Goal:** Complete payment transaction
+
+#### Video Library (videos.html)
+- **Purpose:** Provide additional value and build credibility through leadership interviews
+- **Key Elements:** Collection of leadership interview videos, professional layout, easy navigation
+- **Conversion Goal:** Deepen engagement and reinforce expertise positioning
+- **Access Point:** Linked from the thank-you page as additional content
 
 ### 4. Email Sequence Integration
 - **Trigger:** Form submission on Executive Immersion page
@@ -317,6 +324,7 @@ Leveraging both entry points allows for targeting different audience segments wi
    - Review the Calendar page: [https://mastermind.thecgroupstudio.com/calendar.html](https://mastermind.thecgroupstudio.com/calendar.html)
    - Check the Thank You page: [https://mastermind.thecgroupstudio.com/thank-you.html](https://mastermind.thecgroupstudio.com/thank-you.html)
    - Examine the Payment page: [https://mastermind.thecgroupstudio.com/payment.html](https://mastermind.thecgroupstudio.com/payment.html)
+   - Visit the Video Library: [https://mastermind.thecgroupstudio.com/videos.html](https://mastermind.thecgroupstudio.com/videos.html)
 
 2. Test the user experience by going through the funnel as a prospect
 3. Verify all email templates and automation triggers
