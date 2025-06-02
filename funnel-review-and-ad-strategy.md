@@ -407,13 +407,13 @@ Watch the free masterclass now and discover how to transform your executive pres
 #### Video Ad Script 1: "Exclusive Napa Valley Immersion" (15 seconds)
 
 ```
-[Visual: Stunning footage of Alila Napa Valley resort]
+[Visual: Stunning footage of ALILA Resort NAPA VALLEY, ST. HELENA, CA]
 
 VOICEOVER: "Transform your leadership presence in three days at the exclusive Executive Presence Immersion."
 
 [Visual: Elegant meeting spaces and luxurious accommodations]
 
-VOICEOVER: "July 20-23 at Alila Napa Valley. Only 15 spots available."
+VOICEOVER: "July 20-23, 2025 at ALILA Resort NAPA VALLEY, ST. HELENA, CA. Only 15 spots available."
 
 [Text Overlay: "Executive Presence Immersion"]
 
@@ -427,7 +427,7 @@ KATHRYN: "Apply now to secure your spot."
 #### Video Ad Script 2: "Leadership Transformation Retreat" (30 seconds)
 
 ```
-[Visual: Montage of Alila Napa Valley resort]
+[Visual: Montage of ALILA Resort NAPA VALLEY, ST. HELENA, CA]
 
 VOICEOVER: "Imagine stepping away from the demands of leadership for just three days..."
 
@@ -441,7 +441,7 @@ KATHRYN: "The Executive Presence Immersion is limited to just 15 senior leaders 
 
 [Visual: Participants engaged in workshop activities]
 
-KATHRYN: "Join us July 20-23 at the luxurious Alila Napa Valley for three days that will transform your leadership forever."
+KATHRYN: "Join us July 20-23, 2025 at the luxurious ALILA Resort NAPA VALLEY, ST. HELENA, CA for three days that will transform your leadership forever."
 
 [Text Overlay: "Only 15 Spots Available"]
 
@@ -450,18 +450,18 @@ KATHRYN: "Join us July 20-23 at the luxurious Alila Napa Valley for three days t
 
 #### Image Ad Copy (For LinkedIn/Facebook)
 
-**Headline:** Executive Presence Immersion: July 20-23, 2024
+**Headline:** Executive Presence Immersion: July 20-23, 2025
 
 **Primary Text:** Three days that will transform your leadership presence forever.
 
-Join leadership expert Kathryn Ficarra for an exclusive immersion experience at the luxurious Alila Napa Valley resort. Limited to just 15 senior leaders.
+Join leadership expert Kathryn Ficarra for an exclusive immersion experience at the luxurious ALILA Resort NAPA VALLEY, ST. HELENA, CA. Limited to just 15 senior leaders.
 
 Your $4,200 investment includes:
 ✓ 3-day immersive executive presence program
 ✓ Personalized nervous system regulation techniques
 ✓ Executive presence assessment and roadmap
 ✓ All meals during the program
-✓ 3 nights luxury accommodation at Alila Napa Valley
+✓ 3 nights luxury accommodation at ALILA Resort NAPA VALLEY, ST. HELENA, CA
 
 Only 15 spots available. Senior executives only.
 
@@ -477,9 +477,9 @@ Headline: Transform Your Executive Presence
 Description: Discover the science behind commanding leadership presence
 
 **Card 2:**
-[Image: Alila Napa Valley resort]
+[Image: ALILA Resort NAPA VALLEY, ST. HELENA, CA]
 Headline: Exclusive 3-Day Immersion
-Description: July 20-23, 2024 at Alila Napa Valley
+Description: July 20-23, 2025 at ALILA Resort NAPA VALLEY, ST. HELENA, CA
 
 **Card 3:**
 [Image: Executive in leadership moment]
