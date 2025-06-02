@@ -70,7 +70,7 @@
 
 ### 6. Pending Technical Updates
 - **Stripe Integration:** Email sequence requiring Stripe integration is not yet implemented pending API access
-- **Payment Links:** Stripe payment links need to be updated to reflect the new pricing ($4,400 instead of previous pricing)
+- **Payment Links:** Stripe payment links need to be updated to reflect the new pricing ($4,200 instead of previous pricing)
 - **Payment Confirmation:** Automated payment confirmation email workflow will be implemented once Stripe API access is granted
 
 ## Funnel Improvements & Updates
@@ -83,7 +83,7 @@
 2. **Venue & Event Details**
    - Updated venue to "Alila Napa Valley, St. Helena, CA"
    - Confirmed dates: July 20-23, 2024
-   - Updated pricing to $4,400
+   - Updated pricing to $4,200
 
 3. **Content Refinements**
    - Clarified program inclusions
@@ -324,7 +324,7 @@ Leveraging both entry points allows for targeting different audience segments wi
 5. Provide any existing creative assets that can be used for ad development
 6. Schedule a kickoff call to discuss implementation timeline
 7. Provide Stripe API access to complete payment integration
-8. Update Stripe payment links to reflect current pricing ($4,400)
+8. Update Stripe payment links to reflect current pricing ($4,200)
 
 ---
 

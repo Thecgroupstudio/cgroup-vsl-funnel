@@ -249,12 +249,12 @@ We're creating an automated email journey that guides potential clients from the
         
         <div style="margin-bottom: 20px;">
             <p style="font-weight: bold; margin-bottom: 5px;">Full Payment:</p>
-            <p style="margin: 0;">$4,400 - Secure your spot with a one-time payment</p>
+            <p style="margin: 0;">$4,200 - Secure your spot with a one-time payment</p>
         </div>
         
         <div style="margin-bottom: 20px;">
             <p style="font-weight: bold; margin-bottom: 5px;">Payment Plan:</p>
-            <p style="margin: 0;">2 payments of $2,200 each</p>
+            <p style="margin: 0;">2 payments of $2,100 each</p>
             <ul style="padding-left: 20px; margin-top: 5px;">
                 <li>First payment: Due immediately to secure your spot</li>
                 <li>Second payment: Due 30 days after first payment</li>
