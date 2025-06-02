@@ -60,7 +60,7 @@ We're creating an automated email journey that guides potential clients from the
     <ul style="padding-left: 20px; margin-bottom: 20px;">
         <li>Your specific leadership challenges</li>
         <li>How the Executive Presence Immersion can help you</li>
-        <li>Whether this program is the right fit for your goals</li>
+        <li>How this program will accelerate your leadership transformation</li>
     </ul>
     
     <div style="text-align: center; margin: 30px 0;">
@@ -159,7 +159,7 @@ We're creating an automated email journey that guides potential clients from the
         <li>Prepare any specific questions you have about the program</li>
     </ul>
     
-    <p>This 30-minute call will help us determine if the Executive Presence Immersion is the right fit for your leadership goals. There's no pressure or obligation—just an open conversation about how we might be able to help you.</p>
+    <p>This 30-minute call will reveal how the Executive Presence Immersion can transform your leadership presence and help you achieve breakthrough results. I'm excited to share specific strategies tailored to your unique leadership journey.</p>
     
     <p>If you need to reschedule, please use the link in your calendar invitation or reply to this email.</p>
     
