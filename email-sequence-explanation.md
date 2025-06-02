@@ -105,7 +105,7 @@ We're creating an automated email journey that guides potential clients from the
     <ul style="padding-left: 20px; margin-bottom: 20px;">
         <li>Clarity on how to overcome your specific leadership challenges</li>
         <li>Understanding of our neuroscience-backed approach to executive presence</li>
-        <li>Details about the July 20-23 immersion experience in Monterey</li>
+        <li>Details about the July 20-23 immersion experience in Napa Valley</li>
     </ul>
     
     <div style="text-align: center; margin: 30px 0;">
@@ -240,14 +240,14 @@ We're creating an automated email journey that guides potential clients from the
     
     <p>Hello [First_Name],</p>
     
-    <p>Thank you for our conversation today. I enjoyed learning about your leadership journey and am excited about the possibility of working with you at the Executive Presence Immersion in Monterey this July.</p>
+    <p>Thank you for our conversation today. I enjoyed learning about your leadership journey and am excited about the possibility of working with you at the Executive Presence Immersion in Napa Valley this July.</p>
     
     <p>As promised, here are the complete program details:</p>
     
     <div style="background-color: #f7f7f7; padding: 20px; margin: 25px 0; border-radius: 5px;">
         <h3 style="color: #4169e1; margin-top: 0;">Executive Presence Immersion</h3>
         <p><strong>Dates:</strong> July 20-23, 2024</p>
-        <p><strong>Location:</strong> Sanctuary Beach Resort, Monterey, CA</p>
+        <p><strong>Location:</strong> Alila Napa Valley, 1915 Main Street, St. Helena, CA 94574</p>
         <p><strong>Investment:</strong> $8,500</p>
         
         <p style="margin-top: 15px;"><strong>What's Included:</strong></p>
@@ -255,7 +255,7 @@ We're creating an automated email journey that guides potential clients from the
             <li>3 days of intensive, hands-on training (9am-5pm daily)</li>
             <li>Neuroscience-backed techniques for managing your nervous system</li>
             <li>Personalized feedback and coaching</li>
-            <li>Luxury accommodations for 3 nights</li>
+            <li>Luxury accommodations for 3 nights (included in your registration)</li>
             <li>All meals and refreshments</li>
             <li>Comprehensive workbook and resources</li>
             <li>30-day post-immersion support</li>
@@ -414,7 +414,7 @@ We're creating an automated email journey that guides potential clients from the
     
     <p>Hello [First_Name],</p>
     
-    <p>Congratulations on securing your spot in the Executive Presence Immersion! I'm thrilled to have you join us for this transformative experience in Monterey this July.</p>
+    <p>Congratulations on securing your spot in the Executive Presence Immersion! I'm thrilled to have you join us for this transformative experience in Napa Valley this July.</p>
     
     <div style="background-color: #f0f7ff; border: 1px solid #d0e3ff; padding: 20px; margin: 25px 0; border-radius: 5px;">
         <h3 style="color: #4169e1; margin-top: 0;">Payment Receipt</h3>
@@ -428,7 +428,7 @@ We're creating an automated email journey that guides potential clients from the
     <p><strong>Your Executive Presence Immersion Details:</strong></p>
     <ul style="padding-left: 20px; margin-bottom: 20px;">
         <li><strong>Dates:</strong> July 20-23, 2024</li>
-        <li><strong>Location:</strong> Sanctuary Beach Resort, Monterey, CA</li>
+        <li><strong>Location:</strong> Alila Napa Valley, 1915 Main Street, St. Helena, CA 94574</li>
         <li><strong>Check-in:</strong> July 20, from 3:00 PM</li>
         <li><strong>Program Start:</strong> July 20, 6:00 PM Welcome Dinner</li>
         <li><strong>Program End:</strong> July 23, 4:00 PM</li>
@@ -444,7 +444,7 @@ We're creating an automated email journey that guides potential clients from the
     <p><strong>Next Steps:</strong></p>
     <ol style="padding-left: 20px; margin-bottom: 20px;">
         <li>Complete your <a href="#" style="color: #4169e1;">Participant Information Form</a> (required within 7 days)</li>
-        <li>Book your travel to Monterey, CA</li>
+        <li>Book your travel to Napa Valley, CA</li>
         <li>Watch for an email to schedule your pre-immersion strategy session</li>
         <li>Mark your calendar for our group orientation call on July 6th at 11:00 AM PT</li>
     </ol>
