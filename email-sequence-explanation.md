@@ -537,12 +537,24 @@ We're creating an automated email journey that guides potential clients from the
     
     <p><strong>Your Executive Presence Immersion Details:</strong></p>
     <ul style="padding-left: 20px; margin-bottom: 20px;">
-        <li><strong>Dates:</strong> July 20-23, 2024</li>
-        <li><strong>Location:</strong> Alila Napa Valley, 1915 Main Street, St. Helena, CA 94574</li>
+        <li><strong>Dates:</strong> July 20-23, 2025</li>
+        <li><strong>Location:</strong> ALILA RESORT NAPA VALLEY, 1915 Main Street, St. Helena, CA 94574</li>
         <li><strong>Check-in:</strong> July 20, from 3:00 PM</li>
         <li><strong>Program Start:</strong> July 20, 6:00 PM Welcome Dinner</li>
         <li><strong>Program End:</strong> July 23, 4:00 PM</li>
     </ul>
+    
+    <div style="margin: 25px 0;">
+        <p><strong>Event Location Map:</strong></p>
+        <a href="https://goo.gl/maps/5QhRXJZfPZGEBtYK6" target="_blank">
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=Alila+Napa+Valley,St+Helena,CA&zoom=14&size=600x300&maptype=roadmap&markers=color:red%7CAlila+Napa+Valley,St+Helena,CA&key=YOUR_API_KEY" alt="Map of ALILA RESORT NAPA VALLEY" style="width: 100%; max-width: 600px; border-radius: 8px;">
+        </a>
+        <p style="font-size: 0.9rem; margin-top: 10px;">
+            <a href="https://goo.gl/maps/5QhRXJZfPZGEBtYK6" target="_blank" style="color: #4169e1; text-decoration: none;">
+                View on Google Maps
+            </a>
+        </p>
+    </div>
     
     <p><strong>Your Special Bonuses:</strong></p>
     <ul style="padding-left: 20px; margin-bottom: 20px;">
