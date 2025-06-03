@@ -271,7 +271,6 @@ We're creating an automated email journey that guides potential clients from the
                 <li>PayPal</li>
             </ul>
         </div>
-        
         <div style="background-color: #e8f4ff; padding: 15px; border-left: 4px solid #4169e1; margin-top: 20px;">
             <p style="margin: 0; font-weight: bold;">Secure Online Payment:</p>
             <p style="margin: 10px 0 0;">Your payment information is protected with industry-standard encryption. You'll receive an immediate confirmation after your payment is processed.</p>

@@ -265,104 +265,15 @@
                     <span style="color: #4169e1; font-weight: 600;">ALILA Resort NAPA VALLEY, ST. HELENA, CA</span>
                 </p>
             </div>
-            <!-- Video Container with Custom Preview -->
+            <!-- Video Container with Wistia Embed -->
             <div style="width: 100%; max-width: 650px; margin: 0 auto; background: #000; font-size: 0; line-height: 0;">
-                <div id="videoContainer" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
-                    <!-- YouTube thumbnail with play button overlay -->
-                    <div id="videoThumbnail" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; cursor: pointer;">
-                        <img src="https://img.youtube.com/vi/CZ5D2KWzmhM/maxresdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;" alt="Video Thumbnail">
-                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2);"></div>
-                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
-                            <div class="pulse-play-button" style="background: linear-gradient(135deg, #9b59b6, #e74c3c); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; position: relative; box-shadow: 0 0 20px rgba(155, 89, 182, 0.6); animation: pulse 2s infinite;">
-                                <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
-                                    <path d="M8 5v14l11-7z"/>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Hidden YouTube player div -->
-                    <div id="youtubePlayerDiv" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none;"></div>
-                </div>
-                    <style>
-                        @keyframes pulse {
-                            0% { box-shadow: 0 0 0 0 rgba(255, 0, 4, 0.7); }
-                            70% { box-shadow: 0 0 0 20px rgba(255, 0, 4, 0); }
-                            100% { box-shadow: 0 0 0 0 rgba(255, 0, 4, 0); }
-                        }
-                    </style>
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
+                    <script src="https://fast.wistia.com/player.js" async></script>
+                    <script src="https://fast.wistia.com/embed/g2vojmbx3o.js" async type="module"></script>
+                    <style>wistia-player[media-id='g2vojmbx3o']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/g2vojmbx3o/swatch'); display: block; filter: blur(5px); padding-top:129.44%; }</style>
+                    <wistia-player media-id="g2vojmbx3o" aspect="0.7725321888412017"></wistia-player>
                 </div>
             </div>
-            
-            <!-- YouTube API Implementation -->
-            <script>
-                // Load YouTube API
-                var tag = document.createElement('script');
-                tag.src = "https://www.youtube.com/iframe_api";
-                var firstScriptTag = document.getElementsByTagName('script')[0];
-                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-                
-                var player;
-                var playerReady = false;
-                
-                function onYouTubeIframeAPIReady() {
-                    // Initialize player but don't load video yet
-                    playerReady = true;
-                }
-                
-                // Function to initialize and play video when thumbnail is clicked
-                function initializeVideo() {
-                    // Show the player div
-                    document.getElementById('youtubePlayerDiv').style.display = 'block';
-                    // Hide the thumbnail
-                    document.getElementById('videoThumbnail').style.display = 'none';
-                    
-                    // Create the player
-                    player = new YT.Player('youtubePlayerDiv', {
-                        videoId: 'CZ5D2KWzmhM',
-                        playerVars: {
-                            'autoplay': 1,
-                            'mute': 0, // Start with sound
-                            'controls': 1,
-                            'modestbranding': 1,
-                            'rel': 0,
-                            'showinfo': 0,
-                            'start': 3 // Start video at 3 seconds
-                        },
-                        events: {
-                            'onReady': function(event) {
-                                // Video will autoplay with sound
-                                event.target.playVideo();
-                            },
-                            'onStateChange': function(event) {
-                                // If video ends, show thumbnail again
-                                if (event.data === YT.PlayerState.ENDED) {
-                                    document.getElementById('youtubePlayerDiv').style.display = 'none';
-                                    document.getElementById('videoThumbnail').style.display = 'block';
-                                }
-                            }
-                        }
-                    });
-                }
-                
-                // Add click handler to thumbnail
-                document.addEventListener('DOMContentLoaded', function() {
-                    document.getElementById('videoThumbnail').addEventListener('click', function() {
-                        if (playerReady) {
-                            initializeVideo();
-                        } else {
-                            // If API isn't ready yet, wait a bit and try again
-                            setTimeout(function() {
-                                if (playerReady) {
-                                    initializeVideo();
-                                } else {
-                                    console.error('YouTube API not ready');
-                                }
-                            }, 1000);
-                        }
-                    });
-                });
-            </script>
                 
                 <!-- CTA Button for Popup Form -->
                 <div style="width: 100%; max-width: 650px; margin: 0 auto; padding: 20px 0 0 0; background: #fff;">
