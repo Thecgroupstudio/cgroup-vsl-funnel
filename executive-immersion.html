@@ -266,11 +266,23 @@
                 </p>
             </div>
             <!-- Video Container with Wistia Embed -->
-            <div style="width: 100%; max-width: 650px; margin: 0 auto; background: #000; font-size: 0; line-height: 0;">
-                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
+            <div style="width: 100%; max-width: 800px; margin: 0 auto; background: #000;">
+                <div style="position: relative;">
                     <script src="https://fast.wistia.com/player.js" async></script>
                     <script src="https://fast.wistia.com/embed/g2vojmbx3o.js" async type="module"></script>
-                    <style>wistia-player[media-id='g2vojmbx3o']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/g2vojmbx3o/swatch'); display: block; filter: blur(5px); padding-top:129.44%; }</style>
+                    <style>
+                        wistia-player[media-id='g2vojmbx3o']:not(:defined) { 
+                            background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/g2vojmbx3o/swatch'); 
+                            display: block; 
+                            filter: blur(5px); 
+                            padding-top: 129.44%; 
+                        }
+                        wistia-player {
+                            width: 100% !important;
+                            height: auto !important;
+                            max-height: none !important;
+                        }
+                    </style>
                     <wistia-player media-id="g2vojmbx3o" aspect="0.7725321888412017"></wistia-player>
                 </div>
             </div>
