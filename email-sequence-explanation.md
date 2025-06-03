@@ -59,8 +59,9 @@ We're creating an automated email journey that guides potential clients from the
     
     <ul style="padding-left: 20px; margin-bottom: 20px;">
         <li>Your specific leadership challenges</li>
-        <li>How the Executive Presence Immersion can help you</li>
-        <li>How this program will accelerate your leadership transformation</li>
+        <li>How our proprietary <span style="color: #ff0004; font-weight: 600;">IMPACT</span> Framework transforms executive presence</li>
+        <li>How this exclusive immersion experience will accelerate your leadership transformation</li>
+        <li>Why only a limited number of leaders are selected for each immersion cohort</li>
     </ul>
     
     <div style="text-align: center; margin: 30px 0;">
@@ -92,13 +93,13 @@ We're creating an automated email journey that guides potential clients from the
 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
     <img src="https://mastermind.thecgroupstudio.com/images/cgroup-logo.webp" alt="The CGroup Studio" style="width: 120px; height: auto; margin-bottom: 20px;">
     
-    <h2 style="color: #4169e1; margin-bottom: 15px;">Limited Spots Available</h2>
+    <h2 style="color: #4169e1; margin-bottom: 15px;"><span style="color: #ff0004; font-weight: 700;">ONLY LIMITED SPOTS AVAILABLE</span></h2>
     
     <p>Hello {{ $json.body.name }},</p>
     
     <p>I noticed you haven't scheduled your complimentary Introduction Call for the Executive Presence Immersion program yet.</p>
     
-    <p>Our calendar is filling up quickly, and I want to make sure you have the opportunity to discuss how this program can transform your leadership presence.</p>
+    <p>With only limited spots available for our July immersion and applications coming in daily, I want to make sure you don't miss your opportunity to secure your place in this transformative experience.</p>
     
     <p><strong>What you'll gain from this brief call:</strong></p>
     
@@ -194,10 +195,10 @@ We're creating an automated email journey that guides potential clients from the
     
     <div style="background-color: #f7f7f7; border-left: 4px solid #4169e1; padding: 15px; margin: 25px 0;">
         <p style="margin: 0 0 10px 0; font-weight: bold;">Quick Reminder:</p>
-        <p style="margin: 0 0 5px 0;">📅 Date: [Call_Date]</p>
-        <p style="margin: 0 0 5px 0;">⏰ Time: [Call_Time] [Timezone]</p>
-        <p style="margin: 0 0 5px 0;">📞 Via: Zoom</p>
-        <p style="margin: 0 0 0 0;">🔗 Link: [Zoom_Link]</p>
+        <p style="margin: 0 0 5px 0;">&#x1F4C5; Date: [Call_Date]</p>
+        <p style="margin: 0 0 5px 0;">&#x23F1; Time: [Call_Time] [Timezone]</p>
+        <p style="margin: 0 0 5px 0;">&#x1F4F1; Via: Zoom</p>
+        <p style="margin: 0 0 0 0;">&#x1F517; Link: [Zoom_Link]</p>
     </div>
     
     <p><strong>Technical preparation:</strong></p>
@@ -241,6 +242,8 @@ We're creating an automated email journey that guides potential clients from the
     <p>Hello {{ $json.body.name }},</p>
     
     <p>Thank you for your interest in the Executive Presence Immersion. I'm excited about the possibility of having you join us at Alila Napa Valley this July.</p>
+    
+    <p><span style="color: #ff0004; font-weight: 600;">Only limited spots available</span> - With just 15 places in each immersion cohort and applications coming in regularly, I encourage you to secure your place soon.</p>
     
     <p>Here are the payment details for your registration:</p>
     
@@ -313,6 +316,8 @@ We're creating an automated email journey that guides potential clients from the
     
     <p>Thank you for our conversation today. I enjoyed learning about your leadership journey and am excited about the possibility of working with you at the Executive Presence Immersion at Alila Napa Valley, St. Helena, CA this July.</p>
     
+    <p>Based on our conversation, I believe this program would be an excellent fit for you and your goals. The personalized coaching, small group environment, and our proprietary <span style="color: #ff0004; font-weight: bold;">IMPACT Framework</span> are designed to help you develop the authentic executive presence that will elevate your career.</p>
+    
     <p>As promised, here are the complete program details:</p>
     
     <div style="background-color: #f7f7f7; padding: 20px; margin: 25px 0; border-radius: 5px;">
@@ -373,19 +378,22 @@ We're creating an automated email journey that guides potential clients from the
             </div>
         </div>
         
-        <div style="background-color: #fffbea; border-left: 4px solid #ffc107; padding: 15px; margin-top: 20px;">
-            <p style="margin: 0; font-weight: bold;">Special Offer (Valid for 48 Hours):</p>
-            <p style="margin: 10px 0 0 0;">Enroll within 48 hours and receive these exclusive bonuses:</p>
-            <ul style="padding-left: 20px; margin: 10px 0 0 0;">
+        <div style="background-color: #fffbea; border-left: 4px solid #ff0004; padding: 15px; margin-top: 20px;">
+            <p style="margin: 0; font-weight: bold; color: #ff0004;">Special Offer (Valid for 48 Hours) - <span style="text-decoration: underline;">Limited Spots Available!</span></p>
+            <p style="margin: 10px 0;">Register within the next 48 hours and receive:</p>
+            <ul style="padding-left: 20px; margin: 10px 0;">
                 <li>Private 1-hour pre-immersion strategy session ($500 value)</li>
                 <li>Executive Presence Assessment Tool ($350 value)</li>
                 <li>Priority seating and accommodations</li>
             </ul>
-            <p style="margin: 15px 0 0 0; font-size: 0.9em; font-style: italic;">Offer expires: [Expiration_Date_Time]</p>
+            <p style="margin: 15px 0 0 0; font-weight: bold;">Our immersion programs consistently sell out <span style="color: #ff0004;">very quickly</span> due to high demand for this exclusive event.</p>
+            <p style="margin: 10px 0 0 0; font-size: 0.9em; font-style: italic;">Offer expires: [Expiration_Date_Time]</p>
         </div>
     </div>
     
-    <p>Based on our conversation, I believe this program would be transformative for your leadership presence. The techniques you'll learn will directly address the challenges you mentioned regarding [Specific_Challenge_Mentioned].</p>
+    <p>Based on our conversation, I believe this program would be transformative for your leadership presence. Our proprietary <span style="color: #ff0004; font-weight: bold;">IMPACT Framework</span> will directly address the challenges you mentioned regarding [Specific_Challenge_Mentioned] and help you develop an authentic executive presence that resonates with your leadership style.</p>
+    
+    <p><span style="color: #ff0004; font-weight: bold;">With limited spots available</span> and high demand for this exclusive program, I encourage you to secure your place soon. To register, simply click the button below:</p>
     
     <div style="text-align: center; margin: 30px 0;">
         <a href="https://mastermind.thecgroupstudio.com/payment.html" style="background-color: #4169e1; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">Secure Your Spot Now</a>
@@ -425,8 +433,8 @@ We're creating an automated email journey that guides potential clients from the
     
     <p>I wanted to send a quick reminder that your special offer for the Executive Presence Immersion expires tomorrow at [Expiration_Time].</p>
     
-    <div style="background-color: #fffbea; border-left: 4px solid #ffc107; padding: 15px; margin: 25px 0;">
-        <p style="margin: 0; font-weight: bold;">When you enroll by tomorrow, you'll receive:</p>
+    <div style="background-color: #fffbea; border-left: 4px solid #ff0004; padding: 15px; margin: 25px 0;">
+        <p style="margin: 0; font-weight: bold; color: #ff0004;">When you enroll by tomorrow, you'll receive:</p>
         <ul style="padding-left: 20px; margin: 10px 0 0 0;">
             <li>Private 1-hour pre-immersion strategy session ($500 value)</li>
             <li>Executive Presence Assessment Tool ($350 value)</li>
@@ -437,7 +445,7 @@ We're creating an automated email journey that guides potential clients from the
     
     <p>After our conversation, I'm confident that this program will help you address the leadership challenges you mentioned, particularly around [Specific_Challenge_Mentioned].</p>
     
-    <p>The July immersion is filling up quickly, with only 5 spots remaining. I'd love to have you join us for this transformative experience.</p>
+    <p>The July immersion is filling up quickly, with very limited spots remaining. I'd love to have you join us for this transformative experience.</p>
     
     <div style="text-align: center; margin: 30px 0;">
         <a href="https://mastermind.thecgroupstudio.com/payment.html" style="background-color: #4169e1; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">Secure Your Spot Now</a>
