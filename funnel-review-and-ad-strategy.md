@@ -138,7 +138,7 @@ Leveraging both entry points allows for targeting different audience segments wi
 
 #### Audience Targeting:
 - **Demographics:** 
-  - Age: 35-65
+  - Age: 35-50
   - Gender: All genders
   - Income: High-income brackets ($150k+)
   - Education: Bachelor's degree or higher
@@ -151,6 +151,12 @@ Leveraging both entry points allows for targeting different audience segments wi
   - Business leadership
   - Corporate training
   - Professional speaking
+HR Managers
+Talent Developers
+Chief People Officers
+
+
+
 
 - **Custom Audiences:**
   - Website visitors (past 180 days)
