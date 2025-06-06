@@ -81,7 +81,64 @@ P.S. Limited slots available for our July 20-23, 2025 immersion experience. Clic
 [BUTTON: Reserve Your Spot Now] (https://mastermind.thecgroupstudio.com/executive-immersion?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email1_reserve)
 ```
 
-### Email 2: Value-Building Email (Send 3 days after Email 1)
+### Email 1.5: Impact Framework & Assessment Email (Send 2 days after Email 1)
+
+**Subject Line Options:**
+- [FIRST NAME], Your Executive Presence Impact Framework
+- The Framework Behind Transformational Leadership Presence
+- Your Personalized Executive Presence Assessment
+
+**Email Body:**
+
+```
+[LOGO/HEADER IMAGE]
+
+Dear [FIRST NAME],
+
+Thank you for your interest in the Executive Presence Immersion experience. I wanted to share something valuable with you that can help you begin your transformation journey right away.
+
+**The Executive Impact Framework™**
+
+After working with hundreds of leaders across industries, I've developed a proprietary framework that addresses the three core dimensions of executive presence:
+
+1. **Internal Presence** — How you manage your mindset, confidence, and emotional regulation in high-pressure situations
+
+2. **External Expression** — How you communicate, present yourself, and articulate your vision in ways that inspire action
+
+3. **Relational Influence** — How you build meaningful connections and leverage relationships to drive organizational outcomes
+
+[SIMPLE GRAPHIC: Three interconnected circles labeled with the framework components]
+
+The most effective leaders understand that true executive presence requires mastery of all three dimensions. When one area is underdeveloped, your overall impact suffers.
+
+**Your Personalized Purpose Assessment**
+
+To help you identify which dimension needs the most attention in your leadership journey, I've created a quick assessment for you:
+
+[BUTTON: Take Your 3-Minute Assessment] (https://mastermind.thecgroupstudio.com/executive-immersion/assessment?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email1.5_assessment)
+
+This assessment will help you:
+
+• Identify your current executive presence strengths
+• Discover your primary presence archetype
+• Receive tailored recommendations for your leadership development
+• Understand how the Executive Presence Immersion can accelerate your growth
+
+The assessment takes just 3 minutes to complete, and you'll receive your personalized results immediately.
+
+I look forward to seeing your results and potentially discussing them during an introduction call.
+
+To your leadership success,
+
+Kathryn Ficarra
+[SIGNATURE/PHOTO]
+
+P.S. The Executive Presence Immersion on July 20-23, 2025 will include a comprehensive deep dive into all three dimensions of the Impact Framework, with personalized coaching on your specific development areas.
+
+[BUTTON: Take Your Assessment Now] (https://mastermind.thecgroupstudio.com/executive-immersion/assessment?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email1.5_assessment_cta)
+```
+
+### Email 2: Value-Building Email (Send 2 days after Email 1.5)
 
 **Subject Line Options:**
 - The Hidden Cost of Weak Executive Presence
