@@ -73,7 +73,7 @@ The Executive Presence Immersion offers a thoughtfully designed experience focus
 
 I look forward to potentially working with you,
 
-Kathryn
+Kathryn Ficarra
 [SIGNATURE/PHOTO]
 
 P.S. Limited slots available for this exclusive experience. Click below to learn more and schedule your introduction call.
@@ -123,7 +123,7 @@ The Executive Presence Immersion experience has limited slots available to ensur
 
 Looking forward to connecting,
 
-Kathryn
+Kathryn Ficarra
 [SIGNATURE/PHOTO]
 
 P.S. Still considering if this is right for you? With limited slots available, I recommend scheduling a no-obligation introduction call where we can discuss your specific leadership challenges and determine if the Executive Presence Immersion is the right fit.
@@ -179,7 +179,7 @@ If you have any questions or need more information before making your decision, 
 
 I hope to see you at the Executive Presence Immersion,
 
-Kathryn
+Kathryn Ficarra
 [SIGNATURE/PHOTO]
 
 P.S. Remember, executive presence is the difference between being a good leader and being an unforgettable one. Don't miss this opportunity to transform how others perceive and respond to you as a leader.
