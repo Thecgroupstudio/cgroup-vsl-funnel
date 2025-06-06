@@ -55,7 +55,7 @@ I'm reaching out with an exclusive invitation for leaders who are ready to trans
 
 **Introducing the Executive Presence Immersion**
 
-Join me for an intimate, transformative experience at the luxurious ALILA Resort NAPA VALLEY, where just limited leaders will master the art of executive presence through personalized coaching, immersive workshops, and practical application.
+Join me for an intimate, transformative experience at the luxurious ALILA Resort NAPA VALLEY. With limited slots available, you'll master the art of executive presence through personalized coaching, immersive workshops, and practical application.
 
 During this exclusive immersion experience, you'll:
 
@@ -65,7 +65,7 @@ During this exclusive immersion experience, you'll:
 • Build a strategic network of like-minded executives
 • Experience personalized coaching in a luxury resort setting
 
-**Limited to just a select group of participants** to ensure personalized attention and maximum impact.
+**Limited slots available** to ensure personalized attention and maximum impact.
 
 [BUTTON: Learn More About the Experience] (https://mastermind.thecgroupstudio.com/executive-immersion?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email1_learn_more)
 
@@ -73,10 +73,10 @@ The Executive Presence Immersion offers a thoughtfully designed experience focus
 
 I look forward to potentially working with you,
 
-[CLIENT NAME]
-[CLIENT SIGNATURE/PHOTO]
+Kathryn
+[SIGNATURE/PHOTO]
 
-P.S. Spots are filling quickly for this exclusive experience. Click below to learn more and schedule your introduction call.
+P.S. Limited slots available for this exclusive experience. Click below to learn more and schedule your introduction call.
 
 [BUTTON: Reserve Your Spot Now] (https://mastermind.thecgroupstudio.com/executive-immersion?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email1_reserve)
 ```
@@ -113,20 +113,20 @@ In my upcoming Executive Presence Immersion at ALILA Resort NAPA VALLEY, I'll be
 
 **What Past Participants Are Saying:**
 
-"Kathryn's executive presence training significantly improved how I show up as a leader. The strategies I learned helped me navigate leadership challenges with greater confidence and clarity." - [NAME], [POSITION]
+"Kathryn's approach to presence is truly one of a kind. She goes right to the core of what presence truly is, uncovering the foundational systems that most overlook. It is a perspective that I haven't seen taught this way before, it is both refreshing and transformative. Kathryn has a way of making the intangible feel tangible, and the impact is undeniable." - Jenn G, Entrepreneur
 
-[PHOTO/VIDEO TESTIMONIAL IF AVAILABLE]
+"Kathryn's presentation helped me to think about things in a completely different way. It challenged me, inspired me, and will change the way I do business and life." - Caleb S, Entrepreneur
 
-The Executive Presence Immersion experience is limited to just a select group of participants to ensure you receive personalized attention and guidance.
+The Executive Presence Immersion experience has limited slots available to ensure you receive personalized attention and guidance.
 
 [BUTTON: Schedule Your Introduction Call] (https://mastermind.thecgroupstudio.com/executive-immersion?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email2_schedule)
 
 Looking forward to connecting,
 
-[CLIENT NAME]
-[CLIENT SIGNATURE/PHOTO]
+Kathryn
+[SIGNATURE/PHOTO]
 
-P.S. Still considering if this is right for you? Schedule a no-obligation introduction call where we can discuss your specific leadership challenges and determine if the Executive Presence Immersion is the right fit.
+P.S. Still considering if this is right for you? With limited slots available, I recommend scheduling a no-obligation introduction call where we can discuss your specific leadership challenges and determine if the Executive Presence Immersion is the right fit.
 
 [BUTTON: Book Your Call Now] (https://mastermind.thecgroupstudio.com/executive-immersion?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email2_book)
 ```
@@ -134,7 +134,7 @@ P.S. Still considering if this is right for you? Schedule a no-obligation introd
 ### Email 3: Urgency/Final Call Email (Send 5-7 days after Email 2)
 
 **Subject Line Options:**
-- Last Call: 3 Spots Remaining for Executive Presence Immersion
+- Last Call: Limited Slots Available for Executive Presence Immersion
 - [FIRST NAME], Your Executive Presence Opportunity Closes Soon
 - Final 48 Hours: Executive Presence Immersion Registration
 
@@ -145,9 +145,9 @@ P.S. Still considering if this is right for you? Schedule a no-obligation introd
 
 Dear [FIRST NAME],
 
-This is your final opportunity to join the Executive Presence Immersion experience at ALILA Resort NAPA VALLEY.
+This is your final opportunity to join the Executive Presence Immersion experience at ALILA Resort NAPA VALLEY with limited slots available.
 
-**Only [X] spots remain available**, and registration closes on [DATE].
+**Limited slots available**, and registration closes on [DATE].
 
 For those who've been considering this opportunity to transform your leadership presence, now is the time to make your decision.
 
@@ -179,8 +179,8 @@ If you have any questions or need more information before making your decision, 
 
 I hope to see you at the Executive Presence Immersion,
 
-[CLIENT NAME]
-[CLIENT SIGNATURE/PHOTO]
+Kathryn
+[SIGNATURE/PHOTO]
 
 P.S. Remember, executive presence is the difference between being a good leader and being an unforgettable one. Don't miss this opportunity to transform how others perceive and respond to you as a leader.
 
