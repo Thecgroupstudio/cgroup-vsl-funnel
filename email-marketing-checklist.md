@@ -53,9 +53,9 @@ Dear [FIRST NAME],
 
 I'm reaching out with an exclusive invitation for leaders who are ready to transform their executive presence and command any room they enter.
 
-**Introducing the Executive Presence Immersion**
+**Introducing the Executive Presence Immersion: July 20-23, 2025**
 
-Join me for an intimate, transformative experience at the luxurious ALILA Resort NAPA VALLEY. With limited slots available, you'll master the art of executive presence through personalized coaching, immersive workshops, and practical application.
+Join me for an intimate, transformative experience at the luxurious ALILA Resort NAPA VALLEY on July 20-23, 2025. With limited slots available, you'll master the art of executive presence through personalized coaching, immersive workshops, and practical application.
 
 During this exclusive immersion experience, you'll:
 
@@ -76,7 +76,7 @@ I look forward to potentially working with you,
 Kathryn Ficarra
 [SIGNATURE/PHOTO]
 
-P.S. Limited slots available for this exclusive experience. Click below to learn more and schedule your introduction call.
+P.S. Limited slots available for our July 20-23, 2025 immersion experience. Click below to learn more and schedule your introduction call.
 
 [BUTTON: Reserve Your Spot Now] (https://mastermind.thecgroupstudio.com/executive-immersion?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email1_reserve)
 ```
@@ -103,7 +103,7 @@ It's not just charisma or confidence—it's executive presence, and it's the inv
 
 After working with hundreds of executives across industries, I've discovered that executive presence isn't something you're born with—it's a skill that can be developed through the right training and environment.
 
-In my upcoming Executive Presence Immersion at ALILA Resort NAPA VALLEY, I'll be sharing the exact framework I've used to help leaders:
+In my upcoming Executive Presence Immersion at ALILA Resort NAPA VALLEY (July 20-23, 2025), I'll be sharing the exact framework I've used to help leaders:
 
 • Enhance their leadership communication skills
 • Approach high-stakes presentations and negotiations with greater confidence
@@ -126,7 +126,7 @@ Looking forward to connecting,
 Kathryn Ficarra
 [SIGNATURE/PHOTO]
 
-P.S. Still considering if this is right for you? With limited slots available, I recommend scheduling a no-obligation introduction call where we can discuss your specific leadership challenges and determine if the Executive Presence Immersion is the right fit.
+P.S. Still considering if this is right for you? With limited slots available for our July 20-23, 2025 immersion, I recommend scheduling a no-obligation introduction call where we can discuss your specific leadership challenges and determine if the Executive Presence Immersion is the right fit.
 
 [BUTTON: Book Your Call Now] (https://mastermind.thecgroupstudio.com/executive-immersion?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email2_book)
 ```
@@ -145,7 +145,7 @@ P.S. Still considering if this is right for you? With limited slots available, I
 
 Dear [FIRST NAME],
 
-This is your final opportunity to join the Executive Presence Immersion experience at ALILA Resort NAPA VALLEY with limited slots available.
+This is your final opportunity to join the Executive Presence Immersion experience at ALILA Resort NAPA VALLEY on July 20-23, 2025 with limited slots available.
 
 **Limited slots available**, and registration closes on [DATE].
 
@@ -182,7 +182,7 @@ I hope to see you at the Executive Presence Immersion,
 Kathryn Ficarra
 [SIGNATURE/PHOTO]
 
-P.S. Remember, executive presence is the difference between being a good leader and being an unforgettable one. Don't miss this opportunity to transform how others perceive and respond to you as a leader.
+P.S. Remember, executive presence is the difference between being a good leader and being an unforgettable one. Don't miss this July 20-23, 2025 opportunity to transform how others perceive and respond to you as a leader.
 
 [BUTTON: Join the Executive Presence Immersion] (https://mastermind.thecgroupstudio.com/executive-immersion?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email3_join)
 ```
