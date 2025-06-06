@@ -1,5 +1,22 @@
 # Email Marketing Checklist for Executive Presence Immersion
 
+## Campaign Status
+
+**Current Status:** In Progress
+
+| Email | Status | Send Date | Notes |
+|-------|--------|-----------|-------|
+| Email 1: Announcement | ✅ SENT | June 5, 2025 | Initial campaign launch |
+| Email 1.5: Impact Framework & Assessment | 📝 READY | Scheduled for June 7, 2025 | New addition to sequence |
+| Email 2: Value-Building | 📝 READY | Scheduled for June 9, 2025 | Includes testimonials |
+| Email 3: Urgency/Final Call | 📝 READY | Scheduled for June 14, 2025 | Final opportunity message |
+
+**Next Actions:**
+1. Implement Impact Framework assessment page
+2. Develop e-book lead magnet (awaiting client draft content)
+3. Monitor Facebook ad performance with new pixel implementation
+4. Prepare for potential YouTube and X (Twitter) campaign launch after June 14
+
 ## Flodesk Email Campaign Setup Checklist
 
 - [ ] Request access to client's Flodesk account (if you don't already have it)
@@ -37,7 +54,7 @@
 
 ## Email Templates for Executive Presence Immersion Campaign
 
-### Email 1: Announcement Email
+### Email 1: Announcement Email [SENT: June 5, 2025]
 
 **Subject Line Options:**
 - Exclusive Invitation: Transform Your Executive Presence at ALILA Resort
