@@ -67,9 +67,9 @@ During this exclusive immersion experience, you'll:
 
 **Limited to just a select group of participants** to ensure personalized attention and maximum impact.
 
-[BUTTON: Learn More About the Experience]
+[BUTTON: Learn More About the Experience] (https://mastermind.thecgroupstudio.com/executive-immersion?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email1_learn_more)
 
-The Executive Presence Immersion isn't just another leadership workshop—it's a complete transformation of how you show up as a leader, carefully designed to elevate your influence and impact.
+The Executive Presence Immersion offers a thoughtfully designed experience focused on how you show up as a leader, with the goal of helping you refine your leadership presence.
 
 I look forward to potentially working with you,
 
@@ -78,7 +78,7 @@ I look forward to potentially working with you,
 
 P.S. Spots are filling quickly for this exclusive experience. Click below to learn more and schedule your introduction call.
 
-[BUTTON: Reserve Your Spot Now]
+[BUTTON: Reserve Your Spot Now] (https://mastermind.thecgroupstudio.com/executive-immersion?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email1_reserve)
 ```
 
 ### Email 2: Value-Building Email (Send 3 days after Email 1)
@@ -105,21 +105,21 @@ After working with hundreds of executives across industries, I've discovered tha
 
 In my upcoming Executive Presence Immersion at ALILA Resort NAPA VALLEY, I'll be sharing the exact framework I've used to help leaders:
 
-• Get promoted to C-suite positions within 6 months
-• Successfully lead high-stakes presentations and negotiations
-• Build influential relationships with key stakeholders
-• Communicate with clarity and conviction in any situation
-• Develop an authentic leadership style that resonates with teams and executives alike
+• Enhance their leadership communication skills
+• Approach high-stakes presentations and negotiations with greater confidence
+• Develop strategies for building influential professional relationships
+• Communicate with improved clarity and purpose
+• Cultivate an authentic leadership style that aligns with their values and goals
 
 **What Past Participants Are Saying:**
 
-"Kathryn's executive presence training transformed how I show up as a leader. Within three months of implementing her strategies, I was offered a VP position I'd been pursuing for years." - [NAME], [POSITION]
+"Kathryn's executive presence training significantly improved how I show up as a leader. The strategies I learned helped me navigate leadership challenges with greater confidence and clarity." - [NAME], [POSITION]
 
 [PHOTO/VIDEO TESTIMONIAL IF AVAILABLE]
 
 The Executive Presence Immersion experience is limited to just a select group of participants to ensure you receive personalized attention and guidance.
 
-[BUTTON: Schedule Your Introduction Call]
+[BUTTON: Schedule Your Introduction Call] (https://mastermind.thecgroupstudio.com/executive-immersion?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email2_schedule)
 
 Looking forward to connecting,
 
@@ -128,7 +128,7 @@ Looking forward to connecting,
 
 P.S. Still considering if this is right for you? Schedule a no-obligation introduction call where we can discuss your specific leadership challenges and determine if the Executive Presence Immersion is the right fit.
 
-[BUTTON: Book Your Call Now]
+[BUTTON: Book Your Call Now] (https://mastermind.thecgroupstudio.com/executive-immersion?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email2_book)
 ```
 
 ### Email 3: Urgency/Final Call Email (Send 5-7 days after Email 2)
@@ -169,13 +169,13 @@ The Executive Presence Immersion is valued at $4,200, which includes:
 • Ongoing support and resources
 • A community of high-performing peers
 
-This investment in yourself will continue paying dividends throughout your career as you apply these proven executive presence techniques.
+This investment in yourself may provide valuable skills that you can apply throughout your professional journey.
 
-[BUTTON: Secure Your Spot Now]
+[BUTTON: Secure Your Spot Now] (https://mastermind.thecgroupstudio.com/executive-immersion?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email3_secure)
 
 If you have any questions or need more information before making your decision, reply to this email or schedule a quick call using the link below.
 
-[BUTTON: Schedule a Quick Call]
+[BUTTON: Schedule a Quick Call] (https://mastermind.thecgroupstudio.com/executive-immersion?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email3_quick_call)
 
 I hope to see you at the Executive Presence Immersion,
 
@@ -184,7 +184,7 @@ I hope to see you at the Executive Presence Immersion,
 
 P.S. Remember, executive presence is the difference between being a good leader and being an unforgettable one. Don't miss this opportunity to transform how others perceive and respond to you as a leader.
 
-[BUTTON: Join the Executive Presence Immersion]
+[BUTTON: Join the Executive Presence Immersion] (https://mastermind.thecgroupstudio.com/executive-immersion?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email3_join)
 ```
 
 ---
@@ -208,7 +208,7 @@ P.S. Remember, executive presence is the difference between being a good leader 
 
 3. **Creating Tracking Links:**
    - For each CTA button, create a unique UTM link
-   - Format: `https://yourdomain.com/executive-immersion?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email1_main_cta`
+   - Format: `https://mastermind.thecgroupstudio.com/executive-immersion?utm_source=flodesk&utm_medium=email&utm_campaign=exec_presence&utm_content=email1_main_cta`
    - Ensure all links are properly tracked in your analytics platform
 
 4. **Testing Before Sending:**
