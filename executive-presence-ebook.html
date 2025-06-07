@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Presence Is Your Power | Executive Presence E-Book by Kathryn Ficarra</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;500;600;700&display=swap">
+    <style>
+        :root {
+            --primary-color: #ff0004;
+            --secondary-color: #4169e1;
+            --dark-color: #333;
+            --light-color: #f9f9f9;
+            --accent-color: #f5f5f5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .hero {
+            background-color: var(--light-color);
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+        
+        .hero h2 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .ebook-preview {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+        
+        .preview-content {
+            flex: 1;
+            padding: 0 20px;
+            min-width: 300px;
+        }
+        
+        .preview-image {
+            flex: 1;
+            padding: 0 20px;
+            text-align: center;
+            min-width: 300px;
+        }
+        
+        .preview-image img {
+            max-width: 100%;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+        
+        .chapter-preview {
+            background-color: var(--accent-color);
+            padding: 60px 0;
+        }
+        
+        .chapter-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .chapter-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .chapter-content p {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .form-section {
+            padding: 80px 0;
+            text-align: center;
+            background-color: #fff;
+        }
+        
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-container h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .form-container p {
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: #d10003;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #3558c4;
+        }
+        
+        .whats-inside {
+            padding: 60px 0;
+        }
+        
+        .whats-inside h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .chapter-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .chapter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .chapter-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .chapter-card p {
+            margin-bottom: 0;
+        }
+        
+        .author-section {
+            padding: 60px 0;
+            background-color: var(--accent-color);
+        }
+        
+        .author-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .author-image {
+            flex: 1;
+            padding: 0 20px;
+            text-align: center;
+            min-width: 300px;
+        }
+        
+        .author-image img {
+            max-width: 300px;
+            border-radius: 50%;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .author-bio {
+            flex: 2;
+            padding: 0 20px;
+            min-width: 300px;
+        }
+        
+        .author-bio h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content p {
+            margin-bottom: 20px;
+        }
+        
+        .privacy-text {
+            font-size: 14px;
+            color: #aaa;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero h2 {
+                font-size: 20px;
+            }
+            
+            .ebook-preview {
+                flex-direction: column;
+            }
+            
+            .preview-content, .preview-image {
+                padding: 20px 0;
+            }
+            
+            .author-content {
+                flex-direction: column;
+            }
+            
+            .author-image, .author-bio {
+                padding: 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">The Cgroup Studio</div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Your Presence Is Your Power</h1>
+            <h2>Executive presence isn't about commanding the room. It's about knowing who you are before you enter it.</h2>
+            <a href="#get-ebook" class="btn">Get Your Free E-Book</a>
+        </div>
+    </section>
+
+    <section class="ebook-preview">
+        <div class="container">
+            <div class="ebook-preview">
+                <div class="preview-content">
+                    <h3>Transform Your Leadership Presence</h3>
+                    <p>In this powerful e-book, executive coach Kathryn Ficarra shares the six internal shifts that transformed her own leadership journey and those of hundreds of executives she's coached.</p>
+                    <p>You'll discover how to:</p>
+                    <ul>
+                        <li>Align your identity with your leadership for authentic presence</li>
+                        <li>Master your mindset to lead with confidence</li>
+                        <li>Embody your leadership persona without performing</li>
+                        <li>Activate your authority from within</li>
+                        <li>Communicate with clarity and impact</li>
+                        <li>Evolve into your highest leadership potential</li>
+                    </ul>
+                    <p>This isn't just another leadership manual. It's a transformative guide to reclaiming your authentic power.</p>
+                </div>
+                <div class="preview-image">
+                    <img src="ebook-cover.jpg" alt="Your Presence Is Your Power E-Book Cover" onerror="this.src='https://via.placeholder.com/300x400/ff0004/ffffff?text=Your+Presence+Is+Your+Power'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter-preview">
+        <div class="container">
+            <div class="chapter-content">
+                <h3>From the Book: Identity & Alignment</h3>
+                <p>"Before you can lead others with presence, you have to know who you are when no one is watching."</p>
+                <p>We spend so much of our professional lives trying to become what others expect—the competent one, the strong one, the fixer, the closer, the team player. And somewhere along the way, we lose track of ourselves.</p>
+                <p>We trade authenticity for approval. Power for performance. Presence for perfection.</p>
+                <p>But executive presence isn't about image. It's about alignment. It's about what happens internally before you ever say a word.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="whats-inside">
+        <div class="container">
+            <h3>What's Inside the E-Book</h3>
+            <div class="chapters-grid">
+                <div class="chapter-card">
+                    <h4>Chapter 1: Identity & Alignment</h4>
+                    <p>Discover how to lead from your truth, not your title, and create alignment between who you are and how you lead.</p>
+                </div>
+                <div class="chapter-card">
+                    <h4>Chapter 2: Mindset Mastery</h4>
+                    <p>Learn how your inner language shapes your outer presence and how to rewire limiting beliefs that hold you back.</p>
+                </div>
+                <div class="chapter-card">
+                    <h4>Chapter 3: Persona Embodiment</h4>
+                    <p>Move beyond performing to embodying your leadership through practical embodiment techniques.</p>
+                </div>
+                <div class="chapter-card">
+                    <h4>Chapter 4: Authority Activation</h4>
+                    <p>Activate your innate authority and learn the power of aligned yes and empowered no.</p>
+                </div>
+                <div class="chapter-card">
+                    <h4>Chapter 5: Communication Excellence</h4>
+                    <p>Master the art of regulated, grounded communication that carries weight without needing to be loud.</p>
+                </div>
+                <div class="chapter-card">
+                    <h4>Chapter 6: Transformative Growth</h4>
+                    <p>Implement a 90-day practice to evolve your presence from a performance to a permanent state of being.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="author-section">
+        <div class="container">
+            <div class="author-content">
+                <div class="author-image">
+                    <img src="kathryn-ficarra.jpg" alt="Kathryn Ficarra" onerror="this.src='https://via.placeholder.com/300x300/4169e1/ffffff?text=Kathryn+Ficarra'">
+                </div>
+                <div class="author-bio">
+                    <h3>About Kathryn Ficarra</h3>
+                    <p>For over 20 years, Kathryn was a high-achieving executive, leading teams across industries, collecting titles and checking all the boxes. But inside, she was disconnected.</p>
+                    <p>After her own transformative journey, Kathryn now coaches executives and leaders to develop authentic presence that comes from alignment, not performance.</p>
+                    <p>Her Executive Presence Immersion experience has helped hundreds of leaders transform how they show up, lead, and live—creating impact that extends far beyond the boardroom.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="get-ebook" class="form-section">
+        <div class="container">
+            <div class="form-container">
+                <h3>Get Your Free E-Book</h3>
+                <p>Enter your details below to receive "Your Presence Is Your Power" delivered straight to your inbox.</p>
+                <form id="ebook-form" action="thank-you-ebook.html" method="get">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="first-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Download Now</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 The Cgroup Studio. All rights reserved.</p>
+                <p class="privacy-text">By submitting this form, you agree to receive emails from The Cgroup Studio. Your information will never be shared with third parties. You can unsubscribe at any time.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('ebook-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const firstName = document.getElementById('first-name').value;
+            const email = document.getElementById('email').value;
+            
+            // Here you would typically send this data to your server or email service
+            // For now, we'll just redirect to the thank you page with query parameters
+            window.location.href = `thank-you-ebook.html?name=${encodeURIComponent(firstName)}&email=${encodeURIComponent(email)}`;
+        });
+    </script>
+</body>
+</html>
