@@ -2,6 +2,23 @@
   publish = "/"
   command = ""
 
+# Allow direct access to specific pages
+[[redirects]]
+  from = "/executive-presence-ebook.html"
+  to = "/executive-presence-ebook.html"
+  status = 200
+
+[[redirects]]
+  from = "/thank-you-ebook.html"
+  to = "/thank-you-ebook.html"
+  status = 200
+
+[[redirects]]
+  from = "/your-presence-is-your-power.html"
+  to = "/your-presence-is-your-power.html"
+  status = 200
+
+# Default redirect for all other paths
 [[redirects]]
   from = "/*"
   to = "/opt-in.html"
