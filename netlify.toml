@@ -21,10 +21,10 @@
 # Original funnel redirects
 [[redirects]]
   from = "/*"
-  to = "/opt-in.html"
+  to = "/index.html"
   status = 200
 
 [[redirects]]
   from = "/"
-  to = "/opt-in.html"
+  to = "/index.html"
   status = 200
