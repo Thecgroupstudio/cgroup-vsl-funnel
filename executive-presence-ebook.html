@@ -31,12 +31,33 @@
         }
         
         :root {
-            --primary-color: #ff0004;
-            --secondary-color: #4169e1;
-            --dark-color: #1e293b;
-            --light-color: #f8fafc;
-            --accent-color: #f1f5f9;
+            /* Brand Colors */
+            --primary-color: #ff0004;    /* Keeping existing red for brand consistency */
+            --primary-hover: #d10003;    /* Slightly darker red for hover states */
+            --secondary-color: #1e40af;   /* Deep blue for accents */
+            --secondary-hover: #1e3a8a;  /* Darker blue for hover states */
+            
+            /* Background Colors */
+            --bg-primary: #f8fafc;       /* Light sections */
+            --bg-secondary: #ffffff;     /* Content areas */
+            --bg-accent: #f1f5f9;        /* Subtle accent backgrounds */
+            
+            /* Text Colors */
+            --text-primary: #1f2937;     /* Dark gray for primary text */
+            --text-secondary: #4b5563;   /* Medium gray for secondary text */
+            --text-light: #6b7280;       /* Light gray for tertiary text */
+            
+            /* UI Colors */
+            --border-color: #e5e7eb;     /* Light gray for borders */
+            --success-color: #10b981;    /* Green for success messages */
+            --error-color: #ef4444;      /* Red for errors */
+            --warning-color: #f59e0b;    /* Yellow for warnings */
+            --info-color: #3b82f6;       /* Blue for info messages */
+            
+            /* Transitions */
             --transition: all 0.3s ease;
+            --transition-slow: all 0.5s ease;
+            --transition-fast: all 0.15s ease;
         }
         
         * {
@@ -50,8 +71,10 @@
             font-family: 'Raleway', sans-serif;
             line-height: 1.8;
             letter-spacing: 0.3px;
-            color: var(--dark-color);
-            background-color: #fff;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         h1, h2, h3, h4 {
@@ -89,15 +112,32 @@
         }
         
         /* Section backgrounds */
+        /* Section Backgrounds */
         .hero, .chapter-preview, .author-section, footer {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            background-color: var(--bg-primary);
             position: relative;
             overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
         }
         
-        .ebook-preview, .whats-inside {
-            background-color: #ffffff;
+        /* Add subtle pattern to alternate sections */
+        .hero::after, .chapter-preview::after, .author-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.03) 1px, transparent 0);
+            background-size: 20px 20px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        .ebook-preview, .whats-inside, .form-section {
+            background-color: var(--bg-secondary);
             position: relative;
+            border-bottom: 1px solid var(--border-color);
         }
         
         /* Section spacing */
@@ -127,8 +167,9 @@
             font-family: 'Playfair Display', serif;
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
-            color: var(--dark-color);
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            color: var(--text-primary);
+            font-weight: 700;
+            line-height: 1.2;
             animation: fadeIn 0.8s ease-out;
         }
         
@@ -242,21 +283,25 @@
         }
         
         /* Buttons */
+        /* Buttons */
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
-            color: #fff;
-            padding: 1rem 2rem;
-            border: none;
+            color: white;
+            padding: 0.875rem 2rem;
+            border: 2px solid transparent;
             border-radius: 50px;
             font-size: 1.1rem;
             font-weight: 600;
+            line-height: 1.5;
+            text-align: center;
+            text-decoration: none;
             cursor: pointer;
             transition: var(--transition);
-            text-decoration: none;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             position: relative;
             overflow: hidden;
+            -webkit-font-smoothing: antialiased;
         }
         
         .btn::after {
@@ -289,14 +334,14 @@
         }
         
         .btn:hover {
-            background-color: #d10003;
+            background-color: var(--primary-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
         
         .btn:active {
             transform: translateY(1px);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
         }
         
         .btn-secondary {
@@ -325,16 +370,18 @@
         }
         
         /* Cards */
+        /* Cards */
         .chapter-card {
-            background: white;
+            background: var(--bg-secondary);
             border-radius: 12px;
-            padding: 2.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 2.25rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             transition: var(--transition);
             height: 100%;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
         
         .chapter-card::before {
@@ -344,8 +391,10 @@
             left: 0;
             width: 4px;
             height: 0;
-            background: var(--primary-color);
+            background: var(--secondary-color);
+            background: linear-gradient(to bottom, var(--secondary-color), var(--primary-color));
             transition: var(--transition);
+            z-index: 1;
         }
         
         .chapter-card:hover {
