@@ -2,7 +2,7 @@
   publish = "/"
   command = ""
 
-# Allow direct access to specific pages
+# E-book funnel pages
 [[redirects]]
   from = "/executive-presence-ebook.html"
   to = "/executive-presence-ebook.html"
@@ -18,7 +18,7 @@
   to = "/your-presence-is-your-power.html"
   status = 200
 
-# Default redirect for all other paths
+# Original funnel redirects
 [[redirects]]
   from = "/*"
   to = "/opt-in.html"
