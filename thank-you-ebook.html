@@ -66,10 +66,13 @@
         }
         
         .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
         }
         
         .thank-you-section {
@@ -229,7 +232,9 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">The Cgroup Studio</div>
+                <div class="logo">
+                    <img src="images/cgroup-logo.webp" alt="The C Group Studio">
+                </div>
             </div>
         </div>
     </header>
