@@ -76,21 +76,82 @@
         }
         
         .thank-you-section {
-            padding: 100px 0;
-            text-align: center;
-            background-color: var(--light-color);
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .thank-you-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,0,4,0.03) 0%, rgba(255,255,255,0) 100%);
+            z-index: 0;
         }
         
         .thank-you-content {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .thank-you-message {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .checkmark-circle {
+            width: 80px;
+            height: 80px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
+        }
+        
+        .checkmark-circle i {
+            color: white;
+            font-size: 36px;
         }
         
         .thank-you-content h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: var(--dark-color);
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: #1a1a2e;
+            line-height: 1.2;
+        }
+        
+        .thank-you-content .highlight {
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .thank-you-content .highlight::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 5px;
+            width: 100%;
+            height: 10px;
+            background-color: rgba(255, 0, 4, 0.15);
+            z-index: -1;
+            border-radius: 3px;
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            color: #4a5568;
+            margin-bottom: 0;
         }
         
         .thank-you-content p {
@@ -98,9 +159,178 @@
             margin-bottom: 30px;
         }
         
-        .download-section {
-            padding: 80px 0;
-            background-color: #fff;
+        .download-container {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .ebook-preview {
+            flex: 0 0 300px;
+            position: relative;
+            padding: 30px;
+            background: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ebook-cover {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .bestseller-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ffd700;
+            color: #8b6914;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .bestseller-badge i {
+            color: #ffd700;
+            text-shadow: 0 0 1px #8b6914;
+        }
+        
+        .download-actions {
+            flex: 1;
+            padding: 40px;
+            text-align: left;
+        }
+        
+        .download-actions h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+        }
+        
+        .download-actions p {
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .btn-download i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 0, 4, 0.3);
+        }
+        
+        .security-note, .troubleshoot {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #718096;
+            margin-bottom: 0.5rem;
+        }
+        
+        .security-note i {
+            color: #48bb78;
+        }
+        
+        .troubleshoot i {
+            color: #a0aec0;
+        }
+        
+        .text-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .text-link:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 992px) {
+            .download-container {
+                flex-direction: column;
+                max-width: 500px;
+            }
+            
+            .ebook-preview {
+                padding: 40px;
+            }
+            
+            .download-actions {
+                padding: 30px;
+                text-align: center;
+            }
+            
+            .btn-download {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .security-note, .troubleshoot {
+                justify-content: center;
+                text-align: left;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .thank-you-content h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .checkmark-circle {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .checkmark-circle i {
+                font-size: 28px;
+            }
+            
+            .download-actions {
+                padding: 25px 20px;
+            }
+            
+            .download-actions h2 {
+                font-size: 1.5rem;
+            }
         }
         
         .download-container {
@@ -242,18 +472,38 @@
     <section class="thank-you-section">
         <div class="container">
             <div class="thank-you-content">
-                <h1>Your copy of "Your Presence Is Your Power" is ready for download.</h1>
-            </div>
-        </div>
-    </section>
-
-    <section class="download-section">
-        <div class="container">
-            <div class="download-container">
-                <h2>Download Your E-Book</h2>
-                <p>Click the button below to download your copy of "Your Presence Is Your Power" by Kathryn Ficarra.</p>
-                <a href="your-presence-is-your-power.pdf" class="btn" download>Download E-Book</a>
-                <p class="small-text">Having trouble? Check your spam folder if you don't receive the email within 5 minutes.</p>
+                <div class="thank-you-message">
+                    <div class="checkmark-circle">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h1>Your copy of <span class="highlight">Your Presence Is Your Power</span> is ready!</h1>
+                    <p class="subtitle">Your journey to authentic leadership begins now</p>
+                </div>
+                
+                <div class="download-container">
+                    <div class="ebook-preview">
+                        <img src="images/ebook-cover.png" alt="Your Presence Is Your Power - Ebook Cover" class="ebook-cover">
+                        <div class="bestseller-badge">
+                            <i class="fas fa-star"></i> Bestseller
+                        </div>
+                    </div>
+                    
+                    <div class="download-actions">
+                        <h2>Download Your Free E-Book</h2>
+                        <p>Click the button below to get instant access to your copy of this transformative guide.</p>
+                        <a href="your-presence-is-your-power.pdf" class="btn btn-download" download>
+                            <i class="fas fa-download"></i> Download Now (PDF, 5.2MB)
+                        </a>
+                        <div class="security-note">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Secure download. No spam. Unsubscribe anytime.</span>
+                        </div>
+                        <p class="troubleshoot">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Having trouble? <a href="#" class="text-link">Click here</a> if the download doesn't start automatically.</span>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
