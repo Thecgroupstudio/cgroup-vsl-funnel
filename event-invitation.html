@@ -30,16 +30,30 @@
         }
         
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 50px 40px;
+            background-color: var(--white);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
         }
         
         .header {
             text-align: center;
-            padding: 40px 0 20px;
-            background-color: var(--light-bg);
-            border-bottom: 1px solid #d4ccc0;
+            padding: 0 0 30px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .header:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 20px auto 0;
         }
         
         .logo {
@@ -70,9 +84,11 @@
         }
         
         .content {
-            padding: 20px 0;
-            max-width: 700px;
+            padding: 0;
+            max-width: 500px;
             margin: 0 auto;
+            font-size: 1.05rem;
+            line-height: 1.8;
         }
         
         p {
@@ -84,9 +100,10 @@
         .event-details {
             background-color: var(--light-bg);
             padding: 25px;
-            border-radius: 8px;
-            margin: 30px 0;
-            border-left: 4px solid var(--primary-color);
+            border-radius: 4px;
+            margin: 40px 0;
+            border-left: 3px solid var(--accent-color);
+            font-size: 1rem;
         }
         
         .event-details h3 {
@@ -121,10 +138,8 @@
         
         .cta-section {
             text-align: center;
-            margin: 40px 0;
-            padding: 30px;
-            background-color: var(--light-bg);
-            border-radius: 8px;
+            margin: 50px 0 30px;
+            padding: 0;
         }
         
         .cta-button {
@@ -150,19 +165,28 @@
         }
         
         .signature {
-            margin: 40px 0;
+            margin: 50px 0 20px;
             font-style: italic;
-            padding: 20px 0;
-            border-top: 1px solid #eee;
+            padding-top: 20px;
+            position: relative;
+        }
+        
+        .signature:before {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 2px;
+            background: #d4ccc0;
+            margin-bottom: 30px;
         }
         
         .footer {
             text-align: center;
-            padding: 30px 0;
-            margin-top: 40px;
-            border-top: 1px solid #eee;
-            font-size: 0.9rem;
-            color: #777777;
+            padding: 30px 0 0;
+            margin-top: 50px;
+            border-top: 1px solid #e8e2d9;
+            font-size: 0.85rem;
+            color: #8a8279;
         }
         
         @media (max-width: 768px) {
