@@ -16,7 +16,7 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1488811965162867');
+    fbq('init', '1607445923276301');
     
     // Get UTM parameters only
     const url = new URL(window.location.href);
@@ -39,7 +39,7 @@
     fbq('track', 'Lead');
     </script>
     <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1488811965162867&ev=PageView&noscript=1"
+    src="https://www.facebook.com/tr?id=1607445923276301&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Meta Pixel Code -->
     
@@ -52,10 +52,6 @@
             utm_campaign: utmParams.utm_campaign,
             utm_term: utmParams.utm_term,
             utm_content: utmParams.utm_content
-        });
-        fbq('track', 'CompleteRegistration', {
-            value: 1,
-            currency: 'USD',
         });
     </script>
     
@@ -93,15 +89,18 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/footer-fix.css">
 </head>
-<!-- End Meta Pixel Code -->
-</head>
 <body>
-<script>
-  fbq('track', 'CompleteRegistration', {
-    value: 1,
-    currency: 'USD',
-  });
-</script>
+    <!-- CompleteRegistration event - placed right after body tag as per Facebook's recommendation -->
+    <script>
+        // Track CompleteRegistration event with UTM parameters
+        fbq('track', 'CompleteRegistration', {
+            utm_source: utmParams.utm_source,
+            utm_medium: utmParams.utm_medium,
+            utm_campaign: utmParams.utm_campaign,
+            utm_term: utmParams.utm_term,
+            utm_content: utmParams.utm_content
+        });
+    </script>
     <div class="container">
         <div class="header-container">
             <div class="logo-container">

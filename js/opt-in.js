@@ -99,6 +99,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify(formValues)
             })
             .then(response => {
+                // Track CompleteRegistration event with UTM parameters
+                if (window.fbq) {
+                    const utmParams = {
+                        utm_source: formValues.utm_source,
+                        utm_medium: formValues.utm_medium,
+                        utm_campaign: formValues.utm_campaign,
+                        utm_term: formValues.utm_term,
+                        utm_content: formValues.utm_content
+                    };
+                    
+                    fbq('track', 'CompleteRegistration', {
+                        utm_source: utmParams.utm_source,
+                        utm_medium: utmParams.utm_medium,
+                        utm_campaign: utmParams.utm_campaign,
+                        utm_term: utmParams.utm_term,
+                        utm_content: utmParams.utm_content
+                    });
+                }
+            })
+            .then(response => {
                 console.log('Production webhook response status:', response.status);
                 return response.text();
             })
