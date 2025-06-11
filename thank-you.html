@@ -18,7 +18,7 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1607445923276301');
     
-    // Get UTM parameters only
+    // Get UTM parameters only (excluding sensitive data)
     const url = new URL(window.location.href);
     const utmParams = {
         utm_source: url.searchParams.get('utm_source'),
@@ -27,6 +27,17 @@
         utm_term: url.searchParams.get('utm_term'),
         utm_content: url.searchParams.get('utm_content')
     };
+
+    // Remove any sensitive data from URL parameters
+    const sensitiveParams = ['name', 'email'];
+    sensitiveParams.forEach(param => {
+        if (url.searchParams.has(param)) {
+            url.searchParams.delete(param);
+        }
+    });
+    
+    // Update the URL without sensitive data
+    history.replaceState({}, '', url.toString());
     
     // Track PageView with UTM parameters only
     fbq('track', 'PageView', {
