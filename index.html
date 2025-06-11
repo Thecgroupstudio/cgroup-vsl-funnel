@@ -52,6 +52,13 @@
             utm_term: utmParams.utm_term,
             utm_content: utmParams.utm_content
         });
+        fbq('track', 'CompleteRegistration', {
+            utm_source: utmParams.utm_source,
+            utm_medium: utmParams.utm_medium,
+            utm_campaign: utmParams.utm_campaign,
+            utm_term: utmParams.utm_term,
+            utm_content: utmParams.utm_content
+        });
         fbq('track', 'Lead');
     </script>
     
