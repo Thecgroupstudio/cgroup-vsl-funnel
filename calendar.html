@@ -23,7 +23,6 @@
     const utmParams = {
         utm_source: url.searchParams.get('utm_source'),
         utm_medium: url.searchParams.get('utm_medium'),
-        utm_campaign: url.searchParams.get('utm_campaign'),
         utm_term: url.searchParams.get('utm_term'),
         utm_content: url.searchParams.get('utm_content')
     };
@@ -31,7 +30,6 @@
     // Track PageView with UTM parameters only
     fbq('track', 'PageView', {
         utm_source: utmParams.utm_source,
-        utm_medium: utmParams.utm_medium,
         utm_campaign: utmParams.utm_campaign,
         utm_term: utmParams.utm_term,
         utm_content: utmParams.utm_content
