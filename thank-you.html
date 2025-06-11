@@ -17,7 +17,25 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1488811965162867');
-    fbq('track', 'PageView');
+    
+    // Get UTM parameters only
+    const url = new URL(window.location.href);
+    const utmParams = {
+        utm_source: url.searchParams.get('utm_source'),
+        utm_medium: url.searchParams.get('utm_medium'),
+        utm_campaign: url.searchParams.get('utm_campaign'),
+        utm_term: url.searchParams.get('utm_term'),
+        utm_content: url.searchParams.get('utm_content')
+    };
+    
+    // Track PageView with UTM parameters only
+    fbq('track', 'PageView', {
+        utm_source: utmParams.utm_source,
+        utm_medium: utmParams.utm_medium,
+        utm_campaign: utmParams.utm_campaign,
+        utm_term: utmParams.utm_term,
+        utm_content: utmParams.utm_content
+    });
     fbq('track', 'Lead');
     </script>
     <noscript><img height="1" width="1" style="display:none"
@@ -27,8 +45,18 @@
     
     <!-- Facebook Pixel Contact Event -->
     <script>
-        fbq('track', 'Contact');
-        fbq('track', 'CompleteRegistration');
+        // Track Contact event without sensitive data
+        fbq('track', 'Contact', {
+            utm_source: utmParams.utm_source,
+            utm_medium: utmParams.utm_medium,
+            utm_campaign: utmParams.utm_campaign,
+            utm_term: utmParams.utm_term,
+            utm_content: utmParams.utm_content
+        });
+        fbq('track', 'CompleteRegistration', {
+            value: 1,
+            currency: 'USD',
+        });
     </script>
     
     <style>
