@@ -36,6 +36,15 @@
         utm_term: utmParams.utm_term,
         utm_content: utmParams.utm_content
     });
+    
+    // Track CompleteRegistration event with UTM parameters
+    fbq('track', 'CompleteRegistration', {
+        utm_source: utmParams.utm_source,
+        utm_medium: utmParams.utm_medium,
+        utm_campaign: utmParams.utm_campaign,
+        utm_term: utmParams.utm_term,
+        utm_content: utmParams.utm_content
+    });
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1607445923276301&ev=PageView&noscript=1"
