@@ -28,6 +28,7 @@
     <!-- Facebook Pixel Contact Event -->
     <script>
         fbq('track', 'Contact');
+        fbq('track', 'CompleteRegistration');
     </script>
     
     <style>
@@ -64,6 +65,12 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/footer-fix.css">
 </head>
+<script>
+    fbq('track', 'CompleteRegistration', {
+        value: 1.00,
+        currency: 'USD'
+    });
+</script>
 <body>
     <div class="container">
         <div class="header-container">
