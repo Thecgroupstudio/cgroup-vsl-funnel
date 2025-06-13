@@ -1540,9 +1540,12 @@
             const toolsContent = document.getElementById('toolsContent');
             
             // Only show tools in development environment
-            const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const isNetlify = window.location.hostname.includes('netlify.app');
+            const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const isDevelopment = isLocalhost && !isNetlify;
             
             if (isDevelopment) {
+                console.log('Development mode: Flodesk tools enabled');
                 showToolsBtn.style.display = 'block';
                 
                 showToolsBtn.addEventListener('click', () => {
