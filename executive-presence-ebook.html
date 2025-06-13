@@ -1112,39 +1112,60 @@
             }
         });
 
+        // Add subscriber to segment
+        async function addToSegment(email, segmentId) {
+            if (!segmentId) return { success: true }; // Skip if no segment ID provided
+            
+            try {
+                const response = await fetch(`https://api.flodesk.com/v1/segments/${segmentId}/subscribers`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                        'User-Agent': 'ExecutivePresenceEbook/1.0'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        firstName: 'Test'
+                    })
+                });
+                
+                const result = await response.json();
+                return { success: response.ok, result };
+            } catch (error) {
+                console.error('Error adding to segment:', error);
+                return { success: false, error };
+            }
+        }
+
         // Test Flodesk Integration
         document.getElementById('testFlodeskBtn').addEventListener('click', async function() {
             const resultDiv = document.getElementById('testResult');
-            resultDiv.style.display = 'block';
-            resultDiv.textContent = 'Sending test data to Flodesk...';
-            resultDiv.style.background = '#fff3cd';
+            const segmentId = document.getElementById('segmentId').value.trim();
+            const email = 'jazzjazpher5@gmail.com'; // Your test email
             
             try {
-                // Using provided Gmail for testing
-                const email = 'jazzjazpher5@gmail.com';
+                resultDiv.textContent = 'Sending test to Flodesk...';
+                resultDiv.style.display = 'block';
+                resultDiv.style.background = '#fff3cd';
                 
-                // Prepare custom fields according to Flodesk API
-                const customFields = [
-                    { key: 'First Name', value: 'Test' },
-                    { key: 'UTM Source', value: 'test-source' },
-                    { key: 'UTM Medium', value: 'test-medium' },
-                    { key: 'UTM Campaign', value: 'test-campaign' },
-                    { key: 'Lead Source', value: 'Website' },
-                    { key: 'Status', value: 'New Lead' },
-                    { key: 'Signup Page', value: 'Executive Presence Ebook' }
-                ];
-                
-                // Prepare the request body according to Flodesk API
                 const requestBody = {
                     email: email,
                     firstName: 'Test',
-                    customFields: customFields,
+                    custom_fields: {
+                        'First Name': 'Test',
+                        'UTM Source': 'test',
+                        'UTM Medium': 'test',
+                        'UTM Campaign': 'test',
+                        'Lead Source': 'Ebook',
+                        'Status': 'Active',
+                        'Signup Page': 'Executive Presence Ebook'
+                    },
                     tags: ['executive-presence-ebook', 'test-submission'],
                     status: 'active',
                     doubleOptIn: false
                 };
                 
-                console.log('Sending to Flodesk:', JSON.stringify(requestBody, null, 2));
                 
                 // First, create/update the subscriber
                 const response = await fetch('https://api.flodesk.com/v1/subscribers', {
@@ -1160,40 +1181,58 @@
                 const result = await response.json();
                 
                 if (response.ok) {
-                    // Add to workflow after successful subscription
+                    // Add to segment if ID is provided
+                    let segmentResult = null;
+                    if (segmentId) {
+                        segmentResult = await addToSegment(email, segmentId);
+                    }
+                    
+                    // Add to workflow after successful subscription if needed
                     try {
-                        const workflowId = 'YOUR_WORKFLOW_ID'; // Replace with your actual workflow ID
-                        const workflowResponse = await fetch(`https://api.flodesk.com/v1/workflows/${workflowId}/subscribers`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
-                                'User-Agent': 'ExecutivePresenceEbook/1.0'
-                            },
-                            body: JSON.stringify({
-                                email: email,
-                                firstName: 'Test',
-                                // Add any custom fields that your workflow might use
-                                custom_fields: customFields
-                            })
-                        });
-
-                        const workflowResult = await workflowResponse.json();
-                        console.log('Workflow update result:', workflowResult);
+                        const workflowId = 'YOUR_WORKFLOW_ID'; // Replace with your actual workflow ID if needed
+                        let workflowResult = null;
                         
-                        resultDiv.innerHTML = `
+                        if (workflowId && workflowId !== 'YOUR_WORKFLOW_ID') {
+                            const workflowResponse = await fetch(`https://api.flodesk.com/v1/workflows/${workflowId}/subscribers`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                                    'User-Agent': 'ExecutivePresenceEbook/1.0'
+                                },
+                                body: JSON.stringify({
+                                    email: email,
+                                    firstName: 'Test',
+                                    custom_fields: requestBody.custom_fields
+                                })
+                            });
+                            workflowResult = await workflowResponse.json();
+                            console.log('Workflow update result:', workflowResult);
+                        }
+                        
+                        let resultMessage = `
                             ✅ Test submitted successfully!<br>
                             Email: <strong>${email}</strong><br>
-                            Time: <strong>${new Date().toLocaleString()}</strong><br>
-                            Added to workflow: <strong>${workflowId}</strong><br>
-                            Check your Flodesk dashboard for this test submission.
-                        `;
+                            Time: <strong>${new Date().toLocaleString()}</strong>`;
+                            
+                        if (segmentId) {
+                            resultMessage += `<br>Added to segment: <strong>${segmentId} ${segmentResult.success ? '✓' : '✗'}</strong>`;
+                        }
+                        
+                        if (workflowResult) {
+                            resultMessage += `<br>Added to workflow: <strong>${workflowId} ${workflowResult.id ? '✓' : '✗'}</strong>`;
+                        }
+                        
+                        resultMessage += `<br>Check your Flodesk dashboard for this test submission.`;
+                        resultDiv.innerHTML = resultMessage;
+                        
                     } catch (workflowError) {
-                        console.error('Error adding to workflow:', workflowError);
+                        console.error('Error in workflow enrollment:', workflowError);
                         resultDiv.innerHTML = `
-                            ✅ Subscriber created but workflow enrollment failed:<br>
+                            ✅ Subscriber created with partial success:<br>
                             ${workflowError.message || 'Unknown error'}<br>
-                            Email: <strong>${email}</strong>`;
+                            Email: <strong>${email}</strong><br>
+                            ${segmentId ? `Segment: ${segmentResult.success ? 'Added ✓' : 'Failed ✗'}` : ''}`;
                     }
                     resultDiv.style.background = '#d4edda';
                     console.log('Flodesk API Response:', result);
