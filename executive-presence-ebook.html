@@ -1472,50 +1472,47 @@
                 resultDiv.style.background = '#d4edda';
                 log('\n✅ Test completed successfully!', false);
                 
+                // Show success message
+                let successMessage = `
+                    ✅ Test submitted successfully!<br>
+                    Email: <strong>${email}</strong><br>
+                    Time: <strong>${new Date().toLocaleString()}</strong>`;
+                
+                if (segmentId) {
+                    successMessage += `<br>Added to segment: <strong>${segmentId} ✓</strong>`;
+                }
+                
+                if (workflowId) {
+                    successMessage += `<br>Added to workflow: <strong>${workflowId} ✓</strong>`;
+                }
+                
+                successMessage += `<br>Check your Flodesk dashboard for this test submission.`;
+                
+                const successDiv = document.createElement('div');
+                successDiv.style.marginTop = '10px';
+                successDiv.style.padding = '10px';
+                successDiv.style.background = '#d4edda';
+                successDiv.style.borderRadius = '4px';
+                successDiv.style.color = '#155724';
+                successDiv.innerHTML = successMessage;
+                logEl.appendChild(successDiv);
+                
             } catch (error) {
                 console.error('Error in test integration:', error);
                 log(`❌ ERROR: ${error.message || 'Unknown error occurred'}`, true);
                 resultDiv.style.background = '#f8d7da';
-            }                        custom_fields: requestBody.custom_fields
-                                })
-                            });
-                            workflowResult = await workflowResponse.json();
-                            console.log('Workflow update result:', workflowResult);
-                        }
-{{ ... }}
-                        let resultMessage = `
-                            ✅ Test submitted successfully!<br>
-                            Email: <strong>${email}</strong><br>
-                            Time: <strong>${new Date().toLocaleString()}</strong>`;
-                            
-                        if (segmentId) {
-                            resultMessage += `<br>Added to segment: <strong>${segmentId} ${segmentResult.success ? '✓' : '✗'}</strong>`;
-                        }
-                        
-                        if (workflowResult) {
-                            resultMessage += `<br>Added to workflow: <strong>${workflowId} ${workflowResult.id ? '✓' : '✗'}</strong>`;
-                        }
-                        
-                        resultMessage += `<br>Check your Flodesk dashboard for this test submission.`;
-                        resultDiv.innerHTML = resultMessage;
-                        
-                    } catch (workflowError) {
-                        console.error('Error in workflow enrollment:', workflowError);
-                        resultDiv.innerHTML = `
-                            ✅ Subscriber created with partial success:<br>
-                            ${workflowError.message || 'Unknown error'}<br>
-                            Email: <strong>${email}</strong><br>
-                            ${segmentId ? `Segment: ${segmentResult.success ? 'Added ✓' : 'Failed ✗'}` : ''}`;
-                    }
-                    resultDiv.style.background = '#d4edda';
-                    console.log('Flodesk API Response:', result);
-                } else {
-                    throw new Error(result.message || 'Unknown error occurred');
-                }
-            } catch (error) {
-                console.error('Flodesk Test Error:', error);
-                resultDiv.textContent = `❌ Test failed: ${error.message}`;
-                resultDiv.style.background = '#f8d7da';
+                
+                // Show error message
+                let errorMessage = `
+                    ❌ Test failed!<br>
+                    Error: <strong>${error.message || 'Unknown error'}</strong><br>
+                    Check the logs above for details.`;
+                
+                errorDiv.style.background = '#f8d7da';
+                errorDiv.style.borderRadius = '4px';
+                errorDiv.style.color = '#721c24';
+                errorDiv.innerHTML = errorMessage;
+                logEl.appendChild(errorDiv);
             }
         });
     </script>
