@@ -992,6 +992,9 @@
                     <button id="listWorkflowsBtn" style="padding: 8px 12px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; flex: 1;">
                         List Workflows
                     </button>
+                    <button id="listSegmentsBtn" style="padding: 8px 12px; background: #9C27B0; color: white; border: none; border-radius: 4px; cursor: pointer; flex: 1; margin-top: 5px;">
+                        List Segments
+                    </button>
                 </div>
                 <div style="margin-top: 8px;">
                     <input type="text" id="segmentId" placeholder="Segment ID (optional)" style="width: 100%; padding: 6px; border: 1px solid #ced4da; border-radius: 4px; font-size: 12px;">
@@ -1022,6 +1025,57 @@
             element.style.borderRadius = '4px';
             element.style.marginTop = '10px';
         }
+
+        // List all Segments
+        document.getElementById('listSegmentsBtn').addEventListener('click', async function() {
+            const resultDiv = document.getElementById('testResult');
+            resultDiv.innerHTML = 'Fetching segments...';
+            resultDiv.style.display = 'block';
+            resultDiv.style.background = '#fff3cd';
+            
+            try {
+                const response = await fetch('https://api.flodesk.com/v1/segments', {
+                    headers: {
+                        'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                        'User-Agent': 'ExecutivePresenceEbook/1.0'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const segments = await response.json();
+                console.log('Segments:', segments);
+                
+                if (segments && segments.length > 0) {
+                    let html = '<h4>Your Segments:</h4><div style="max-height: 200px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; margin-top: 5px; background: white;">';
+                    
+                    segments.forEach(segment => {
+                        const isEbookSegment = segment.name && segment.name.includes('Your Presence Is Your Power Ebook');
+                        const segmentStyle = isEbookSegment ? 'background: #e8f5e9; padding: 8px; border-left: 4px solid #4CAF50; margin: 5px 0;' : 'padding: 8px; border-left: 4px solid #e0e0e0; margin: 5px 0;';
+                        
+                        html += `
+                            <div style="${segmentStyle}">
+                                <strong>${segment.name || 'Unnamed Segment'}</strong><br>
+                                <small>ID: <code>${segment.id}</code> • ${segment.subscribers_count || 0} subscribers</small>
+                                ${isEbookSegment ? '<div style="color: #2e7d32; font-size: 12px; margin-top: 3px;">✓ This appears to be your Ebook segment</div>' : ''}
+                            </div>`;
+                    });
+                    
+                    html += '</div><p style="margin-top: 8px; font-size: 12px; color: #666;">Copy the Segment ID to use in the Test Integration above.</p>';
+                    resultDiv.innerHTML = html;
+                } else {
+                    resultDiv.innerHTML = 'No segments found in your Flodesk account.';
+                }
+                
+                resultDiv.style.background = '#e7f5fe';
+            } catch (error) {
+                console.error('Error fetching segments:', error);
+                resultDiv.innerHTML = `❌ Error fetching segments: ${error.message || 'Unknown error'}`;
+                resultDiv.style.background = '#ffebee';
+            }
+        });
 
         // List Flodesk Workflows
         document.getElementById('listWorkflowsBtn').addEventListener('click', async function() {
@@ -1138,11 +1192,50 @@
             }
         }
 
+        // Find the Ebook segment ID
+        async function findEbookSegmentId() {
+            try {
+                const response = await fetch('https://api.flodesk.com/v1/segments', {
+                    headers: {
+                        'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                        'User-Agent': 'ExecutivePresenceEbook/1.0'
+                    }
+                });
+                
+                if (!response.ok) throw new Error('Failed to fetch segments');
+                
+                const segments = await response.json();
+                const ebookSegment = segments.find(s => s.name && s.name.includes('Your Presence Is Your Power Ebook'));
+                return ebookSegment ? ebookSegment.id : null;
+            } catch (error) {
+                console.error('Error finding Ebook segment:', error);
+                return null;
+            }
+        }
+
         // Test Flodesk Integration
         document.getElementById('testFlodeskBtn').addEventListener('click', async function() {
             const resultDiv = document.getElementById('testResult');
-            const segmentId = document.getElementById('segmentId').value.trim();
+            let segmentId = document.getElementById('segmentId').value.trim();
             const email = 'jazzjazpher5@gmail.com'; // Your test email
+            
+            // If no segment ID is provided, try to find the Ebook segment
+            if (!segmentId) {
+                resultDiv.textContent = 'Finding Ebook segment...';
+                resultDiv.style.display = 'block';
+                resultDiv.style.background = '#fff3cd';
+                
+                const ebookSegmentId = await findEbookSegmentId();
+                if (ebookSegmentId) {
+                    segmentId = ebookSegmentId;
+                    document.getElementById('segmentId').value = segmentId;
+                    resultDiv.textContent = `Found Ebook segment (${segmentId}). Adding test subscriber...`;
+                } else {
+                    resultDiv.innerHTML = '⚠️ Could not find Ebook segment. Please enter the Segment ID manually.';
+                    resultDiv.style.background = '#fff3cd';
+                    return;
+                }
+            }
             
             try {
                 resultDiv.textContent = 'Sending test to Flodesk...';
