@@ -1232,6 +1232,37 @@
                     log('✅ Found existing subscriber data');
                     log(`Existing subscriber ID: ${subscriberData.id}`);
                     log(`Existing segments: ${JSON.stringify(subscriberData.segments || [], null, 2)}`);
+                    
+                    // For existing subscriber, use PUT to update
+                    const updateUrl = `https://api.flodesk.com/v1/subscribers/${encodeURIComponent(email)}`;
+                    log(`Making PUT request to: ${updateUrl}`);
+                    log(`Request body: ${JSON.stringify(subscriberData, null, 2)}`);
+
+                    const response = await fetch(updateUrl, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                            'User-Agent': 'ExecutivePresenceEbook/1.0'
+                        },
+                        body: JSON.stringify(subscriberData)
+                    });
+
+                    const result = await response.json().catch(e => ({ error: e.message }));
+                    log(`Update Status: ${response.status} ${response.statusText}`);
+                    log(`Update Response: ${JSON.stringify(result, null, 2)}`);
+
+                    if (!response.ok) {
+                        throw new Error(`Failed to update subscriber: ${JSON.stringify(result)}`);
+                    }
+
+                    log('✅ Successfully updated existing subscriber with segment');
+                    return { 
+                        success: true,
+                        segmentId: segmentId,
+                        result: result,
+                        logs: logs
+                    };
                 } else {
                     // If subscriber doesn't exist, create new data
                     log('❌ Subscriber not found, creating new data');
@@ -1248,55 +1279,55 @@
                         optin_timestamp: new Date().toISOString()
                     };
                     log('Creating new subscriber data');
-                }
 
-                // Add the segment to the subscriber data
-                if (!subscriberData.segments) {
-                    subscriberData.segments = [];
-                }
-                
-                // Check if the segment is already added
-                const hasSegment = subscriberData.segments.some(s => s.id === segmentId);
-                if (!hasSegment) {
-                    subscriberData.segments.push({
-                        id: segmentId,
-                        name: 'Your Presence Is Your Power Ebook'
+                    // Add the segment to the new subscriber data
+                    if (!subscriberData.segments) {
+                        subscriberData.segments = [];
+                    }
+                    
+                    // Check if the segment is already added
+                    const hasSegment = subscriberData.segments.some(s => s.id === segmentId);
+                    if (!hasSegment) {
+                        subscriberData.segments.push({
+                            id: segmentId,
+                            name: 'Your Presence Is Your Power Ebook'
+                        });
+                    }
+
+                    log('Updated subscriber data with segment:');
+                    log(JSON.stringify(subscriberData, null, 2));
+
+                    // Make the create request
+                    const createUrl = 'https://api.flodesk.com/v1/subscribers';
+                    log(`Making POST request to: ${createUrl}`);
+                    log(`Request body: ${JSON.stringify(subscriberData, null, 2)}`);
+
+                    const response = await fetch(createUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                            'User-Agent': 'ExecutivePresenceEbook/1.0'
+                        },
+                        body: JSON.stringify(subscriberData)
                     });
+
+                    const result = await response.json().catch(e => ({ error: e.message }));
+                    log(`Create Status: ${response.status} ${response.statusText}`);
+                    log(`Create Response: ${JSON.stringify(result, null, 2)}`);
+
+                    if (!response.ok) {
+                        throw new Error(`Failed to create subscriber: ${JSON.stringify(result)}`);
+                    }
+
+                    log('✅ Successfully created new subscriber with segment');
+                    return { 
+                        success: true,
+                        segmentId: segmentId,
+                        result: result,
+                        logs: logs
+                    };
                 }
-
-                log('Updated subscriber data with segment:');
-                log(JSON.stringify(subscriberData, null, 2));
-
-                // Make the update request
-                const updateUrl = `https://api.flodesk.com/v1/subscribers/${encodeURIComponent(email)}`;
-                log(`Making PUT request to: ${updateUrl}`);
-                log(`Request body: ${JSON.stringify(subscriberData, null, 2)}`);
-
-                const response = await fetch(updateUrl, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
-                        'User-Agent': 'ExecutivePresenceEbook/1.0'
-                    },
-                    body: JSON.stringify(subscriberData)
-                });
-
-                const result = await response.json().catch(e => ({ error: e.message }));
-                log(`Update Status: ${response.status} ${response.statusText}`);
-                log(`Update Response: ${JSON.stringify(result, null, 2)}`);
-
-                if (!response.ok) {
-                    throw new Error(`Failed to update subscriber: ${JSON.stringify(result)}`);
-                }
-
-                log('✅ Successfully updated subscriber with segment');
-                return { 
-                    success: true,
-                    segmentId: segmentId,
-                    result: result,
-                    logs: logs
-                };
 
             } catch (error) {
                 log(`❌ ERROR: ${error.message}`, true);
@@ -1306,6 +1337,7 @@
                     segmentId: segmentId,
                     logs: logs
                 };
+            }    };
             }
         }
 
