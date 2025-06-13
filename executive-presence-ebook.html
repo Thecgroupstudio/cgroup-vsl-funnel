@@ -1250,24 +1250,41 @@
                 // Step 1: First ensure subscriber is created/updated
                 log('✅ Subscriber created/updated successfully');
                 
-                // Step 2: Now add to segment using the correct Flodesk API endpoint
-                log('Adding subscriber to segment...');
-                const segmentData = {
-                    segment_ids: [segmentId]  // This should be an array of segment IDs
+                // Update subscriber with segment information in a single request
+                log('Updating subscriber with segment information...');
+                
+                // Get the segment name from the verification step or use a placeholder
+                const segmentName = 'Your Presence Is Your Power Ebook';
+                
+                // Format the update data to match the required structure
+                const updateData = {
+                    id: createResult.id,
+                    status: 'active',
+                    email: email,
+                    source: 'website',
+                    first_name: 'Test',
+                    last_name: 'User',
+                    segments: [{
+                        id: segmentId,
+                        name: segmentName
+                    }],
+                    custom_fields: createResult.custom_fields || {},
+                    optin_ip: '',
+                    optin_timestamp: new Date().toISOString(),
+                    created_at: createResult.created_at || new Date().toISOString()
                 };
                 
-                const segmentUrl = `https://api.flodesk.com/v1/subscribers/${encodeURIComponent(email)}/segments`;
-                log(`Segment URL: ${segmentUrl}`);
-                log(`Segment data: ${JSON.stringify(segmentData, null, 2)}`);
+                log(`Update URL: https://api.flodesk.com/v1/subscribers/${encodeURIComponent(email)}`);
+                log(`Update data: ${JSON.stringify(updateData, null, 2)}`);
                 
-                const response = await fetch(segmentUrl, {
-                    method: 'POST',
+                const response = await fetch(`https://api.flodesk.com/v1/subscribers/${encodeURIComponent(email)}`, {
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
                         'User-Agent': 'ExecutivePresenceEbook/1.0'
                     },
-                    body: JSON.stringify(segmentData)
+                    body: JSON.stringify(updateData)
                 });
 
                 let result;
