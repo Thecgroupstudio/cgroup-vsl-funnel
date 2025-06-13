@@ -1171,7 +1171,8 @@
             if (!segmentId) return { success: true }; // Skip if no segment ID provided
             
             try {
-                const response = await fetch(`https://api.flodesk.com/v1/segments/${segmentId}/subscribers`, {
+                // First, ensure the subscriber exists
+                const subscriberResponse = await fetch('https://api.flodesk.com/v1/subscribers', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1180,14 +1181,39 @@
                     },
                     body: JSON.stringify({
                         email: email,
-                        firstName: 'Test'
+                        firstName: 'Test',
+                        status: 'active'
                     })
                 });
+
+                if (!subscriberResponse.ok) {
+                    throw new Error('Failed to create/update subscriber');
+                }
+
+                // Then add to segment
+                const segmentsResponse = await fetch(`https://api.flodesk.com/v1/subscribers/${encodeURIComponent(email)}/segments`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                        'User-Agent': 'ExecutivePresenceEbook/1.0'
+                    },
+                    body: JSON.stringify([segmentId]) // Send as array of segment IDs
+                });
                 
-                const result = await response.json();
-                return { success: response.ok, result };
-                console.error('Error adding to segment:', error);
-                return { success: false, error };
+                const result = await segmentsResponse.json();
+                return { 
+                    success: segmentsResponse.ok, 
+                    result,
+                    segmentId: segmentId
+                };
+            } catch (error) {
+                console.error('Error in addToSegment:', error);
+                return { 
+                    success: false, 
+                    error: error.message || 'Unknown error',
+                    segmentId: segmentId
+                };
             }
         }
 
