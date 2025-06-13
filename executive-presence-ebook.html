@@ -1211,14 +1211,17 @@
             try {
                 log(`Starting to add/update subscriber ${email} and add to segment ${segmentId}`);
                 
-                // First, create/update the subscriber
-                log('Step 1/2: Creating/updating subscriber...');
+                // Create/update subscriber with segment in a single request
+                log('Adding/updating subscriber with segment...');
                 const subscriberData = {
                     email: email,
                     status: 'active',
                     first_name: 'Test',
                     last_name: 'User',
                     source: 'website',
+                    segments: [{
+                        id: segmentId
+                    }],
                     custom_fields: {
                         'Signup Page': 'Executive Presence Ebook',
                         'Lead Source': 'Website'
@@ -1226,9 +1229,9 @@
                     optin_timestamp: new Date().toISOString()
                 };
                 
-                log(`Subscriber data: ${JSON.stringify(subscriberData, null, 2)}`);
+                log(`Subscriber data with segment: ${JSON.stringify(subscriberData, null, 2)}`);
                 
-                const subscriberResponse = await fetch('https://api.flodesk.com/v1/subscribers', {
+                const response = await fetch('https://api.flodesk.com/v1/subscribers', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1238,46 +1241,18 @@
                     body: JSON.stringify(subscriberData)
                 });
 
-                const subscriberResult = await subscriberResponse.json().catch(e => ({}));
-                log(`Subscriber API Status: ${subscriberResponse.status} ${subscriberResponse.statusText}`);
-                log(`Subscriber API Response: ${JSON.stringify(subscriberResult, null, 2)}`);
-
-                if (!subscriberResponse.ok) {
-                    throw new Error(`Failed to create/update subscriber: ${JSON.stringify(subscriberResult)}`);
-                }
-                
-                // Step 2: Add to segment using the correct Flodesk API endpoint
-                log('Step 2/2: Adding to segment...');
-                const segmentsUrl = `https://api.flodesk.com/v1/segments/${segmentId}/subscribers`;
-                log(`Segment API URL: ${segmentsUrl}`);
-                
-                const segmentsResponse = await fetch(segmentsUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
-                        'User-Agent': 'ExecutivePresenceEbook/1.0'
-                    },
-                    body: JSON.stringify({
-                        subscribers: [{
-                            email: email,
-                            status: 'active'
-                        }]
-                    })
-                });
-                
                 let result;
                 try {
-                    result = await segmentsResponse.json();
+                    result = await response.json();
                 } catch (e) {
-                    result = { error: 'Failed to parse response', raw: await segmentsResponse.text() };
+                    result = { error: 'Failed to parse response', raw: await response.text() };
                 }
                 
-                log(`Segment API Status: ${segmentsResponse.status} ${segmentsResponse.statusText}`);
-                log(`Segment API Response: ${JSON.stringify(result, null, 2)}`);
+                log(`API Status: ${response.status} ${response.statusText}`);
+                log(`API Response: ${JSON.stringify(result, null, 2)}`);
                 
-                if (!segmentsResponse.ok) {
-                    throw new Error(`Failed to add to segment: ${JSON.stringify(result)}`);
+                if (!response.ok) {
+                    throw new Error(`Failed to create/update subscriber with segment: ${JSON.stringify(result)}`);
                 }
                 
                 log('Successfully added to segment!');
