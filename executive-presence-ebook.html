@@ -1100,14 +1100,33 @@
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 
-                const workflows = await response.json();
-                console.log('Workflows:', workflows);
+                const data = await response.json();
+                console.log('Workflows:', data);
                 
-                if (workflows && workflows.length > 0) {
-                    const workflowList = workflows.map(wf => `ID: ${wf.id}\nName: ${wf.name}\nStatus: ${wf.status}\n`).join('\n');
-                    resultDiv.textContent = workflowList;
+                if (data && data.data && data.data.length > 0) {
+                    let html = '<h4>Your Workflows:</h4><div style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; margin-top: 5px; background: white;">';
+                    
+                    data.data.forEach(workflow => {
+                        html += `
+                            <div style="padding: 8px; border-bottom: 1px solid #eee;">
+                                <strong>${workflow.name || 'Unnamed Workflow'}</strong><br>
+                                <small>ID: <code>${workflow.id}</code></small>
+                            </div>`;
+                    });
+                    
+                    // Add pagination info if available
+                    if (data.meta) {
+                        html += `
+                            <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #eee; font-size: 12px; color: #666;">
+                                Page ${data.meta.page + 1} of ${data.meta.total_pages} • 
+                                ${data.meta.total_items} total workflows
+                            </div>`;
+                    }
+                    
+                    html += '</div><p style="margin-top: 8px; font-size: 12px; color: #666;">Copy the Workflow ID to use in the Test Integration above.</p>';
+                    resultDiv.innerHTML = html;
                     resultDiv.style.display = 'block';
-                    testResult.textContent = `Found ${workflows.length} workflow(s)`;
+                    testResult.textContent = `Found ${data.meta?.total_items || data.data.length} workflow(s)`;
                 } else {
                     resultDiv.textContent = 'No workflows found';
                     resultDiv.style.display = 'block';
