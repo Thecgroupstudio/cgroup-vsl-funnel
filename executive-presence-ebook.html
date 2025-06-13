@@ -1054,11 +1054,12 @@
                     segments.forEach(segment => {
                         const isEbookSegment = segment.name && segment.name.includes('Your Presence Is Your Power Ebook');
                         const segmentStyle = isEbookSegment ? 'background: #e8f5e9; padding: 8px; border-left: 4px solid #4CAF50; margin: 5px 0;' : 'padding: 8px; border-left: 4px solid #e0e0e0; margin: 5px 0;';
+                        const colorBox = segment.color ? `<span style="display: inline-block; width: 12px; height: 12px; background: ${segment.color}; margin-right: 6px; vertical-align: middle; border-radius: 2px;"></span>` : '';
                         
                         html += `
                             <div style="${segmentStyle}">
-                                <strong>${segment.name || 'Unnamed Segment'}</strong><br>
-                                <small>ID: <code>${segment.id}</code> • ${segment.subscribers_count || 0} subscribers</small>
+                                ${colorBox}<strong>${segment.name || 'Unnamed Segment'}</strong><br>
+                                <small>ID: <code>${segment.id}</code> • ${segment.total_active_subscribers || 0} active subscribers • Created: ${new Date(segment.created_at).toLocaleDateString()}</small>
                                 ${isEbookSegment ? '<div style="color: #2e7d32; font-size: 12px; margin-top: 3px;">✓ This appears to be your Ebook segment</div>' : ''}
                             </div>`;
                     });
