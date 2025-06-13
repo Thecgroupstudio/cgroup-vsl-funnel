@@ -1402,21 +1402,10 @@
                     }
                     
                     if (!segmentResult.success) {
-                        // If failed, try alternative method
-                        log('Trying alternative method to add to segment...');
-                        const altResult = await addToSegmentAlternative(email, segmentId);
-                        
-                        if (altResult.logs) {
-                            altResult.logs.forEach(msg => log(`  ${msg}`));
-                        }
-                        
-                        if (!altResult.success) {
-                            throw new Error(`Failed to add to segment (tried 2 methods). Last error: ${altResult.error || 'Unknown error'}`);
-                        }
-                        log(`✅ Successfully added to segment using alternative method: ${segmentId}`);
-                    } else {
-                        log(`✅ Successfully added to segment: ${segmentId}`);
+                        throw new Error(`Failed to add to segment: ${segmentResult.error || 'Unknown error'}`);
                     }
+                    
+                    log(`✅ Successfully added to segment: ${segmentId}`);
                 }
                 
                 // Show final success message
