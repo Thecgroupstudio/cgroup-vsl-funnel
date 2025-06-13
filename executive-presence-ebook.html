@@ -1309,8 +1309,9 @@
                     log('✅ Successfully created new subscriber');
                     log('Now adding subscriber to segment...');
 
-                    // Now add the subscriber to the segment
-                    const segmentUrl = `https://api.flodesk.com/v1/subscribers/${encodeURIComponent(email)}/segments`;
+                    // Now add the subscriber to the segment using the subscriber ID from the create response
+                    const subscriberId = createResult.id;
+                    const segmentUrl = `https://api.flodesk.com/v1/subscribers/${subscriberId}/segments`;
                     log(`Making POST request to: ${segmentUrl}`);
                     log(`Segment ID to add: ${segmentId}`);
 
