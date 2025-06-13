@@ -1211,17 +1211,14 @@
             try {
                 log(`Starting to add/update subscriber ${email} and add to segment ${segmentId}`);
                 
-                // Create/update subscriber with segment in a single request
-                log('Adding/updating subscriber with segment...');
+                // First, ensure the subscriber exists
+                log('Ensuring subscriber exists...');
                 const subscriberData = {
                     email: email,
                     status: 'active',
                     first_name: 'Test',
                     last_name: 'User',
                     source: 'website',
-                    segments: [{
-                        id: segmentId
-                    }],
                     custom_fields: {
                         'Signup Page': 'Executive Presence Ebook',
                         'Lead Source': 'Website'
@@ -1229,9 +1226,10 @@
                     optin_timestamp: new Date().toISOString()
                 };
                 
-                log(`Subscriber data with segment: ${JSON.stringify(subscriberData, null, 2)}`);
+                log(`Subscriber data: ${JSON.stringify(subscriberData, null, 2)}`);
                 
-                const response = await fetch('https://api.flodesk.com/v1/subscribers', {
+                // First, create/update the subscriber
+                const createResponse = await fetch('https://api.flodesk.com/v1/subscribers', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1239,6 +1237,36 @@
                         'User-Agent': 'ExecutivePresenceEbook/1.0'
                     },
                     body: JSON.stringify(subscriberData)
+                });
+                
+                const createResult = await createResponse.json().catch(e => ({}));
+                log(`Create/Update Status: ${createResponse.status} ${createResponse.statusText}`);
+                log(`Create/Update Response: ${JSON.stringify(createResult, null, 2)}`);
+                
+                if (!createResponse.ok) {
+                    throw new Error(`Failed to create/update subscriber: ${JSON.stringify(createResult)}`);
+                }
+                
+                // Now add to segment using the correct Flodesk API format
+                log('Adding to segment...');
+                const segmentData = {
+                    subscribers: [{
+                        email: email,
+                        status: 'active',
+                        segments: [segmentId]
+                    }]
+                };
+                
+                log(`Segment data: ${JSON.stringify(segmentData, null, 2)}`);
+                
+                const response = await fetch('https://api.flodesk.com/v1/segments', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                        'User-Agent': 'ExecutivePresenceEbook/1.0'
+                    },
+                    body: JSON.stringify(segmentData)
                 });
 
                 let result;
