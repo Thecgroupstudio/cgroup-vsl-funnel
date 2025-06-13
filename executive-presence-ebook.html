@@ -962,6 +962,10 @@
                 <h4 style="margin-top: 0; margin-bottom: 8px;">Create Segment</h4>
                 <input type="text" id="segmentName" placeholder="Segment Name" style="width: 100%; padding: 6px; margin-bottom: 8px; border: 1px solid #ced4da; border-radius: 4px;">
                 <div style="margin-bottom: 8px;">
+                    <label style="display: block; margin-bottom: 4px; font-size: 12px;">Color:</label>
+                    <input type="color" id="segmentColor" value="#6c757d" style="width: 100%; height: 30px; margin-bottom: 8px;">
+                </div>
+                <div style="margin-bottom: 8px;">
                     <label style="display: block; margin-bottom: 4px; font-size: 12px;">Rule:</label>
                     <div style="display: flex; gap: 5px; margin-bottom: 5px;">
                         <select id="ruleField" style="flex: 2; padding: 4px;">
@@ -1083,6 +1087,7 @@
                     },
                     body: JSON.stringify({
                         name: segmentName,
+                        color: document.getElementById('segmentColor').value.substring(1), // Remove # from color
                         rules: [{
                             field: ruleField,
                             operator: ruleOperator,
