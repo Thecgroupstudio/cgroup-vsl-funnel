@@ -1253,15 +1253,14 @@
                 // Add subscriber to segment using the Flodesk API
                 log('Adding subscriber to segment...');
                 
-                // The endpoint format is: /v1/segments/{segmentId}/subscribers
-                const segmentUrl = `https://api.flodesk.com/v1/segments/${segmentId}/subscribers`;
+                // The correct endpoint format is: /v1/subscribers/{email}/segments
+                const segmentUrl = `https://api.flodesk.com/v1/subscribers/${encodeURIComponent(email)}/segments`;
                 
                 log(`Segment URL: ${segmentUrl}`);
                 
-                // The request body should contain the subscriber's email
+                // The request body should contain an array of segment IDs
                 const requestBody = {
-                    email: email,
-                    status: 'active'
+                    segment_ids: [segmentId]
                 };
                 
                 log(`Request body: ${JSON.stringify(requestBody, null, 2)}`);
