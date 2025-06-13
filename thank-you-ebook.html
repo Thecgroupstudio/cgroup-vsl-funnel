@@ -430,6 +430,65 @@
             margin-bottom: 20px;
         }
         
+        .immersion-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d3748 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .immersion-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .immersion-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .event-details {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #e2e8f0;
+        }
+        
+        .event-details i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+        
+        .btn-immersion {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-immersion:hover {
+            background-color: transparent;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-immersion i {
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-immersion:hover i {
+            transform: translateX(5px);
+        }
+        
         @media (max-width: 768px) {
             .thank-you-content h1 {
                 font-size: 36px;
@@ -488,6 +547,21 @@
                         </p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="immersion-section">
+        <div class="container">
+            <div class="immersion-content">
+                <h3>Secure your spot for the Executive Presence Immersion</h3>
+                <p class="event-details">
+                    <i class="fas fa-calendar-alt"></i> July 20-23, 2025<br>
+                    <i class="fas fa-map-marker-alt"></i> ALILA Resort NAPA VALLEY, ST. HELENA, CA
+                </p>
+                <a href="index.html" class="btn btn-immersion">
+                    Reserve Your Spot Now <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
