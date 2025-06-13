@@ -1459,15 +1459,19 @@
                 }
                 
                 // Add to workflow if workflow ID is provided
-                const workflowId = document.getElementById('workflowId').value.trim();
-                if (workflowId) {
-                    log(`\nStep 3/3: Adding to workflow ${workflowId}...`);
-                    const workflowResult = await addToWorkflow(email, workflowId);
-                    
-                    if (!workflowResult.success) {
-                        log(`⚠️ Warning: Failed to add to workflow: ${workflowResult.error}`, true);
-                    } else {
-                        log(`✅ Successfully added to workflow: ${workflowId}`);
+                let workflowId = '';
+                const workflowInput = document.getElementById('workflowId');
+                if (workflowInput) {
+                    workflowId = workflowInput.value.trim();
+                    if (workflowId) {
+                        log(`\nStep 3/3: Adding to workflow ${workflowId}...`);
+                        const workflowResult = await addToWorkflow(email, workflowId);
+                        
+                        if (!workflowResult.success) {
+                            log(`⚠️ Warning: Failed to add to workflow: ${workflowResult.error}`, true);
+                        } else {
+                            log(`✅ Successfully added to workflow: ${workflowId}`);
+                        }
                     }
                 }
                 
