@@ -1322,7 +1322,9 @@
                             'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
                             'User-Agent': 'ExecutivePresenceEbook/1.0'
                         },
-                        body: JSON.stringify([segmentId]) // Send array of segment IDs as per API docs
+                        body: JSON.stringify({
+                            segment_ids: [segmentId]  // Wrap in an object with segment_ids array
+                        })
                     });
 
                     const segmentResult = await segmentResponse.json().catch(e => ({
