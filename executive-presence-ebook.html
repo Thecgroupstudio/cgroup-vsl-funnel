@@ -1359,52 +1359,12 @@
                     log(`Using provided segment ID: ${segmentId}`);
                 }
                 
-                // Prepare subscriber data
-                const requestBody = {
-                    email: email,
-                    firstName: 'Test',
-                    custom_fields: {
-                        'First Name': 'Test',
-                        'UTM Source': 'test',
-                        'UTM Medium': 'test',
-                        'UTM Campaign': 'test',
-                        'Lead Source': 'Ebook',
-                        'Status': 'Active',
-                        'Signup Page': 'Executive Presence Ebook'
-                    },
-                    tags: ['executive-presence-ebook', 'test-submission'],
-                    status: 'active',
-                    doubleOptIn: false
-                };
-                
-                log('Step 1/3: Creating/updating subscriber...');
-                log(`Request: POST https://api.flodesk.com/v1/subscribers`);
-                log(`Payload: ${JSON.stringify(requestBody, null, 2)}`);
-                
-                // Create/Update subscriber
-                const response = await fetch('https://api.flodesk.com/v1/subscribers', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
-                        'User-Agent': 'ExecutivePresenceEbook/1.0'
-                    },
-                    body: JSON.stringify(requestBody)
-                });
-                
-                const result = await response.json().catch(e => ({}));
-                log(`Response Status: ${response.status} ${response.statusText}`);
-                log(`Response: ${JSON.stringify(result, null, 2)}`);
-                
-                if (!response.ok) {
-                    throw new Error(`Failed to add subscriber: ${JSON.stringify(result)}`);
-                }
-                
-                log('✅ Successfully created/updated subscriber');
+                // Skip subscriber creation and go straight to segment addition
+                log('Skipping subscriber creation (test mode)');
                 
                 // Add to segment if segment ID is provided
                 if (segmentId) {
-                    log(`\nStep 2/3: Adding to segment ${segmentId}...`);
+                    log(`\nStep 1/2: Adding to segment ${segmentId}...`);
                     
                     // First verify the segment exists
                     log(`Verifying segment ${segmentId} exists...`);
