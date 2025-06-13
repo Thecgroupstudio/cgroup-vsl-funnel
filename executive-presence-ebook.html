@@ -1045,13 +1045,13 @@
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 
-                const segments = await response.json();
-                console.log('Segments:', segments);
+                const data = await response.json();
+                console.log('Segments:', data);
                 
-                if (segments && segments.length > 0) {
-                    let html = '<h4>Your Segments:</h4><div style="max-height: 200px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; margin-top: 5px; background: white;">';
+                if (data && data.data && data.data.length > 0) {
+                    let html = '<h4>Your Segments:</h4><div style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; margin-top: 5px; background: white;">';
                     
-                    segments.forEach(segment => {
+                    data.data.forEach(segment => {
                         const isEbookSegment = segment.name && segment.name.includes('Your Presence Is Your Power Ebook');
                         const segmentStyle = isEbookSegment ? 'background: #e8f5e9; padding: 8px; border-left: 4px solid #4CAF50; margin: 5px 0;' : 'padding: 8px; border-left: 4px solid #e0e0e0; margin: 5px 0;';
                         const colorBox = segment.color ? `<span style="display: inline-block; width: 12px; height: 12px; background: ${segment.color}; margin-right: 6px; vertical-align: middle; border-radius: 2px;"></span>` : '';
@@ -1063,6 +1063,15 @@
                                 ${isEbookSegment ? '<div style="color: #2e7d32; font-size: 12px; margin-top: 3px;">✓ This appears to be your Ebook segment</div>' : ''}
                             </div>`;
                     });
+                    
+                    // Add pagination info if available
+                    if (data.meta) {
+                        html += `
+                            <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #eee; font-size: 12px; color: #666;">
+                                Page ${data.meta.page + 1} of ${data.meta.total_pages} • 
+                                ${data.meta.total_items} total segments
+                            </div>`;
+                    }
                     
                     html += '</div><p style="margin-top: 8px; font-size: 12px; color: #666;">Copy the Segment ID to use in the Test Integration above.</p>';
                     resultDiv.innerHTML = html;
