@@ -1124,9 +1124,11 @@
                     }
                     
                     html += '</div><p style="margin-top: 8px; font-size: 12px; color: #666;">Copy the Workflow ID to use in the Test Integration above.</p>';
-                    resultDiv.innerHTML = html;
+                    testResult.innerHTML = html;
+                    testResult.style.display = 'block';
+                    testResult.style.background = '#e7f5fe';
+                    resultDiv.textContent = `Found ${data.meta?.total_items || data.data.length} workflow(s)`;
                     resultDiv.style.display = 'block';
-                    testResult.textContent = `Found ${data.meta?.total_items || data.data.length} workflow(s)`;
                 } else {
                     resultDiv.textContent = 'No workflows found';
                     resultDiv.style.display = 'block';
