@@ -996,7 +996,11 @@
                 const result = await response.json();
                 
                 if (response.ok) {
-                    resultDiv.textContent = '✅ Test successful! Check your Flodesk dashboard.';
+                    resultDiv.innerHTML = `
+                        ✅ Test successful!<br>
+                        Email: ${testEmail}<br>
+                        Check your Flodesk dashboard for this test submission.
+                    `;
                     resultDiv.style.background = '#d4edda';
                     console.log('Flodesk API Response:', result);
                 } else {
