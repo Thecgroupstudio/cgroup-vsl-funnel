@@ -53,20 +53,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // If still no UTM parameters, use referrer information
+    // Set default UTM values for main funnel
     const sourceInput = document.getElementById('utm_source');
     const mediumInput = document.getElementById('utm_medium');
-    if (sourceInput && mediumInput && !sourceInput.value && !mediumInput.value) {
-        const referrerInfo = getReferrerInfo();
-        if (referrerInfo) {
-            sourceInput.value = referrerInfo.domain;
-            mediumInput.value = 'referral';
-        } else {
-            // If no referrer, mark as direct traffic
-            sourceInput.value = 'direct';
-            mediumInput.value = 'none';
-        }
-    }
+    const campaignInput = document.getElementById('utm_campaign');
+    
+    // Default values for main funnel
+    if (sourceInput && !sourceInput.value) sourceInput.value = 'main-funnel';
+    if (mediumInput && !mediumInput.value) mediumInput.value = 'organic';
+    if (campaignInput && !campaignInput.value) campaignInput.value = 'executive-presence-immersion';
+    
+    // Store these defaults in localStorage
+    if (sourceInput && sourceInput.value) localStorage.setItem('utm_source', sourceInput.value);
+    if (mediumInput && mediumInput.value) localStorage.setItem('utm_medium', mediumInput.value);
+    if (campaignInput && campaignInput.value) localStorage.setItem('utm_campaign', campaignInput.value);
     
     // Form submission handler
     if (form) {

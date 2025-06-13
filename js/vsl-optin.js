@@ -71,17 +71,15 @@ function handleFormSubmit(form, formId) {
             }
         });
         
-        // If no UTM source/medium, use referrer info
-        if (!formProps.utm_source && !formProps.utm_medium) {
-            const referrerInfo = getReferrerInfo();
-            if (referrerInfo) {
-                formProps.utm_source = referrerInfo.domain;
-                formProps.utm_medium = 'referral';
-            } else {
-                formProps.utm_source = 'direct';
-                formProps.utm_medium = 'none';
-            }
-        }
+        // Set default UTM values for masterclass funnel
+        if (!formProps.utm_source) formProps.utm_source = 'masterclass-funnel';
+        if (!formProps.utm_medium) formProps.utm_medium = 'organic';
+        if (!formProps.utm_campaign) formProps.utm_campaign = 'executive-presence-masterclass';
+        
+        // Store these defaults in localStorage
+        localStorage.setItem('utm_source', formProps.utm_source);
+        localStorage.setItem('utm_medium', formProps.utm_medium);
+        localStorage.setItem('utm_campaign', formProps.utm_campaign);
         
         console.log('Sending form data to n8n:', formProps);
         

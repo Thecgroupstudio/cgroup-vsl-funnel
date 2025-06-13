@@ -868,6 +868,14 @@
     </footer>
 
     <script>
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
         document.getElementById('ebook-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -875,9 +883,27 @@
             const firstName = document.getElementById('first-name').value;
             const email = document.getElementById('email').value;
             
-            // Here you would typically send this data to your server or email service
-            // For now, we'll just redirect to the thank you page with query parameters
-            window.location.href = `thank-you-ebook.html?name=${encodeURIComponent(firstName)}&email=${encodeURIComponent(email)}`;
+            // Create URL with form data
+            const url = new URL('thank-you-ebook.html', window.location.origin);
+            url.searchParams.set('name', encodeURIComponent(firstName));
+            url.searchParams.set('email', encodeURIComponent(email));
+            
+            // Add UTM parameters if they exist
+            const utmParams = ['source', 'medium', 'campaign', 'term', 'content'];
+            utmParams.forEach(param => {
+                const value = getUrlParameter('utm_' + param);
+                if (value) {
+                    url.searchParams.set('utm_' + param, value);
+                }
+            });
+            
+            // Set default UTM values for ebook funnel if none exist
+            if (!url.searchParams.has('utm_source')) url.searchParams.set('utm_source', 'ebook-funnel');
+            if (!url.searchParams.has('utm_medium')) url.searchParams.set('utm_medium', 'organic');
+            if (!url.searchParams.has('utm_campaign')) url.searchParams.set('utm_campaign', 'executive-presence-ebook');
+            
+            // Redirect to thank you page with all parameters
+            window.location.href = url.toString();
         });
     </script>
     <!-- Back to Top Button -->
