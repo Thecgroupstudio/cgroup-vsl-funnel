@@ -949,15 +949,76 @@
         });
     </script>
     
-    <!-- Test Flodesk Integration Button (Remove in production) -->
-    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
-        <button id="testFlodeskBtn" style="padding: 10px 15px; background: #ff4444; color: white; border: none; border-radius: 4px; cursor: pointer;">
-            Test Flodesk Integration
-        </button>
-        <div id="testResult" style="margin-top: 10px; padding: 10px; border-radius: 4px; display: none;"></div>
+    <!-- Flodesk Tools (Remove in production) -->
+    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <h3 style="margin-top: 0; margin-bottom: 10px;">Flodesk Tools</h3>
+        
+        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+            <button id="testFlodeskBtn" style="padding: 8px 12px; background: #ff4444; color: white; border: none; border-radius: 4px; cursor: pointer; flex: 1;">
+                Test Integration
+            </button>
+            <button id="listWorkflowsBtn" style="padding: 8px 12px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; flex: 1;">
+                List Workflows
+            </button>
+        </div>
+        
+        <div id="testResult" style="margin-top: 10px; padding: 10px; border-radius: 4px; display: none; max-height: 200px; overflow-y: auto; background: #f8f9fa;"></div>
+        <pre id="workflowsList" style="margin-top: 10px; padding: 10px; border-radius: 4px; background: #f8f9fa; display: none; max-height: 300px; overflow-y: auto; white-space: pre-wrap;"></pre>
     </div>
     
     <script>
+        // Helper function to show messages
+        function showMessage(elementId, message, isError = false) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.style.display = 'block';
+            element.style.background = isError ? '#f8d7da' : '#d4edda';
+            element.style.color = isError ? '#721c24' : '#155724';
+            element.style.padding = '10px';
+            element.style.borderRadius = '4px';
+            element.style.marginTop = '10px';
+        }
+
+        // List Flodesk Workflows
+        document.getElementById('listWorkflowsBtn').addEventListener('click', async function() {
+            const resultDiv = document.getElementById('workflowsList');
+            const testResult = document.getElementById('testResult');
+            
+            try {
+                testResult.textContent = 'Fetching workflows...';
+                testResult.style.display = 'block';
+                
+                const response = await fetch('https://api.flodesk.com/v1/workflows', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                        'User-Agent': 'ExecutivePresenceEbook/1.0'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const workflows = await response.json();
+                console.log('Workflows:', workflows);
+                
+                if (workflows && workflows.length > 0) {
+                    const workflowList = workflows.map(wf => `ID: ${wf.id}\nName: ${wf.name}\nStatus: ${wf.status}\n`).join('\n');
+                    resultDiv.textContent = workflowList;
+                    resultDiv.style.display = 'block';
+                    testResult.textContent = `Found ${workflows.length} workflow(s)`;
+                } else {
+                    resultDiv.textContent = 'No workflows found';
+                    resultDiv.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error fetching workflows:', error);
+                showMessage('testResult', `❌ Error fetching workflows: ${error.message}`, true);
+            }
+        });
+
         // Test Flodesk Integration
         document.getElementById('testFlodeskBtn').addEventListener('click', async function() {
             const resultDiv = document.getElementById('testResult');
@@ -992,6 +1053,7 @@
                 
                 console.log('Sending to Flodesk:', JSON.stringify(requestBody, null, 2));
                 
+                // First, create/update the subscriber
                 const response = await fetch('https://api.flodesk.com/v1/subscribers', {
                     method: 'POST',
                     headers: {
@@ -1005,12 +1067,41 @@
                 const result = await response.json();
                 
                 if (response.ok) {
-                    resultDiv.innerHTML = `
-                        ✅ Test submitted successfully!<br>
-                        Email: <strong>${email}</strong><br>
-                        Time: <strong>${new Date().toLocaleString()}</strong><br>
-                        Check your Flodesk dashboard for this test submission.
-                    `;
+                    // Add to workflow after successful subscription
+                    try {
+                        const workflowId = 'YOUR_WORKFLOW_ID'; // Replace with your actual workflow ID
+                        const workflowResponse = await fetch(`https://api.flodesk.com/v1/workflows/${workflowId}/subscribers`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                                'User-Agent': 'ExecutivePresenceEbook/1.0'
+                            },
+                            body: JSON.stringify({
+                                email: email,
+                                firstName: 'Test',
+                                // Add any custom fields that your workflow might use
+                                custom_fields: customFields
+                            })
+                        });
+
+                        const workflowResult = await workflowResponse.json();
+                        console.log('Workflow update result:', workflowResult);
+                        
+                        resultDiv.innerHTML = `
+                            ✅ Test submitted successfully!<br>
+                            Email: <strong>${email}</strong><br>
+                            Time: <strong>${new Date().toLocaleString()}</strong><br>
+                            Added to workflow: <strong>${workflowId}</strong><br>
+                            Check your Flodesk dashboard for this test submission.
+                        `;
+                    } catch (workflowError) {
+                        console.error('Error adding to workflow:', workflowError);
+                        resultDiv.innerHTML = `
+                            ✅ Subscriber created but workflow enrollment failed:<br>
+                            ${workflowError.message || 'Unknown error'}<br>
+                            Email: <strong>${email}</strong>`;
+                    }
                     resultDiv.style.background = '#d4edda';
                     console.log('Flodesk API Response:', result);
                 } else {
