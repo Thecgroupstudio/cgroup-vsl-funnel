@@ -997,9 +997,10 @@
                 
                 if (response.ok) {
                     resultDiv.innerHTML = `
-                        ✅ Test successful!<br>
-                        Email: ${testEmail}<br>
-                        Check your Flodesk dashboard for this test submission.
+                        ✅ Test submitted successfully!<br>
+                        Email: <strong>${testEmail}</strong><br>
+                        Check your Flodesk dashboard for this test submission.<br>
+                        <small>Check your inbox or Flodesk dashboard for this test submission.</small>
                     `;
                     resultDiv.style.background = '#d4edda';
                     console.log('Flodesk API Response:', result);
