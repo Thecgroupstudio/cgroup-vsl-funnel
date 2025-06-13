@@ -1298,7 +1298,7 @@
                 log(`API Response: ${JSON.stringify(result, null, 2)}`);
                 
                 if (!response.ok) {
-                    throw new Error(`Failed to create/update subscriber with segment: ${JSON.stringify(result)}`);
+                    throw new Error(`Failed to add to segment: ${JSON.stringify(result)}`);
                 }
                 
                 log('Successfully added to segment!');
@@ -1317,66 +1317,6 @@
                     success: false, 
                     error: errorMessage,
                     segmentId: segmentId,
-                    logs: logs
-                };
-            }
-        }
-
-        // Alternative method to add to segment - uses a different API endpoint
-        async function addToSegmentAlternative(email, segmentId) {
-            const logs = [];
-            const log = (message) => {
-                console.log(`[${new Date().toISOString()}] [ALT] ${message}`);
-                logs.push(`[ALT] ${message}`);
-                return message;
-            };
-            
-            try {
-                log(`Trying alternative method to add ${email} to segment ${segmentId}`);
-                
-                // First, ensure the subscriber exists
-                log('Ensuring subscriber exists...');
-                const subscriberResponse = await fetch('https://api.flodesk.com/v1/subscribers', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
-                        'User-Agent': 'ExecutivePresenceEbook/1.0'
-                    },
-                    body: JSON.stringify({
-                        email: email,
-                        firstName: 'Test',
-                        status: 'active',
-                        segments: [segmentId],  // Try adding segment directly in the subscriber update
-                        custom_fields: {
-                            'Signup Page': 'Executive Presence Ebook',
-                            'Lead Source': 'Website'
-                        }
-                    })
-                });
-                
-                const result = await subscriberResponse.json().catch(e => ({}));
-                log(`Alternative method response: ${JSON.stringify(result, null, 2)}`);
-                
-                if (!subscriberResponse.ok) {
-                    throw new Error(`Alternative method failed: ${JSON.stringify(result)}`);
-                }
-                
-                // Check if segment was added in the response
-                const segmentAdded = result.segments && result.segments.some(s => s.id === segmentId);
-                
-                return {
-                    success: segmentAdded,
-                    result: result,
-                    logs: logs,
-                    message: segmentAdded ? 'Added to segment via alternative method' : 'Segment not added in response'
-                };
-                
-            } catch (error) {
-                log(`Error in alternative method: ${error.message}`);
-                return {
-                    success: false,
-                    error: error.message,
                     logs: logs
                 };
             }
