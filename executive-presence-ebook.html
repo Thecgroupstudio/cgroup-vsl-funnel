@@ -1352,8 +1352,8 @@
                     log(`Using provided segment ID: ${segmentId}`);
                 }
                 
-                // Skip subscriber creation and go straight to segment addition
-                log('Skipping subscriber creation (test mode)');
+                // Always create/update the subscriber first
+                log('Creating/updating subscriber...');
                 
                 // Add to segment if segment ID is provided
                 if (segmentId) {
