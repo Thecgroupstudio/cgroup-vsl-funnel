@@ -1250,30 +1250,29 @@
                 // Step 1: First ensure subscriber is created/updated
                 log('✅ Subscriber created/updated successfully');
                 
-                // Add subscriber to segment using the Flodesk API
-                log('Adding subscriber to segment...');
+                // Add segment to the subscriber data for the create/update call
+                log('Adding segment to subscriber data...');
                 
-                // The correct endpoint format is: /v1/subscribers/{email}/segments
-                const segmentUrl = `https://api.flodesk.com/v1/subscribers/${encodeURIComponent(email)}/segments`;
+                // Get the segment name from the verification step or use a placeholder
+                const segmentName = 'Your Presence Is Your Power Ebook';
                 
-                log(`Segment URL: ${segmentUrl}`);
+                // Update the subscriber data to include the segment
+                subscriberData.segments = [{
+                    id: segmentId,
+                    name: segmentName
+                }];
                 
-                // The request body should contain an array of segment IDs
-                const requestBody = {
-                    segment_ids: [segmentId]
-                };
+                log(`Updated subscriber data with segment: ${JSON.stringify(subscriberData, null, 2)}`);
                 
-                log(`Request body: ${JSON.stringify(requestBody, null, 2)}`);
-                
-                // Make the POST request to add the subscriber to the segment
-                const response = await fetch(segmentUrl, {
-                    method: 'POST',
+                // Make the PUT request to update the subscriber with the segment
+                const response = await fetch(`https://api.flodesk.com/v1/subscribers/${encodeURIComponent(email)}`, {
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
                         'User-Agent': 'ExecutivePresenceEbook/1.0'
                     },
-                    body: JSON.stringify(requestBody)
+                    body: JSON.stringify(subscriberData)
                 });
 
                 let result;
