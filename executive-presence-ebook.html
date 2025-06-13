@@ -1249,17 +1249,13 @@
                 
                 // Now add to segment using the correct Flodesk API endpoint
                 log('Adding to segment...');
-                const segmentUrl = `https://api.flodesk.com/v1/segments/${segmentId}/subscribers`;
-                log(`Segment URL: ${segmentUrl}`);
-                
                 const segmentData = {
-                    email: email,
-                    status: 'active'
+                    segment_ids: [segmentId]
                 };
                 
                 log(`Segment data: ${JSON.stringify(segmentData, null, 2)}`);
                 
-                const response = await fetch(segmentUrl, {
+                const response = await fetch(`https://api.flodesk.com/v1/subscribers/${encodeURIComponent(email)}/segments`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
