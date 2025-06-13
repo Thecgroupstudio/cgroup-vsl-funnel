@@ -1258,6 +1258,66 @@
             }
         }
 
+        // Alternative method to add to segment - uses a different API endpoint
+        async function addToSegmentAlternative(email, segmentId) {
+            const logs = [];
+            const log = (message) => {
+                console.log(`[${new Date().toISOString()}] [ALT] ${message}`);
+                logs.push(`[ALT] ${message}`);
+                return message;
+            };
+            
+            try {
+                log(`Trying alternative method to add ${email} to segment ${segmentId}`);
+                
+                // First, ensure the subscriber exists
+                log('Ensuring subscriber exists...');
+                const subscriberResponse = await fetch('https://api.flodesk.com/v1/subscribers', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                        'User-Agent': 'ExecutivePresenceEbook/1.0'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        firstName: 'Test',
+                        status: 'active',
+                        segments: [segmentId],  // Try adding segment directly in the subscriber update
+                        custom_fields: {
+                            'Signup Page': 'Executive Presence Ebook',
+                            'Lead Source': 'Website'
+                        }
+                    })
+                });
+                
+                const result = await subscriberResponse.json().catch(e => ({}));
+                log(`Alternative method response: ${JSON.stringify(result, null, 2)}`);
+                
+                if (!subscriberResponse.ok) {
+                    throw new Error(`Alternative method failed: ${JSON.stringify(result)}`);
+                }
+                
+                // Check if segment was added in the response
+                const segmentAdded = result.segments && result.segments.some(s => s.id === segmentId);
+                
+                return {
+                    success: segmentAdded,
+                    result: result,
+                    logs: logs,
+                    message: segmentAdded ? 'Added to segment via alternative method' : 'Segment not added in response'
+                };
+                
+            } catch (error) {
+                log(`Error in alternative method: ${error.message}`);
+                return {
+                    success: false,
+                    error: error.message,
+                    logs: logs
+                };
+            }
+        }
+
         // Hardcoded Ebook segment ID
         const EBOOK_SEGMENT_ID = '684be75d6b21c78b38dfca5b';
         
@@ -1345,6 +1405,30 @@
                 // Add to segment if segment ID is provided
                 if (segmentId) {
                     log(`\nStep 2/3: Adding to segment ${segmentId}...`);
+                    
+                    // First verify the segment exists
+                    log(`Verifying segment ${segmentId} exists...`);
+                    let segmentExists = false;
+                    try {
+                        const verifyResponse = await fetch(`https://api.flodesk.com/v1/segments/${segmentId}`, {
+                            headers: {
+                                'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                                'User-Agent': 'ExecutivePresenceEbook/1.0'
+                            }
+                        });
+                        
+                        segmentExists = verifyResponse.ok;
+                        if (!segmentExists) {
+                            log(`⚠️ Segment ${segmentId} not found or inaccessible. Status: ${verifyResponse.status}`);
+                        } else {
+                            const segmentData = await verifyResponse.json();
+                            log(`✅ Found segment: "${segmentData.name}" (${segmentId})`);
+                        }
+                    } catch (e) {
+                        log(`⚠️ Error verifying segment: ${e.message}`, true);
+                    }
+                    
+                    // Try to add to segment
                     const segmentResult = await addToSegment(email, segmentId);
                     
                     // Log the segment addition result
@@ -1354,9 +1438,21 @@
                     }
                     
                     if (!segmentResult.success) {
-                        throw new Error(`Failed to add to segment: ${segmentResult.error || 'Unknown error'}`);
+                        // If failed, try alternative method
+                        log('Trying alternative method to add to segment...');
+                        const altResult = await addToSegmentAlternative(email, segmentId);
+                        
+                        if (altResult.logs) {
+                            altResult.logs.forEach(msg => log(`  ${msg}`));
+                        }
+                        
+                        if (!altResult.success) {
+                            throw new Error(`Failed to add to segment (tried 2 methods). Last error: ${altResult.error || 'Unknown error'}`);
+                        }
+                        log(`✅ Successfully added to segment using alternative method: ${segmentId}`);
+                    } else {
+                        log(`✅ Successfully added to segment: ${segmentId}`);
                     }
-                    log(`✅ Successfully added to segment: ${segmentId}`);
                 }
                 
                 // Add to workflow if workflow ID is provided
