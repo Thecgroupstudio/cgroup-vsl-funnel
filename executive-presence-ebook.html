@@ -1458,42 +1458,17 @@
                     }
                 }
                 
-                // Add to workflow if workflow ID is provided
-                let workflowId = '';
-                const workflowInput = document.getElementById('workflowId');
-                if (workflowInput) {
-                    workflowId = workflowInput.value.trim();
-                    if (workflowId) {
-                        log(`\nStep 3/3: Adding to workflow ${workflowId}...`);
-                        const workflowResult = await addToWorkflow(email, workflowId);
-                        
-                        if (!workflowResult.success) {
-                            log(`⚠️ Warning: Failed to add to workflow: ${workflowResult.error}`, true);
-                        } else {
-                            log(`✅ Successfully added to workflow: ${workflowId}`);
-                        }
-                    }
-                }
-                
                 // Show final success message
                 resultDiv.style.background = '#d4edda';
                 log('\n✅ Test completed successfully!', false);
                 
                 // Show success message
-                let successMessage = `
+                const successMessage = `
                     ✅ Test submitted successfully!<br>
                     Email: <strong>${email}</strong><br>
-                    Time: <strong>${new Date().toLocaleString()}</strong>`;
-                
-                if (segmentId) {
-                    successMessage += `<br>Added to segment: <strong>${segmentId} ✓</strong>`;
-                }
-                
-                if (workflowId) {
-                    successMessage += `<br>Added to workflow: <strong>${workflowId} ✓</strong>`;
-                }
-                
-                successMessage += `<br>Check your Flodesk dashboard for this test submission.`;
+                    Added to segment: <strong>${segmentId} ✓</strong><br>
+                    Time: <strong>${new Date().toLocaleString()}</strong><br>
+                    Check your Flodesk dashboard for this test submission.`;
                 
                 const successDiv = document.createElement('div');
                 successDiv.style.marginTop = '10px';
