@@ -1247,19 +1247,19 @@
                     throw new Error(`Failed to create/update subscriber: ${JSON.stringify(createResult)}`);
                 }
                 
-                // Now add to segment using the correct Flodesk API format
+                // Now add to segment using the correct Flodesk API endpoint
                 log('Adding to segment...');
+                const segmentUrl = `https://api.flodesk.com/v1/segments/${segmentId}/subscribers`;
+                log(`Segment URL: ${segmentUrl}`);
+                
                 const segmentData = {
-                    subscribers: [{
-                        email: email,
-                        status: 'active',
-                        segments: [segmentId]
-                    }]
+                    email: email,
+                    status: 'active'
                 };
                 
                 log(`Segment data: ${JSON.stringify(segmentData, null, 2)}`);
                 
-                const response = await fetch('https://api.flodesk.com/v1/segments', {
+                const response = await fetch(segmentUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
