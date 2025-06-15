@@ -243,8 +243,16 @@
             <div style="background: linear-gradient(90deg, #4169e1, #ff0004); padding: 12px; text-align: center; margin: -25px -25px 15px -25px;">
                 <h3 style="color: white; margin: 0; font-size: 1.2rem; font-weight: 500;">Ready to Transform Your Leadership?</h3>
             </div>
-            <form id="vsl-optin-form-floating" class="optin-form">
+            <form id="vsl-optin-form-floating" class="optin-form" action="booking-strategy-session.html" method="get">
                 <input type="hidden" name="source" value="floating">
+                <input type="hidden" name="lead_source" value="masterclass-popup">
+                <input type="hidden" name="form_type" value="masterclass_optin">
+                <!-- UTM Parameters -->
+                <input type="hidden" name="utm_source" id="utm_source">
+                <input type="hidden" name="utm_medium" id="utm_medium">
+                <input type="hidden" name="utm_campaign" id="utm_campaign">
+                <input type="hidden" name="utm_term" id="utm_term">
+                <input type="hidden" name="utm_content" id="utm_content">
                 <p style="font-size: 0.9rem; color: #666; margin-bottom: 5px; text-align: center; line-height: 1.4;">
                     Secure your spot for the EXECUTIVE PRESENCE PROGRAM
                 </p>
@@ -261,10 +269,10 @@
                 </div>
                 <button type="submit" 
                     style="width: 100%; padding: 12px; background: linear-gradient(90deg, #4169e1, #ff0004); color: white; border: none; border-radius: 4px; font-weight: 600; font-size: 14px; cursor: pointer; margin-top: 5px;">
-                    JOIN NOW
+                    BOOK YOUR SESSION
                 </button>
                 <p style="font-size: 0.7rem; color: #999; margin: 12px 0 0; text-align: center; line-height: 1.4; font-style: italic;">
-                    You'll be redirected to schedule your call
+                    You'll be redirected to book your strategy session
                 </p>
             </form>
         </div>
@@ -515,19 +523,66 @@
         </div>
     </footer>
     <script>
-        // Add UTM parameters to forms
+        // Handle UTM parameters and form submission
         document.addEventListener('DOMContentLoaded', function() {
+            // Get URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
             
+            // Set UTM parameters in form fields and localStorage
             utmParams.forEach(param => {
-                const value = urlParams.get(param);
+                const value = urlParams.get(param) || localStorage.getItem(param) || '';
                 if (value) {
+                    // Set in form fields
                     document.querySelectorAll(`input[name="${param}"]`).forEach(input => {
                         input.value = value;
                     });
+                    // Store in localStorage
+                    localStorage.setItem(param, value);
                 }
             });
+            
+            // Set default UTM values if not present
+            if (!urlParams.get('utm_source') && !localStorage.getItem('utm_source')) {
+                const sourceField = document.getElementById('utm_source');
+                if (sourceField) sourceField.value = 'masterclass-funnel';
+            }
+            if (!urlParams.get('utm_medium') && !localStorage.getItem('utm_medium')) {
+                const mediumField = document.getElementById('utm_medium');
+                if (mediumField) mediumField.value = 'organic';
+            }
+            if (!urlParams.get('utm_campaign') && !localStorage.getItem('utm_campaign')) {
+                const campaignField = document.getElementById('utm_campaign');
+                if (campaignField) campaignField.value = 'executive-presence-masterclass';
+            }
+            
+            // Track form submission
+            const form = document.getElementById('vsl-optin-form-floating');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    // Track form submission in analytics
+                    if (window.fbq) {
+                        fbq('track', 'Lead');
+                    }
+                    if (window.lintrk) {
+                        window.lintrk('track', { conversion_id: 1234567 });
+                    }
+                    
+                    // Set form submission timestamp
+                    const timestampField = document.createElement('input');
+                    timestampField.type = 'hidden';
+                    timestampField.name = 'form_submitted_at';
+                    timestampField.value = new Date().toISOString();
+                    form.appendChild(timestampField);
+                    
+                    // Add page URL
+                    const pageUrlField = document.createElement('input');
+                    pageUrlField.type = 'hidden';
+                    pageUrlField.name = 'page_url';
+                    pageUrlField.value = window.location.href;
+                    form.appendChild(pageUrlField);
+                });
+            }
         });
 
         // Function to show popup
