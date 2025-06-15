@@ -561,32 +561,76 @@
             // Track form submission
             const form = document.getElementById('vsl-optin-form-floating');
             if (form) {
-                form.addEventListener('submit', function(e) {
-                    // Track form submission in analytics
-                    if (window.fbq) {
-                        fbq('track', 'Lead');
-                    }
-                    if (window.lintrk) {
-                        window.lintrk('track', { conversion_id: 1234567 });
-                    }
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
                     
-                    // Set form submission timestamp
-                    const timestampField = document.createElement('input');
-                    timestampField.type = 'hidden';
-                    timestampField.name = 'form_submitted_at';
-                    timestampField.value = new Date().toISOString();
-                    form.appendChild(timestampField);
+                    const submitButton = this.querySelector('button[type="submit"]');
+                    const originalButtonText = submitButton.innerHTML;
                     
-                    // Add page URL
-                    const pageUrlField = document.createElement('input');
-                    pageUrlField.type = 'hidden';
-                    pageUrlField.name = 'page_url';
-                    pageUrlField.value = window.location.href;
-                    form.appendChild(pageUrlField);
+                    try {
+                        // Show loading state
+                        submitButton.disabled = true;
+                        submitButton.innerHTML = 'Sending...';
+                        
+                        // Get form data
+                        const formData = new FormData(this);
+                        const firstName = formData.get('name');
+                        const email = formData.get('email');
+                        
+                        // Prepare UTM parameters
+                        const utmSource = getUrlParameter('utm_source') || 'masterclass-funnel';
+                        const utmMedium = getUrlParameter('utm_medium') || 'organic';
+                        const utmCampaign = getUrlParameter('utm_campaign') || 'executive-presence-masterclass';
+                        
+                        // Track in analytics
+                        if (window.fbq) {
+                            fbq('track', 'Lead');
+                        }
+                        if (window.lintrk) {
+                            window.lintrk('track', { conversion_id: 1234567 });
+                        }
+                        
+                        // Add to Flodesk segment
+                        const flodeskSegment = formData.get('flodesk_segment');
+                        if (flodeskSegment) {
+                            const result = await addToSegment(email, flodeskSegment);
+                            if (!result.success) {
+                                console.error('Error in addToSegment:', result.error);
+                                console.log('API Logs:', result.logs);
+                                throw new Error('Failed to process your submission. Please try again.');
+                            }
+                            console.log('Subscription successful:', result);
+                        }
+                        
+                        // Add form submission timestamp
+                        const timestampField = document.createElement('input');
+                        timestampField.type = 'hidden';
+                        timestampField.name = 'form_submitted_at';
+                        timestampField.value = new Date().toISOString();
+                        this.appendChild(timestampField);
+                        
+                        // Submit the form
+                        this.submit();
+                        
+                    } catch (error) {
+                        console.error('Error in form submission:', error);
+                        // Show user-friendly error message
+                        alert(error.message || 'There was an error submitting the form. Please try again or contact support if the problem persists.');
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = originalButtonText;
+                    }
                 });
             }
         });
 
+        // Function to get URL parameter
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+        
         // Function to show popup
         function showPopup() {
             // Close any open keyboard on mobile
