@@ -177,17 +177,52 @@
             <div class="calendly-inline-widget" data-url="https://calendly.com/kathrynficarra/strategy-session-clone?primary_color=ff0004" style="min-width:320px;height:1400px;overflow:hidden;"></div>
             <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
             <script>
+                // Function to handle successful booking
+                function handleBookingConfirmation() {
+                    console.log('Booking confirmed, will redirect in 10 seconds...');
+                    // Wait 10 seconds then redirect to thank you page
+                    setTimeout(function() {
+                        console.log('Redirecting to thank you page...');
+                        window.location.href = 'thank-you-session.html';
+                    }, 10000); // 10000 milliseconds = 10 seconds
+                }
+
                 // Listen for Calendly events
-                window.addEventListener('message', function(e) {
-                    // Check if the event is from Calendly and is a scheduling event
-                    if (e.data.event && e.data.event === 'calendly.event_scheduled') {
-                        console.log('Booking confirmed, will redirect in 10 seconds...');
-                        // Wait 10 seconds then redirect to thank you page
-                        setTimeout(function() {
-                            window.location.href = 'thank-you-session.html';
-                        }, 10000); // 10000 milliseconds = 10 seconds
+                function onCalendlyEvent(e) {
+                    try {
+                        console.log('Calendly event received:', e.data);
+                        // Check if the event is from Calendly and is a scheduling event
+                        if (e.origin === 'https://calendly.com' && e.data.event && e.data.event === 'calendly.event_scheduled') {
+                            handleBookingConfirmation();
+                        }
+                    } catch (error) {
+                        console.error('Error processing Calendly event:', error);
                     }
+                }
+
+                // Initialize Calendly event listener
+                window.addEventListener('message', onCalendlyEvent);
+
+                // Also listen for the Calendly init event
+                document.addEventListener('DOMContentLoaded', function() {
+                    // For direct Calendly button clicks if needed
+                    document.body.addEventListener('click', function(e) {
+                        if (e.target.closest('[data-calendly-role="close"]') || 
+                            e.target.closest('[data-calendly-role="close-button"]')) {
+                            console.log('Calendly modal closed');
+                        }
+                    });
                 });
+
+                // Fallback: Also check for Calendly's global object
+                function checkCalendlyGlobal() {
+                    if (window.Calendly && window.Calendly.initPopupWidget) {
+                        console.log('Calendly widget initialized');
+                    } else {
+                        setTimeout(checkCalendlyGlobal, 500);
+                    }
+                }
+                checkCalendlyGlobal();
             </script>
             <!-- Calendly inline widget end -->
             
