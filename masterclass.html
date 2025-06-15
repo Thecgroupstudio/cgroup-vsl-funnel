@@ -841,16 +841,19 @@
                 // TODO: Add Meta Pixel 'Lead' event code
                 // TODO: Add Google Ads 'Opt-In' event code
                 
-                // Add email and name to calendar link if available
+                // Add email and name to booking link if available
                 const urlParams = new URLSearchParams(window.location.search);
                 const email = urlParams.get('email');
                 const name = urlParams.get('name');
                 
                 if (email || name) {
-                    const calendarLink = new URL('calendar.html', window.location.href);
-                    if (email) calendarLink.searchParams.append('email', email);
-                    if (name) calendarLink.searchParams.append('name', name);
-                    document.getElementById('book-call-btn').href = calendarLink.toString();
+                    const bookingLink = new URL('booking-strategy-session.html', window.location.href);
+                    if (email) bookingLink.searchParams.append('email', email);
+                    if (name) bookingLink.searchParams.append('name', name);
+                    const bookCallBtn = document.getElementById('book-call-btn');
+                    if (bookCallBtn) {
+                        bookCallBtn.href = bookingLink.toString();
+                    }
                 }
             });
         }
