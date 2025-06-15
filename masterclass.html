@@ -254,7 +254,7 @@
                 <input type="hidden" name="utm_term" id="utm_term">
                 <input type="hidden" name="utm_content" id="utm_content">
                 <!-- Flodesk Segment ID -->
-                <input type="hidden" name="flodesk_segment" value="684ed11935be6c5de9662bd8">
+                <input type="hidden" name="flodesk_segment" value="684be75d6b21c78b38dfca5b">
                 <p style="font-size: 0.9rem; color: #666; margin-bottom: 5px; text-align: center; line-height: 1.4;">
                     Secure your spot for the EXECUTIVE PRESENCE PROGRAM
                 </p>
@@ -380,7 +380,7 @@
             
             <!-- CTA Button for Popup Form -->
             <div style="text-align: center; padding: 20px 0 0 0; background: #fff; display: block;">
-                <a href="booking-strategy-session.html" class="cta-button" style="padding: 16px 40px; font-size: 1.2rem; font-weight: 600; color: white; background: linear-gradient(90deg, #4169e1, #ff0004); border: none; border-radius: 4px; cursor: pointer; box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3); transition: all 0.3s ease 0s; display: inline-block; text-decoration: none; line-height: normal;">BOOK YOUR STRATEGY SESSION &rarr;</a>
+                <button onclick="showPopup()" class="cta-button" style="padding: 16px 40px; font-size: 1.2rem; font-weight: 600; color: white; background: linear-gradient(90deg, #4169e1, #ff0004); border: none; border-radius: 4px; cursor: pointer; box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3); transition: all 0.3s ease 0s; display: inline-block; text-decoration: none; line-height: normal;">BOOK YOUR STRATEGY SESSION &rarr;</button>
                 <p style="color: #666; margin-top: 10px; font-size: 0.9rem; margin-bottom: 5px; line-height: 1.6; letter-spacing: 0.01em;">
                     Executive Presence Program<br><span style="color: #4169e1; font-weight: 600;">Book your 1 on 1 Strategy Session</span>
                 </p>
@@ -609,8 +609,13 @@
                         timestampField.value = new Date().toISOString();
                         this.appendChild(timestampField);
                         
-                        // Submit the form
-                        this.submit();
+                        // Redirect to booking page with form data
+                        const formDataObj = {};
+                        formData.forEach((value, key) => {
+                            formDataObj[key] = value;
+                        });
+                        const queryString = new URLSearchParams(formDataObj).toString();
+                        window.location.href = `booking-strategy-session.html?${queryString}`;
                         
                     } catch (error) {
                         console.error('Error in form submission:', error);
@@ -657,6 +662,167 @@
             document.getElementById('popupOverlay').style.display = 'none';
             document.getElementById('floatingOptin').style.display = 'none';
             document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+        
+        // Add or update subscriber and add to segment in a single request
+        async function addToSegment(email, segmentId) {
+            const logs = [];
+            const log = (message, isError = false) => {
+                const timestamp = new Date().toISOString();
+                const logEntry = `[${timestamp}] ${isError ? '❌ ERROR: ' : ''}${message}`;
+                console.log(logEntry);
+                logs.push(logEntry);
+            };
+
+            try {
+                log(`Starting to add/update subscriber ${email} and add to segment ${segmentId}`);
+
+                // First retrieve the existing subscriber to get their current data
+                log('Retrieving existing subscriber data...');
+                const existingUrl = `https://api.flodesk.com/v1/subscribers/${encodeURIComponent(email)}`;
+                log(`Existing subscriber URL: ${existingUrl}`);
+
+                const existingResponse = await fetch(existingUrl, {
+                    headers: {
+                        'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                        'User-Agent': 'ExecutivePresenceMasterclass/1.0'
+                    }
+                });
+
+                const existingResult = await existingResponse.json().catch(e => ({ error: e.message }));
+                log(`Existing subscriber status: ${existingResponse.status} ${existingResponse.statusText}`);
+                log(`Existing subscriber response: ${JSON.stringify(existingResult, null, 2)}`);
+
+                let subscriberData;
+                if (existingResponse.ok) {
+                    subscriberData = existingResult;
+                    log('✅ Found existing subscriber data');
+                    log(`Existing subscriber ID: ${subscriberData.id}`);
+                    log(`Existing segments: ${JSON.stringify(subscriberData.segments || [], null, 2)}`);
+                    
+                    // For existing subscriber, use PUT to update
+                    const updateUrl = `https://api.flodesk.com/v1/subscribers/${encodeURIComponent(email)}`;
+                    log(`Making PUT request to: ${updateUrl}`);
+                    log(`Request body: ${JSON.stringify(subscriberData, null, 2)}`);
+
+                    const response = await fetch(updateUrl, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                            'User-Agent': 'ExecutivePresenceMasterclass/1.0'
+                        },
+                        body: JSON.stringify(subscriberData)
+                    });
+
+                    const result = await response.json().catch(e => ({ error: e.message }));
+                    log(`Update Status: ${response.status} ${response.statusText}`);
+                    log(`Update Response: ${JSON.stringify(result, null, 2)}`);
+
+                    if (!response.ok) {
+                        throw new Error(`Failed to update subscriber: ${JSON.stringify(result)}`);
+                    }
+
+                    log('✅ Successfully updated existing subscriber with segment');
+                    return { 
+                        success: true,
+                        segmentId: segmentId,
+                        result: result,
+                        logs: logs
+                    };
+                } else {
+                    // If subscriber doesn't exist, create new data
+                    log('❌ Subscriber not found, creating new data');
+                    subscriberData = {
+                        email: email,
+                        status: 'active',
+                        first_name: 'New',
+                        last_name: 'Subscriber',
+                        source: 'masterclass',
+                        custom_fields: {
+                            'Signup Page': 'Executive Presence Masterclass',
+                            'Lead Source': 'Masterclass Registration'
+                        },
+                        optin_timestamp: new Date().toISOString()
+                    };
+                    log('Creating new subscriber data');
+                    log(JSON.stringify(subscriberData, null, 2));
+
+                    // Make the create request without segments first
+                    const createUrl = 'https://api.flodesk.com/v1/subscribers';
+                    log(`Making POST request to: ${createUrl}`);
+                    log(`Request body: ${JSON.stringify(subscriberData, null, 2)}`);
+
+                    const createResponse = await fetch(createUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                            'User-Agent': 'ExecutivePresenceMasterclass/1.0'
+                        },
+                        body: JSON.stringify(subscriberData)
+                    });
+
+                    const createResult = await createResponse.json().catch(e => ({ error: e.message }));
+                    log(`Create Status: ${createResponse.status} ${createResponse.statusText}`);
+                    log(`Create Response: ${JSON.stringify(createResult, null, 2)}`);
+
+                    if (!createResponse.ok) {
+                        throw new Error(`Failed to create subscriber: ${JSON.stringify(createResult)}`);
+                    }
+
+                    log('✅ Successfully created new subscriber');
+                    log('Now adding subscriber to segment...');
+
+                    // Now add the subscriber to the segment using the subscriber ID from the create response
+                    const subscriberId = createResult.id;
+                    const segmentUrl = `https://api.flodesk.com/v1/subscribers/${subscriberId}/segments`;
+                    log(`Making POST request to: ${segmentUrl}`);
+                    log(`Segment ID to add: ${segmentId}`);
+
+                    const segmentResponse = await fetch(segmentUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                            'User-Agent': 'ExecutivePresenceMasterclass/1.0'
+                        },
+                        body: JSON.stringify({
+                            segment_ids: [segmentId]  // Wrap in an object with segment_ids array
+                        })
+                    });
+
+                    const segmentResult = await segmentResponse.json().catch(e => ({
+                        error: e.message,
+                        status: segmentResponse.status,
+                        statusText: segmentResponse.statusText
+                    }));
+
+                    log(`Add to Segment Status: ${segmentResponse.status} ${segmentResponse.statusText}`);
+                    log(`Add to Segment Response: ${JSON.stringify(segmentResult, null, 2)}`);
+
+                    if (!segmentResponse.ok) {
+                        throw new Error(`Failed to add subscriber to segment: ${JSON.stringify(segmentResult)}`);
+                    }
+
+                    log('✅ Successfully added subscriber to segment');
+                    return { 
+                        success: true,
+                        segmentId: segmentId,
+                        result: segmentResult,
+                        logs: logs
+                    };
+                }
+
+            } catch (error) {
+                log(`❌ ERROR: ${error.message}`, true);
+                return { 
+                    success: false,
+                    error: error.message,
+                    segmentId: segmentId,
+                    logs: logs
+                };
+            }
         }
         
         // Prevent clicks on the form from closing the popup
