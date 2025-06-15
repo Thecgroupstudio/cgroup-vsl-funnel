@@ -574,13 +574,31 @@
                         
                         // Get form data
                         const formData = new FormData(this);
+                        const formProps = Object.fromEntries(formData);
                         const firstName = formData.get('name');
                         const email = formData.get('email');
+                        const flodeskSegment = formData.get('flodesk_segment');
+                        
+                        // Add additional data for n8n
+                        formProps.page_url = window.location.href;
+                        formProps.timestamp = new Date().toISOString();
+                        formProps.form_id = 'floating';
+                        formProps.requestId = Date.now() + Math.random().toString(36).substring(2);
                         
                         // Prepare UTM parameters
                         const utmSource = getUrlParameter('utm_source') || 'masterclass-funnel';
                         const utmMedium = getUrlParameter('utm_medium') || 'organic';
                         const utmCampaign = getUrlParameter('utm_campaign') || 'executive-presence-masterclass';
+                        
+                        // Set UTM parameters in form data if not present
+                        if (!formProps.utm_source) formProps.utm_source = utmSource;
+                        if (!formProps.utm_medium) formProps.utm_medium = utmMedium;
+                        if (!formProps.utm_campaign) formProps.utm_campaign = utmCampaign;
+                        
+                        // Store UTM parameters in localStorage
+                        localStorage.setItem('utm_source', formProps.utm_source);
+                        localStorage.setItem('utm_medium', formProps.utm_medium);
+                        localStorage.setItem('utm_campaign', formProps.utm_campaign);
                         
                         // Track in analytics
                         if (window.fbq) {
@@ -590,8 +608,21 @@
                             window.lintrk('track', { conversion_id: 1234567 });
                         }
                         
+                        // Send data to n8n webhook in the background
+                        const n8nPromise = fetch('https://cgroup.app.n8n.cloud/webhook/3e216d40-d18c-44cb-8a70-122a4acaa275', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                                'Pragma': 'no-cache',
+                                'Expires': '0'
+                            },
+                            body: JSON.stringify(formProps)
+                        }).catch(error => {
+                            console.error('Error sending to n8n:', error);
+                        });
+                        
                         // Add to Flodesk segment
-                        const flodeskSegment = formData.get('flodesk_segment');
                         if (flodeskSegment) {
                             const result = await addToSegment(email, flodeskSegment);
                             if (!result.success) {
@@ -602,19 +633,14 @@
                             console.log('Subscription successful:', result);
                         }
                         
+                        // Wait for n8n to complete (but don't block on it)
+                        await n8nPromise;
+                        
                         // Add form submission timestamp
-                        const timestampField = document.createElement('input');
-                        timestampField.type = 'hidden';
-                        timestampField.name = 'form_submitted_at';
-                        timestampField.value = new Date().toISOString();
-                        this.appendChild(timestampField);
+                        formProps.form_submitted_at = new Date().toISOString();
                         
                         // Redirect to booking page with form data
-                        const formDataObj = {};
-                        formData.forEach((value, key) => {
-                            formDataObj[key] = value;
-                        });
-                        const queryString = new URLSearchParams(formDataObj).toString();
+                        const queryString = new URLSearchParams(formProps).toString();
                         window.location.href = `booking-strategy-session.html?${queryString}`;
                         
                     } catch (error) {
