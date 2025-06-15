@@ -159,8 +159,8 @@ function handleFormSubmit(form, formId) {
                 if (value) params.append(param, value);
             });
             
-            // Redirect to calendar page with all parameters
-            window.location.href = 'calendar.html?' + params.toString();
+            // Redirect to booking page with all parameters
+            window.location.href = 'booking-strategy-session.html?' + params.toString();
         }, 1500);
     });
 }
