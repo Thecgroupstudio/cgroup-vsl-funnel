@@ -400,6 +400,7 @@
             </div>
             <form id="vsl-optin-form-floating" class="optin-form">
                 <input type="hidden" name="source" value="floating">
+                <input type="hidden" name="flodesk_segment" id="flodesk_segment" value="684ee046d2653f764ae9be85">
                 <p style="font-size: 0.9rem; color: #666; margin-bottom: 5px; text-align: center; line-height: 1.4;">
                     Secure your spot for the Executive Presence Immersion
                 </p>
@@ -686,7 +687,7 @@
             // Handle form submission
             const form = document.getElementById('vsl-optin-form-floating');
             if (form) {
-                form.addEventListener('submit', function(e) {
+                form.addEventListener('submit', async function(e) {
                     e.preventDefault();
                     
                     const submitButton = form.querySelector('button[type="submit"]');
@@ -699,15 +700,31 @@
                         
                         // Get form data
                         const formData = new FormData(form);
-                        const formProps = {};
-                        formData.forEach((value, key) => {
-                            formProps[key] = value;
-                        });
+                        const formProps = Object.fromEntries(formData);
+                        const firstName = formData.get('name');
+                        const email = formData.get('email');
+                        const flodeskSegment = formData.get('flodesk_segment');
                         
-                        // Add additional tracking data
+                        // Add additional data for n8n
                         formProps.page_url = window.location.href;
                         formProps.timestamp = new Date().toISOString();
                         formProps.form_id = 'floating';
+                        formProps.requestId = Date.now() + Math.random().toString(36).substring(2);
+                        
+                        // Prepare UTM parameters
+                        const utmSource = getUrlParameter('utm_source') || 'masterclass-funnel';
+                        const utmMedium = getUrlParameter('utm_medium') || 'organic';
+                        const utmCampaign = getUrlParameter('utm_campaign') || 'executive-presence-immersion';
+                        
+                        // Set UTM parameters in form data if not present
+                        if (!formProps.utm_source) formProps.utm_source = utmSource;
+                        if (!formProps.utm_medium) formProps.utm_medium = utmMedium;
+                        if (!formProps.utm_campaign) formProps.utm_campaign = utmCampaign;
+                        
+                        // Store UTM parameters in localStorage
+                        localStorage.setItem('utm_source', formProps.utm_source);
+                        localStorage.setItem('utm_medium', formProps.utm_medium);
+                        localStorage.setItem('utm_campaign', formProps.utm_campaign);
                         
                         // Track in analytics
                         if (window.fbq) {
@@ -717,8 +734,39 @@
                             window.lintrk('track', { conversion_id: 1234567 });
                         }
                         
+                        // Send data to n8n webhook in the background
+                        const n8nPromise = fetch('https://cgroup.app.n8n.cloud/webhook/3e216d40-d18c-44cb-8a70-122a4acaa275', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                                'Pragma': 'no-cache',
+                                'Expires': '0'
+                            },
+                            body: JSON.stringify(formProps)
+                        }).catch(error => {
+                            console.error('Error sending to n8n:', error);
+                        });
+                        
+                        // Add to Flodesk segment
+                        if (flodeskSegment) {
+                            const result = await addToSegment(email, flodeskSegment);
+                            if (!result.success) {
+                                console.error('Error in addToSegment:', result.error);
+                                console.log('API Logs:', result.logs);
+                                throw new Error('Failed to process your submission. Please try again.');
+                            }
+                            console.log('Subscription successful:', result);
+                        }
+                        
+                        // Wait for n8n to complete (but don't block on it)
+                        await n8nPromise;
+                        
                         // Add form submission timestamp
                         formProps.form_submitted_at = new Date().toISOString();
+                        
+                        // Add Flodesk segment ID to form data
+                        formProps.flodesk_segment = '684ee046d2653f764ae9be85';
                         
                         // Build query string for redirect
                         const queryParams = new URLSearchParams();
@@ -739,6 +787,167 @@
                 });
             }
         }); // Close the DOMContentLoaded event listener
+        
+        // Add or update subscriber and add to segment in a single request
+        async function addToSegment(email, segmentId) {
+            const logs = [];
+            const log = (message, isError = false) => {
+                const timestamp = new Date().toISOString();
+                const logEntry = `[${timestamp}] ${isError ? '❌ ERROR: ' : ''}${message}`;
+                console.log(logEntry);
+                logs.push(logEntry);
+            };
+
+            try {
+                log(`Starting to add/update subscriber ${email} and add to segment ${segmentId}`);
+
+                // First retrieve the existing subscriber to get their current data
+                log('Retrieving existing subscriber data...');
+                const existingUrl = `https://api.flodesk.com/v1/subscribers/${encodeURIComponent(email)}`;
+                log(`Existing subscriber URL: ${existingUrl}`);
+
+                const existingResponse = await fetch(existingUrl, {
+                    headers: {
+                        'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                        'User-Agent': 'ExecutivePresenceImmersion/1.0'
+                    }
+                });
+
+                const existingResult = await existingResponse.json().catch(e => ({ error: e.message }));
+                log(`Existing subscriber status: ${existingResponse.status} ${existingResponse.statusText}`);
+                log(`Existing subscriber response: ${JSON.stringify(existingResult, null, 2)}`);
+
+                let subscriberData;
+                if (existingResponse.ok) {
+                    subscriberData = existingResult;
+                    log('✅ Found existing subscriber data');
+                    log(`Existing subscriber ID: ${subscriberData.id}`);
+                    log(`Existing segments: ${JSON.stringify(subscriberData.segments || [], null, 2)}`);
+                    
+                    // For existing subscriber, use PUT to update
+                    const updateUrl = `https://api.flodesk.com/v1/subscribers/${encodeURIComponent(email)}`;
+                    log(`Making PUT request to: ${updateUrl}`);
+                    log(`Request body: ${JSON.stringify(subscriberData, null, 2)}`);
+
+                    const response = await fetch(updateUrl, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                            'User-Agent': 'ExecutivePresenceImmersion/1.0'
+                        },
+                        body: JSON.stringify(subscriberData)
+                    });
+
+                    const result = await response.json().catch(e => ({ error: e.message }));
+                    log(`Update Status: ${response.status} ${response.statusText}`);
+                    log(`Update Response: ${JSON.stringify(result, null, 2)}`);
+
+                    if (!response.ok) {
+                        throw new Error(`Failed to update subscriber: ${JSON.stringify(result)}`);
+                    }
+
+                    log('✅ Successfully updated existing subscriber with segment');
+                    return { 
+                        success: true,
+                        segmentId: segmentId,
+                        result: result,
+                        logs: logs
+                    };
+                } else {
+                    // If subscriber doesn't exist, create new data
+                    log('❌ Subscriber not found, creating new data');
+                    subscriberData = {
+                        email: email,
+                        status: 'active',
+                        first_name: 'New',
+                        last_name: 'Subscriber',
+                        source: 'executive-immersion',
+                        custom_fields: {
+                            'Signup Page': 'Executive Presence Immersion',
+                            'Lead Source': 'Immersion Registration'
+                        },
+                        optin_timestamp: new Date().toISOString()
+                    };
+                    log('Creating new subscriber data');
+                    log(JSON.stringify(subscriberData, null, 2));
+
+                    // Make the create request without segments first
+                    const createUrl = 'https://api.flodesk.com/v1/subscribers';
+                    log(`Making POST request to: ${createUrl}`);
+                    log(`Request body: ${JSON.stringify(subscriberData, null, 2)}`);
+
+                    const createResponse = await fetch(createUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                            'User-Agent': 'ExecutivePresenceImmersion/1.0'
+                        },
+                        body: JSON.stringify(subscriberData)
+                    });
+
+                    const createResult = await createResponse.json().catch(e => ({ error: e.message }));
+                    log(`Create Status: ${createResponse.status} ${createResponse.statusText}`);
+                    log(`Create Response: ${JSON.stringify(createResult, null, 2)}`);
+
+                    if (!createResponse.ok) {
+                        throw new Error(`Failed to create subscriber: ${JSON.stringify(createResult)}`);
+                    }
+
+                    log('✅ Successfully created new subscriber');
+                    log('Now adding subscriber to segment...');
+
+                    // Now add the subscriber to the segment using the subscriber ID from the create response
+                    const subscriberId = createResult.id;
+                    const segmentUrl = `https://api.flodesk.com/v1/subscribers/${subscriberId}/segments`;
+                    log(`Making POST request to: ${segmentUrl}`);
+                    log(`Segment ID to add: ${segmentId}`);
+
+                    const segmentResponse = await fetch(segmentUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Basic ' + btoa('fd_key_a5671a146595472fb913e1ef30126273.HLXll0SLiOy4OEnKoLQM6zujCjbxVlXpGWxcQHKUKC9ecFHBrE72BtMEYRa60MZvu5vj0hJqeTKsEEHbPDi4VdSSXxSsQ6lZM1byw0EHymimmm2fH1KfGLHbUcYXNMB0ijLLMij3ZiPrdFJkth0xlLF9Hhlj5Whpgcua1SQnw7UdNW0Gp2WqPU53Ryn185DM:'),
+                            'User-Agent': 'ExecutivePresenceImmersion/1.0'
+                        },
+                        body: JSON.stringify({
+                            segment_ids: [segmentId]  // Wrap in an object with segment_ids array
+                        })
+                    });
+
+                    const segmentResult = await segmentResponse.json().catch(e => ({
+                        error: e.message,
+                        status: segmentResponse.status,
+                        statusText: segmentResponse.statusText
+                    }));
+
+                    log(`Add to Segment Status: ${segmentResponse.status} ${segmentResponse.statusText}`);
+                    log(`Add to Segment Response: ${JSON.stringify(segmentResult, null, 2)}`);
+
+                    if (!segmentResponse.ok) {
+                        throw new Error(`Failed to add subscriber to segment: ${JSON.stringify(segmentResult)}`);
+                    }
+
+                    log('✅ Successfully added subscriber to segment');
+                    return { 
+                        success: true,
+                        segmentId: segmentId,
+                        result: segmentResult,
+                        logs: logs
+                    };
+                }
+
+            } catch (error) {
+                log(`❌ ERROR: ${error.message}`, true);
+                return { 
+                    success: false,
+                    error: error.message,
+                    segmentId: segmentId,
+                    logs: logs
+                };
+            }
+        }
 
         // Function to show popup
         function showPopup() {
