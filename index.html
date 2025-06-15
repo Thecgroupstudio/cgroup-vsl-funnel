@@ -651,20 +651,94 @@
     
 
     <script>
-        // Add UTM parameters to forms
+        // Function to get URL parameter
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Add UTM parameters to forms and handle form submission
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
             
+            // Set UTM parameters in form fields and localStorage
             utmParams.forEach(param => {
-                const value = urlParams.get(param);
+                const value = urlParams.get(param) || localStorage.getItem(param) || '';
                 if (value) {
+                    // Set in form fields
                     document.querySelectorAll(`input[name="${param}"]`).forEach(input => {
                         input.value = value;
                     });
+                    // Store in localStorage
+                    localStorage.setItem(param, value);
                 }
             });
-        });
+            
+            // Set default UTM values if not present
+            if (!urlParams.get('utm_source') && !localStorage.getItem('utm_source')) {
+                const sourceField = document.querySelector('input[name="utm_source"]');
+                if (sourceField) sourceField.value = 'masterclass-funnel';
+            }
+            
+            // Handle form submission
+            const form = document.getElementById('vsl-optin-form-floating');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const submitButton = form.querySelector('button[type="submit"]');
+                    const originalButtonText = submitButton.innerHTML;
+                    
+                    try {
+                        // Show loading state
+                        submitButton.disabled = true;
+                        submitButton.innerHTML = 'Sending...';
+                        
+                        // Get form data
+                        const formData = new FormData(form);
+                        const formProps = {};
+                        formData.forEach((value, key) => {
+                            formProps[key] = value;
+                        });
+                        
+                        // Add additional tracking data
+                        formProps.page_url = window.location.href;
+                        formProps.timestamp = new Date().toISOString();
+                        formProps.form_id = 'floating';
+                        
+                        // Track in analytics
+                        if (window.fbq) {
+                            fbq('track', 'Lead');
+                        }
+                        if (window.lintrk) {
+                            window.lintrk('track', { conversion_id: 1234567 });
+                        }
+                        
+                        // Add form submission timestamp
+                        formProps.form_submitted_at = new Date().toISOString();
+                        
+                        // Build query string for redirect
+                        const queryParams = new URLSearchParams();
+                        Object.entries(formProps).forEach(([key, value]) => {
+                            if (value) queryParams.append(key, value);
+                        });
+                        
+                        // Redirect to booking page with form data
+                        window.location.href = `booking-strategy-session.html?${queryParams.toString()}`;
+                        
+                    } catch (error) {
+                        console.error('Error in form submission:', error);
+                        // Show user-friendly error message
+                        alert('There was an error processing your submission. Please try again or contact support if the problem persists.');
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = originalButtonText;
+                    }
+                });
+            }
+        }); // Close the DOMContentLoaded event listener
 
         // Function to show popup
         function showPopup() {
