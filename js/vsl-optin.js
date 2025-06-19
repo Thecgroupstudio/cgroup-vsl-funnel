@@ -43,18 +43,7 @@ function getReferrerInfo() {
 
 // Initialize form handlers when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Handle floating form
-    const floatingForm = document.getElementById('vsl-optin-form-floating');
-    if (floatingForm) {
-        // No form submission handler
-        handleFormSubmit(floatingForm, 'floating');
-    }
-    
-    // Handle inline form
-    const inlineForm = document.getElementById('vsl-optin-form-inline');
-    if (inlineForm) {
-        handleFormSubmit(inlineForm, 'inline');
-    }
+    // Form submission is now handled in the main HTML file
     
     // Add UTM parameters to forms
     const urlParams = new URLSearchParams(window.location.search);
