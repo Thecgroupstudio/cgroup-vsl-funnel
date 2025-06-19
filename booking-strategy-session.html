@@ -3,46 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Permissions-Policy" content="payment=()">
     <title>Book Your 1 on 1 Strategy Session - The C Group Studio</title>
     <link rel="icon" href="images/cgroup-logo.webp">
     
     <!-- Meta Pixel Code -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1607445923276301');
-    
-    // Get UTM parameters only
-    const url = new URL(window.location.href);
-    const utmParams = {
-        utm_source: url.searchParams.get('utm_source'),
-        utm_medium: url.searchParams.get('utm_medium'),
-        utm_term: url.searchParams.get('utm_term'),
-        utm_content: url.searchParams.get('utm_content')
-    };
-    
-    // Track PageView with UTM parameters only
-    fbq('track', 'PageView', {
-        utm_source: utmParams.utm_source,
-        utm_campaign: utmParams.utm_campaign,
-        utm_term: utmParams.utm_term,
-        utm_content: utmParams.utm_content
-    });
-    
-    // Track CompleteRegistration event with UTM parameters
-    fbq('track', 'CompleteRegistration', {
-        utm_source: utmParams.utm_source,
-        utm_medium: utmParams.utm_medium,
-        utm_campaign: utmParams.utm_campaign,
-        utm_term: utmParams.utm_term,
-        utm_content: utmParams.utm_content
-    });
+    // Check if fbq is already defined to prevent duplicate initialization
+    if (!window.fbq) {
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        
+        // Initialize with a random ID to prevent conflicts
+        fbq('init', '1607445923276301');
+        
+        // Only track if not already tracked
+        if (!window.fbTracked) {
+            // Get UTM parameters only
+            const url = new URL(window.location.href);
+            const utmParams = {
+                utm_source: url.searchParams.get('utm_source'),
+                utm_medium: url.searchParams.get('utm_medium'),
+                utm_term: url.searchParams.get('utm_term'),
+                utm_content: url.searchParams.get('utm_content')
+            };
+            
+            // Track PageView with UTM parameters only
+            fbq('track', 'PageView', {
+                utm_source: utmParams.utm_source,
+                utm_medium: utmParams.utm_medium,
+                utm_campaign: utmParams.utm_campaign,
+                utm_term: utmParams.utm_term,
+                utm_content: utmParams.utm_content
+            });
+            
+            // Mark as tracked
+            window.fbTracked = true;
+        }
+    }
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1607445923276301&ev=PageView&noscript=1"
@@ -223,13 +227,24 @@
                 // Listen for Calendly events
                 function onCalendlyEvent(e) {
                     try {
-                        console.log('Calendly event received:', e.data);
-                        // Check if the event is from Calendly and is a scheduling event
-                        if (e.origin === 'https://calendly.com' && e.data.event && e.data.event === 'calendly.event_scheduled') {
-                            handleBookingConfirmation();
+                        // Only process specific events to reduce console spam
+                        if (e.origin === 'https://calendly.com' && e.data && e.data.event) {
+                            // Only log non-page_height events to reduce noise
+                            if (e.data.event !== 'calendly.page_height') {
+                                console.log('Calendly event received:', e.data);
+                            }
+                            
+                            // Handle booking confirmation
+                            if (e.data.event === 'calendly.event_scheduled') {
+                                handleBookingConfirmation();
+                            }
                         }
                     } catch (error) {
-                        console.error('Error processing Calendly event:', error);
+                        // Only log actual errors, not expected issues
+                        if (!error.message.includes('Cannot read properties of null') && 
+                            !error.message.includes('is not a function')) {
+                            console.error('Error processing Calendly event:', error);
+                        }
                     }
                 }
 
