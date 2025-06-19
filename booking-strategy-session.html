@@ -62,6 +62,32 @@
     </script>
     
     <style>
+        /* Base layout */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .container {
+            flex: 1 0 auto;
+            width: 100%;
+            max-width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        
+        main {
+            padding-bottom: 60px;
+            width: 100%;
+        }
+        
         /* Mobile optimizations */
         @media (max-width: 768px) {
             .calendly-inline-widget {
@@ -158,22 +184,30 @@
 </head>
 <body>
     <div class="container">
-        <div class="header-container">
-            <div class="logo-container">
-                <img src="images/cgroup-logo.webp" alt="The CGroup Studio" style="width: 120px; height: auto;">
+        <header>
+            <div class="header-container">
+                <div class="logo-container">
+                    <img src="images/cgroup-logo.webp" alt="The CGroup Studio" style="width: 120px; height: auto;">
+                </div>
             </div>
-        <header style="text-align: center; padding-top: 20px;">
+            <div class="hero-text" style="text-align: center; padding: 40px 20px 20px; background: #fff;">
+                <h1 style="font-size: 2rem; margin: 0 0 10px 0; color: #000; line-height: 1.3;">NEXT STEP: BOOK YOUR <span style="color: #4169e1;">1 ON 1 STRATEGY SESSION</span></h1>
+                <p style="color: #ff0004; font-weight: 600; margin: 0 0 10px 0; font-size: 1.2rem;">UNLOCK YOUR LEADERSHIP POTENTIAL WITH A PERSONALIZED STRATEGY</p>
+                <p style="margin: 0 auto; max-width: 700px; color: #333; font-size: 1.1rem;">Select a convenient time below for your personal 30-minute strategy session.</p>
+            </div>
         </header>
 
-        <main style="max-width: 1000px; margin: 0 auto; padding: 0 20px; margin-top: 10px;">
-            <div class="hero-section" style="padding: 0; margin-bottom: 0; text-align: center;">
-                <h1 style="font-size: 1.8rem; margin-bottom: 5px;">NEXT STEP: BOOK YOUR <span style="color: #4169e1;">1 ON 1 STRATEGY SESSION</span></h1>
-                <p style="color: #ff0004; font-weight: 600; margin: 5px 0 10px; font-size: 1.1rem;">UNLOCK YOUR LEADERSHIP POTENTIAL WITH A PERSONALIZED STRATEGY</p>
-                <p style="margin: 0 auto 15px; max-width: 700px;">Select a convenient time below for your personal 30-minute strategy session.</p>
+        <main style="max-width: 1200px; margin: 0 auto; padding: 20px; padding-bottom: 60px;">
+            <!-- Calendly inline widget begin -->
+            <div style="background: #fff; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); padding: 20px; margin: 20px 0 40px 0;">
+                <div class="calendly-inline-widget" data-url="https://calendly.com/kathrynficarra/strategy-session-clone?primary_color=ff0004" style="min-width:320px;height:1000px;"></div>
             </div>
             
-            <!-- Calendly inline widget begin -->
-            <div class="calendly-inline-widget" data-url="https://calendly.com/kathrynficarra/strategy-session-clone?primary_color=ff0004" style="min-width:320px;height:1400px;overflow:hidden;"></div>
+            <div style="text-align: center; margin: 40px 0 20px;">
+                <p style="color: #666; font-size: 1rem; max-width: 800px; margin: 0 auto 30px; line-height: 1.6;">
+                    Your information is secure. We respect your privacy and will never share your details with third parties.
+                </p>
+            </div>
             <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
             <script>
                 // Function to handle successful booking
@@ -224,43 +258,7 @@
                 checkCalendlyGlobal();
             </script>
             <!-- Calendly inline widget end -->
-            
-            <!-- Trust Badges Section -->
-            <div style="text-align: center; margin: 25px auto 40px; padding-top: 0;">
-                <p style="font-size: 0.8rem; color: #777; letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase; font-weight: 600;">TRUSTED BY EXECUTIVES FROM</p>
-                <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; align-items: center; max-width: 800px; margin: 0 auto;">
-                    <img src="images/client-company-logo.avif" alt="Trusted Companies" style="max-width: 100%; height: auto;">
-                </div>
-            </div>
-            
-            <div style="margin: 40px auto 60px;">
-                <div style="background-color: #f8f9fa; border-left: 4px solid #4169e1; padding: 20px 25px; margin: 20px auto; max-width: 700px; border-radius: 0 8px 8px 0;">
-                    <h3 style="margin-top: 0; color: #333; font-size: 1.2rem; text-align: center; text-transform: uppercase;">WHAT TO EXPECT IN YOUR 1 ON 1 STRATEGY SESSION:</h3>
-                    <ul style="margin: 15px 0 0 0; padding: 0; list-style-type: none;">
-                        <li style="margin-bottom: 12px; display: flex; align-items: flex-start;">
-                            <span style="margin-right: 10px; font-weight: bold;">✓</span> A personalized assessment of your leadership goals and challenges
-                        </li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: flex-start;">
-                            <span style="margin-right: 10px; font-weight: bold;">✓</span> Customized strategies to enhance your executive presence
-                        </li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: flex-start;">
-                            <span style="margin-right: 10px; font-weight: bold;">✓</span> Actionable insights to elevate your professional impact immediately
-                        </li>
-                        <li style="margin-bottom: 12px; display: flex; align-items: flex-start;">
-                            <span style="margin-right: 10px; font-weight: bold;">✓</span> Clear next steps for your leadership development journey
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
 
-            
-            <div style="max-width: 900px; margin: 0 auto;">
-                
-                <div style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: #666;">
-                    <p style="margin: 5px 0;">Your information is secure. We respect your privacy.</p>
-                </div>
-            </div>
         </main>
 
     </div><!-- End of container -->
@@ -331,17 +329,41 @@
     </script>
     <script src="js/opt-in.js"></script>
     
-    <footer style="background: #f8f9fa; padding: 30px 0; margin-top: 40px; border-top: 1px solid #e0e0e0;">
+    <footer style="background: #f8f9fa; padding: 40px 0; border-top: 1px solid #e0e0e0; margin-top: auto;">
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px; text-align: center;">
-            <div style="margin-bottom: 15px;">
-                <img src="images/cgroup-logo.webp" alt="The CGroup Studio" style="max-width: 120px; height: auto;">
+            <!-- Trust Badges Section -->
+            <div style="margin-bottom: 30px;">
+                <p style="font-size: 0.8rem; color: #777; letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase; font-weight: 600;">TRUSTED BY EXECUTIVES FROM</p>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <img src="images/client-company-logo.avif" alt="Trusted Companies" style="max-width: 100%; height: auto;">
+                </div>
             </div>
-            <p style="color: #666; font-size: 0.9rem; margin: 0;">
-                © 2025 The C Group Studio. All rights reserved. | 
-                <a href="#" style="color: #4169e1; text-decoration: none;">Privacy Policy</a> | 
-                <a href="#" style="color: #4169e1; text-decoration: none;">Terms</a> | 
-                <a href="#" style="color: #4169e1; text-decoration: none;">Disclaimer</a>
-            </p>
+            
+            <div style="margin: 30px 0; padding: 20px 0; border-top: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0;">
+                <h3 style="font-size: 1.1rem; color: #333; margin: 0 0 15px 0;">WHAT TO EXPECT IN YOUR 1 ON 1 STRATEGY SESSION:</h3>
+                <ul style="margin: 0; padding: 0; list-style: none; max-width: 700px; margin: 0 auto;">
+                    <li style="margin-bottom: 10px; color: #555; font-size: 0.95rem;">✓ A personalized assessment of your leadership goals and challenges</li>
+                    <li style="margin-bottom: 10px; color: #555; font-size: 0.95rem;">✓ Customized strategies to enhance your executive presence</li>
+                    <li style="margin-bottom: 10px; color: #555; font-size: 0.95rem;">✓ Actionable insights to elevate your professional impact immediately</li>
+                    <li style="color: #555; font-size: 0.95rem;">✓ Clear next steps for your leadership development journey</li>
+                </ul>
+            </div>
+            
+            <div style="margin-top: 25px;">
+                <div style="margin-bottom: 15px;">
+                    <img src="images/cgroup-logo.webp" alt="The CGroup Studio" style="max-width: 100px; height: auto; opacity: 0.8;">
+                </div>
+                <p style="color: #666; font-size: 0.85rem; margin: 10px 0;">
+                    © 2025 The C Group Studio. All rights reserved.
+                </p>
+                <p style="margin: 10px 0 0 0;">
+                    <a href="#" style="color: #4169e1; text-decoration: none; font-size: 0.85rem; margin: 0 10px;">Privacy Policy</a>
+                    <span style="color: #ccc;">•</span>
+                    <a href="#" style="color: #4169e1; text-decoration: none; font-size: 0.85rem; margin: 0 10px;">Terms</a>
+                    <span style="color: #ccc;">•</span>
+                    <a href="#" style="color: #4169e1; text-decoration: none; font-size: 0.85rem; margin: 0 10px;">Disclaimer</a>
+                </p>
+            </div>
         </div>
     </footer>
 </body>
