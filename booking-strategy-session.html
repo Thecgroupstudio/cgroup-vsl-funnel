@@ -55,14 +55,18 @@
     
     <!-- Facebook Pixel Contact Event -->
     <script>
+        // Get UTM parameters from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const utmParams = {
+            utm_source: urlParams.get('utm_source') || '',
+            utm_medium: urlParams.get('utm_medium') || '',
+            utm_campaign: urlParams.get('utm_campaign') || '',
+            utm_term: urlParams.get('utm_term') || '',
+            utm_content: urlParams.get('utm_content') || ''
+        };
+        
         // Track Contact event without sensitive data
-        fbq('track', 'Contact', {
-            utm_source: utmParams.utm_source,
-            utm_medium: utmParams.utm_medium,
-            utm_campaign: utmParams.utm_campaign,
-            utm_term: utmParams.utm_term,
-            utm_content: utmParams.utm_content
-        });
+        fbq('track', 'Contact', utmParams);
     </script>
     
     <style>
