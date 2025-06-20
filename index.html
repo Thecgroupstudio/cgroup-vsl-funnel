@@ -703,6 +703,7 @@
         </main>
     </div>
 
+    <!-- YouTube IFrame API -->
     <script>
         // Load YouTube API
         var tag = document.createElement('script');
@@ -731,62 +732,43 @@
             });
         }
         
-        <!-- YouTube IFrame API -->
-        <script>
-            // Load YouTube API
-            var tag = document.createElement('script');
-            tag.src = "https://www.youtube.com/iframe_api";
-            var firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-            
-            var player;
-            var previewDuration = 10; // Preview duration in seconds
-            
-            function onYouTubeIframeAPIReady() {
-                player = new YT.Player('youtubePlayerDiv', {
-                    videoId: 'wuW7RTCf3Jw',
-                    playerVars: {
-                        'autoplay': 1,
-                        'mute': 1,
-                        'controls': 1,
-                        'modestbranding': 1,
-                        'rel': 0,
-                        'showinfo': 0
-                    },
-                    events: {
-                        'onReady': onPlayerReady,
-                        'onStateChange': onPlayerStateChange
-                    }
-                });
+        function onPlayerReady(event) {
+            console.log('Player ready');
+            // Hide loading indicator when player is ready
+            const videoLoading = document.getElementById('videoLoading');
+            if (videoLoading) {
+                videoLoading.style.display = 'none';
             }
             
-            function onPlayerReady(event) {
-                console.log('Player ready');
-                // Hide loading indicator when player is ready
-                document.getElementById('videoLoading').style.display = 'none';
-                // Player is already set to autoplay from the playerVars
-                
-                // Set timeout to pause video after preview duration
-                setTimeout(function() {
-                    console.log('Preview finished');
-                    if (player) {
-                        player.pauseVideo();
-                        document.getElementById('videoOverlay').style.display = 'block';
+            // Set timeout to pause video after preview duration
+            setTimeout(function() {
+                console.log('Preview finished');
+                if (player) {
+                    player.pauseVideo();
+                    const videoOverlay = document.getElementById('videoOverlay');
+                    if (videoOverlay) {
+                        videoOverlay.style.display = 'block';
                     }
-                }, previewDuration * 1000);
-            }
-            
-            function onPlayerStateChange(event) {
-                console.log('Player state changed:', event.data);
-                // If video ends, show overlay
-                if (event.data === YT.PlayerState.ENDED) {
-                    document.getElementById('videoOverlay').style.display = 'block';
+                }
+            }, previewDuration * 1000);
+        }
+        
+        function onPlayerStateChange(event) {
+            console.log('Player state changed:', event.data);
+            // If video ends, show overlay
+            if (event.data === YT.PlayerState.ENDED) {
+                const videoOverlay = document.getElementById('videoOverlay');
+                if (videoOverlay) {
+                    videoOverlay.style.display = 'block';
                 }
             }
-            
-            // Add click handler to overlay
-            document.addEventListener('DOMContentLoaded', function() {
-                document.getElementById('videoOverlay').addEventListener('click', function() {
+        }
+        
+        // Add click handler to overlay
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoOverlay = document.getElementById('videoOverlay');
+            if (videoOverlay) {
+                videoOverlay.addEventListener('click', function() {
                     console.log('Overlay clicked');
                     this.style.display = 'none';
                     if (player) {
@@ -794,8 +776,9 @@
                         player.playVideo();
                     }
                 });
-            });
-        </script>
+            }
+        });
+    </script>
         
         <!-- CTA Button for Popup Form -->
         <div style="text-align: center; padding: 20px 0 0 0; background: #fff; display: block;">
