@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Your Strategy Call | The C Group</title>
+    <link rel="icon" href="images/cgroup-logo.webp">
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #e53e3e;
+            --light: #f7fafc;
+            --dark: #2d3748;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .logo {
+            max-width: 150px;
+            margin-bottom: 15px;
+        }
+        h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin: 15px 0;
+            font-weight: 700;
+        }
+        .subheadline {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+        .page-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        .booking-section {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 600;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .calendly-inline-widget {
+            min-height: 700px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .booking-details {
+            margin-top: 30px;
+        }
+        .detail-item {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+        .detail-icon {
+            color: var(--accent);
+            margin-right: 15px;
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+        .detail-text {
+            flex: 1;
+        }
+        .detail-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        .detail-desc {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .testimonial-sidebar {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            align-self: flex-start;
+        }
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .testimonial-text:before {
+            content: '"';
+            font-size: 60px;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            color: rgba(255,255,255,0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #4a5568;
+            margin-right: 15px;
+            overflow: hidden;
+        }
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .author-info h4 {
+            margin: 0 0 5px 0;
+            font-size: 1.1rem;
+        }
+        .author-role {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        .guarantee-badge {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 10px 20px;
+            display: inline-flex;
+            align-items: center;
+            margin-top: 25px;
+            font-size: 0.9rem;
+        }
+        .guarantee-badge i {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        @media (max-width: 900px) {
+            .page-content {
+                grid-template-columns: 1fr;
+            }
+            .testimonial-sidebar {
+                order: -1;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .subheadline {
+                font-size: 1.1rem;
+            }
+            .booking-section, .testimonial-sidebar {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="images/cgroup-logo.webp" alt="The C Group" class="logo">
+            <h1>Schedule Your Strategy Call</h1>
+            <p class="subheadline">Select a time that works best for you</p>
+        </div>
+
+        <div class="page-content">
+            <div class="booking-section">
+                <h2 class="section-title">Choose Your Time</h2>
+                <div class="calendly-inline-widget" 
+                     data-url="https://calendly.com/your-username/executive-presence-call" 
+                     style="min-width:320px;height:700px;">
+                </div>
+                
+                <div class="booking-details">
+                    <h3 class="section-title">What to Expect</h3>
+                    <div class="detail-item">
+                        <div class="detail-icon">⏱️</div>
+                        <div class="detail-text">
+                            <div class="detail-title">30-Minute Strategy Session</div>
+                            <div class="detail-desc">A focused conversation to understand your leadership challenges and goals.</div>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">🎯</div>
+                        <div class="detail-text">
+                            <div class="detail-title">Personalized Assessment</div>
+                            <div class="detail-desc">Get immediate feedback on your executive presence strengths and areas for growth.</div>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">💡</div>
+                        <div class="detail-text">
+                            <div class="detail-title">Customized Action Plan</div>
+                            <div class="detail-desc">Walk away with clear next steps to enhance your leadership presence.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-sidebar">
+                <div class="testimonial-text">
+                    "The executive presence program was a game-changer for my career. Within three months of working with Kathryn, I was promoted to CMO. The nervous system techniques alone have transformed how I handle high-pressure situations."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <img src="images/testimonial-avatar.jpg" alt="Testimonial">
+                    </div>
+                    <div class="author-info">
+                        <h4>Michael R.</h4>
+                        <div class="author-role">CMO, Tech Startup</div>
+                    </div>
+                </div>
+                
+                <div class="guarantee-badge">
+                    <i>🤝</i>
+                    <span>100% Confidential & No Obligation</span>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 15px;">Preparing for Our Call</h3>
+                    <ul style="padding-left: 20px; margin: 0; color: rgba(255,255,255,0.9);">
+                        <li style="margin-bottom: 10px;">Find a quiet space with good internet connection</li>
+                        <li style="margin-bottom: 10px;">Have your calendar ready for potential program start dates</li>
+                        <li style="margin-bottom: 10px;">Think about your biggest leadership challenges</li>
+                        <li>Prepare any questions you have about the program</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+        const email = urlParams.get('email');
+        
+        // Pre-fill Calendly with URL parameters
+        function prefillCalendly() {
+            if (window.Calendly) {
+                const prefill = {
+                    name: name || '',
+                    email: email || '',
+                    customAnswers: {}
+                };
+                
+                // Add additional parameters if needed
+                if (urlParams.has('company')) {
+                    prefill.customAnswers.a1 = urlParams.get('company');
+                }
+                if (urlParams.has('title')) {
+                    prefill.customAnswers.a2 = urlParams.get('title');
+                }
+                
+                // Initialize Calendly with prefill data
+                Calendly.initInlineWidget({
+                    url: 'https://calendly.com/your-username/executive-presence-call',
+                    parentElement: document.querySelector('.calendly-inline-widget'),
+                    prefill: prefill,
+                    utm: {}
+                });
+            } else {
+                // If Calendly isn't loaded yet, try again shortly
+                setTimeout(prefillCalendly, 500);
+            }
+        }
+        
+        // Initialize Calendly when the page loads
+        document.addEventListener('DOMContentLoaded', prefillCalendly);
+        
+        // Handle successful booking
+        function onCalendlyEvent(e) {
+            if (e.data.event === 'calendly.event_scheduled') {
+                // Redirect to thank you page after booking
+                window.location.href = 'executive-presence-thank-you.html';
+            }
+        }
+        
+        // Listen for Calendly events
+        window.addEventListener('message', onCalendlyEvent);
+    </script>
+</body>
+</html>

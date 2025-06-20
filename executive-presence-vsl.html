@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Presence Masterclass | The C Group</title>
+    <link rel="icon" href="images/cgroup-logo.webp">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #e53e3e;
+            --light: #f7fafc;
+            --dark: #2d3748;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .logo {
+            max-width: 150px;
+            margin-bottom: 15px;
+        }
+        h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin: 10px 0;
+            font-weight: 700;
+        }
+        .subheadline {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            margin: 30px 0;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .cta-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .cta-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .cta-subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 25px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #c53030;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(229, 62, 62, 0.3);
+        }
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        .benefit-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        .benefit-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .benefit-desc {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        .testimonial {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 40px 0;
+            position: relative;
+        }
+        .testimonial:before {
+            content: '"';
+            font-size: 100px;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            color: rgba(255,255,255,0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        .testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+        }
+        .testimonial-author {
+            font-weight: 600;
+            font-style: normal;
+            margin-top: 15px;
+            display: block;
+        }
+        .testimonial-role {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .subheadline {
+                font-size: 1.1rem;
+            }
+            .cta-section {
+                padding: 25px 15px;
+            }
+            .cta-title {
+                font-size: 1.5rem;
+            }
+            .cta-subtitle {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="images/cgroup-logo.webp" alt="The C Group" class="logo">
+            <h1>Executive Presence Masterclass</h1>
+            <p class="subheadline">The Neuroscience of Commanding Respect and Authority</p>
+        </div>
+
+        <div class="video-container">
+            <!-- Replace with actual VSL video embed code -->
+            <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="cta-section">
+            <h2 class="cta-title">Ready to Transform Your Leadership Presence?</h2>
+            <p class="cta-subtitle">Book your strategy call now to discover how our 6-week Executive Presence Program can help you command respect, influence decisions, and accelerate your career.</p>
+            <a href="executive-presence-booking.html" class="btn">Book My Strategy Call</a>
+        </div>
+
+        <div class="benefits">
+            <div class="benefit-card">
+                <div class="benefit-icon">💡</div>
+                <h3 class="benefit-title">Nervous System Mastery</h3>
+                <p class="benefit-desc">Learn to stay calm and composed under pressure, even in high-stakes situations where others crumble.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🎯</div>
+                <h3 class="benefit-title">Authentic Authority</h3>
+                <p class="benefit-desc">Develop a leadership presence that's both powerful and authentic, without feeling like an imposter.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🚀</div>
+                <h3 class="benefit-title">Career Acceleration</h3>
+                <p class="benefit-desc">Gain the confidence and skills to position yourself for promotions and leadership opportunities.</p>
+            </div>
+        </div>
+
+        <div class="testimonial">
+            <p class="testimonial-text">
+                "Kathryn's approach to executive presence transformed how I show up in the boardroom. I went from feeling like an imposter to commanding the room with confidence. The nervous system techniques alone were worth the investment."
+                <span class="testimonial-author">
+                    Sarah M.
+                    <span class="testimonial-role">SVP of Operations, Fortune 500 Company</span>
+                </span>
+            </p>
+        </div>
+
+        <div class="cta-section">
+            <h2 class="cta-title">Limited Spots Available</h2>
+            <p class="cta-subtitle">Our program is highly personalized with limited enrollment to ensure individual attention. Secure your spot on a strategy call today.</p>
+            <a href="executive-presence-booking.html" class="btn">Book My Strategy Call Now</a>
+        </div>
+    </div>
+
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+        const email = urlParams.get('email');
+        
+        // Set up booking link with parameters
+        document.querySelectorAll('a[href*="executive-presence-booking.html"]').forEach(link => {
+            const url = new URL(link.href);
+            if (name) url.searchParams.set('name', name);
+            if (email) url.searchParams.set('email', email);
+            link.href = url.toString();
+        });
+    </script>
+</body>
+</html>

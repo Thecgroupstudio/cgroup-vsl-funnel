@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock Your Executive Presence | The C Group</title>
+    <link rel="icon" href="images/cgroup-logo.webp">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #e53e3e;
+            --light: #f7fafc;
+            --dark: #2d3748;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .logo {
+            max-width: 180px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .subheadline {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .video-placeholder {
+            background: #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            padding-bottom: 56.25%;
+        }
+        .video-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(230, 62, 62, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .play-button:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: var(--accent);
+        }
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 25px solid white;
+            margin-left: 5px;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        .form-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.2);
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .submit-btn:hover {
+            background: #c53030;
+            transform: translateY(-2px);
+        }
+        .privacy {
+            font-size: 0.85rem;
+            color: #718096;
+            text-align: center;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+        .privacy a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .privacy a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .subheadline {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="images/cgroup-logo.webp" alt="The C Group" class="logo">
+            <h1>Unlock Your Executive Presence in Just 6 Weeks</h1>
+            <p class="subheadline">Join our exclusive program for C-suite leaders and transform how you show up in every room</p>
+        </div>
+        
+        <div class="content">
+            <div class="video-placeholder">
+                <img src="images/executive-presence-thumbnail.jpg" alt="Executive Presence Program">
+                <div class="play-button"></div>
+            </div>
+            
+            <div class="form-container">
+                <h2 class="form-title">Reserve Your Spot</h2>
+                <form id="optinForm" action="executive-presence-vsl.html" method="GET">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Business Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Job Title</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Watch Free Training</button>
+                </form>
+                <p class="privacy">
+                    We respect your privacy. Your information is secure and will never be shared. 
+                    By submitting, you agree to receive emails from The C Group. 
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('optinForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Get form data
+            const formData = new FormData(this);
+            const params = new URLSearchParams(formData).toString();
+            // Redirect to VSL page with form data as URL parameters
+            window.location.href = `executive-presence-vsl.html?${params}`;
+        });
+
+        // Handle play button click
+        document.querySelector('.play-button').addEventListener('click', function() {
+            document.getElementById('optinForm').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('name').focus();
+        });
+    </script>
+</body>
+</html>
