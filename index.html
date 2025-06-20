@@ -402,6 +402,23 @@
         </div>
 
         <main class="vsl-container" style="background: #fff; padding: 0;">
+            <!-- Video Section -->
+            <div style="width: 100%; max-width: 1000px; margin: 0 auto; padding: 20px 0 0;">
+                <div style="position: relative; width: 100%; padding-top: 56.25%; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                    <div id="player"></div>
+                    <div id="videoOverlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 2;">
+                        <div style="text-align: center; color: white;">
+                            <div style="width: 80px; height: 80px; background: rgba(255, 0, 4, 0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; transition: all 0.3s ease;" class="pulse-play-button">
+                                <svg width="30" height="34" viewBox="0 0 30 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M28.5 15.134C30.1667 16.0365 30.1667 18.2969 28.5 19.1994L5.25 32.9904C3.58333 33.8929 1.5 32.7125 1.5 30.9075L1.5 3.42585C1.5 1.62088 3.58333 0.440434 5.25 1.34294L28.5 15.134Z" fill="white"/>
+                                </svg>
+                            </div>
+                            <p style="font-size: 1.2rem; font-weight: 600; margin: 0; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">WATCH THE VIDEO</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div style="text-align: center; margin: 40px 0 10px;">
                 <p style="color: #ff0004; font-weight: 600; margin-bottom: 5px; font-size: 1rem; text-transform: uppercase;">EXCLUSIVE 1:1 SESSION</p>
                 <h2 style="font-size: 2.5rem; color: #000; margin: 15px 0; font-weight: 800; text-transform: uppercase; line-height: 1.2;">BOOK YOUR EXECUTIVE PRESENCE STRATEGY SESSION</h2>
@@ -864,6 +881,72 @@
         </footer>
     </div><!-- End of container -->
     
+    <!-- YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        // YouTube Player API
+        let player;
+        
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '100%',
+                width: '100%',
+                videoId: 'YOUR_VIDEO_ID', // Replace with your YouTube video ID
+                playerVars: {
+                    'playsinline': 1,
+                    'rel': 0,
+                    'modestbranding': 1,
+                    'showinfo': 0,
+                    'controls': 1
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+        
+        function onPlayerReady(event) {
+            // Video is ready
+            const playButton = document.querySelector('.pulse-play-button');
+            const videoOverlay = document.getElementById('videoOverlay');
+            
+            // Add click handler to play button
+            if (playButton) {
+                playButton.addEventListener('click', function() {
+                    event.target.playVideo();
+                    videoOverlay.style.opacity = '0';
+                    setTimeout(() => {
+                        videoOverlay.style.display = 'none';
+                    }, 300);
+                });
+            }
+        }
+        
+        function onPlayerStateChange(event) {
+            // Handle video state changes if needed
+            // For example, you can track when video ends
+            if (event.data === YT.PlayerState.ENDED) {
+                // Video ended, you can show CTA or replay button
+            }
+        }
+        
+        // Add click handler to overlay
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoOverlay = document.getElementById('videoOverlay');
+            if (videoOverlay) {
+                videoOverlay.addEventListener('click', function() {
+                    if (player) {
+                        player.playVideo();
+                        videoOverlay.style.opacity = '0';
+                        setTimeout(() => {
+                            videoOverlay.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            }
+        });
+    </script>
 
     <script>
         // Function to get URL parameter
