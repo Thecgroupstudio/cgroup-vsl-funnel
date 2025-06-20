@@ -55,17 +55,24 @@
             line-height: 1.5;
         }
         .content {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-            max-width: 800px;
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 60px;
+            align-items: flex-start;
+            max-width: 1100px;
             margin: 0 auto 80px;
             padding: 0 20px;
         }
         
         .image-container {
             width: 100%;
-            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
         }
         .video-placeholder {
             background: #e2e8f0;
@@ -235,15 +242,15 @@
         
         <div class="content">
             <div class="image-container">
-                <div style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); margin-bottom: 40px;">
+                <div style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
                     <img src="images/kathryn-ficarra.jpg" alt="Kathryn Ficarra - Executive Presence Coach" style="width: 100%; height: auto; display: block;">
                 </div>
-                <div style="text-align: center;">
+                <div style="text-align: center; margin-top: 30px;">
                     <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=945,h=138,fit=crop/AMqawWPOy9f82Wjp/clients-Aq2WKWD6jaCr7v45.png" alt="Featured in: Apple TV, Morning News, Wall Street Select, Starbucks" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
                 </div>
             </div>
             
-            <div class="form-container">
+            <div class="form-container" style="position: sticky; top: 30px;">
                 <h2 class="form-title">Reserve Your Spot</h2>
                 <form id="optinForm" action="executive-presence-vsl.html" method="GET">
                     <div class="form-group">
