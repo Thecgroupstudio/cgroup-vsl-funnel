@@ -403,22 +403,59 @@
 
         <main class="vsl-container" style="background: #fff; padding: 0;">
             <!-- Video Section -->
-            <div style="width: 100%; max-width: 1000px; margin: 0 auto; padding: 20px 0 0;">
-                <div style="position: relative; width: 100%; padding-top: 56.25%; background: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
-                    <div id="player"></div>
-                    <div id="videoOverlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 2;">
-                        <div style="text-align: center; color: white;">
-                            <div style="width: 80px; height: 80px; background: rgba(255, 0, 4, 0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; transition: all 0.3s ease;" class="pulse-play-button">
-                                <svg width="30" height="34" viewBox="0 0 30 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M28.5 15.134C30.1667 16.0365 30.1667 18.2969 28.5 19.1994L5.25 32.9904C3.58333 33.8929 1.5 32.7125 1.5 30.9075L1.5 3.42585C1.5 1.62088 3.58333 0.440434 5.25 1.34294L28.5 15.134Z" fill="white"/>
+            <div style="text-align: center; margin: 40px 0 10px;">
+                <p style="color: #ff0004; font-weight: 600; margin-bottom: 5px; font-size: 1rem; text-transform: uppercase;">EXECUTIVE PRESENCE PROGRAM</p>
+                <h2 style="font-size: 2.5rem; color: #000; margin: 15px 0; font-weight: 800; text-transform: uppercase; line-height: 1.2;">Free Executive Presence Masterclass</h2>
+                <p style="font-size: 1.2rem; color: #333; max-width: 700px; margin: 0 auto 10px; line-height: 1.6; font-weight: 400; letter-spacing: 0.01em;">
+                    Learn how to develop unshakable executive presence in this exclusive training
+                </p>
+            </div>
+            
+            <!-- Video Container with Custom Preview -->
+            <div style="width: 100%; max-width: 650px; margin: 0 auto; background: #000; font-size: 0; line-height: 0;">
+                <!-- Video Loading Indicator -->
+                <div id="videoLoading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 5;">
+                    <div style="width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 1s linear infinite;"></div>
+                </div>
+                <div id="videoContainer" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
+                    <div id="youtubePlayerDiv" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+                    
+                    <!-- Overlay that appears after preview -->
+                    <div id="videoOverlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); cursor: pointer; z-index: 10;">
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
+                            <div class="pulse-play-button" style="background: rgba(255,0,4,0.8); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; position: relative; box-shadow: 0 0 0 rgba(255,0,4,0.4);">
+                                <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+                                    <path d="M8 5v14l11-7z"/>
                                 </svg>
                             </div>
-                            <p style="font-size: 1.2rem; font-weight: 600; margin: 0; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">WATCH THE VIDEO</p>
+                            <h3 style="margin: 0 0 10px; font-size: 1.2rem; font-weight: 600;">Continue Watching</h3>
+                            <p style="margin: 0; font-size: 0.9rem;">Click to unmute and watch the full training</p>
                         </div>
                     </div>
                 </div>
             </div>
-
+            
+            <!-- CTA Button for Popup Form -->
+            <div style="text-align: center; padding: 20px 0 0 0; background: #fff; display: block;">
+                <button onclick="showPopup()" class="cta-button" style="padding: 16px 40px; font-size: 1.2rem; font-weight: 600; color: white; background: linear-gradient(90deg, #4169e1, #ff0004); border: none; border-radius: 4px; cursor: pointer; box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3); transition: all 0.3s ease 0s; display: inline-block; text-decoration: none; line-height: normal;">BOOK YOUR STRATEGY SESSION &rarr;</button>
+                <p style="color: #666; margin-top: 10px; font-size: 0.9rem; margin-bottom: 5px; line-height: 1.6; letter-spacing: 0.01em;">
+                    Executive Presence Program<br><span style="color: #4169e1; font-weight: 600;">Book your 1 on 1 Strategy Session</span>
+                </p>
+                <p style="color: #ff0004; font-weight: 600; font-size: 0.9rem; margin-bottom: 0; line-height: 1.2;">
+                    Only Limited spots available - Apply now to secure your place
+                </p>
+            </div>
+            
+            <!-- As Seen On Section -->
+            <div style="margin: 30px auto 0; text-align: center; max-width: 800px;">
+                <p style="font-size: 0.85rem; color: #777; letter-spacing: 2px; margin-bottom: 1px; text-transform: uppercase; font-weight: 600;">TRUSTED BY LEADERS FROM</p>
+                <img src="images/client-company-logo.avif" alt="As Seen On TV" style="max-width: 100%; height: auto; margin: 0 auto; display: block;">
+            </div>
+            
+            <!-- Spacer between sections -->
+            <div style="height: 40px; background: #fff;"></div>
+            
+            <!-- Session Details Section -->
             <div style="text-align: center; margin: 40px 0 10px;">
                 <p style="color: #ff0004; font-weight: 600; margin-bottom: 5px; font-size: 1rem; text-transform: uppercase;">EXCLUSIVE 1:1 SESSION</p>
                 <h2 style="font-size: 2.5rem; color: #000; margin: 15px 0; font-weight: 800; text-transform: uppercase; line-height: 1.2;">BOOK YOUR EXECUTIVE PRESENCE STRATEGY SESSION</h2>
@@ -729,97 +766,119 @@
                         <div style="margin-top: 30px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
                             <div style="display: flex; align-items: center; gap: 10px;">
                                 <div style="width: 24px; height: 24px; background: #4caf50; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg>
-                                </div>
-                                <span style="font-size: 0.9rem; opacity: 0.9;">60-Minute 1:1 Session</span>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <div style="width: 24px; height: 24px; background: #4caf50; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg>
-                                </div>
-                                <span style="font-size: 0.9rem; opacity: 0.9;">Customized Action Plan</span>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <div style="width: 24px; height: 24px; background: #4caf50; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="20 6 9 17 4 12"></polyline>
-                                    </svg>
-                                </div>
-                                <span style="font-size: 0.9rem; opacity: 0.9;">Exclusive Resources</span>
-                            </div>
+        
+        <!-- Video Container with Custom Preview -->
+        <div style="width: 100%; max-width: 650px; margin: 0 auto; background: #000; font-size: 0; line-height: 0;">
+            <!-- Video Loading Indicator -->
+            <div id="videoLoading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 5;">
+                <div style="width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 1s linear infinite;"></div>
+            </div>
+            <div id="videoContainer" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
+                <div id="youtubePlayerDiv" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+                
+                <!-- Overlay that appears after preview -->
+                <div id="videoOverlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); cursor: pointer; z-index: 10;">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white;">
+                        <div class="pulse-play-button" style="background: rgba(255,0,4,0.8); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; position: relative; box-shadow: 0 0 0 rgba(255,0,4,0.4);">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
                         </div>
+                        <h3 style="margin: 0 0 10px; font-size: 1.2rem; font-weight: 600;">Continue Watching</h3>
+                        <p style="margin: 0; font-size: 0.9rem;">Click to unmute and watch the full training</p>
                     </div>
                 </div>
-                </div>
             </div>
-        </main>
-    </div><!-- End of container -->
-    
-    <!-- YouTube IFrame API -->
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script>
-        // YouTube Player API
-        let player;
+        </div>
         
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '100%',
-                width: '100%',
-                videoId: 'YOUR_VIDEO_ID', // Replace with your YouTube video ID
-                playerVars: {
-                    'playsinline': 1,
-                    'rel': 0,
-                    'modestbranding': 1,
-                    'showinfo': 0,
-                    'controls': 1
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        }
-        
-        function onPlayerReady(event) {
-            // Video is ready
-            const playButton = document.querySelector('.pulse-play-button');
-            const videoOverlay = document.getElementById('videoOverlay');
+        <!-- YouTube IFrame API -->
+        <script>
+            // Load YouTube API
+            var tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
             
-            // Add click handler to play button
-            if (playButton) {
-                playButton.addEventListener('click', function() {
-                    event.target.playVideo();
-                    videoOverlay.style.opacity = '0';
-                    setTimeout(() => {
-                        videoOverlay.style.display = 'none';
-                    }, 300);
+            var player;
+            var previewDuration = 10; // Preview duration in seconds
+            
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('youtubePlayerDiv', {
+                    videoId: 'wuW7RTCf3Jw',
+                    playerVars: {
+                        'autoplay': 1,
+                        'mute': 1,
+                        'controls': 1,
+                        'modestbranding': 1,
+                        'rel': 0,
+                        'showinfo': 0
+                    },
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
+                    }
                 });
             }
-        }
-        
-        function onPlayerStateChange(event) {
-            // Handle video state changes if needed
-            // For example, you can track when video ends
-            if (event.data === YT.PlayerState.ENDED) {
-                // Video ended, you can show CTA or replay button
-            }
-        }
-        
-        // Add click handler to overlay
-        document.addEventListener('DOMContentLoaded', function() {
-            const videoOverlay = document.getElementById('videoOverlay');
-            if (videoOverlay) {
-                videoOverlay.addEventListener('click', function() {
+            
+            function onPlayerReady(event) {
+                console.log('Player ready');
+                // Hide loading indicator when player is ready
+                document.getElementById('videoLoading').style.display = 'none';
+                // Player is already set to autoplay from the playerVars
+                
+                // Set timeout to pause video after preview duration
+                setTimeout(function() {
+                    console.log('Preview finished');
                     if (player) {
+                        player.pauseVideo();
+                        document.getElementById('videoOverlay').style.display = 'block';
+                    }
+                }, previewDuration * 1000);
+            }
+            
+            function onPlayerStateChange(event) {
+                console.log('Player state changed:', event.data);
+                // If video ends, show overlay
+                if (event.data === YT.PlayerState.ENDED) {
+                    document.getElementById('videoOverlay').style.display = 'block';
+                }
+            }
+            
+            // Add click handler to overlay
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('videoOverlay').addEventListener('click', function() {
+                    console.log('Overlay clicked');
+                    this.style.display = 'none';
+                    if (player) {
+                        player.unMute();
                         player.playVideo();
-                        videoOverlay.style.opacity = '0';
-                        setTimeout(() => {
-                            videoOverlay.style.display = 'none';
-                        }, 300);
+                    }
+                });
+            });
+        </script>
+        
+        <!-- CTA Button for Popup Form -->
+        <div style="text-align: center; padding: 20px 0 0 0; background: #fff; display: block;">
+            <button onclick="showPopup()" class="cta-button" style="padding: 16px 40px; font-size: 1.2rem; font-weight: 600; color: white; background: linear-gradient(90deg, #4169e1, #ff0004); border: none; border-radius: 4px; cursor: pointer; box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3); transition: all 0.3s ease 0s; display: inline-block; text-decoration: none; line-height: normal;">BOOK YOUR STRATEGY SESSION &rarr;</button>
+            <p style="color: #666; margin-top: 10px; font-size: 0.9rem; margin-bottom: 5px; line-height: 1.6; letter-spacing: 0.01em;">
+                Executive Presence Program<br><span style="color: #4169e1; font-weight: 600;">Book your 1 on 1 Strategy Session</span>
+            </p>
+            <p style="color: #ff0004; font-weight: 600; font-size: 0.9rem; margin-bottom: 0; line-height: 1.2;">
+                Only Limited spots available - Apply now to secure your place
+            </p>
+        </div>
+        
+        <!-- As Seen On Section -->
+        <div style="margin: 30px auto 0; text-align: center; max-width: 800px;">
+            <p style="font-size: 0.85rem; color: #777; letter-spacing: 2px; margin-bottom: 1px; text-transform: uppercase; font-weight: 600;">TRUSTED BY LEADERS FROM</p>
+            <img src="images/client-company-logo.avif" alt="As Seen On TV" style="max-width: 100%; height: auto; margin: 0 auto; display: block;">
+        </div>
+        
+        <!-- Spacer between sections -->
+        <div style="height: 40px; background: #fff;"></div>    }
+        }
+        
+        // Video player functionality is now handled by the YouTube IFrame API
                     }
                 });
             }
