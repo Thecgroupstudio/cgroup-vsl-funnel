@@ -5,9 +5,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Executive Presence Booking | The C Group</title>
     <link rel="icon" href="images/cgroup-logo.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #e53e3e;
+            --light: #f7fafc;
+            --dark: #2d3748;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        h1 {
+            color: var(--primary);
+            font-size: 2.4rem;
+            margin: 0 auto 20px;
+            font-weight: 800;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+            max-width: 800px;
+        }
+        .subheadline {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin: 0 auto 30px;
+            font-weight: 500;
+            line-height: 1.5;
+            max-width: 700px;
+        }
+        .booking-container {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin: 0 auto;
+            max-width: 800px;
+        }
+        .loading-note {
+            text-align: center;
+            color: #4a5568;
+            font-style: italic;
+            margin: 15px 0 30px;
+            font-size: 0.95rem;
+        }
+        .calendly-inline-widget {
+            min-height: 700px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 15px;
+            }
+            .booking-container {
+                padding: 25px 20px;
+            }
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 15px;
+            }
+            .subheadline {
+                font-size: 1.1rem;
+                margin-bottom: 25px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Content will be added here -->
+    <div class="container">
+        <div class="header">
+            <h1>Ready To Lead With Unshakable Confidence?</h1>
+            <p class="subheadline">Use The Calendar Tool Below To Schedule A Free Executive Presence Consultation With Me.</p>
+        </div>
+
+        <div class="booking-container">
+            <p class="loading-note">Please allow 10 seconds for the calendar to load.</p>
+            <!-- Calendly inline widget begin -->
+            <div class="calendly-inline-widget" 
+                 data-url="https://calendly.com/your-username/executive-presence-consultation" 
+                 style="min-width:320px;height:700px;">
+            </div>
+            <!-- Calendly inline widget end -->
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer style="background: #f8f9fa; padding: 40px 0 0; margin-top: 40px; border-top: 1px solid #e2e8f0;">
