@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Executive Presence Booking | The C Group</title>
+    <meta http-equiv="Permissions-Policy" content="payment=(), interest-cohort=()">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://connect.facebook.net https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com https://assets.calendly.com; frame-src 'self' https://calendly.com;" />
+    <title>Book Your Executive Presence Consultation - The C Group Studio</title>
     <link rel="icon" href="images/cgroup-logo.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Calendly link widget -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <style>
         :root {
             --primary: #1a365d;
@@ -99,13 +103,14 @@
 
         <p class="loading-note" style="text-align: center; color: #4a5568; font-style: italic; margin: 0 auto 20px; max-width: 800px;">Please allow 10 seconds for the calendar to load.</p>
         
-        <div class="booking-container">
-            <!-- Calendly inline widget begin -->
-            <div class="calendly-inline-widget" 
-                 data-url="https://calendly.com/kathrynficarra/strategy-session-clone?primary_color=ff0004" 
-                 style="min-width:320px;height:700px;">
+        <div class="booking-container" style="background: #fff; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); padding: 20px; margin: 20px 0 40px 0;">
+            <div class="calendly-inline-widget" data-url="https://calendly.com/kathrynficarra/strategy-session-clone?primary_color=ff0004" style="min-width:320px;height:1000px;"></div>
+            
+            <div style="text-align: center; margin: 40px 0 20px;">
+                <p style="color: #666; font-size: 1rem; max-width: 800px; margin: 0 auto 30px; line-height: 1.6;">
+                    Your information is secure. We respect your privacy and will never share your details with third parties.
+                </p>
             </div>
-            <!-- Calendly inline widget end -->
             <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
             <script>
                 // Function to handle successful booking
@@ -120,23 +125,51 @@
 
                 // Listen for Calendly events
                 function onCalendlyEvent(e) {
-                    if (e.data.event === 'calendly.event_scheduled') {
-                        handleBookingConfirmation();
+                    try {
+                        // Only process specific events to reduce console spam
+                        if (e.origin === 'https://calendly.com' && e.data && e.data.event) {
+                            // Only log non-page_height events to reduce noise
+                            if (e.data.event !== 'calendly.page_height') {
+                                console.log('Calendly event received:', e.data);
+                            }
+                            
+                            // Handle booking confirmation
+                            if (e.data.event === 'calendly.event_scheduled') {
+                                handleBookingConfirmation();
+                            }
+                        }
+                    } catch (error) {
+                        // Only log actual errors, not expected issues
+                        if (!error.message.includes('Cannot read properties of null') && 
+                            !error.message.includes('is not a function')) {
+                            console.error('Error processing Calendly event:', error);
+                        }
                     }
                 }
 
-                // Add event listener for Calendly messages
+                // Initialize Calendly event listener
                 window.addEventListener('message', onCalendlyEvent);
 
-                // Initialize Calendly widget
+                // Also listen for the Calendly init event
                 document.addEventListener('DOMContentLoaded', function() {
-                    if (typeof Calendly !== 'undefined') {
-                        Calendly.initInlineWidget({
-                            url: 'https://calendly.com/kathrynficarra/strategy-session-clone?primary_color=ff0004',
-                            parentElement: document.querySelector('.calendly-inline-widget')
-                        });
-                    }
+                    // For direct Calendly button clicks if needed
+                    document.body.addEventListener('click', function(e) {
+                        if (e.target.closest('[data-calendly-role="close"]') || 
+                            e.target.closest('[data-calendly-role="close-button"]')) {
+                            console.log('Calendly modal closed');
+                        }
+                    });
                 });
+
+                // Fallback: Also check for Calendly's global object
+                function checkCalendlyGlobal() {
+                    if (window.Calendly && window.Calendly.initPopupWidget) {
+                        console.log('Calendly widget initialized');
+                    } else {
+                        setTimeout(checkCalendlyGlobal, 500);
+                    }
+                }
+                checkCalendlyGlobal();
             </script>
         </div>
     </div>
