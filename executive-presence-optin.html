@@ -74,21 +74,18 @@
         
         .image-container {
             display: flex;
-            align-items: flex-start;
-            gap: 30px;
+            flex-direction: column;
+            gap: 20px;
             margin-bottom: 30px;
         }
         
         .main-image {
-            flex: 1;
-            min-width: 0;
+            width: 100%;
         }
         
         .companies-logo {
-            flex: 1;
-            min-width: 0;
-            display: flex;
-            align-items: center;
+            width: 100%;
+            margin-top: 20px;
         }
         
         @media (max-width: 768px) {
@@ -271,8 +268,8 @@
                     <div class="main-image" style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
                         <img src="images/kathryn-ficarra.jpg" alt="Kathryn Ficarra - Executive Presence Coach" style="width: 100%; height: auto; display: block;">
                     </div>
-                    <div class="companies-logo">
-                        <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=945,h=138,fit=crop/AMqawWPOy9f82Wjp/clients-Aq2WKWD6jaCr7v45.png" alt="Featured in: Apple TV, Morning News, Wall Street Select, Starbucks" style="width: 100%; height: auto; display: block;">
+                    <div class="companies-logo" style="text-align: center;">
+                        <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=945,h=138,fit=crop/AMqawWPOy9f82Wjp/clients-Aq2WKWD6jaCr7v45.png" alt="Featured in: Apple TV, Morning News, Wall Street Select, Starbucks" style="max-width: 100%; height: auto; display: inline-block;">
                     </div>
                 </div>
             </div>
