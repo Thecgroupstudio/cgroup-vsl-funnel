@@ -186,9 +186,8 @@
         </div>
         
         <div class="content">
-            <div class="video-placeholder">
-                <img src="images/executive-presence-thumbnail.jpg" alt="Executive Presence Program">
-                <div class="play-button"></div>
+            <div style="text-align: center; margin: 30px 0;">
+                <img src="images/executive-presence-optin.jpg" alt="Executive Presence Program" style="max-width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
             </div>
             
             <div class="form-container">
@@ -231,10 +230,12 @@
             window.location.href = `executive-presence-vsl.html?${params}`;
         });
 
-        // Handle play button click
-        document.querySelector('.play-button').addEventListener('click', function() {
-            document.getElementById('optinForm').scrollIntoView({ behavior: 'smooth' });
-            document.getElementById('name').focus();
+        // Focus on name field when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const nameField = document.getElementById('name');
+            if (nameField) {
+                nameField.focus();
+            }
         });
     </script>
 </body>
