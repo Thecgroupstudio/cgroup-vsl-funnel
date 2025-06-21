@@ -376,13 +376,56 @@
     <!-- End LinkedIn Insight Tag -->
 
     <script>
+        async function submitForm(form) {
+            // Show loading state
+            const submitBtn = form.querySelector('.submit-btn');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.style.opacity = '0.8';
+            submitBtn.style.cursor = 'not-allowed';
+
+            try {
+                // Get form data
+                const formData = new FormData(form);
+                const formObject = Object.fromEntries(formData.entries());
+                
+                // Send data to n8n webhook
+                const response = await fetch('https://cgroup.app.n8n.cloud/webhook/99b7d2ca-4a13-4b0a-8589-b268dff831ec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formObject)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                // Continue with the original redirect
+                const params = new URLSearchParams(formData).toString();
+                window.location.href = `executive-presence-vsl.html?${params}`;
+                
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                // If there's an error with the webhook, still redirect the user
+                const params = new URLSearchParams(new FormData(form)).toString();
+                window.location.href = `executive-presence-vsl.html?${params}`;
+            } finally {
+                // Reset button state in case of error
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+                submitBtn.style.opacity = '1';
+                submitBtn.style.cursor = 'pointer';
+            }
+        }
+
+
+        // Add form submit handler
         document.getElementById('optinForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            // Get form data
-            const formData = new FormData(this);
-            const params = new URLSearchParams(formData).toString();
-            // Redirect to VSL page with form data as URL parameters
-            window.location.href = `executive-presence-vsl.html?${params}`;
+            submitForm(this);
         });
 
         // Focus on name field when page loads
