@@ -308,6 +308,14 @@
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" placeholder="Your Email Address..." required>
                     </div>
+                    <!-- Hidden tracking fields -->
+                    <input type="hidden" id="timestamp" name="timestamp">
+                    <input type="hidden" id="utm_source" name="utm_source">
+                    <input type="hidden" id="utm_medium" name="utm_medium">
+                    <input type="hidden" id="utm_campaign" name="utm_campaign">
+                    <input type="hidden" id="utm_content" name="utm_content">
+                    <input type="hidden" id="utm_term" name="utm_term">
+                    <input type="hidden" id="page_url" name="page_url">
                     <button type="submit" class="submit-btn" style="font-size: 1.3rem; font-weight: 700; padding: 15px 20px;">Yes, I Want the Blueprint!</button>
                 </form>
                 <div style="text-align: center;">
@@ -428,8 +436,24 @@
             submitForm(this);
         });
 
-        // Focus on name field when page loads
+        // Set up tracking data when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            // Set timestamp
+            document.getElementById('timestamp').value = new Date().toISOString();
+            
+            // Set page URL
+            document.getElementById('page_url').value = window.location.href;
+            
+            // Get UTM parameters from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const utmParams = ['source', 'medium', 'campaign', 'content', 'term'];
+            
+            utmParams.forEach(param => {
+                const value = urlParams.get(`utm_${param}`) || '';
+                document.getElementById(`utm_${param}`).value = value;
+            });
+            
+            // Focus on name field
             const nameField = document.getElementById('name');
             if (nameField) {
                 nameField.focus();
