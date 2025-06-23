@@ -298,31 +298,25 @@
             </div>
             
             <div class="right-column">
-                <div class="form-container" style="position: sticky; top: 30px;">
-                    <h2 class="form-title" style="font-size: 1.1rem; line-height: 1.5; margin-bottom: 20px; color: #4a5568;">Enter your name & email below to get instant access to the 1-page blueprint for building Executive Presence from the inside out.</h2>
-                <form id="optinForm" action="executive-presence-vsl.html" method="GET">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" placeholder="Your Name..." required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Your Email Address..." required>
-                    </div>
-                    <!-- Hidden tracking fields -->
-                    <input type="hidden" id="timestamp" name="timestamp">
-                    <input type="hidden" id="utm_source" name="utm_source">
-                    <input type="hidden" id="utm_medium" name="utm_medium">
-                    <input type="hidden" id="utm_campaign" name="utm_campaign">
-                    <input type="hidden" id="utm_content" name="utm_content">
-                    <input type="hidden" id="utm_term" name="utm_term">
-                    <input type="hidden" id="page_url" name="page_url">
-                    <button type="submit" class="submit-btn" style="font-size: 1.3rem; font-weight: 700; padding: 15px 20px;">Yes, I Want the Blueprint!</button>
-                </form>
-                <div style="text-align: center;">
-                    <p class="privacy" style="font-size: 0.7rem; color: #718096; margin: 10px 0 0; line-height: 1.4; display: inline-block; text-align: center;">
-                        Your information is private & secure. We will never spam or annoy you.
-                    </p>
+                <div class="form-container" style="position: sticky; top: 30px; padding: 0; overflow: hidden; height: 600px;">
+                    <iframe
+                        src="https://api.leadconnectorhq.com/widget/form/B2Z7bWPx9D8DF4UuNYlq"
+                        style="width:100%;height:100%;border:none;border-radius:10px"
+                        id="inline-B2Z7bWPx9D8DF4UuNYlq" 
+                        data-layout="{'id':'INLINE'}"
+                        data-trigger-type="alwaysShow"
+                        data-trigger-value=""
+                        data-activation-type="alwaysActivated"
+                        data-activation-value=""
+                        data-deactivation-type="neverDeactivate"
+                        data-deactivation-value=""
+                        data-form-name="VSL Form Opt In"
+                        data-height="498"
+                        data-layout-iframe-id="inline-B2Z7bWPx9D8DF4UuNYlq"
+                        data-form-id="B2Z7bWPx9D8DF4UuNYlq"
+                        title="VSL Form Opt In">
+                    </iframe>
+                    <script src="https://link.msgsndr.com/js/form_embed.js"></script>
                 </div>
             </div>
         </div>
@@ -385,81 +379,8 @@
     <!-- End LinkedIn Insight Tag -->
 
     <script>
-        async function submitForm(form) {
-            // Show loading state
-            const submitBtn = form.querySelector('.submit-btn');
-            const originalBtnText = submitBtn.textContent;
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
-            submitBtn.style.opacity = '0.8';
-            submitBtn.style.cursor = 'not-allowed';
-
-            try {
-                // Get form data
-                const formData = new FormData(form);
-                const formObject = Object.fromEntries(formData.entries());
-                
-                // Send data to n8n webhook
-                const response = await fetch('https://cgroup.app.n8n.cloud/webhook/99b7d2ca-4a13-4b0a-8589-b268dff831ec', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formObject)
-                });
-
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                // Continue with the original redirect
-                const params = new URLSearchParams(formData).toString();
-                window.location.href = `executive-presence-vsl.html?${params}`;
-                
-            } catch (error) {
-                console.error('Error submitting form:', error);
-                // If there's an error with the webhook, still redirect the user
-                const params = new URLSearchParams(new FormData(form)).toString();
-                window.location.href = `executive-presence-vsl.html?${params}`;
-            } finally {
-                // Reset button state in case of error
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalBtnText;
-                submitBtn.style.opacity = '1';
-                submitBtn.style.cursor = 'pointer';
-            }
-        }
-
-
-        // Add form submit handler
-        document.getElementById('optinForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            submitForm(this);
-        });
-
-        // Set up tracking data when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set timestamp
-            document.getElementById('timestamp').value = new Date().toISOString();
-            
-            // Set page URL
-            document.getElementById('page_url').value = window.location.href;
-            
-            // Get UTM parameters from URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const utmParams = ['source', 'medium', 'campaign', 'content', 'term'];
-            
-            utmParams.forEach(param => {
-                const value = urlParams.get(`utm_${param}`) || '';
-                document.getElementById(`utm_${param}`).value = value;
-            });
-            
-            // Focus on name field
-            const nameField = document.getElementById('name');
-            if (nameField) {
-                nameField.focus();
-            }
-        });
+        // Form handling now managed by LeadConnector embedded form
+        // All tracking and form submission is handled through their platform
     </script>
 </body>
 </html>
