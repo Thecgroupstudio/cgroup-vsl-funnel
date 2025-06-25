@@ -67,6 +67,20 @@
             margin: 0 auto 40px;
             max-width: 100%;
         }
+        /* LeadConnector Widget Container */
+        #lc_booking_widget_pZBC4tvuhTVrNusNkkbY {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            min-height: 600px;
+        }
+        
+        /* Responsive adjustments for the widget */
+        @media (max-width: 768px) {
+            #lc_booking_widget_pZBC4tvuhTVrNusNkkbY {
+                min-height: 800px;
+            }
+        }
         .booking-btn {
             display: inline-block;
             background-color: var(--primary);
@@ -156,14 +170,23 @@
             <p style="color: var(--dark); font-size: 1.1rem; margin: 0 auto 25px; line-height: 1.6; max-width: 700px;">
                 Click the button below to select your preferred time and complete your booking.
             </p>
-            
-            <a href="https://api.leadconnectorhq.com/widget/booking/pZBC4tvuhTVrNusNkkbY" 
-               target="_blank" 
-               rel="noopener noreferrer"
-               class="booking-btn">
-                View Available Times
-            </a>
-            
+            <!-- LeadConnector Booking Widget -->
+            <div class="booking-container" style="text-align: center;">
+                <div id="lc_booking_widget_pZBC4tvuhTVrNusNkkbY"></div>
+                <script>
+                    (function(w, d, t, h, s, n) {
+                        w.LeadConnectorBookingWidget = w.LeadConnectorBookingWidget || function() {
+                            (w.LeadConnectorBookingWidget.q = w.LeadConnectorBookingWidget.q || []).push(arguments);
+                        };
+                        w.LeadConnectorBookingWidget.l = +new Date();
+                        w.LeadConnectorBookingWidget('create', 'pZBC4tvuhTVrNusNkkbY', {
+                            container: 'lc_booking_widget_pZBC4tvuhTVrNusNkkbY',
+                            type: 'inline'
+                        });
+                    })(window, document, 'script', 'https://api.leadconnectorhq.com/static/booking-widget/booking-widget.js');
+                </script>
+                <p class="privacy-note">Your information is secure and will never be shared.</p>
+            </div>
             <div style="margin-top: 30px; padding-top: 25px; border-top: 1px solid #e2e8f0;">
                 <p class="privacy-note">
                     Your information is secure. We respect your privacy and will never share your details with third parties.
