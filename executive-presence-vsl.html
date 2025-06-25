@@ -29,85 +29,100 @@
     /></noscript>
     <!-- End Meta Pixel Code -->
     
-    <!-- Video and Engagement Tracking -->
+    <!-- Content and Engagement Tracking -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Track ViewContent for the VSL page
         fbq('track', 'ViewContent', {
             content_name: 'IMPACT Framework VSL',
-            content_type: 'video',
+            content_type: 'landing_page',
             content_ids: ['impact_framework_vsl'],
             content_category: 'Executive Presence Training'
         });
         
-        // Video tracking
-        const video = document.querySelector('video');
-        if (video) {
-            let hasPlayed25 = false;
-            let hasPlayed50 = false;
-            let hasPlayed75 = false;
+        // Track scroll depth
+        let scrollTracked = {
+            '25': false,
+            '50': false,
+            '75': false,
+            '90': false
+        };
+        
+        function trackScrollDepth() {
+            const scrollPosition = window.scrollY + window.innerHeight;
+            const pageHeight = document.documentElement.scrollHeight;
+            const scrollPercent = Math.round((scrollPosition / pageHeight) * 100);
             
-            video.addEventListener('play', function() {
-                fbq('track', 'ViewContent', {
-                    content_name: 'VSL Video Play',
-                    content_type: 'video',
-                    content_ids: ['impact_framework_vsl'],
-                    content_category: 'Video Engagement',
-                    progress: 'started'
-                });
-            });
-            
-            video.addEventListener('timeupdate', function() {
-                const progress = (video.currentTime / video.duration) * 100;
-                
-                if (progress >= 25 && !hasPlayed25) {
-                    hasPlayed25 = true;
-                    trackVideoProgress(25);
-                } else if (progress >= 50 && !hasPlayed50) {
-                    hasPlayed50 = true;
-                    trackVideoProgress(50);
-                } else if (progress >= 75 && !hasPlayed75) {
-                    hasPlayed75 = true;
-                    trackVideoProgress(75);
+            // Track at 25%, 50%, 75%, and 90% scroll depth
+            [25, 50, 75, 90].forEach(percent => {
+                if (scrollPercent >= percent && !scrollTracked[percent]) {
+                    scrollTracked[percent] = true;
+                    fbq('track', 'ViewContent', {
+                        content_name: 'VSL Scroll Depth',
+                        content_type: 'landing_page',
+                        content_ids: ['impact_framework_vsl'],
+                        content_category: 'Scroll Depth',
+                        scroll_depth: percent + '%',
+                        page_url: window.location.href
+                    });
                 }
-            });
-            
-            video.addEventListener('ended', function() {
-                fbq('track', 'ViewContent', {
-                    content_name: 'VSL Video Complete',
-                    content_type: 'video',
-                    content_ids: ['impact_framework_vsl'],
-                    content_category: 'Video Engagement',
-                    progress: 'completed',
-                    video_duration: Math.round(video.duration)
-                });
             });
         }
         
-        // Track button clicks
-        const ctaButtons = document.querySelectorAll('.cta-button, .button, a[href*="leadconnector"], a[href*="booking"]');
-        ctaButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                fbq('track', 'InitiateCheckout', {
-                    content_name: button.innerText.trim() || 'VSL CTA Click',
-                    content_category: 'CTA Click',
+        // Track time on page
+        let timeOnPageStart = Date.now();
+        window.addEventListener('beforeunload', function() {
+            const timeSpent = Math.round((Date.now() - timeOnPageStart) / 1000); // in seconds
+            if (timeSpent > 5) { // Only track if spent more than 5 seconds
+                fbq('track', 'ViewContent', {
+                    content_name: 'VSL Time Spent',
+                    content_type: 'landing_page',
                     content_ids: ['impact_framework_vsl'],
-                    button_text: button.innerText.trim(),
-                    button_url: button.href || window.location.href
+                    content_category: 'Engagement',
+                    time_spent_seconds: timeSpent,
+                    page_url: window.location.href
+                });
+            }
+        });
+        
+        // Track button clicks
+        function trackButtonClick(button) {
+            fbq('track', 'InitiateCheckout', {
+                content_name: button.innerText.trim() || 'VSL CTA Click',
+                content_category: 'CTA Click',
+                content_ids: ['impact_framework_vsl'],
+                button_text: button.innerText.trim(),
+                button_url: button.href || window.location.href,
+                page_url: window.location.href
+            });
+        }
+        
+        // Set up click listeners for all relevant buttons/links
+        const ctaSelectors = [
+            '.cta-button', 
+            '.button', 
+            'a[href*="leadconnector"]', 
+            'a[href*="booking"]',
+            'a[href*="schedule"]',
+            'button[type="submit"]'
+        ];
+        
+        ctaSelectors.forEach(selector => {
+            document.querySelectorAll(selector).forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Small timeout to ensure the click is registered before navigation
+                    setTimeout(() => trackButtonClick(button), 100);
                 });
             });
         });
         
-        function trackVideoProgress(percent) {
-            fbq('track', 'ViewContent', {
-                content_name: 'VSL Video Progress',
-                content_type: 'video',
-                content_ids: ['impact_framework_vsl'],
-                content_category: 'Video Engagement',
-                progress: percent + '%',
-                video_percent_complete: percent
-            });
-        }
+        // Set up scroll tracking
+        window.addEventListener('scroll', function() {
+            trackScrollDepth();
+        });
+        
+        // Initial scroll check
+        trackScrollDepth();
     });
     </script>
     <style>
