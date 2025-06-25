@@ -346,6 +346,24 @@
                         title="VSL Form Opt In">
                     </iframe>
                     <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+                    <script>
+                    // Track form submission
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // This listens for messages from the iframe
+                        window.addEventListener('message', function(event) {
+                            // Check if the message is from LeadConnector
+                            if (event.origin === 'https://api.leadconnectorhq.com' && 
+                                event.data && 
+                                event.data.type === 'lc:form:submitted') {
+                                // Track the Lead event
+                                fbq('track', 'Lead', {
+                                    content_name: 'Executive Presence Blueprint',
+                                    content_category: 'Lead Magnet'
+                                });
+                            }
+                        }, false);
+                    });
+                    </script>
                 </div>
             </div>
         </div>

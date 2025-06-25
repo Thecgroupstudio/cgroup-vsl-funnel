@@ -372,6 +372,29 @@
         </div>
     </div>
 
+    <!-- Track CompleteRegistration event -->
+    <script>
+    // Track when the page loads as this is the thank you page after booking
+    document.addEventListener('DOMContentLoaded', function() {
+        fbq('track', 'CompleteRegistration', {
+            content_name: 'Executive Presence Consultation',
+            content_category: 'Booking',
+            status: 'completed'
+        });
+        
+        // Also track a Purchase event with $0 value for conversion tracking
+        fbq('track', 'Purchase', {
+            value: 0,
+            currency: 'USD',
+            content_type: 'product',
+            content_ids: ['executive_presence_consultation'],
+            content_name: 'Executive Presence Consultation',
+            content_category: 'Booking',
+            status: 'completed'
+        });
+    });
+    </script>
+
     <!-- Footer -->
     <footer style="background: #f8f9fa; padding: 40px 0 0; margin-top: 40px; border-top: 1px solid #e2e8f0;">
         <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">

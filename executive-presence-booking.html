@@ -198,6 +198,36 @@
                     </iframe>
                 </div>
                 <p class="privacy-note">Your information is secure and will never be shared.</p>
+                <script>
+                // Track booking schedule event
+                document.addEventListener('DOMContentLoaded', function() {
+                    // This listens for messages from the iframe
+                    window.addEventListener('message', function(event) {
+                        // Check if the message is from LeadConnector
+                        if (event.origin === 'https://api.leadconnectorhq.com' && 
+                            event.data && 
+                            event.data.type === 'lc:booking:scheduled') {
+                            // Track the Schedule event
+                            fbq('track', 'Schedule', {
+                                content_name: 'Executive Presence Consultation',
+                                content_category: 'Booking',
+                                value: 0,
+                                currency: 'USD'
+                            });
+                            
+                            // Also track a Purchase event with $0 value for conversion tracking
+                            fbq('track', 'Purchase', {
+                                value: 0,
+                                currency: 'USD',
+                                content_type: 'product',
+                                content_ids: ['executive_presence_consultation'],
+                                content_name: 'Executive Presence Consultation',
+                                content_category: 'Booking'
+                            });
+                        }
+                    }, false);
+                });
+                </script>
             </div>
 
             <script>
