@@ -21,8 +21,24 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
+    
+    // Initialize Pixel with your ID
     fbq('init', '1607445923276301');
+    
+    // Track PageView
     fbq('track', 'PageView');
+    
+    // Track ViewContent for the opt-in page
+    fbq('track', 'ViewContent', {
+        content_name: 'Executive Presence Opt-in Page',
+        content_category: 'Lead Generation',
+        content_ids: ['executive_presence_optin'],
+        content_type: 'product',
+        value: 0,
+        currency: 'USD',
+        page_type: 'optin',
+        debug_timestamp: Date.now()
+    });
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1607445923276301&ev=PageView&noscript=1"
@@ -393,8 +409,39 @@
                             }
                         }
                         
+                        // Track form submission
+                        function trackFormSubmission() {
+                            console.log('Form submission detected, tracking Lead event');
+                            fbq('track', 'Lead', {
+                                content_name: 'Executive Presence Opt-in',
+                                content_category: 'Form Submission',
+                                value: 0,
+                                currency: 'USD',
+                                eventID: 'optin_' + Date.now()
+                            });
+                            
+                            // Also track CompleteRegistration
+                            fbq('track', 'CompleteRegistration', {
+                                content_name: 'Executive Presence Opt-in',
+                                content_category: 'Form Submission',
+                                value: 0,
+                                currency: 'USD',
+                                eventID: 'complete_reg_' + Date.now()
+                            });
+                            
+                            console.log('Lead and CompleteRegistration events sent');
+                        }
+                        
                         // Initialize when DOM is ready
                         document.addEventListener('DOMContentLoaded', function() {
+                            console.log('DOM fully loaded, initializing form tracking...');
+                            
+                            // Track when the form is loaded
+                            fbq('track', 'PageView', {
+                                page_type: 'optin_form_loaded',
+                                timestamp: Date.now()
+                            });
+                            
                             const formIframe = document.querySelector('iframe[src*="leadconnectorhq.com/widget/form"]');
                             
                             if (formIframe) {
