@@ -349,19 +349,64 @@
                     <script>
                     // Track form submission
                     document.addEventListener('DOMContentLoaded', function() {
-                        // This listens for messages from the iframe
-                        window.addEventListener('message', function(event) {
-                            // Check if the message is from LeadConnector
-                            if (event.origin === 'https://api.leadconnectorhq.com' && 
-                                event.data && 
-                                event.data.type === 'lc:form:submitted') {
-                                // Track the Lead event
+                        // Listen for form submission
+                        const formIframe = document.querySelector('iframe[src*="leadconnectorhq.com/widget/form"]');
+                        if (formIframe) {
+                            // Add click event listener to the iframe
+                            formIframe.addEventListener('load', function() {
+                                try {
+                                    // Try to access the iframe content
+                                    const iframeDoc = formIframe.contentDocument || formIframe.contentWindow.document;
+                                    const form = iframeDoc.querySelector('form');
+                                    if (form) {
+                                        form.addEventListener('submit', function() {
+                                            // Track the Lead event
+                                            fbq('track', 'Lead', {
+                                                content_name: 'Executive Presence Blueprint',
+                                                content_category: 'Lead Magnet'
+                                            });
+                                            
+                                            // Also track a CompleteRegistration event
+                                            fbq('track', 'CompleteRegistration', {
+                                                content_name: 'Executive Presence Blueprint',
+                                                content_category: 'Opt-in'
+                                            });
+                                        });
+                                    }
+                                } catch (e) {
+                                    console.log('Could not access iframe content:', e);
+                                    
+                                    // Fallback: Listen for messages from the iframe
+                                    window.addEventListener('message', function(event) {
+                                        // Check if the message is from LeadConnector
+                                        if (event.origin === 'https://api.leadconnectorhq.com' && 
+                                            event.data) {
+                                            console.log('Received message from LeadConnector:', event.data);
+                                            
+                                            // Track on any message as a fallback
+                                            fbq('track', 'Lead', {
+                                                content_name: 'Executive Presence Blueprint',
+                                                content_category: 'Lead Magnet',
+                                                method: 'message_listener'
+                                            });
+                                        }
+                                    }, false);
+                                }
+                            });
+                        }
+                        
+                        // Add a click event listener to the document as a fallback
+                        document.addEventListener('click', function(e) {
+                            // Check if the click is on or inside the form iframe
+                            if (e.target.closest('iframe[src*="leadconnectorhq.com"]')) {
+                                // Track the Lead event on any click within the iframe
                                 fbq('track', 'Lead', {
                                     content_name: 'Executive Presence Blueprint',
-                                    content_category: 'Lead Magnet'
+                                    content_category: 'Lead Magnet',
+                                    method: 'click_listener'
                                 });
                             }
-                        }, false);
+                        });
                     });
                     </script>
                 </div>
