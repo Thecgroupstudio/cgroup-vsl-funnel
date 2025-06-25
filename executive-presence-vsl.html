@@ -106,44 +106,60 @@
             });
         }
         
-        // Set up click listeners for all relevant buttons/links
-        const ctaSelectors = [
-            '.cta-button', 
-            '.button', 
-            'a[href*="leadconnector"]', 
-            'a[href*="booking"]',
-            'a[href*="schedule"]',
-            'button[type="submit"]',
-            'a.btn',
-            'button.btn',
-            'input[type="submit"]',
-            'input[type="button"]'
-        ];
-        
-        let clickHandlersAdded = 0;
-        
-        ctaSelectors.forEach(selector => {
-            try {
-                const elements = document.querySelectorAll(selector);
-                console.log(`Found ${elements.length} elements for selector: ${selector}`);
-                
-                elements.forEach(button => {
-                    if (!button.hasAttribute('data-fb-tracked')) {
-                        button.setAttribute('data-fb-tracked', 'true');
-                        button.addEventListener('click', function(e) {
-                            console.log('Click captured on:', selector, button);
-                            // Small timeout to ensure the click is registered before navigation
-                            setTimeout(() => trackButtonClick(button), 100);
-                        });
-                        clickHandlersAdded++;
-                    }
+        // Track the main CTA button
+        const bookingButton = document.getElementById('bookingButton');
+        if (bookingButton) {
+            console.log('Found booking button, adding click listener');
+            bookingButton.addEventListener('click', function(e) {
+                console.log('Booking button clicked');
+                fbq('track', 'InitiateCheckout', {
+                    content_name: 'Book Consultation',
+                    content_category: 'CTA Click',
+                    content_ids: ['impact_framework_vsl'],
+                    button_text: 'SCHEDULE A CONSULTATION HERE',
+                    button_id: 'bookingButton',
+                    page_url: window.location.href,
+                    debug_timestamp: Date.now()
                 });
-            } catch (e) {
-                console.error('Error setting up click tracking for selector', selector, e);
-            }
-        });
+            });
+        } else {
+            console.log('Booking button not found');
+        }
         
-        console.log(`Added click handlers to ${clickHandlersAdded} elements`);
+        // Track YouTube video interactions
+        const youtubeIframe = document.querySelector('iframe[src*="youtube"]');
+        if (youtubeIframe) {
+            console.log('YouTube iframe found, setting up tracking');
+            
+            // Track when the iframe is clicked (as a proxy for play)
+            youtubeIframe.addEventListener('load', function() {
+                console.log('YouTube iframe loaded');
+                // Track initial view of the video
+                fbq('track', 'ViewContent', {
+                    content_name: 'YouTube Video Loaded',
+                    content_type: 'video',
+                    content_ids: ['impact_framework_vsl'],
+                    content_category: 'Video Engagement',
+                    video_provider: 'youtube',
+                    debug_timestamp: Date.now()
+                });
+            });
+            
+            // Track clicks on the iframe as a play event
+            youtubeIframe.parentElement.addEventListener('click', function() {
+                console.log('YouTube iframe clicked (likely play)');
+                fbq('track', 'ViewContent', {
+                    content_name: 'YouTube Video Play',
+                    content_type: 'video',
+                    content_ids: ['impact_framework_vsl'],
+                    content_category: 'Video Engagement',
+                    video_action: 'play',
+                    debug_timestamp: Date.now()
+                });
+            });
+        } else {
+            console.log('YouTube iframe not found');
+        }
         
         // Set up scroll tracking
         window.addEventListener('scroll', function() {
