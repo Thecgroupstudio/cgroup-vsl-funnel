@@ -23,8 +23,21 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
+    // Initialize Facebook Pixel
     fbq('init', '1607445923276301');
     fbq('track', 'PageView');
+    
+    // Track ViewContent for the booking page
+    fbq('track', 'ViewContent', {
+        content_name: 'Executive Presence Booking Page',
+        content_category: 'Booking',
+        content_ids: ['executive_presence_booking'],
+        content_type: 'product',
+        value: 0,
+        currency: 'USD',
+        page_type: 'booking',
+        debug_timestamp: Date.now()
+    });
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1607445923276301&ev=PageView&noscript=1"
@@ -206,9 +219,24 @@
                         fbqQueue: window.fbq && window.fbq.queue ? window.fbq.queue : 'No queue',
                         pixelId: '1607445923276301',
                         pageUrl: window.location.href,
-                        timestamp: new Date().toISOString()
+                        timestamp: new Date().toISOString(),
+                        debug: {
+                            pixelLoaded: !!window.fbq,
+                            queueLength: window.fbq?.queue?.length || 0,
+                            documentReady: document.readyState,
+                            iframes: document.querySelectorAll('iframe').length
+                        }
                     };
                     console.log('Facebook Pixel Status:', status);
+                    
+                    // Also log the current state of the page
+                    console.log('Page State:', {
+                        url: window.location.href,
+                        title: document.title,
+                        bodyText: document.body.innerText.substring(0, 200) + '...',
+                        iframeCount: document.querySelectorAll('iframe').length
+                    });
+                    
                     return status;
                 }
 
@@ -280,8 +308,21 @@
                     }
                     
                     // Check for booking completion on page load
+                    console.log('Checking for booking completion on page load...');
                     if (checkBookingCompletion()) {
+                        console.log('Booking completion detected on page load');
                         trackBookingCompletion('page_load');
+                    } else {
+                        console.log('No booking completion detected on page load');
+                        // Also track that the page was viewed
+                        fbq('track', 'ViewContent', {
+                            content_name: 'Executive Presence Booking Page - Viewed',
+                            content_category: 'Booking',
+                            content_ids: ['executive_presence_booking_view'],
+                            content_type: 'product',
+                            page_type: 'booking',
+                            debug_timestamp: Date.now()
+                        });
                     }
                     
                     // Listen for URL changes as the booking flow progresses
