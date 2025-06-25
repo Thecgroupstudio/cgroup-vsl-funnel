@@ -199,78 +199,144 @@
                 </div>
                 <p class="privacy-note">Your information is secure and will never be shared.</p>
                 <script>
+                // Debug function to log Facebook Pixel status
+                function logPixelStatus() {
+                    const status = {
+                        fbqType: typeof fbq,
+                        fbqQueue: window.fbq && window.fbq.queue ? window.fbq.queue : 'No queue',
+                        pixelId: '1607445923276301',
+                        pageUrl: window.location.href,
+                        timestamp: new Date().toISOString()
+                    };
+                    console.log('Facebook Pixel Status:', status);
+                    return status;
+                }
+
+                // Function to track booking completion
+                function trackBookingCompletion(trigger) {
+                    console.log('Tracking booking completion, trigger:', trigger);
+                    
+                    // Track the Schedule event
+                    fbq('track', 'Schedule', {
+                        content_name: 'Executive Presence Consultation',
+                        content_category: 'Booking',
+                        value: 0,
+                        currency: 'USD',
+                        trigger: trigger,
+                        debug_timestamp: Date.now()
+                    });
+                    
+                    // Track a Purchase event with $0 value for conversion tracking
+                    fbq('track', 'Purchase', {
+                        value: 0,
+                        currency: 'USD',
+                        content_type: 'product',
+                        content_ids: ['executive_presence_consultation'],
+                        content_name: 'Executive Presence Consultation',
+                        content_category: 'Booking',
+                        status: 'scheduled',
+                        trigger: trigger,
+                        debug_timestamp: Date.now()
+                    });
+                    
+                    // Track a CompleteRegistration event as well
+                    fbq('track', 'CompleteRegistration', {
+                        content_name: 'Executive Presence Consultation',
+                        content_category: 'Booking',
+                        value: 0,
+                        currency: 'USD',
+                        trigger: trigger,
+                        debug_timestamp: Date.now()
+                    });
+                    
+                    console.log('Booking completion tracked with trigger:', trigger);
+                }
+
                 // Track booking schedule event
                 document.addEventListener('DOMContentLoaded', function() {
+                    console.log('DOM fully loaded, initializing booking tracking...');
+                    logPixelStatus();
+                    
+                    // Function to check if booking is completed
+                    function checkBookingCompletion() {
+                        const currentUrl = window.location.href;
+                        const bodyText = document.body.innerText.toLowerCase();
+                        
+                        if (currentUrl.includes('booking_confirmed') || 
+                            currentUrl.includes('success') ||
+                            bodyText.includes('thank you') ||
+                            bodyText.includes('confirmed') ||
+                            bodyText.includes('appointment scheduled') ||
+                            bodyText.includes('booking complete')) {
+                            
+                            // Only track if we haven't already tracked this session
+                            if (!sessionStorage.getItem('bookingTracked')) {
+                                trackBookingCompletion('page_check');
+                                sessionStorage.setItem('bookingTracked', 'true');
+                            }
+                            return true;
+                        }
+                        return false;
+                    }
+                    
+                    // Check for booking completion on page load
+                    if (checkBookingCompletion()) {
+                        trackBookingCompletion('page_load');
+                    }
+                    
                     // Listen for URL changes as the booking flow progresses
                     let lastUrl = location.href;
-                    const observer = new MutationObserver(() => {
-                        const currentUrl = location.href;
-                        if (currentUrl !== lastUrl) {
-                            lastUrl = currentUrl;
-                            // Check if we're on a success page
-                            if (currentUrl.includes('booking_confirmed') || 
-                                currentUrl.includes('success') ||
-                                document.body.innerText.toLowerCase().includes('thank you') ||
-                                document.body.innerText.toLowerCase().includes('confirmed')) {
-                                
-                                // Track the Schedule event
-                                fbq('track', 'Schedule', {
-                                    content_name: 'Executive Presence Consultation',
-                                    content_category: 'Booking',
-                                    value: 0,
-                                    currency: 'USD'
-                                });
-                                
-                                // Also track a Purchase event with $0 value for conversion tracking
-                                fbq('track', 'Purchase', {
-                                    value: 0,
-                                    currency: 'USD',
-                                    content_type: 'product',
-                                    content_ids: ['executive_presence_consultation'],
-                                    content_name: 'Executive Presence Consultation',
-                                    content_category: 'Booking',
-                                    status: 'scheduled'
-                                });
-                                
-                                // Track a CompleteRegistration event as well
-                                fbq('track', 'CompleteRegistration', {
-                                    content_name: 'Executive Presence Consultation',
-                                    content_category: 'Booking',
-                                    value: 0,
-                                    currency: 'USD'
-                                });
-                            }
+                    const observer = new MutationObserver(function() {
+                        // Check URL change
+                        if (location.href !== lastUrl) {
+                            lastUrl = location.href;
+                            console.log('URL changed to:', lastUrl);
+                            checkBookingCompletion();
+                        }
+                        
+                        // Also check for success elements in the page
+                        const successElements = document.querySelectorAll(
+                            '.booking-confirmation, .success-message, [class*="success"], [id*="success"]'
+                        );
+                        
+                        if (successElements.length > 0 && !sessionStorage.getItem('bookingTracked')) {
+                            console.log('Success elements found on page');
+                            trackBookingCompletion('element_detection');
+                            sessionStorage.setItem('bookingTracked', 'true');
                         }
                     });
                     
                     // Start observing the document with the configured parameters
-                    observer.observe(document, { childList: true, subtree: true });
+                    observer.observe(document, { 
+                        childList: true, 
+                        subtree: true,
+                        characterData: true,
+                        attributes: true
+                    });
                     
-                    // Also check on page load in case we're already on a success page
-                    if (window.location.href.includes('booking_confirmed') || 
-                        window.location.href.includes('success') ||
-                        document.body.innerText.toLowerCase().includes('thank you') ||
-                        document.body.innerText.toLowerCase().includes('confirmed')) {
-                        
-                        fbq('track', 'Schedule', {
-                            content_name: 'Executive Presence Consultation',
-                            content_category: 'Booking',
-                            value: 0,
-                            currency: 'USD',
-                            trigger: 'page_load'
-                        });
-                        
-                        fbq('track', 'Purchase', {
-                            value: 0,
-                            currency: 'USD',
-                            content_type: 'product',
-                            content_ids: ['executive_presence_consultation'],
-                            content_name: 'Executive Presence Consultation',
-                            content_category: 'Booking',
-                            status: 'scheduled',
-                            trigger: 'page_load'
-                        });
-                    }
+                    console.log('MutationObserver started for booking tracking');
+                    
+                    // Also set up a message listener for iframe communication
+                    window.addEventListener('message', function(event) {
+                        try {
+                            const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+                            console.log('Message received from iframe:', data);
+                            
+                            if (data.type === 'booking_completed' || 
+                                data.event === 'booking_success' ||
+                                (data.message && data.message.includes('success'))) {
+                                
+                                if (!sessionStorage.getItem('bookingTracked')) {
+                                    trackBookingCompletion('iframe_message');
+                                    sessionStorage.setItem('bookingTracked', 'true');
+                                }
+                            }
+                        } catch (e) {
+                            console.log('Non-JSON message received from iframe:', event.data);
+                        }
+                    });
+                    
+                    console.log('Message listener set up for iframe communication');
                 });
                 </script>
             </div>
