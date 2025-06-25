@@ -31,7 +31,9 @@
     
     <!-- Content and Engagement Tracking -->
     <script>
+    console.log('Tracking script loaded');
     document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM fully loaded, initializing tracking...');
         // Track ViewContent for the VSL page
         fbq('track', 'ViewContent', {
             content_name: 'IMPACT Framework VSL',
@@ -39,6 +41,7 @@
             content_ids: ['impact_framework_vsl'],
             content_category: 'Executive Presence Training'
         });
+        console.log('Initial ViewContent event sent');
         
         // Track scroll depth
         let scrollTracked = {
@@ -53,17 +56,21 @@
             const pageHeight = document.documentElement.scrollHeight;
             const scrollPercent = Math.round((scrollPosition / pageHeight) * 100);
             
+            console.log('Scroll position:', scrollPercent + '%');
+            
             // Track at 25%, 50%, 75%, and 90% scroll depth
             [25, 50, 75, 90].forEach(percent => {
                 if (scrollPercent >= percent && !scrollTracked[percent]) {
                     scrollTracked[percent] = true;
+                    console.log('Tracking scroll depth:', percent + '%');
                     fbq('track', 'ViewContent', {
                         content_name: 'VSL Scroll Depth',
                         content_type: 'landing_page',
                         content_ids: ['impact_framework_vsl'],
                         content_category: 'Scroll Depth',
                         scroll_depth: percent + '%',
-                        page_url: window.location.href
+                        page_url: window.location.href,
+                        debug_timestamp: Date.now()
                     });
                 }
             });
@@ -87,13 +94,15 @@
         
         // Track button clicks
         function trackButtonClick(button) {
+            console.log('Button clicked:', button.innerText.trim() || 'Unknown button');
             fbq('track', 'InitiateCheckout', {
                 content_name: button.innerText.trim() || 'VSL CTA Click',
                 content_category: 'CTA Click',
                 content_ids: ['impact_framework_vsl'],
                 button_text: button.innerText.trim(),
                 button_url: button.href || window.location.href,
-                page_url: window.location.href
+                page_url: window.location.href,
+                debug_timestamp: Date.now()
             });
         }
         
@@ -104,17 +113,37 @@
             'a[href*="leadconnector"]', 
             'a[href*="booking"]',
             'a[href*="schedule"]',
-            'button[type="submit"]'
+            'button[type="submit"]',
+            'a.btn',
+            'button.btn',
+            'input[type="submit"]',
+            'input[type="button"]'
         ];
         
+        let clickHandlersAdded = 0;
+        
         ctaSelectors.forEach(selector => {
-            document.querySelectorAll(selector).forEach(button => {
-                button.addEventListener('click', function(e) {
-                    // Small timeout to ensure the click is registered before navigation
-                    setTimeout(() => trackButtonClick(button), 100);
+            try {
+                const elements = document.querySelectorAll(selector);
+                console.log(`Found ${elements.length} elements for selector: ${selector}`);
+                
+                elements.forEach(button => {
+                    if (!button.hasAttribute('data-fb-tracked')) {
+                        button.setAttribute('data-fb-tracked', 'true');
+                        button.addEventListener('click', function(e) {
+                            console.log('Click captured on:', selector, button);
+                            // Small timeout to ensure the click is registered before navigation
+                            setTimeout(() => trackButtonClick(button), 100);
+                        });
+                        clickHandlersAdded++;
+                    }
                 });
-            });
+            } catch (e) {
+                console.error('Error setting up click tracking for selector', selector, e);
+            }
         });
+        
+        console.log(`Added click handlers to ${clickHandlersAdded} elements`);
         
         // Set up scroll tracking
         window.addEventListener('scroll', function() {
