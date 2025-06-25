@@ -347,67 +347,79 @@
                     </iframe>
                     <script src="https://link.msgsndr.com/js/form_embed.js"></script>
                     <script>
-                    // Track form submission
-                    document.addEventListener('DOMContentLoaded', function() {
-                        // Listen for form submission
-                        const formIframe = document.querySelector('iframe[src*="leadconnectorhq.com/widget/form"]');
-                        if (formIframe) {
-                            // Add click event listener to the iframe
-                            formIframe.addEventListener('load', function() {
-                                try {
-                                    // Try to access the iframe content
-                                    const iframeDoc = formIframe.contentDocument || formIframe.contentWindow.document;
-                                    const form = iframeDoc.querySelector('form');
-                                    if (form) {
-                                        form.addEventListener('submit', function() {
-                                            // Track the Lead event
-                                            fbq('track', 'Lead', {
-                                                content_name: 'Executive Presence Blueprint',
-                                                content_category: 'Lead Magnet'
-                                            });
-                                            
-                                            // Also track a CompleteRegistration event
-                                            fbq('track', 'CompleteRegistration', {
-                                                content_name: 'Executive Presence Blueprint',
-                                                content_category: 'Opt-in'
-                                            });
-                                        });
-                                    }
-                                } catch (e) {
-                                    console.log('Could not access iframe content:', e);
-                                    
-                                    // Fallback: Listen for messages from the iframe
-                                    window.addEventListener('message', function(event) {
-                                        // Check if the message is from LeadConnector
-                                        if (event.origin === 'https://api.leadconnectorhq.com' && 
-                                            event.data) {
-                                            console.log('Received message from LeadConnector:', event.data);
-                                            
-                                            // Track on any message as a fallback
-                                            fbq('track', 'Lead', {
-                                                content_name: 'Executive Presence Blueprint',
-                                                content_category: 'Lead Magnet',
-                                                method: 'message_listener'
-                                            });
-                                        }
-                                    }, false);
-                                }
+                    // Track form submission with debounce and single-fire logic
+                    (function() {
+                        // Track if we've already fired the event
+                        let hasTracked = false;
+                        
+                        // Function to track the lead (with debounce)
+                        function trackLead() {
+                            if (hasTracked) return;
+                            hasTracked = true;
+                            
+                            console.log('Tracking Lead event');
+                            fbq('track', 'Lead', {
+                                content_name: 'Executive Presence Blueprint',
+                                content_category: 'Lead Magnet',
+                                eventID: 'optin_' + Date.now()
                             });
+                            
+                            // Also track a CompleteRegistration event
+                            fbq('track', 'CompleteRegistration', {
+                                content_name: 'Executive Presence Blueprint',
+                                content_category: 'Opt-in',
+                                eventID: 'complete_' + Date.now()
+                            });
+                            
+                            // Remove event listeners after tracking
+                            window.removeEventListener('message', handleMessage);
+                            document.removeEventListener('click', handleClick);
                         }
                         
-                        // Add a click event listener to the document as a fallback
-                        document.addEventListener('click', function(e) {
-                            // Check if the click is on or inside the form iframe
+                        // Handle messages from iframe
+                        function handleMessage(event) {
+                            if (event.origin === 'https://api.leadconnectorhq.com' && event.data) {
+                                console.log('Received message from LeadConnector:', event.data);
+                                // If we get any message from LeadConnector, track the lead
+                                trackLead();
+                            }
+                        }
+                        
+                        // Handle clicks on the iframe
+                        function handleClick(e) {
                             if (e.target.closest('iframe[src*="leadconnectorhq.com"]')) {
-                                // Track the Lead event on any click within the iframe
-                                fbq('track', 'Lead', {
-                                    content_name: 'Executive Presence Blueprint',
-                                    content_category: 'Lead Magnet',
-                                    method: 'click_listener'
+                                trackLead();
+                            }
+                        }
+                        
+                        // Initialize when DOM is ready
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const formIframe = document.querySelector('iframe[src*="leadconnectorhq.com/widget/form"]');
+                            
+                            if (formIframe) {
+                                // Try to access the iframe content
+                                formIframe.addEventListener('load', function() {
+                                    try {
+                                        const iframeDoc = formIframe.contentDocument || formIframe.contentWindow.document;
+                                        const form = iframeDoc.querySelector('form');
+                                        if (form) {
+                                            form.addEventListener('submit', trackLead);
+                                        }
+                                    } catch (e) {
+                                        console.log('Could not access iframe content:', e);
+                                        // Fall back to message/click listeners
+                                        window.addEventListener('message', handleMessage, false);
+                                    }
                                 });
+                                
+                                // Also set up click listener as a fallback
+                                document.addEventListener('click', handleClick);
                             }
                         });
-                    });
+                        
+                        // Track page view with PageView event
+                        fbq('track', 'PageView');
+                    })();
                     </script>
                 </div>
             </div>
