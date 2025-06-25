@@ -106,59 +106,146 @@
             });
         }
         
-        // Track the main CTA button
-        const bookingButton = document.getElementById('bookingButton');
-        if (bookingButton) {
-            console.log('Found booking button, adding click listener');
-            bookingButton.addEventListener('click', function(e) {
-                console.log('Booking button clicked');
-                fbq('track', 'InitiateCheckout', {
-                    content_name: 'Book Consultation',
-                    content_category: 'CTA Click',
-                    content_ids: ['impact_framework_vsl'],
-                    button_text: 'SCHEDULE A CONSULTATION HERE',
-                    button_id: 'bookingButton',
-                    page_url: window.location.href,
-                    debug_timestamp: Date.now()
-                });
-            });
-        } else {
-            console.log('Booking button not found');
+        // Helper function to safely add event listeners
+        function safeAddEventListener(element, event, handler) {
+            try {
+                if (element && element.addEventListener) {
+                    element.addEventListener(event, handler);
+                    console.log(`Added ${event} listener to`, element);
+                    return true;
+                }
+                return false;
+            } catch (e) {
+                console.error('Error adding event listener:', e);
+                return false;
+            }
         }
-        
+
+        // Track the main CTA button with multiple fallbacks
+        function trackBookingButton() {
+            // Try different ways to find the button
+            const buttonSelectors = [
+                '#bookingButton',
+                '.submit-btn',
+                'a[href*="executive-presence-booking"]',
+                'a:contains("SCHEDULE A CONSULTATION")',
+                'a:contains("Book Now")',
+                'a[style*="background:"]',
+                'a[style*="background-color:"]',
+                'a[style*="color: white"]',
+                'a[style*="color:white"]'
+            ];
+
+            let buttonFound = false;
+            
+            for (const selector of buttonSelectors) {
+                try {
+                    const buttons = document.querySelectorAll(selector);
+                    if (buttons && buttons.length > 0) {
+                        console.log(`Found ${buttons.length} elements matching selector: ${selector}`);
+                        buttons.forEach(btn => {
+                            if (!btn.hasAttribute('data-tracked')) {
+                                btn.setAttribute('data-tracked', 'true');
+                                safeAddEventListener(btn, 'click', function(e) {
+                                    console.log('CTA Button clicked:', btn.innerText.trim());
+                                    fbq('track', 'InitiateCheckout', {
+                                        content_name: 'Book Consultation',
+                                        content_category: 'CTA Click',
+                                        content_ids: ['impact_framework_vsl'],
+                                        button_text: btn.innerText.trim(),
+                                        button_selector: selector,
+                                        page_url: window.location.href,
+                                        debug_timestamp: Date.now()
+                                    });
+                                });
+                                buttonFound = true;
+                            }
+                        });
+                        if (buttonFound) break;
+                    }
+                } catch (e) {
+                    console.error(`Error with selector ${selector}:`, e);
+                }
+            }
+
+            if (!buttonFound) {
+                console.warn('No booking button found with standard selectors, trying fallback...');
+                // Last resort: try to find any clickable element that might be a button
+                const allLinks = document.querySelectorAll('a, button, [role="button"]');
+                console.log(`Found ${allLinks.length} potential clickable elements`);
+            }
+        }
+
         // Track YouTube video interactions
-        const youtubeIframe = document.querySelector('iframe[src*="youtube"]');
-        if (youtubeIframe) {
-            console.log('YouTube iframe found, setting up tracking');
-            
-            // Track when the iframe is clicked (as a proxy for play)
-            youtubeIframe.addEventListener('load', function() {
-                console.log('YouTube iframe loaded');
-                // Track initial view of the video
-                fbq('track', 'ViewContent', {
-                    content_name: 'YouTube Video Loaded',
-                    content_type: 'video',
-                    content_ids: ['impact_framework_vsl'],
-                    content_category: 'Video Engagement',
-                    video_provider: 'youtube',
-                    debug_timestamp: Date.now()
+        function trackYouTubeVideo() {
+            const youtubeIframe = document.querySelector('iframe[src*="youtube"], iframe[src*="youtu.be"]');
+            if (youtubeIframe) {
+                console.log('YouTube iframe found, setting up tracking');
+                
+                // Track when the iframe loads
+                safeAddEventListener(youtubeIframe, 'load', function() {
+                    console.log('YouTube iframe loaded');
+                    fbq('track', 'ViewContent', {
+                        content_name: 'YouTube Video Loaded',
+                        content_type: 'video',
+                        content_ids: ['impact_framework_vsl'],
+                        content_category: 'Video Engagement',
+                        video_provider: 'youtube',
+                        debug_timestamp: Date.now()
+                    });
                 });
-            });
-            
-            // Track clicks on the iframe as a play event
-            youtubeIframe.parentElement.addEventListener('click', function() {
-                console.log('YouTube iframe clicked (likely play)');
-                fbq('track', 'ViewContent', {
-                    content_name: 'YouTube Video Play',
-                    content_type: 'video',
-                    content_ids: ['impact_framework_vsl'],
-                    content_category: 'Video Engagement',
-                    video_action: 'play',
-                    debug_timestamp: Date.now()
+                
+                // Track clicks on the iframe container
+                const videoContainer = youtubeIframe.parentElement;
+                if (videoContainer) {
+                    safeAddEventListener(videoContainer, 'click', function() {
+                        console.log('YouTube video container clicked');
+                        fbq('track', 'ViewContent', {
+                            content_name: 'YouTube Video Play',
+                            content_type: 'video',
+                            content_ids: ['impact_framework_vsl'],
+                            content_category: 'Video Engagement',
+                            video_action: 'play',
+                            debug_timestamp: Date.now()
+                        });
+                    });
+                }
+                
+                // Also track the iframe directly in case it's clickable
+                safeAddEventListener(youtubeIframe, 'click', function() {
+                    console.log('YouTube iframe clicked directly');
+                    fbq('track', 'ViewContent', {
+                        content_name: 'YouTube Video Play (Direct)',
+                        content_type: 'video',
+                        content_ids: ['impact_framework_vsl'],
+                        content_category: 'Video Engagement',
+                        video_action: 'play_direct',
+                        debug_timestamp: Date.now()
+                    });
                 });
-            });
+            } else {
+                console.log('YouTube iframe not found');
+            }
+        }
+
+        // Initialize tracking with retry logic
+        function initializeTracking() {
+            console.log('Initializing tracking...');
+            trackBookingButton();
+            trackYouTubeVideo();
+            
+            // If no button found initially, try again after a delay in case of dynamic loading
+            if (document.querySelectorAll('[data-tracked="true"]').length === 0) {
+                console.log('No buttons tracked yet, will retry in 1 second...');
+                setTimeout(trackBookingButton, 1000);
+            }
+        }
+
+        // Start tracking when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeTracking);
         } else {
-            console.log('YouTube iframe not found');
+            initializeTracking();
         }
         
         // Set up scroll tracking
