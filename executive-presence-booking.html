@@ -36,8 +36,8 @@
         }
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
+            margin-bottom: 30px;
+            padding: 0 15px 20px;
             border-bottom: 1px solid #e2e8f0;
         }
         h1 {
@@ -45,53 +45,100 @@
             font-size: 2.4rem;
             margin: 0 auto 20px;
             font-weight: 800;
-            line-height: 1.3;
+            line-height: 1.25;
             letter-spacing: -0.5px;
-            max-width: 800px;
+            max-width: 100%;
+            padding: 0 10px;
         }
         .subheadline {
             font-size: 1.3rem;
             color: var(--secondary);
-            margin: 0 auto 30px;
+            margin: 0 auto 20px;
             font-weight: 500;
             line-height: 1.5;
-            max-width: 700px;
+            max-width: 100%;
+            padding: 0 10px;
         }
         .booking-container {
             background: white;
             border-radius: 10px;
-            padding: 40px;
+            padding: 30px 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            margin: 0 auto;
-            max-width: 800px;
+            margin: 0 auto 40px;
+            max-width: 100%;
         }
-        .loading-note {
+        .booking-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 16px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(26, 54, 93, 0.25);
+            width: 100%;
+            max-width: 400px;
+            margin: 15px auto 25px;
             text-align: center;
-            color: #4a5568;
-            font-style: italic;
-            margin: 15px 0 30px;
-            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
         }
-        .booking-iframe-container {
-            min-height: 700px;
-            border-radius: 8px;
-            overflow: hidden;
-            margin: 20px 0;
+        .booking-btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 54, 93, 0.3);
+        }
+        .privacy-note {
+            color: #666;
+            font-size: 1rem;
+            max-width: 800px;
+            margin: 30px auto 15px;
+            line-height: 1.6;
+            padding: 0 10px;
+        }
+        .new-window-note {
+            color: #999;
+            font-size: 0.9rem;
+            margin: 0 auto 15px;
         }
         @media (max-width: 768px) {
             .container {
-                padding: 30px 15px;
-            }
-            .booking-container {
-                padding: 25px 20px;
+                padding: 25px 15px 40px;
             }
             h1 {
                 font-size: 2rem;
                 margin-bottom: 15px;
+                line-height: 1.2;
+            }
+            .subheadline {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+            }
+            .booking-container {
+                padding: 25px 20px;
+                margin: 0 auto 30px;
+            }
+            .booking-btn {
+                font-size: 1.05rem;
+                padding: 14px 25px;
+                max-width: 100%;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
             }
             .subheadline {
                 font-size: 1.1rem;
-                margin-bottom: 25px;
+            }
+            .booking-btn {
+                font-size: 1rem;
+                padding: 14px 20px;
+            }
+            .privacy-note {
+                font-size: 0.95rem;
             }
         }
     </style>
@@ -104,27 +151,24 @@
             <p class="subheadline" style="margin-top: -10px; font-size: 1.1rem; color: #4a5568;">This is your first step to regulating your nervous system, unlocking clarity under pressure, and showing up as the most grounded version of yourself in every room you walk into.</p>
         </div>
 
-        <div class="booking-container" style="background: #fff; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); padding: 40px; margin: 20px 0 40px 0; text-align: center;">
-            <h2 style="color: var(--primary); margin-bottom: 25px; font-size: 1.8rem;">Book Your Session</h2>
-            <p style="color: var(--dark); font-size: 1.1rem; margin-bottom: 30px; line-height: 1.6;">
+        <div class="booking-container">
+            <h2 style="color: var(--primary); margin: 0 0 20px 0; font-size: 1.8rem; line-height: 1.3;">Book Your Session</h2>
+            <p style="color: var(--dark); font-size: 1.1rem; margin: 0 auto 25px; line-height: 1.6; max-width: 700px;">
                 Click the button below to select your preferred time and complete your booking.
             </p>
             
             <a href="https://api.leadconnectorhq.com/widget/booking/pZBC4tvuhTVrNusNkkbY" 
                target="_blank" 
                rel="noopener noreferrer"
-               style="display: inline-block; background-color: var(--primary); color: white; 
-                      text-decoration: none; padding: 15px 40px; border-radius: 50px; 
-                      font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease;
-                      box-shadow: 0 4px 15px rgba(26, 54, 93, 0.25);">
+               class="booking-btn">
                 View Available Times
             </a>
             
-            <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #e2e8f0;">
-                <p style="color: #666; font-size: 1rem; max-width: 800px; margin: 0 auto 15px; line-height: 1.6;">
+            <div style="margin-top: 30px; padding-top: 25px; border-top: 1px solid #e2e8f0;">
+                <p class="privacy-note">
                     Your information is secure. We respect your privacy and will never share your details with third parties.
                 </p>
-                <p style="color: #999; font-size: 0.9rem;">
+                <p class="new-window-note">
                     (Opens in a new window)
                 </p>
             </div>

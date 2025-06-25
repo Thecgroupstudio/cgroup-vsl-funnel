@@ -7,130 +7,347 @@
     <meta name="description" content="Your consultation is confirmed. Please see this page for important information and required preparation steps before our call.">
     <title>Booking Confirmed: Your Next Steps</title>
     <link rel="icon" href="images/cgroup-logo.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #e53e3e;
+            --light: #f7fafc;
+            --dark: #2d3748;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 15px;
+        }
+        .step-container {
+            background: white;
+            border-radius: 10px;
+            padding: 35px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .step-title {
+            color: var(--accent);
+            font-size: 1.8rem;
+            margin: 0 0 15px;
+            font-weight: 700;
+            line-height: 1.3;
+            text-align: center;
+        }
+        .step-heading {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin: 0 0 25px;
+            font-weight: 800;
+            line-height: 1.2;
+            text-align: center;
+        }
+        .step-subtitle {
+            color: var(--dark);
+            font-size: 1.2rem;
+            margin: 0 0 30px;
+            font-weight: 500;
+            text-align: center;
+        }
+        .video-container {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 640px;
+            margin: 0 auto 30px;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .important-note {
+            background: #f0f9ff;
+            border-left: 4px solid var(--secondary);
+            padding: 20px;
+            border-radius: 6px;
+            text-align: left;
+            max-width: 700px;
+            margin: 30px auto 0;
+        }
+        .important-note h3 {
+            color: var(--secondary);
+            font-size: 1.3rem;
+            margin: 0 0 15px;
+            font-weight: 600;
+        }
+        .important-note p {
+            color: var(--dark);
+            margin: 0 0 15px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .important-note img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-top: 15px;
+        }
+        .btn-primary {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 16px 30px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .btn-primary:hover {
+            background: #c53030;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .testimonial {
+            max-width: 500px;
+            margin: 0 auto 30px;
+            text-align: left;
+            background: #000;
+            padding: 25px;
+            border-radius: 0;
+            color: #fff;
+            font-family: Georgia, serif;
+        }
+        .testimonial-rating {
+            color: #fff;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            line-height: 1;
+        }
+        .testimonial-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0 0 20px;
+            position: relative;
+            font-weight: 400;
+        }
+        .testimonial-author {
+            font-style: italic;
+            font-size: 0.9rem;
+            margin: 0;
+            color: #fff;
+            opacity: 0.9;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px 15px;
+            }
+            .step-container {
+                padding: 25px 20px;
+                margin-bottom: 25px;
+            }
+            .step-title {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+            .step-heading {
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+                line-height: 1.2;
+            }
+            .step-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 25px;
+            }
+            .important-note {
+                padding: 15px;
+            }
+            .important-note h3 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+            .btn-primary {
+                font-size: 1.05rem;
+                padding: 14px 25px;
+                width: 100%;
+                max-width: 100%;
+            }
+            .testimonial {
+                padding: 20px;
+                margin-bottom: 25px;
+            }
+        }
+        @media (max-width: 480px) {
+            .step-title {
+                font-size: 1.3rem;
+            }
+            .step-heading {
+                font-size: 1.5rem;
+            }
+            .step-subtitle {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+            .btn-primary {
+                font-size: 1rem;
+                padding: 14px 20px;
+            }
+            .testimonial {
+                padding: 15px;
+            }
+            .testimonial-text {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
 </head>
-<body style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.6; color: #2d3748; margin: 0; padding: 0; background-color: #f8f9fa;">
-    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 40px 20px 60px;">
+<body>
+    <div class="container">
         <!-- Step 1: Watch The Video -->
-        <div style="text-align: center; margin-bottom: 60px; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-            <h2 style="color: #e53e3e; font-size: 1.8rem; margin: 0 0 15px; font-weight: 700; line-height: 1.4;">Wait! Your Booking Is Not Yet Complete!</h2>
-            <h1 style="color: #1a365d; font-size: 2.2rem; margin: 0 0 30px; font-weight: 800; line-height: 1.3;">Step #1 of 3: Watch The Video Below</h1>
-            <p style="color: #2d3748; font-size: 1.2rem; margin: 0 0 30px; font-weight: 500;">Please Watch The Video Below To Confirm Your Consultation</p>
+        <div class="step-container">
+            <h2 class="step-title">Wait! Your Booking Is Not Yet Complete!</h2>
+            <h1 class="step-heading">Step #1 of 3: Watch The Video Below</h1>
+            <p class="step-subtitle">Please Watch The Video Below To Confirm Your Consultation</p>
             
-            <!-- Video Container -->
-            <div style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); max-width: 360px; margin: 0 auto 20px;">
-                <iframe width="100%" height="640" src="https://www.youtube.com/embed/8ZBx31YF3Fs?si=goPdkxcVxI_aXu9h" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display: block; margin: 0 auto;"></iframe>
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/8ZBx31YF3Fs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
             </div>
             
-            <div style="background: #f0f9ff; border-left: 4px solid #3182ce; padding: 20px; border-radius: 6px; text-align: left; max-width: 700px; margin: 40px auto 0;">
-                <h3 style="color: #2c5282; font-size: 1.3rem; margin: 0 0 15px 0; font-weight: 600;">IMPORTANT: Add The Event To Your Calendar</h3>
-                <p style="color: #2d3748; margin: 0 0 15px 0; font-size: 1rem; line-height: 1.6;">
+            <div class="important-note">
+                <h3>IMPORTANT: Add The Event To Your Calendar</h3>
+                <p>
                     Check your email inbox for a message titled "Event Invitation" from an @kathrynficarra.com address.<br>
                     Click "Yes" or "Add to Calendar" to lock it in.
                 </p>
-                <div style="margin-top: 15px; text-align: center;">
-                    <img src="images/I know the Sender Example.png" alt="Event Invitation Example" style="max-width: 100%; height: auto; border: 1px solid #e2e8f0; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <div style="text-align: center;">
+                    <img src="images/I know the Sender Example.png" alt="Event Invitation Example">
                 </div>
             </div>
         </div>
 
         <!-- Step 2: Access Your Free Masterclass -->
-        <div style="text-align: center; margin-bottom: 60px; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-            <h2 style="color: #1a365d; font-size: 2rem; margin: 0 0 20px; font-weight: 800; line-height: 1.3;">Step #2 of 3: Access Your Free Masterclass</h2>
-            <a href="masterclass.html" target="_blank" style="display: inline-block; background: #e53e3e; color: white; text-decoration: none; font-weight: 600; padding: 15px 30px; border-radius: 6px; font-size: 1.1rem; margin: 20px 0; transition: all 0.3s ease;">
+        <div class="step-container" style="text-align: center;">
+            <h2 class="step-heading">Step #2 of 3: Access Your Free Masterclass</h2>
+            <a href="masterclass.html" target="_blank" rel="noopener noreferrer" class="btn-primary">
                 ▶︎ Watch The Masterclass Here (opens in a new tab)
             </a>
         </div>
 
         <!-- Step 3: Client Appreciation -->
-        <div style="text-align: center; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-            <h2 style="color: #1a365d; font-size: 2rem; margin: 0 0 40px; font-weight: 800; line-height: 1.3;">Step #3 of 3: What Other Leaders Are Saying</h2>
+        <div class="step-container" style="text-align: center;">
+            <h2 class="step-heading">Step #3 of 3: What Other Leaders Are Saying</h2>
             
             <!-- Testimonial 1 -->
-            <div style="max-width: 500px; margin: 0 auto 40px; text-align: left; background: #000; padding: 30px; border-radius: 0; position: relative; color: #fff; font-family: Georgia, serif;">
-                <div style="color: #fff; font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 15px; line-height: 1;">
+            <div class="testimonial">
+                <div class="testimonial-rating">
                     ☆ ☆ ☆ ☆ ☆
                 </div>
-                <p style="font-size: 1rem; line-height: 1.6; margin: 0 0 20px 0; position: relative; font-weight: 400;">
+                <p class="testimonial-text">
                     Kathryn coached me through several contracts I had up in the air. I had no idea the way I was coming across. We worked on my belief patterns around closing business. I implemented her process and I closed the deal at the price I wanted.
                 </p>
-                <p style="font-style: italic; font-size: 0.9rem; margin: 0; color: #fff; opacity: 0.9;">—Rebecca, Architect</p>
+                <p class="testimonial-author">—Rebecca, Architect</p>
             </div>
 
             <!-- Testimonial 2 -->
-            <div style="max-width: 500px; margin: 0 auto 40px; text-align: left; background: #000; padding: 30px; border-radius: 0; position: relative; color: #fff; font-family: Georgia, serif;">
-                <div style="color: #fff; font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 15px; line-height: 1;">
+            <div class="testimonial">
+                <div class="testimonial-rating">
                     ☆ ☆ ☆ ☆ ☆
                 </div>
-                <p style="font-size: 1rem; line-height: 1.6; margin: 0 0 20px 0; position: relative; font-weight: 400;">
+                <p class="testimonial-text">
                     Kathryn coached me on my business strategy. Would you believe we uncovered the energetic drag I was seeing was relationship? When we fixed that, everything changed. She changed my life.
                 </p>
-                <p style="font-style: italic; font-size: 0.9rem; margin: 0; color: #fff; opacity: 0.9;">—Doris, Entrepreneur</p>
+                <p class="testimonial-author">—Doris, Entrepreneur</p>
             </div>
 
             <!-- Testimonial 3 -->
-            <div style="max-width: 500px; margin: 0 auto 40px; text-align: left; background: #000; padding: 30px; border-radius: 0; position: relative; color: #fff; font-family: Georgia, serif;">
-                <div style="color: #fff; font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 15px; line-height: 1;">
+            <div class="testimonial">
+                <div class="testimonial-rating">
                     ☆ ☆ ☆ ☆ ☆
                 </div>
-                <p style="font-size: 1rem; line-height: 1.6; margin: 0 0 20px 0; position: relative; font-weight: 400;">
+                <p class="testimonial-text">
                     Kathryn's approach to leadership was innovative and really helped the team take the onus on themselves and what they bring to the table. It is improving our culture.
                 </p>
-                <p style="font-style: italic; font-size: 0.9rem; margin: 0; color: #fff; opacity: 0.9;">—Deanne, Starbucks</p>
+                <p class="testimonial-author">—Deanne, Starbucks</p>
             </div>
 
             <!-- Testimonial 4 -->
-            <div style="max-width: 500px; margin: 0 auto 40px; text-align: left; background: #000; padding: 30px; border-radius: 0; position: relative; color: #fff; font-family: Georgia, serif;">
-                <div style="color: #fff; font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 15px; line-height: 1;">
+            <div class="testimonial">
+                <div class="testimonial-rating">
                     ☆ ☆ ☆ ☆ ☆
                 </div>
-                <p style="font-size: 1rem; line-height: 1.6; margin: 0 0 20px 0; position: relative; font-weight: 400;">
+                <p class="testimonial-text">
                     Kathryn is incredibly powerful. What she discussed was relevant in my life, and I really resonated with her message.
                 </p>
-                <p style="font-style: italic; font-size: 0.9rem; margin: 0; color: #fff; opacity: 0.9;">—Joe L., DreamWorks Animation Studios</p>
+                <p class="testimonial-author">—Joe L., DreamWorks Animation Studios</p>
             </div>
 
             <!-- Testimonial 5 -->
-            <div style="max-width: 500px; margin: 0 auto 40px; text-align: left; background: #000; padding: 30px; border-radius: 0; position: relative; color: #fff; font-family: Georgia, serif;">
-                <div style="color: #fff; font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 15px; line-height: 1;">
+            <div class="testimonial">
+                <div class="testimonial-rating">
                     ☆ ☆ ☆ ☆ ☆
                 </div>
-                <p style="font-size: 1rem; line-height: 1.6; margin: 0 0 20px 0; position: relative; font-weight: 400;">
+                <p class="testimonial-text">
                     Kathryn's message is relevant and powerful. I was honored to learn from her.
                 </p>
-                <p style="font-style: italic; font-size: 0.9rem; margin: 0; color: #fff; opacity: 0.9;">—Barbara, DisruptHR</p>
+                <p class="testimonial-author">—Barbara, DisruptHR</p>
             </div>
 
             <!-- Testimonial 6 -->
-            <div style="max-width: 500px; margin: 0 auto 40px; text-align: left; background: #000; padding: 30px; border-radius: 0; position: relative; color: #fff; font-family: Georgia, serif;">
-                <div style="color: #fff; font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 15px; line-height: 1;">
+            <div class="testimonial">
+                <div class="testimonial-rating">
                     ☆ ☆ ☆ ☆ ☆
                 </div>
-                <p style="font-size: 1rem; line-height: 1.6; margin: 0 0 20px 0; position: relative; font-weight: 400;">
+                <p class="testimonial-text">
                     Kathryn's presentation helped me to think about things in a completely different way. It challenged me, inspired me, and will change the way I do business and life.
                 </p>
-                <p style="font-style: italic; font-size: 0.9rem; margin: 0; color: #fff; opacity: 0.9;">—Caleb S., Entrepreneur</p>
+                <p class="testimonial-author">—Caleb S., Entrepreneur</p>
             </div>
 
             <!-- Testimonial 7 -->
-            <div style="max-width: 500px; margin: 0 auto 40px; text-align: left; background: #000; padding: 30px; border-radius: 0; position: relative; color: #fff; font-family: Georgia, serif;">
-                <div style="color: #fff; font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 15px; line-height: 1;">
+            <div class="testimonial">
+                <div class="testimonial-rating">
                     ☆ ☆ ☆ ☆ ☆
                 </div>
-                <p style="font-size: 1rem; line-height: 1.6; margin: 0 0 20px 0; position: relative; font-weight: 400;">
+                <p class="testimonial-text">
                     Kathryn has a unique way of asking questions, and those lead to changing the way you think. She has a unique approach and it has helped me tremendously in my speaking business.
                 </p>
-                <p style="font-style: italic; font-size: 0.9rem; margin: 0; color: #fff; opacity: 0.9;">—Nikki R., Entrepreneur</p>
+                <p class="testimonial-author">—Nikki R., Entrepreneur</p>
             </div>
 
             <!-- Testimonial 8 -->
-            <div style="max-width: 500px; margin: 0 auto; text-align: left; background: #000; padding: 30px; border-radius: 0; position: relative; color: #fff; font-family: Georgia, serif;">
-                <div style="color: #fff; font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 15px; line-height: 1;">
+            <div class="testimonial" style="margin-bottom: 0;">
+                <div class="testimonial-rating">
                     ☆ ☆ ☆ ☆ ☆
                 </div>
-                <p style="font-size: 1rem; line-height: 1.6; margin: 0 0 20px 0; position: relative; font-weight: 400;">
+                <p class="testimonial-text">
                     Kathryn's approach to presence is truly one of a kind. She goes right to the core of what presence truly is, uncovering the foundational systems that most overlook. It is a perspective that I haven't seen taught this way before. It is both refreshing and transformative.
                 </p>
-                <p style="font-style: italic; font-size: 0.9rem; margin: 0; color: #fff; opacity: 0.9;">—Jenn G., Entrepreneur</p>
+                <p class="testimonial-author">—Jenn G., Entrepreneur</p>
             </div>
 
 
