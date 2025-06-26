@@ -320,14 +320,21 @@
             <h2 class="step-heading">Step #2 of 3: Additional Information</h2>
             <p class="step-subtitle">Before our 1 on 1 Free Consultation With Me</p>
             
-            <div class="video-container">
+            <div class="video-container" style="max-width: 800px;">
                 <div class="video-wrapper">
-                    <video controls autoplay style="width: 100%; height: 100%;">
-                        <source src="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/685dbca85e100ee7f36dfffe.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                    <iframe 
+                        src="https://player.vimeo.com/video/685dbca85e100ee7f36dfffe" 
+                        frameborder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture" 
+                        allowfullscreen
+                        style="width:100%;height:100%;">
+                    </iframe>
                 </div>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                    If the video doesn't load, please <a href="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/685dbca85e100ee7f36dfffe.mp4" target="_blank" style="color: #e53e3e; text-decoration: underline;">click here to watch the video</a>.
+                </p>
             </div>
+            <script src="https://player.vimeo.com/api/player.js"></script>
         </div>
 
         <!-- Step 3: Client Appreciation -->
