@@ -11,18 +11,53 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code with AEM Configuration -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    // Configure AEM (Aggregated Event Measurement)
+    !function(f,b,e,v,n,t,s){
+    if(f.fbq)return;n=f.fbq=function(){n.callMethod ?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
     n.queue=[];t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1607445923276301');
-    fbq('track', 'PageView');
+    
+    // Initialize Pixel with AEM configuration
+    fbq('init', '1607445923276301', {
+        em: 'your_email@example.com', // Replace with your email for AEM
+        external_id: false,           // Set to true if using external IDs
+        autoConfig: true,             // Enable automatic configuration
+        debug: true,                  // Enable debug mode
+        dataProcessingOptions: ['LDU'], // Enable Limited Data Use mode
+        dataProcessingOptionsCountry: 1, // 1 = US, 100 = worldwide
+        dataProcessingOptionsState: 100 // 100 = worldwide
+    });
+    
+    // Set data processing options for GDPR/CCPA compliance
+    fbq('dataProcessingOptions', ['LDU'], 1, 1000);
+    
+    // Track PageView with AEM parameters
+    fbq('track', 'PageView', {
+        eventID: 'pageview_' + Date.now(),
+        source_url: window.location.href,
+        plugin: 'AEM',
+        aem: 1
+    });
+    
+    // Configure Automatic Advanced Matching (AAM)
+    fbq('init', '1607445923276301', {
+        em: 'hashed_email',
+        ph: 'hashed_phone_number',
+        db: 'hashed_date_of_birth',
+        ge: 'hashed_gender',
+        fn: 'hashed_first_name',
+        ln: 'hashed_last_name',
+        external_id: 'hashed_user_id'
+    }, { 
+        autoConfig: true,
+        debug: true 
+    });
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1607445923276301&ev=PageView&noscript=1"
@@ -415,15 +450,16 @@
                                 allowfullscreen>
                             </iframe>
                         </div>
+                        
+                        <!-- Booking Button Moved Here -->
+                        <a href="executive-presence-booking.html" class="submit-btn" style="font-size: 1.3rem; font-weight: 700; padding: 16px 30px; width: 100%; max-width: 500px; margin: 20px auto; display: block; background: #e53e3e; color: white; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; text-decoration: none; text-align: center;" id="bookingButton">
+                            SCHEDULE A CONSULTATION HERE
+                        </a>
                     </div>
                     
                     <p style="text-align: center; color: #2d3748; font-size: 1.1rem; margin: 15px auto 20px; line-height: 1.6; font-weight: 500; max-width: 700px; padding: 0 10px;">
                         Discover how to transform your nervous system to project authentic executive presence, speak with clarity under pressure, and command authority like top leaders from Disney and Starbucks — without scripts or fake confidence.
                     </p>
-                    
-                    <a href="executive-presence-booking.html" class="submit-btn" style="font-size: 1.3rem; font-weight: 700; padding: 16px 30px; width: 100%; max-width: 500px; margin: 15px auto 25px; display: block; background: #e53e3e; color: white; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; text-decoration: none; text-align: center;" id="bookingButton">
-                        SCHEDULE A CONSULTATION HERE
-                    </a>
                 </div>
             </div>
         </div>

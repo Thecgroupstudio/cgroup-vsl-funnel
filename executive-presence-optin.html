@@ -11,10 +11,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code with AEM Configuration -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    // Configure AEM (Aggregated Event Measurement)
+    !function(f,b,e,v,n,t,s){
+    if(f.fbq)return;n=f.fbq=function(){n.callMethod ?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
     n.queue=[];t=b.createElement(e);t.async=!0;
@@ -22,13 +23,29 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     
-    // Initialize Pixel with your ID
-    fbq('init', '1607445923276301');
+    // Initialize Pixel with AEM configuration
+    fbq('init', '1607445923276301', {
+        em: 'your_email@example.com', // Replace with your email for AEM
+        external_id: false,           // Set to true if using external IDs
+        autoConfig: true,             // Enable automatic configuration
+        debug: true,                  // Enable debug mode
+        dataProcessingOptions: ['LDU'], // Enable Limited Data Use mode
+        dataProcessingOptionsCountry: 1, // 1 = US, 100 = worldwide
+        dataProcessingOptionsState: 100 // 100 = worldwide
+    });
     
-    // Track PageView
-    fbq('track', 'PageView');
+    // Set data processing options for GDPR/CCPA compliance
+    fbq('dataProcessingOptions', ['LDU'], 1, 1000);
     
-    // Track ViewContent for the opt-in page
+    // Track PageView with AEM parameters
+    fbq('track', 'PageView', {
+        eventID: 'pageview_' + Date.now(),
+        source_url: window.location.href,
+        plugin: 'AEM',
+        aem: 1
+    });
+    
+    // Track ViewContent with AEM parameters
     fbq('track', 'ViewContent', {
         content_name: 'Executive Presence Opt-in Page',
         content_category: 'Lead Generation',
@@ -37,7 +54,23 @@
         value: 0,
         currency: 'USD',
         page_type: 'optin',
+        eventID: 'view_content_' + Date.now(),
+        aem: 1,
         debug_timestamp: Date.now()
+    });
+    
+    // Configure Automatic Advanced Matching (AAM)
+    fbq('init', '1607445923276301', {
+        em: 'hashed_email',
+        ph: 'hashed_phone_number',
+        db: 'hashed_date_of_birth',
+        ge: 'hashed_gender',
+        fn: 'hashed_first_name',
+        ln: 'hashed_last_name',
+        external_id: 'hashed_user_id'
+    }, { 
+        autoConfig: true,
+        debug: true 
     });
     </script>
     <noscript><img height="1" width="1" style="display:none"
