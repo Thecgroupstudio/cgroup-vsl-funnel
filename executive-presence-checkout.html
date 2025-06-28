@@ -269,33 +269,24 @@
                     
                     <!-- GoHighLevel Order Form will be embedded here -->
                     <div id="ghl-order-form">
-                        <!-- This will be replaced by the GoHighLevel order form embed code -->
-                        <form id="checkout-form">
-                            <div class="form-group">
-                                <label for="full-name">Full Name</label>
-                                <input type="text" id="full-name" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input type="email" id="email" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Payment Information</label>
-                                <div id="card-element" class="form-control" style="padding: 15px; min-height: 50px; display: flex; align-items: center;">
-                                    <!-- Stripe Elements will be inserted here -->
-                                    <div style="width: 100%;">
-                                        <div id="card-number" style="margin-bottom: 10px;"></div>
-                                        <div style="display: flex; gap: 10px;">
-                                            <div id="card-expiry" style="flex: 1;"></div>
-                                            <div id="card-cvc" style="flex: 1;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn-primary" id="submit-button">
-                                Yes, I'm Ready! Enroll Now
-                            </button>
-                        </form>
+                        <iframe
+                            src="https://api.yourpresenceisyourpower.com/widget/form/1DeGYN2QkdsjW7MR7PEF"
+                            style="width:100%;height:100%;border:none;border-radius:10px"
+                            id="inline-1DeGYN2QkdsjW7MR7PEF" 
+                            data-layout="{'id':'INLINE'}"
+                            data-trigger-type="alwaysShow"
+                            data-trigger-value=""
+                            data-activation-type="alwaysActivated"
+                            data-activation-value=""
+                            data-deactivation-type="neverDeactivate"
+                            data-deactivation-value=""
+                            data-form-name="Enrollment form"
+                            data-height="992"
+                            data-layout-iframe-id="inline-1DeGYN2QkdsjW7MR7PEF"
+                            data-form-id="1DeGYN2QkdsjW7MR7PEF"
+                            title="Enrollment form"
+                                >
+                        </iframe>
                     </div>
                 </div>
                 
@@ -367,82 +358,8 @@
     <!-- Font Awesome for icons -->
     <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
     
-    <!-- Stripe Elements -->
-    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://api.yourpresenceisyourpower.com/js/form_embed.js"></script>
     <script>
-        // Initialize Stripe
-        const stripe = Stripe('your_publishable_key');
-        const elements = stripe.elements();
-        
-        // Create an instance of the card Element
-        const card = elements.create('card', {
-            style: {
-                base: {
-                    fontSize: '16px',
-                    color: '#2d3748',
-                    '::placeholder': {
-                        color: '#a0aec0',
-                    },
-                },
-                invalid: {
-                    color: '#e53e3e',
-                    iconColor: '#e53e3e',
-                },
-            },
-        });
-        
-        // Add an instance of the card Element into the `card-element` div
-        card.mount('#card-element');
-        
-        // Handle real-time validation errors from the card Element
-        card.on('change', function(event) {
-            const displayError = document.getElementById('card-errors');
-            if (event.error) {
-                displayError.textContent = event.error.message;
-            } else {
-                displayError.textContent = '';
-            }
-        });
-        
-        // Handle form submission
-        const form = document.getElementById('checkout-form');
-        form.addEventListener('submit', async function(event) {
-            event.preventDefault();
-            
-            const submitButton = document.getElementById('submit-button');
-            submitButton.disabled = true;
-            submitButton.textContent = 'Processing...';
-            
-            // Create payment method and confirm payment
-            const { paymentMethod, error } = await stripe.createPaymentMethod({
-                type: 'card',
-                card: card,
-                billing_details: {
-                    name: document.getElementById('full-name').value,
-                    email: document.getElementById('email').value,
-                },
-            });
-            
-            if (error) {
-                // Show error to your customer
-                const errorElement = document.getElementById('card-errors');
-                errorElement.textContent = error.message;
-                submitButton.disabled = false;
-                submitButton.textContent = 'Yes, I\'m Ready! Enroll Now';
-            } else {
-                // Send the payment method ID to your server
-                // This is where you would typically make an AJAX call to your server
-                // to complete the payment
-                console.log('PaymentMethod:', paymentMethod);
-                
-                // For demo purposes, we'll simulate a successful payment
-                setTimeout(function() {
-                    // Redirect to thank you page on success
-                    window.location.href = 'executive-presence-thank-you.html';
-                }, 1500);
-            }
-        });
-        
         // Facebook tracking for checkout initiation
         document.addEventListener('DOMContentLoaded', function() {
             fbq('track', 'InitiateCheckout', {
