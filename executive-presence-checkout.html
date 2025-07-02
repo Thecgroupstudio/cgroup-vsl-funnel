@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Secure checkout for The Executive Presence Container program. Enroll now for 6 weeks of high-touch coaching with Kathryn Ficarra.">
     <title>Checkout - The Executive Presence Container</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://api.yourpresenceisyourpower.com https://kit.fontawesome.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https: data:; frame-src https://api.yourpresenceisyourpower.com; connect-src 'self' https://api.yourpresenceisyourpower.com;">
     <link rel="icon" href="images/cgroup-logo.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -298,7 +299,10 @@
                             data-form-id="1DeGYN2QkdsjW7MR7PEF"
                             title="Enrollment form"
                             scrolling="no"
-                                >
+                            sandbox="allow-forms allow-same-origin allow-scripts allow-popups"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            loading="lazy"
+                            >
                         </iframe>
                     </div>
                 </div>
