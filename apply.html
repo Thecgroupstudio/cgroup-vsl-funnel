@@ -15,8 +15,8 @@
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: #1a1a1a;
-            background-color: #fafbfc;
+            color: #f8f9fa;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -29,23 +29,22 @@
             flex: 1;
         }
 
-        /* Section 1: Elegant Application Header */
+        /* Section 1: Luxury Application Header */
         .application-header {
             text-align: center;
             padding: 80px 0 60px 0;
-            background: white;
             margin: 60px 0 80px 0;
         }
 
         .exclusive-badge {
             display: inline-block;
-            color: #e53e3e;
+            color: #d4af37;
             font-size: 14px;
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 30px;
-            border-bottom: 2px solid #e53e3e;
+            border-bottom: 2px solid #d4af37;
             padding-bottom: 8px;
         }
 
@@ -54,7 +53,7 @@
             font-size: 48px;
             font-weight: 700;
             line-height: 1.2;
-            color: #1a1a1a;
+            color: #ffffff;
             max-width: 700px;
             margin: 0 auto 40px auto;
             letter-spacing: -0.5px;
@@ -62,7 +61,7 @@
 
         .sub-headline {
             font-size: 20px;
-            color: #6b7280;
+            color: #d1d5db;
             font-weight: 400;
             line-height: 1.7;
             max-width: 600px;
@@ -76,13 +75,14 @@
         }
 
         .booking-container {
-            background: white;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
             padding: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             margin: 0 auto 40px;
             max-width: 100%;
-            border: 1px solid #f1f5f9;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(10px);
         }
 
         .ghl-calendar-embed {
@@ -92,7 +92,7 @@
         }
 
         .privacy-note {
-            color: #6b7280;
+            color: #9ca3af;
             font-size: 14px;
             text-align: center;
             margin: 30px auto 20px;
@@ -106,12 +106,12 @@
             }
         }
 
-        /* Elegant Footer */
+        /* Luxury Footer */
         .footer {
-            background: #f8fafc;
+            background: rgba(0, 0, 0, 0.3);
             padding: 40px 0;
             margin-top: auto;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
             text-align: center;
         }
 
@@ -120,15 +120,20 @@
         }
 
         .footer-links a {
-            color: #64748b;
+            color: #d1d5db;
             text-decoration: none;
             margin: 0 15px;
             font-size: 14px;
             font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #d4af37;
         }
 
         .footer-text {
-            color: #94a3b8;
+            color: #9ca3af;
             font-size: 14px;
         }
 
