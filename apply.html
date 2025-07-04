@@ -153,28 +153,154 @@
     <div class="calendar-section">
         <div class="container">
             <div class="booking-container">
-                <div style="width: 100%; min-height: 800px;">
-                    <!-- GHL Calendar Embed Placeholder -->
-                    <!-- Replace this section with your actual GoHighLevel Calendar embed code -->
-                    <iframe 
-                        class="ghl-calendar-embed"
-                        src="[INSERT_YOUR_GHL_CALENDAR_URL_HERE]"
-                        title="IMPACT Leadership Assessment Booking"
-                        frameborder="0"
-                        scrolling="no"
-                        allowfullscreen="true"
-                        webkitallowfullscreen="true"
-                        mozallowfullscreen="true">
-                    </iframe>
+<!-- LeadConnector Booking Widget -->
+                <div class="booking-container" style="text-align: center; margin-top: 10px;">
+                    <div style="width: 100%; min-height: 800px;">
+                        <iframe 
+                            src="https://api.leadconnectorhq.com/widget/booking/pZBC4tvuhTVrNusNkkbY" 
+                            style="width: 100%; height: 100%; border: none; min-height: 800px;"
+                            frameborder="0"
+                            scrolling="no"
+                            allowfullscreen="true"
+                            webkitallowfullscreen="true"
+                            mozallowfullscreen="true">
+                        </iframe>
+                    </div>
+                    <p class="privacy-note">Your information is secure and will never be shared.</p>
+                    <script>
+                    // Debug function to log Facebook Pixel status
+                    function logPixelStatus() {
+                        const status = {
+                            fbqType: typeof fbq,
+                            fbqQueue: window.fbq && window.fbq.queue ? window.fbq.queue : 'No queue',
+                            pixelId: '1607445923276301',
+                            pageUrl: window.location.href,
+                            timestamp: new Date().toISOString(),
+                            debug: {
+                                pixelLoaded: !!window.fbq,
+                                queueLength: window.fbq?.queue?.length || 0,
+                                documentReady: document.readyState,
+                                iframes: document.querySelectorAll('iframe').length
+                            }
+                        };
+                        console.log('Facebook Pixel Status:', status);
+                        
+                        // Also log the current state of the page
+                        console.log('Page State:', {
+                            url: window.location.href,
+                            title: document.title,
+                            bodyText: document.body.innerText.substring(0, 200) + '...',
+                            iframeCount: document.querySelectorAll('iframe').length
+                        });
+                        
+                        return status;
+                    }
+
+                    // Function to track booking completion
+                    function trackBookingCompletion(trigger) {
+                        console.log('Tracking booking completion, trigger:', trigger);
+                        
+                        // Track the Schedule event
+                        fbq('track', 'Schedule', {
+                            content_name: 'Executive Presence Consultation',
+                            content_category: 'Booking',
+                            value: 0,
+                            currency: 'USD',
+                            trigger: trigger,
+                            debug_timestamp: Date.now()
+                        });
+                        
+                        // Track a Purchase event with $0 value for conversion tracking
+                        fbq('track', 'Purchase', {
+                            value: 0,
+                            currency: 'USD',
+                            content_type: 'product',
+                            content_ids: ['executive_presence_consultation'],
+                            content_name: 'Executive Presence Consultation',
+                            content_category: 'Booking',
+                            status: 'scheduled',
+                            trigger: trigger,
+                            debug_timestamp: Date.now()
+                        });
+                        
+                        // Track a CompleteRegistration event as well
+                        fbq('track', 'CompleteRegistration', {
+                            content_name: 'Executive Presence Consultation',
+                            content_category: 'Booking',
+                            value: 0,
+                            currency: 'USD',
+                            trigger: trigger,
+                            debug_timestamp: Date.now()
+                        });
+                        
+                        console.log('All tracking events fired for trigger:', trigger);
+                    }
+
+                    // Check for booking completion indicators every 2 seconds
+                    let bookingCheckInterval;
+                    let hasTrackedCompletion = false;
+
+                    function startBookingMonitoring() {
+                        console.log('Starting booking completion monitoring...');
+                        
+                        bookingCheckInterval = setInterval(() => {
+                            if (hasTrackedCompletion) {
+                                return;
+                            }
+                            
+                            // Check for thank you or confirmation messages
+                            const thankYouIndicators = [
+                                'thank you',
+                                'confirmation',
+                                'scheduled',
+                                'booked',
+                                'confirmed'
+                            ];
+                            
+                            const pageText = document.body.innerText.toLowerCase();
+                            const foundIndicator = thankYouIndicators.find(indicator => 
+                                pageText.includes(indicator)
+                            );
+                            
+                            if (foundIndicator) {
+                                console.log('Booking completion detected via text indicator:', foundIndicator);
+                                hasTrackedCompletion = true;
+                                trackBookingCompletion('text_detection');
+                                clearInterval(bookingCheckInterval);
+                            }
+                            
+                            // Also check URL changes that might indicate completion
+                            if (window.location.href.includes('thank') || 
+                                window.location.href.includes('confirm') ||
+                                window.location.href.includes('success')) {
+                                console.log('Booking completion detected via URL change');
+                                hasTrackedCompletion = true;
+                                trackBookingCompletion('url_detection');
+                                clearInterval(bookingCheckInterval);
+                            }
+                        }, 2000);
+                    }
+
+                    // Start monitoring when page loads
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', () => {
+                            setTimeout(startBookingMonitoring, 1000);
+                            setTimeout(logPixelStatus, 2000);
+                        });
+                    } else {
+                        setTimeout(startBookingMonitoring, 1000);
+                        setTimeout(logPixelStatus, 2000);
+                    }
+
+                    // Also set up a fallback timer for 5 minutes
+                    setTimeout(() => {
+                        if (!hasTrackedCompletion) {
+                            console.log('5-minute fallback timer reached, clearing interval');
+                            clearInterval(bookingCheckInterval);
+                        }
+                    }, 300000); // 5 minutes
+                    </script>
                 </div>
-                <p class="privacy-note">Your information is secure and will never be shared.</p>
-                
-                <!-- Alternative: If using GHL script embed -->
-                <!-- 
-                <div id="ghl-calendar-widget">
-                    [INSERT_GHL_CALENDAR_SCRIPT_HERE]
-                </div>
-                -->
             </div>
         </div>
     </div>
