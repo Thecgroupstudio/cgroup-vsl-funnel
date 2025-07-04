@@ -349,27 +349,12 @@
         let ctaShown = false;
         let videoStartTime = null;
 
-        function handleUnmute() {
-            // Remove the unmute overlay
-            const overlay = document.querySelector('.unmute-overlay');
-            if (overlay) {
-                overlay.style.display = 'none';
-            }
-            
-            // Start tracking video time
-            videoStartTime = Date.now();
-            console.log('Video unmuted, starting timer');
-            
-            // Show CTA after 12-14 minutes (using 13 minutes = 780 seconds)
-            setTimeout(showCTA, 780000); // 13 minutes in milliseconds
-        }
-
         function showCTA() {
             if (!ctaShown) {
                 const ctaSection = document.getElementById('ctaSection');
                 ctaSection.classList.add('show');
                 ctaShown = true;
-                console.log('CTA section revealed at 13-minute mark');
+                console.log('CTA section revealed');
             }
         }
 
@@ -380,6 +365,212 @@
             alert('This would redirect to your application page');
             // window.location.href = 'application-page.html';
         }
+
+        // Custom Video Player Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('custom-video');
+            const playOverlay = document.getElementById('play-overlay');
+            const customControls = document.getElementById('custom-controls');
+            const playPauseBtn = document.getElementById('play-pause-btn');
+            const playIcon = document.getElementById('play-icon');
+            const pauseIcon = document.getElementById('pause-icon');
+            const progressBar = document.getElementById('progress-bar');
+            const progressHandle = document.getElementById('progress-handle');
+            const timeDisplay = document.getElementById('time-display');
+            const volumeBtn = document.getElementById('volume-btn');
+            const volumeOnIcon = document.getElementById('volume-on-icon');
+            const volumeOffIcon = document.getElementById('volume-off-icon');
+            const volumeSlider = document.getElementById('volume-slider');
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            const videoContainer = document.querySelector('.video-container');
+
+            let isPlaying = false;
+            let isDragging = false;
+
+            // Format time helper function
+            function formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+
+            // Play/Pause functionality
+            function togglePlayPause() {
+                if (video.paused) {
+                    video.play();
+                    isPlaying = true;
+                    playOverlay.style.display = 'none';
+                    playIcon.style.display = 'none';
+                    pauseIcon.style.display = 'block';
+                } else {
+                    video.pause();
+                    isPlaying = false;
+                    playIcon.style.display = 'block';
+                    pauseIcon.style.display = 'none';
+                }
+            }
+
+            // Large play button overlay click
+            playOverlay.addEventListener('click', function() {
+                togglePlayPause();
+            });
+
+            // Play/pause button click
+            playPauseBtn.addEventListener('click', function() {
+                togglePlayPause();
+            });
+
+            // Hover effects for play overlay
+            playOverlay.addEventListener('mouseenter', function() {
+                const playButton = this.querySelector('.play-button');
+                playButton.style.transform = 'scale(1.1)';
+                this.style.background = 'rgba(0,0,0,0.4)';
+            });
+
+            playOverlay.addEventListener('mouseleave', function() {
+                const playButton = this.querySelector('.play-button');
+                playButton.style.transform = 'scale(1)';
+                this.style.background = 'rgba(0,0,0,0.3)';
+            });
+
+            // Show/hide controls on hover
+            videoContainer.addEventListener('mouseenter', function() {
+                if (isPlaying) {
+                    customControls.style.opacity = '1';
+                    progressHandle.style.opacity = '1';
+                }
+            });
+
+            videoContainer.addEventListener('mouseleave', function() {
+                if (!isDragging) {
+                    customControls.style.opacity = '0';
+                    progressHandle.style.opacity = '0';
+                }
+            });
+
+            // Progress bar functionality with CTA timing
+            video.addEventListener('timeupdate', function() {
+                if (!isDragging) {
+                    const progress = (video.currentTime / video.duration) * 100;
+                    progressBar.style.width = progress + '%';
+                    progressHandle.style.left = progress + '%';
+                }
+                
+                // Update time display
+                if (video.duration) {
+                    timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+                    
+                    // Show CTA at 12-14 minute mark (780-840 seconds)
+                    if (video.currentTime >= 780 && !ctaShown) {
+                        showCTA();
+                    }
+                }
+            });
+
+            // Progress bar click to seek
+            document.querySelector('.progress-container').addEventListener('click', function(e) {
+                const rect = this.getBoundingClientRect();
+                const pos = (e.clientX - rect.left) / rect.width;
+                video.currentTime = pos * video.duration;
+            });
+
+            // Progress handle drag functionality
+            progressHandle.addEventListener('mousedown', function(e) {
+                isDragging = true;
+                customControls.style.opacity = '1';
+                progressHandle.style.opacity = '1';
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (isDragging) {
+                    const progressContainer = document.querySelector('.progress-container');
+                    const rect = progressContainer.getBoundingClientRect();
+                    const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+                    const progress = pos * 100;
+                    progressBar.style.width = progress + '%';
+                    progressHandle.style.left = progress + '%';
+                    video.currentTime = pos * video.duration;
+                }
+            });
+
+            document.addEventListener('mouseup', function() {
+                if (isDragging) {
+                    isDragging = false;
+                    // Hide controls after a delay if not hovering
+                    setTimeout(() => {
+                        if (!videoContainer.matches(':hover')) {
+                            customControls.style.opacity = '0';
+                            progressHandle.style.opacity = '0';
+                        }
+                    }, 2000);
+                }
+            });
+
+            // Volume control
+            volumeBtn.addEventListener('click', function() {
+                if (video.muted) {
+                    video.muted = false;
+                    volumeOnIcon.style.display = 'block';
+                    volumeOffIcon.style.display = 'none';
+                    volumeSlider.style.width = (video.volume * 100) + '%';
+                } else {
+                    video.muted = true;
+                    volumeOnIcon.style.display = 'none';
+                    volumeOffIcon.style.display = 'block';
+                    volumeSlider.style.width = '0%';
+                }
+            });
+
+            // Volume slider
+            document.querySelector('.volume-slider-container').addEventListener('click', function(e) {
+                const rect = this.getBoundingClientRect();
+                const pos = (e.clientX - rect.left) / rect.width;
+                video.volume = pos;
+                video.muted = false;
+                volumeSlider.style.width = (pos * 100) + '%';
+                volumeOnIcon.style.display = 'block';
+                volumeOffIcon.style.display = 'none';
+            });
+
+            // Fullscreen functionality
+            fullscreenBtn.addEventListener('click', function() {
+                if (!document.fullscreenElement) {
+                    videoContainer.requestFullscreen().catch(err => {
+                        console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                    });
+                } else {
+                    document.exitFullscreen();
+                }
+            });
+
+            // Control button hover effects
+            document.querySelectorAll('.control-btn').forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.color = '#e53e3e';
+                });
+                btn.addEventListener('mouseleave', function() {
+                    this.style.color = 'white';
+                });
+            });
+
+            // Initialize volume slider
+            volumeSlider.style.width = (video.volume * 100) + '%';
+
+            // Auto-hide controls after video starts
+            video.addEventListener('play', function() {
+                setTimeout(() => {
+                    if (!videoContainer.matches(':hover')) {
+                        customControls.style.opacity = '0';
+                    }
+                }, 3000);
+            });
+
+            // Show controls when video is paused
+            video.addEventListener('pause', function() {
+                customControls.style.opacity = '1';
+                progressHandle.style.opacity = '1';
+            });
+        });
 
         // Alternative: Show CTA based on user scroll if they skip ahead
         let hasScrolledToBottom = false;
