@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Briefing - Secure Your Next Promotion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #2c2c2c;
+            background-color: #fafafa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section 1: Exclusive Invitation */
+        .hero-section {
+            background-color: white;
+            padding: 80px 0 60px 0;
+            text-align: center;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .exclusive-tag {
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
+
+        .main-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .sub-headline {
+            font-style: italic;
+            font-size: 20px;
+            color: #555;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            background-color: #A98F7A;
+            color: white;
+            padding: 18px 40px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            border: none;
+            display: inline-block;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .cta-button:hover {
+            background-color: #9a7f6a;
+            transform: translateY(-2px);
+        }
+
+        .urgency-text {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Section 2: Briefing Agenda */
+        .agenda-section {
+            background-color: white;
+            padding: 80px 0;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .section-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #1a1a1a;
+        }
+
+        .benefits-list {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding: 0 20px;
+        }
+
+        .checkmark {
+            color: #A98F7A;
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 15px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .benefit-text {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        /* Section 3: Authority Stack */
+        .authority-section {
+            background-color: #f8f8f8;
+            padding: 80px 0;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .guide-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .guide-image {
+            text-align: center;
+        }
+
+        .guide-image img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .guide-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .guide-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 25px;
+        }
+
+        .testimonial {
+            font-style: italic;
+            color: #666;
+            border-left: 3px solid #A98F7A;
+            padding-left: 20px;
+            margin-top: 25px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            margin-top: 10px;
+            font-style: normal;
+        }
+
+        /* Section 4: Final CTA */
+        .final-cta-section {
+            background-color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .final-message {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 40px;
+            line-height: 1.4;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #f8f8f8;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            border-top: 1px solid #e8e8e8;
+        }
+
+        .footer a {
+            color: #A98F7A;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-headline {
+                font-size: 36px;
+            }
+
+            .sub-headline {
+                font-size: 18px;
+            }
+
+            .cta-button {
+                padding: 15px 30px;
+                font-size: 18px;
+            }
+
+            .section-headline {
+                font-size: 28px;
+            }
+
+            .guide-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .benefit-item {
+                padding: 0 10px;
+            }
+
+            .benefit-text {
+                font-size: 16px;
+            }
+
+            .hero-section {
+                padding: 60px 0 40px 0;
+            }
+
+            .agenda-section,
+            .authority-section,
+            .final-cta-section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-headline {
+                font-size: 28px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Section 1: The Exclusive Invitation -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="exclusive-tag">For Senior Leaders & Executives</div>
+            <h1 class="main-headline">The New Method to Secure Your Next Promotion, Amplify Your Influence, and Add a Potential Six-Figures to Your Income.</h1>
+            <p class="sub-headline">(Even if you feel overworked and undervalued in your current role).</p>
+            <a href="#" class="cta-button" onclick="handleCTAClick()">Request My 72-Hour Access Pass</a>
+            <p class="urgency-text">Your personal access link will expire in 72 hours.</p>
+        </div>
+    </section>
+
+    <!-- Section 2: The Briefing Agenda -->
+    <section class="agenda-section">
+        <div class="container">
+            <h2 class="section-headline">Inside This Confidential Briefing, You Will Discover:</h2>
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <span class="checkmark">✓</span>
+                    <p class="benefit-text">The real reason talented executives get stuck—and why it has nothing to do with skill or performance.</p>
+                </div>
+                <div class="benefit-item">
+                    <span class="checkmark">✓</span>
+                    <p class="benefit-text">How to use the IMPACT Framework to command authority and win consensus in high-stakes meetings, without conflict.</p>
+                </div>
+                <div class="benefit-item">
+                    <span class="checkmark">✓</span>
+                    <p class="benefit-text">A simple communication shift, used by the top 1% of leaders, that separates influence from mere management.</p>
+                </div>
+                <div class="benefit-item">
+                    <span class="checkmark">✓</span>
+                    <p class="benefit-text">The direct path to career acceleration, and how our clients leverage this framework to secure promotions and negotiate significant compensation increases.</p>
+                </div>
+                <div class="benefit-item">
+                    <span class="checkmark">✓</span>
+                    <p class="benefit-text">A 60-second physiological technique to regain total composure and clarity before any critical conversation or decision.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: The Authority Stack -->
+    <section class="authority-section">
+        <div class="container">
+            <h2 class="section-headline">Your Guide:</h2>
+            <div class="guide-content">
+                <div class="guide-image">
+                    <img src="kathryn-headshot.jpg" alt="Kathryn Ficarra - Executive Presence Expert" />
+                </div>
+                <div class="guide-text">
+                    <h3>Kathryn Ficarra</h3>
+                    <p class="guide-description">
+                        As a trusted advisor to executives, Kathryn's work sits at the intersection of leadership strategy and human dynamics. Her proprietary IMPACT framework has been leveraged by leaders at some of the world's most recognized companies, including Starbucks and Dreamworks Animation, to achieve profound professional and personal transformations.
+                    </p>
+                    <div class="testimonial">
+                        <p>"Kathryn has a way of making the intangible feel tangible, and the impact is undeniable."</p>
+                        <p class="testimonial-author">- Jenn G, Entrepreneur</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Final Call to Action -->
+    <section class="final-cta-section">
+        <div class="container">
+            <p class="final-message">The gap between your current role and your ultimate potential is smaller than you think. It's time to bridge it.</p>
+            <a href="#" class="cta-button" onclick="handleCTAClick()">Request My 72-Hour Access Pass</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>The C Group Studio, LLC | © 2025</p>
+            <p>
+                <a href="#privacy">Privacy Policy</a> | 
+                <a href="#terms">Terms & Conditions</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function handleCTAClick() {
+            // This is where you would integrate your opt-in form or redirect to your form handler
+            // For now, this is a placeholder
+            alert('This would redirect to your opt-in form or trigger a form modal.');
+            
+            // Example of what you might do:
+            // window.location.href = 'your-form-handler.php';
+            // or open a modal with the opt-in form
+            
+            console.log('CTA clicked - Request Access Pass');
+        }
+
+        // Optional: Add some analytics tracking
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track page view
+            console.log('Request Access page loaded');
+            
+            // You could add Google Analytics, Facebook Pixel, or other tracking here
+        });
+    </script>
+</body>
+</html>
