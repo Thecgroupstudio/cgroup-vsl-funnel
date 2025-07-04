@@ -61,61 +61,38 @@
             text-align: center;
         }
 
-        .calendar-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fafafa;
-            border-radius: 12px;
-            padding: 40px 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        .booking-container {
+            background: white;
+            border-radius: 10px;
+            padding: 10px 10px 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin: 0 auto 20px;
+            max-width: 100%;
         }
 
         .ghl-calendar-embed {
             width: 100%;
-            min-height: 600px;
+            min-height: 800px;
             border: none;
-            border-radius: 8px;
         }
 
-        /* Implementation Notes Section */
-        .implementation-notes {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 30px;
-            margin: 40px 0;
-            font-size: 14px;
+        .privacy-note {
+            color: #666;
+            font-size: 1rem;
+            max-width: 800px;
+            margin: 30px auto 15px;
             line-height: 1.6;
+            padding: 0 10px;
         }
 
-        .implementation-notes h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
-            color: #1a1a1a;
-            margin-bottom: 20px;
+        /* Responsive adjustments for the widget */
+        @media (max-width: 768px) {
+            .ghl-calendar-embed {
+                min-height: 800px;
+            }
         }
 
-        .implementation-notes h4 {
-            font-weight: 600;
-            color: #333;
-            margin: 20px 0 10px 0;
-        }
 
-        .implementation-notes ul {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-
-        .implementation-notes li {
-            margin-bottom: 5px;
-        }
-
-        .implementation-notes code {
-            background: #e9ecef;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-        }
 
         /* Footer */
         .footer {
@@ -159,11 +136,7 @@
                 padding: 30px 15px;
             }
 
-            .implementation-notes {
-                padding: 20px;
-                margin: 30px 0;
-                font-size: 13px;
-            }
+
         }
     </style>
 </head>
@@ -179,15 +152,22 @@
     <!-- Section 2: The Integrated Calendar & Application Form -->
     <div class="calendar-section">
         <div class="container">
-            <div class="calendar-container">
-                <!-- GHL Calendar Embed Placeholder -->
-                <!-- Replace this section with your actual GoHighLevel Calendar embed code -->
-                <iframe 
-                    class="ghl-calendar-embed"
-                    src="[INSERT_YOUR_GHL_CALENDAR_URL_HERE]"
-                    title="IMPACT Leadership Assessment Booking"
-                    frameborder="0">
-                </iframe>
+            <div class="booking-container">
+                <div style="width: 100%; min-height: 800px;">
+                    <!-- GHL Calendar Embed Placeholder -->
+                    <!-- Replace this section with your actual GoHighLevel Calendar embed code -->
+                    <iframe 
+                        class="ghl-calendar-embed"
+                        src="[INSERT_YOUR_GHL_CALENDAR_URL_HERE]"
+                        title="IMPACT Leadership Assessment Booking"
+                        frameborder="0"
+                        scrolling="no"
+                        allowfullscreen="true"
+                        webkitallowfullscreen="true"
+                        mozallowfullscreen="true">
+                    </iframe>
+                </div>
+                <p class="privacy-note">Your information is secure and will never be shared.</p>
                 
                 <!-- Alternative: If using GHL script embed -->
                 <!-- 
@@ -199,50 +179,7 @@
         </div>
     </div>
 
-    <!-- GoHighLevel Implementation Guide -->
-    <div class="container">
-        <div class="implementation-notes">
-            <h3>🔧 GoHighLevel Implementation Guide</h3>
-            
-            <h4>Calendar Setup in GHL:</h4>
-            <ul>
-                <li><strong>Calendar Name:</strong> "IMPACT Leadership Assessment"</li>
-                <li><strong>Duration:</strong> 60 minutes (recommended)</li>
-                <li><strong>Buffer Time:</strong> 15 minutes before/after</li>
-                <li><strong>Embed Type:</strong> Use GHL Calendar widget or iframe</li>
-            </ul>
 
-            <h4>Custom Form Fields (Configure in Calendar Settings):</h4>
-            <ul>
-                <li><strong>Contact Information:</strong> First Name*, Last Name*, Email*, Phone Number*</li>
-                <li><strong>Professional Context:</strong> Current Title* (Text), Company Name* (Text), LinkedIn Profile URL (Website)</li>
-                <li><strong>Strategic Context:</strong> 
-                    <ul>
-                        <li>"What is the #1 professional goal you are focused on achieving in the next 12 months?*" (Large Text Area)</li>
-                        <li>"What is the single biggest challenge holding you back from achieving it?*" (Large Text Area)</li>
-                    </ul>
-                </li>
-                <li><strong>Commitment & Readiness:</strong> "This process requires a significant investment of your time, energy, and financial resources to achieve the transformation you desire. Are you prepared to make that investment in yourself at this time?*" (Radio Buttons: "Yes, I am ready to invest" / "No, not at this time")</li>
-            </ul>
-
-            <h4>Calendar Settings:</h4>
-            <ul>
-                <li><strong>Submit Button Text:</strong> "Schedule & Submit Application"</li>
-                <li><strong>Post-Submission Redirect:</strong> <code>application-received.html</code></li>
-                <li><strong>Confirmation Email:</strong> Enable with professional messaging</li>
-                <li><strong>Reminder Emails:</strong> 24 hours and 1 hour before appointment</li>
-            </ul>
-
-            <h4>Integration Steps:</h4>
-            <ol>
-                <li>Create the calendar in your GHL account with the above specifications</li>
-                <li>Configure the custom form fields in the calendar settings</li>
-                <li>Get the calendar embed code from GHL</li>
-                <li>Replace the placeholder iframe/script above with your actual GHL embed code</li>
-                <li>Test the booking flow from selection to <code>application-received.html</code></li>
-            </ol>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer class="footer">
