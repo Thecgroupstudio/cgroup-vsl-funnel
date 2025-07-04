@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Under Review - Executive Presence Immersion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #2c2c2c;
+            background-color: #fafafa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section 1: Confirmation Header */
+        .confirmation-section {
+            background-color: white;
+            padding: 80px 0 60px 0;
+            text-align: center;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .main-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+        }
+
+        .sub-headline {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 0;
+            font-weight: 400;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Section 2: Proof & Indoctrination */
+        .proof-section {
+            background-color: white;
+            padding: 80px 0;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .section-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .intro-text {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 60px;
+            font-style: italic;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 0;
+        }
+
+        .testimonial-card {
+            text-align: center;
+            padding: 0;
+        }
+
+        .outcome-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-quote {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-attribution {
+            font-size: 14px;
+            color: #888;
+            font-weight: 500;
+        }
+
+        /* Section 3: Final Authority */
+        .authority-section {
+            background-color: white;
+            padding: 60px 0 80px 0;
+            text-align: center;
+        }
+
+        .final-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            line-height: 1.5;
+            color: #1a1a1a;
+            font-style: italic;
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+        }
+
+        .final-attribution {
+            font-size: 16px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #f8f8f8;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #e8e8e8;
+        }
+
+        .footer p {
+            color: #888;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .footer a {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #e53e3e;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-headline {
+                font-size: 32px;
+            }
+
+            .section-headline {
+                font-size: 28px;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .final-quote {
+                font-size: 20px;
+            }
+
+            .confirmation-section,
+            .proof-section {
+                padding: 60px 0 40px 0;
+            }
+
+            .authority-section {
+                padding: 40px 0 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Section 1: Confirmation & Expectation-Setting Header -->
+    <div class="confirmation-section">
+        <div class="container">
+            <h1 class="main-headline">Thank You. Your Application is Under Review.</h1>
+            <p class="sub-headline">Our team will personally review your responses within the next 24 business hours. If your application demonstrates a strong fit for the IMPACT Lab, we will send a final calendar confirmation for the assessment time you selected. Please note that your appointment is not confirmed until you receive this final confirmation email from us.</p>
+        </div>
+    </div>
+
+    <!-- Section 2: Indoctrination & Proof -->
+    <div class="proof-section">
+        <div class="container">
+            <h2 class="section-headline">A Look Inside: The IMPACT Framework in Action</h2>
+            <p class="intro-text">The following are verified results from leaders who have successfully moved through this assessment process.</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <h3 class="outcome-label">Outcome: Tangible Business Wins</h3>
+                    <p class="testimonial-quote">"I implemented her process and I closed the deal at the price I wanted. I am so thankful to her."</p>
+                    <p class="testimonial-attribution">- Rebecca, Architect Entrepreneur</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <h3 class="outcome-label">Outcome: Unshakable Influence</h3>
+                    <p class="testimonial-quote">"Kathryn's approach to leadership was innovative and really helped the team take the onus on themselves... it is improving our culture."</p>
+                    <p class="testimonial-attribution">- Deanne, Starbucks Coffee Company</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <h3 class="outcome-label">Outcome: Personal Transformation</h3>
+                    <p class="testimonial-quote">"When we fixed that, everything changed. She changed my life."</p>
+                    <p class="testimonial-attribution">- Doris, Entrepreneur</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3: Final Authority Reinforcement -->
+    <div class="authority-section">
+        <div class="container">
+            <p class="final-quote">"Kathryn's approach to presence is truly one of a kind. She goes right to the core... making the intangible feel tangible, and the impact is undeniable."</p>
+            <p class="final-attribution">- Jenn G, Entrepreneur</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>
+                The C Group Studio, LLC | © 2025 | 
+                <a href="privacy-policy.html">Privacy Policy</a> | 
+                <a href="terms-conditions.html">Terms & Conditions</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
