@@ -70,21 +70,7 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.15);
         }
 
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        /* Video wrapper styles handled inline in custom-video-container */
 
         .unmute-overlay {
             position: absolute;
@@ -253,14 +239,13 @@
     <div class="video-section">
         <div class="container">
             <div class="video-container">
-                <div class="video-wrapper">
+                <div class="custom-video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-bottom: 20px; background: #000; border-radius: 12px;">
                     <video 
                         id="custom-video"
                         playsinline 
                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px;"
                         poster=""
-                        preload="metadata"
-                        muted>
+                        preload="metadata">
                         <source src="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/685dcd26b70fa2fc3a24e532.mp4" type="video/mp4">
                         Your browser does not support the video tag. Please <a href="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/685dcd26b70fa2fc3a24e532.mp4" target="_blank">click here</a> to view the video.
                     </video>
@@ -382,7 +367,7 @@
             const volumeOffIcon = document.getElementById('volume-off-icon');
             const volumeSlider = document.getElementById('volume-slider');
             const fullscreenBtn = document.getElementById('fullscreen-btn');
-            const videoContainer = document.querySelector('.video-container');
+            const videoContainer = document.querySelector('.custom-video-container');
 
             let isPlaying = false;
             let isDragging = false;
