@@ -102,39 +102,33 @@
 
         /* Luxury Footer */
         .footer {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 40px 0;
-            margin-top: auto;
-            border-top: 1px solid rgba(212, 175, 55, 0.3);
             text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            margin-top: auto;
         }
 
-        .footer-links {
-            margin-bottom: 20px;
-        }
-
-        .footer-links a {
-            color: #d1d5db;
-            text-decoration: none;
-            margin: 0 15px;
+        .footer p {
             font-size: 14px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: #d4af37;
-        }
-
-        .footer-text {
             color: #9ca3af;
-            font-size: 14px;
         }
 
-        .footer-text::before {
+        .footer p::before {
             content: '✦';
             color: #d4af37;
             margin-right: 8px;
+        }
+
+        .footer a {
+            color: #d1d5db;
+            text-decoration: none;
+            margin: 0 5px;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #d4af37;
         }
 
         /* Responsive Design */
@@ -332,12 +326,10 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-links">
-                <a href="privacy-policy.html">Privacy Policy</a>
+            <p>
+                The C Group Studio, LLC | © 2025 | 
+                <a href="privacy-policy.html">Privacy Policy</a> | 
                 <a href="terms-conditions.html">Terms & Conditions</a>
-            </div>
-            <p class="footer-text">
-                The C Group Studio, LLC | © 2025
             </p>
         </div>
     </footer>
