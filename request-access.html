@@ -361,25 +361,67 @@
         </div>
     </footer>
 
+    <!-- Modal Popup -->
+    <div id="formModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Request Your 72-Hour Access Pass</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-container" style="height: 500px; overflow: hidden;">
+                    <iframe
+                        src="https://api.leadconnectorhq.com/widget/form/B2Z7bWPx9D8DF4UuNYlq"
+                        style="width:100%;height:100%;border:none;border-radius:10px"
+                        id="inline-B2Z7bWPx9D8DF4UuNYlq" 
+                        data-layout="{'id':'INLINE'}"
+                        data-trigger-type="alwaysShow"
+                        data-trigger-value=""
+                        data-activation-type="alwaysActivated"
+                        data-activation-value=""
+                        data-deactivation-type="neverDeactivate"
+                        data-deactivation-value=""
+                        data-form-name="VSL Form Opt In"
+                        data-height="498"
+                        data-layout-iframe-id="inline-B2Z7bWPx9D8DF4UuNYlq"
+                        data-form-id="B2Z7bWPx9D8DF4UuNYlq"
+                        title="VSL Form Opt In">
+                    </iframe>
+                    <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         function handleCTAClick() {
-            // This is where you would integrate your opt-in form or redirect to your form handler
-            // For now, this is a placeholder
-            alert('This would redirect to your opt-in form or trigger a form modal.');
-            
-            // Example of what you might do:
-            // window.location.href = 'your-form-handler.php';
-            // or open a modal with the opt-in form
-            
-            console.log('CTA clicked - Request Access Pass');
+            // Show the modal
+            document.getElementById('formModal').style.display = 'block';
+            console.log('CTA clicked - Request Access Pass modal opened');
         }
 
-        // Optional: Add some analytics tracking
+        function closeModal() {
+            document.getElementById('formModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('formModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Close modal with escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.getElementById('formModal').style.display = 'none';
+            }
+        });
+
+        // Track page view
         document.addEventListener('DOMContentLoaded', function() {
-            // Track page view
             console.log('Request Access page loaded');
-            
-            // You could add Google Analytics, Facebook Pixel, or other tracking here
         });
     </script>
 </body>
