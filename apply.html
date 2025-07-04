@@ -75,6 +75,10 @@
         }
 
         .booking-container {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 8px;
+            padding: 20px;
             margin: 0 auto 40px;
             max-width: 100%;
         }
@@ -131,6 +135,12 @@
             font-size: 14px;
         }
 
+        .footer-text::before {
+            content: '✦';
+            color: #d4af37;
+            margin-right: 8px;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .main-headline {
@@ -159,6 +169,7 @@
     <!-- Section 1: The Formal Application Header -->
     <div class="application-header">
         <div class="container">
+            <div class="exclusive-badge">Private Application</div>
             <h1 class="main-headline">Application for a Private Assessment</h1>
             <p class="sub-headline">This 1:1 assessment is the foundational step of the IMPACT Lab. Please select your preferred time below and complete the brief application that follows to submit your request.</p>
         </div>
