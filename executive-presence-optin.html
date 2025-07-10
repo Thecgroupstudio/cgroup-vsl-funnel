@@ -169,15 +169,23 @@
         }
         
         @media (max-width: 1080px) {
-            .header {
+            .hero-container {
                 flex-direction: column !important;
                 gap: 40px !important;
                 padding: 40px 20px 20px !important;
             }
-            .header h1 {
+            .hero-left-column {
+                max-width: 100% !important;
+                padding-right: 0 !important;
+            }
+            .hero-right-column {
+                flex: 1 1 auto !important;
+                max-width: 100% !important;
+            }
+            .hero-container h1 {
                 font-size: 2.5rem !important;
             }
-            .header .form-container {
+            .hero-container .form-container {
                 flex: 1 1 auto !important;
                 max-width: 100% !important;
             }
@@ -351,17 +359,39 @@
         .privacy a:hover {
             text-decoration: underline;
         }
+        
+        /* Hero Section Columns */
+        .hero-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px 30px;
+        }
+        
+        .hero-left-column {
+            flex: 1;
+            max-width: 650px;
+            padding-right: 20px;
+        }
+        
+        .hero-right-column {
+            flex: 0 0 400px;
+            max-width: 400px;
+        }
         @media (max-width: 900px) {
-            .header {
+            .hero-container {
                 gap: 40px !important;
             }
-            .header h1 {
+            .hero-container h1 {
                 font-size: 2.2rem !important;
             }
-            .header h1 span {
+            .hero-container h1 span {
                 font-size: 2.4rem !important;
             }
-            .header .form-container {
+            .hero-right-column {
                 flex: 0 0 380px !important;
                 max-width: 380px !important;
             }
@@ -414,14 +444,14 @@
 </head>
 <body>
     <div class="container">
-        <div class="header" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 60px; max-width: 1200px; margin: 0 auto; padding: 60px 20px 30px;">
-            <div style="flex: 1; max-width: 650px; padding-right: 20px;">
+        <div class="header hero-container">
+            <div class="hero-left-column">
                 <div style="margin-bottom: 20px; color: #4a5568; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">For High-Earning Professionals & Leaders:</div>
                 <h1 style="font-size: 2.6rem; line-height: 1.15; margin-bottom: 20px; font-weight: 800; color: #1a365d;">Get Promoted & Increase Your Income By <span style="color: #e53e3e; font-weight: 900;">20%+</span><br>In The Next <span style="color: #e53e3e; font-weight: 900;">12 Months</span><br>Using This<br><span style="color: #e53e3e; font-size: 2.8rem; white-space: nowrap;">NEW Leadership Breakthrough</span></h1>
                 <p class="subheadline" style="font-size: 1.25rem; font-weight: 500; margin-bottom: 25px; color: #4a5568; line-height: 1.4;">(Without Working Longer Hours, Playing Office Politics, Or Getting An MBA)</p>
             </div>
             
-            <div style="flex: 0 0 400px; max-width: 400px;">
+            <div class="hero-right-column">
                 <div class="form-container" id="form-section" style="padding: 0; overflow: hidden; height: 500px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
                     <iframe
                         src="https://api.leadconnectorhq.com/widget/form/B2Z7bWPx9D8DF4UuNYlq"
