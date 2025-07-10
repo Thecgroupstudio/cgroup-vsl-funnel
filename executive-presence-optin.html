@@ -356,6 +356,11 @@
             .header div:first-child {
                 font-size: 0.9rem !important;
             }
+            .header button {
+                font-size: 1.1rem !important;
+                padding: 16px 35px !important;
+                margin-top: 25px !important;
+            }
             .form-container {
                 height: 600px !important;
             }
@@ -371,10 +376,17 @@
         <div class="header">
             <div style="margin-bottom: 25px; color: #4a5568; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">For High-Earning Professionals & Leaders:</div>
             <h1 style="font-size: 3.2rem; line-height: 1.1; margin-bottom: 25px; font-weight: 800; color: #1a365d;">Get Promoted & Increase Your Income By <span style="color: #e53e3e; font-weight: 900;">20%+</span><br>In The Next <span style="color: #e53e3e; font-weight: 900;">12 Months</span> Using This<br><span style="color: #e53e3e; font-size: 3.4rem;">NEW Leadership Breakthrough</span></h1>
-            <p class="subheadline" style="font-size: 1.5rem; font-weight: 500; margin-bottom: 40px; color: #4a5568; line-height: 1.4;">(Without Working Longer Hours, Playing Office Politics, Or Getting An MBA)</p>
+            <p class="subheadline" style="font-size: 1.5rem; font-weight: 500; margin-bottom: 30px; color: #4a5568; line-height: 1.4;">(Without Working Longer Hours, Playing Office Politics, Or Getting An MBA)</p>
+            
+            <!-- CTA Button -->
+            <div style="text-align: center; margin-top: 35px;">
+                <button onclick="scrollToForm()" style="background: linear-gradient(135deg, #e53e3e, #c53030); color: white; padding: 18px 45px; font-size: 1.2rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 6px 20px rgba(229, 62, 62, 0.3); transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 0.5px;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(229, 62, 62, 0.4)'" onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='0 6px 20px rgba(229, 62, 62, 0.3)'">
+                    Reserve Your Spot Now →
+                </button>
+            </div>
         </div>
         
-        <div class="content">
+        <div class="content" id="form-section">
             <div class="left-column">
                 <div class="image-container">
                     <div class="main-image" style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
@@ -598,6 +610,17 @@
     <!-- End LinkedIn Insight Tag -->
 
     <script>
+        // Smooth scroll function
+        function scrollToForm() {
+            const formSection = document.getElementById('form-section');
+            if (formSection) {
+                formSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+        
         // Form handling now managed by LeadConnector embedded form
         // All tracking and form submission is handled through their platform
     </script>
