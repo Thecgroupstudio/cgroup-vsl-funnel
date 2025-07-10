@@ -203,21 +203,31 @@
                 max-width: 100% !important;
             }
             .content {
-                flex-direction: column;
-                align-items: center;
-                max-width: 600px;
-                gap: 40px;
+                flex-direction: column !important;
+                align-items: center !important;
+                max-width: 600px !important;
+                gap: 40px !important;
+                padding: 40px 20px !important;
             }
             .left-column {
-                margin-right: 0;
-                margin-bottom: 20px;
+                flex: 1 1 100% !important;
+                max-width: 100% !important;
+                margin: 0 auto 40px auto !important;
             }
-            .left-column,
             .right-column {
-                flex: 1 1 100%;
-                max-width: 500px;
-                width: 100%;
-                margin: 0 auto;
+                flex: 1 1 100% !important;
+                max-width: 100% !important;
+                margin: 0 auto !important;
+            }
+            .right-column > div {
+                padding: 30px !important;
+                font-size: 1rem !important;
+            }
+            .right-column p {
+                font-size: 1rem !important;
+            }
+            .right-column > div > p:first-child {
+                font-size: 1.2rem !important;
             }
             .main-image,
             .companies-logo {
@@ -605,22 +615,7 @@
         </div>
     </div>
     
-    <!-- What You'll Discover Section -->
-    <div style="background: #f8f9fa; padding: 60px 0; margin-top: 60px; border-top: 1px solid #e2e8f0;">
-        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
-                <div style="background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-left: 4px solid #e53e3e;">
-                    <p style="font-size: 1.4rem; font-weight: 700; color: #2d3748; margin-bottom: 30px; text-align: center;">In this exclusive, limited-time briefing, you will discover:</p>
-                    <div style="text-align: left; font-size: 1.1rem; line-height: 1.8; color: #4a5568;">
-                        <p style="margin-bottom: 20px; display: flex; align-items: flex-start;"><span style="color: #e53e3e; font-size: 1.2rem; margin-right: 12px; flex-shrink: 0;">✅</span> <span>The #1 reason brilliant leaders "go blank" under pressure (it's a biological problem, not a skill issue).</span></p>
-                        <p style="margin-bottom: 20px; display: flex; align-items: flex-start;"><span style="color: #e53e3e; font-size: 1.2rem; margin-right: 12px; flex-shrink: 0;">✅</span> <span>The new "Presence Recalibration™" method for hardwiring confidence at the neurological level.</span></p>
-                        <p style="margin-bottom: 20px; display: flex; align-items: flex-start;"><span style="color: #e53e3e; font-size: 1.2rem; margin-right: 12px; flex-shrink: 0;">✅</span> <span>How to communicate in a way that signals "executive material" and makes you the obvious choice for senior roles.</span></p>
-                        <p style="margin-bottom: 0; display: flex; align-items: flex-start;"><span style="color: #e53e3e; font-size: 1.2rem; margin-right: 12px; flex-shrink: 0;">✅</span> <span>A case study of how one entrepreneur closed a multi-year deal just one week after implementing these strategies.</span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     
     <!-- Footer -->
     <footer style="background: #f8f9fa; padding: 40px 0 0; margin-top: 40px; border-top: 1px solid #e2e8f0;">
