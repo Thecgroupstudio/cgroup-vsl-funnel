@@ -343,6 +343,31 @@
             position: relative;
             z-index: 1;
         }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #e53e3e, #c53030);
+            color: white;
+            padding: 18px 40px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            border: none;
+            display: inline-block;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 30px auto 20px;
+            box-shadow: 0 4px 15px rgba(229, 62, 62, 0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .cta-button:hover {
+            background: linear-gradient(135deg, #c53030, #9b2c2c);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(229, 62, 62, 0.4);
+        }
         @media (max-width: 1080px) {
             .content {
                 flex-direction: column;
@@ -512,9 +537,11 @@
                         </p>
                         
                         <!-- Booking Button Moved Here -->
-                        <a href="executive-presence-booking.html" class="submit-btn" style="background: linear-gradient(135deg, #e53e3e, #c53030); color: white; padding: 18px 40px; font-size: 20px; font-weight: 600; cursor: pointer; border-radius: 8px; border: none; display: inline-block; text-decoration: none; transition: all 0.3s ease; margin: 30px auto 20px; box-shadow: 0 4px 15px rgba(229, 62, 62, 0.3); text-align: center; max-width: 500px; width: 100%;" id="bookingButton" onmouseover="this.style.background='linear-gradient(135deg, #c53030, #9b2c2c)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(229, 62, 62, 0.4)';" onmouseout="this.style.background='linear-gradient(135deg, #e53e3e, #c53030)'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(229, 62, 62, 0.3)';">
-                            Apply for Your FREE Strategy Session Now
-                        </a>
+                        <div style="text-align: center;">
+                            <a href="executive-presence-booking.html" class="cta-button" id="bookingButton">
+                                Apply for Your FREE Strategy Session Now
+                            </a>
+                        </div>
                     </div>
                     
 
