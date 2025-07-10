@@ -340,15 +340,13 @@
             text-decoration: underline;
         }
         @media (max-width: 768px) {
-            .content {
-                grid-template-columns: 1fr;
+            .container {
+                flex-direction: column;
+                padding: 20px;
             }
-            h1 {
+            .header h1 {
                 font-size: 2.2rem !important;
                 line-height: 1.2 !important;
-            }
-            h1 span {
-                font-size: 2.4rem !important;
             }
             .subheadline {
                 font-size: 1.2rem !important;
@@ -358,8 +356,14 @@
             }
             .header button {
                 font-size: 1.1rem !important;
-                padding: 16px 35px !important;
+                padding: 16px 30px !important;
                 margin-top: 25px !important;
+                width: auto !important;
+                display: block !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                max-width: 280px !important;
+                word-wrap: break-word !important;
             }
             .form-container {
                 height: 600px !important;
