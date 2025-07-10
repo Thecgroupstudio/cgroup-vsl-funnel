@@ -416,6 +416,91 @@
             </div>
         </div>
         
+        <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+        <script>
+        // Track form submission with debounce and single-fire logic
+        (function() {
+            // Track if we've already fired the event
+            let hasTracked = false;
+            
+            // Function to track the lead (with debounce)
+            function trackLead() {
+                if (hasTracked) return;
+                hasTracked = true;
+                
+                console.log('Tracking Lead event');
+                fbq('track', 'Lead', {
+                    content_name: 'Executive Presence Blueprint',
+                    content_category: 'Lead Magnet',
+                    eventID: 'optin_' + Date.now()
+                });
+                
+                // Also track a CompleteRegistration event
+                fbq('track', 'CompleteRegistration', {
+                    content_name: 'Executive Presence Blueprint',
+                    content_category: 'Opt-in',
+                    eventID: 'complete_' + Date.now()
+                });
+                
+                // Remove event listeners after tracking
+                window.removeEventListener('message', handleMessage);
+                document.removeEventListener('click', handleClick);
+            }
+            
+            // Handle messages from iframe
+            function handleMessage(event) {
+                if (event.origin === 'https://api.leadconnectorhq.com' && event.data) {
+                    console.log('Received message from LeadConnector:', event.data);
+                    // If we get any message from LeadConnector, track the lead
+                    trackLead();
+                }
+            }
+            
+            // Handle clicks on the iframe
+            function handleClick(e) {
+                if (e.target.closest('iframe[src*="leadconnectorhq.com"]')) {
+                    trackLead();
+                }
+            }
+            
+            // Initialize when DOM is ready
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log('DOM fully loaded, initializing form tracking...');
+                
+                // Track when the form is loaded
+                fbq('track', 'PageView', {
+                    page_type: 'optin_form_loaded',
+                    timestamp: Date.now()
+                });
+                
+                const formIframe = document.querySelector('iframe[src*="leadconnectorhq.com/widget/form"]');
+                
+                if (formIframe) {
+                    // Try to access the iframe content
+                    formIframe.addEventListener('load', function() {
+                        try {
+                            const iframeDoc = formIframe.contentDocument || formIframe.contentWindow.document;
+                            const form = iframeDoc.querySelector('form');
+                            if (form) {
+                                form.addEventListener('submit', trackLead);
+                            }
+                        } catch (e) {
+                            console.log('Could not access iframe content:', e);
+                            // Fall back to message/click listeners
+                            window.addEventListener('message', handleMessage, false);
+                        }
+                    });
+                    
+                    // Also set up click listener as a fallback
+                    document.addEventListener('click', handleClick);
+                }
+            });
+            
+            // Track page view with PageView event
+            fbq('track', 'PageView');
+        })();
+        </script>
+        
         <div class="content">
             <div class="left-column">
                 <div class="image-container">
