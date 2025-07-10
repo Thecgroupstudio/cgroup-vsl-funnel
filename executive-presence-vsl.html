@@ -608,12 +608,28 @@
                     isPlaying = false;
                     playIcon.style.display = 'block';
                     pauseIcon.style.display = 'none';
+                    // Show play overlay when paused
+                    playOverlay.style.display = 'flex';
                 }
             }
 
-            // Large play button overlay click
-            playOverlay.addEventListener('click', function() {
+            // Video click to play/pause
+            video.addEventListener('click', function() {
                 togglePlayPause();
+            });
+
+            // Large play button overlay click
+            playOverlay.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent triggering video click event
+                togglePlayPause();
+            });
+            
+            // Spacebar to play/pause
+            document.addEventListener('keydown', function(e) {
+                if (e.code === 'Space' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    togglePlayPause();
+                }
             });
 
             // Play/pause button click
