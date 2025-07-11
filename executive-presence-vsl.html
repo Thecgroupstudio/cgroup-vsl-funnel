@@ -664,13 +664,15 @@
             // Initialize video
             video.load();
             
-            // Show booking button immediately with animation
-            showBookingButton();
-            
-            // Make sure button is visible even if JavaScript is slow
+            // Make sure booking button is visible
             const bookingButton = document.getElementById('bookingButtonContainer');
             if (bookingButton) {
                 bookingButton.style.display = 'block';
+                bookingButton.style.opacity = '1';
+                bookingButton.style.visibility = 'visible';
+                console.log('Booking button should be visible');
+            } else {
+                console.error('Booking button container not found');
             }
             
             // Set initial states
@@ -756,12 +758,20 @@
             // Add debug styles to help identify the button
             const style = document.createElement('style');
             style.textContent = `
+                #play-button {
+                    position: relative;
+                    z-index: 1000 !important;
+                }
                 #play-button:hover {
                     transform: scale(1.1) !important;
                     box-shadow: 0 0 0 3px yellow !important;
                 }
                 #play-overlay {
                     border: 2px dashed red !important;
+                    z-index: 999 !important;
+                }
+                #custom-video {
+                    z-index: 1 !important;
                 }
             `;
             document.head.appendChild(style);
