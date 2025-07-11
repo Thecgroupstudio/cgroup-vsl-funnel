@@ -655,6 +655,14 @@
             if (bookingButton) {
                 bookingButton.style.display = 'block';
             }
+            
+            // Ensure play overlay is visible initially
+            playOverlay.style.display = 'flex';
+            
+            // Reset play/pause state
+            isPlaying = false;
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
 
             // Video click to play/pause
             video.addEventListener('click', function() {
@@ -666,9 +674,6 @@
                 e.stopPropagation(); // Prevent triggering video click event
                 togglePlayPause();
             });
-            
-            // Show play overlay by default
-            playOverlay.style.display = 'flex';
 
             // Spacebar to play/pause
             document.addEventListener('keydown', function(e) {
@@ -679,9 +684,12 @@
             });
 
             // Play/pause button click
-            playPauseBtn.addEventListener('click', function() {
-                togglePlayPause();
-            });
+            if (playPauseBtn) {
+                playPauseBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    togglePlayPause();
+                });
+            }
 
             // Hover effects for play overlay
             playOverlay.addEventListener('mouseenter', function() {
