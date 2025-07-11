@@ -818,82 +818,72 @@
     </noscript>
     <!-- End LinkedIn Insight Tag -->
     
+    <!-- Hidden video element for preloading -->
+    <video id="preload-video" style="display: none;" preload="auto" muted playsinline>
+        <source src="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/686f82998994786cbaebafbf.mp4" type="video/mp4">
+    </video>
+    
     <script>
+        // Preload the entire video after page loads
         document.addEventListener('DOMContentLoaded', function() {
-            const mainVideo = document.getElementById('custom-video');
-            let isFirstPlay = true;
-            
-            // Configure video for better streaming
-            mainVideo.preload = 'auto';
-            mainVideo.playsInline = true;
-            
-            // Optimize for performance
-            mainVideo.setAttribute('playsinline', '');
-            mainVideo.setAttribute('webkit-playsinline', '');
-            
-            // Progressive loading strategy
-            function optimizeVideoPlayback() {
-                // Set a smaller buffer size to prevent excessive preloading
-                if (mainVideo.buffered.length > 0) {
-                    const bufferEnd = mainVideo.buffered.end(mainVideo.buffered.length - 1);
-                    const currentTime = mainVideo.currentTime;
-                    
-                    // If we're close to the end of the buffer, try to load more
-                    if (bufferEnd - currentTime < 10) { // 10 seconds buffer
-                        mainVideo.load();
-                    }
-                }
-            }
-            
-            // Handle buffering state
-            mainVideo.addEventListener('waiting', function() {
-                console.log('Buffering video...');
-                // Show loading indicator if needed
-            });
-            
-            mainVideo.addEventListener('playing', function() {
-                console.log('Video is playing smoothly');
-                // Hide loading indicator
-            });
-            
-            // Monitor buffer status
-            mainVideo.addEventListener('progress', function() {
-                optimizeVideoPlayback();
-            });
-            
-            // Handle first play
-            mainVideo.addEventListener('play', function() {
-                if (isFirstPlay) {
-                    console.log('First play started');
-                    isFirstPlay = false;
-                }
-            });
-            
-            // Error handling
-            mainVideo.addEventListener('error', function(e) {
-                console.error('Video playback error:', mainVideo.error);
-                // Try to recover by reloading the video
-                if (mainVideo.networkState === mainVideo.NETWORK_NO_SOURCE ||
-                    mainVideo.networkState === mainVideo.NETWORK_EMPTY) {
-                    console.log('Attempting to recover...');
-                    mainVideo.load();
-                }
-            });
-            
-            // Start loading the video after a short delay
+            // Start preloading after a short delay to prioritize page rendering
             setTimeout(function() {
-                console.log('Starting video load...');
-                mainVideo.load();
+                const preloadVideo = document.getElementById('preload-video');
+                const mainVideo = document.getElementById('custom-video');
                 
-                // On slower connections, wait for enough data before enabling play
-                const checkReady = setInterval(function() {
-                    if (mainVideo.readyState >= 3) { // HAVE_FUTURE_DATA
-                        mainVideo.play().catch(e => console.log('Auto-play prevented:', e));
-                        clearInterval(checkReady);
+                // Set the preload video source to match the main video
+                preloadVideo.src = mainVideo.querySelector('source').src;
+                
+                // Start preloading
+                preloadVideo.load();
+                
+                // When preloaded, set the current time of main video to 0
+                preloadVideo.addEventListener('canplaythrough', function() {
+                    mainVideo.currentTime = 0;
+                    console.log('Video fully loaded and ready to play');
+                });
+                
+                // Track if this is the first play
+                let isFirstPlay = true;
+                
+                // When main video is played
+                mainVideo.addEventListener('play', function() {
+                    // Only transfer time on first play
+                    if (isFirstPlay && preloadVideo.buffered.length > 0) {
+                        mainVideo.currentTime = preloadVideo.currentTime;
+                        isFirstPlay = false;
                     }
-                }, 500);
+                    
+                    // Clean up preload video
+                    preloadVideo.pause();
+                    preloadVideo.removeAttribute('src');
+                    preloadVideo.load();
+                });
                 
-            }, 1000);
+                // If user interacts with the page, start preloading
+                const userInteractionEvents = ['mousedown', 'touchstart', 'keydown'];
+                const handleUserInteraction = function() {
+                    if (preloadVideo.readyState < 2) { // If not already loaded
+                        console.log('User interaction detected, starting video preload');
+                        preloadVideo.load();
+                    }
+                    userInteractionEvents.forEach(event => {
+                        document.removeEventListener(event, handleUserInteraction);
+                    });
+                };
+                
+                userInteractionEvents.forEach(event => {
+                    document.addEventListener(event, handleUserInteraction, { once: true });
+                });
+                
+                // Add error handling
+                preloadVideo.addEventListener('error', function(e) {
+                    console.error('Error preloading video:', e);
+                    // Fallback to main video loading if preload fails
+                    mainVideo.load();
+                });
+                
+            }, 1000); // 1 second delay before starting preload
         });
     </script>
 </body>
