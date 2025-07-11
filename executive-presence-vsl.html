@@ -837,27 +837,35 @@
                 // Start preloading
                 preloadVideo.load();
                 
-                // When preloaded, set the current time of main video to 0
-                preloadVideo.addEventListener('canplaythrough', function() {
-                    mainVideo.currentTime = 0;
-                    console.log('Video fully loaded and ready to play');
-                });
-                
                 // Track if this is the first play
                 let isFirstPlay = true;
                 
-                // When main video is played
-                mainVideo.addEventListener('play', function() {
-                    // Only transfer time on first play
-                    if (isFirstPlay && preloadVideo.buffered.length > 0) {
-                        mainVideo.currentTime = preloadVideo.currentTime;
+                // When preload video is ready
+                preloadVideo.addEventListener('canplaythrough', function() {
+                    console.log('Video fully loaded and ready to play');
+                    
+                    // Only set up the first play handler once
+                    if (isFirstPlay) {
+                        // When main video is played for the first time
+                        const firstPlayHandler = function() {
+                            if (preloadVideo.buffered.length > 0) {
+                                // Only set the time if not already set
+                                if (mainVideo.currentTime === 0) {
+                                    mainVideo.currentTime = preloadVideo.currentTime;
+                                }
+                            }
+                            // Clean up preload video after first play
+                            preloadVideo.pause();
+                            preloadVideo.removeAttribute('src');
+                            preloadVideo.load();
+                            // Remove this event listener after first play
+                            mainVideo.removeEventListener('play', firstPlayHandler);
+                        };
+                        
+                        // Set up the first play handler
+                        mainVideo.addEventListener('play', firstPlayHandler, { once: true });
                         isFirstPlay = false;
                     }
-                    
-                    // Clean up preload video
-                    preloadVideo.pause();
-                    preloadVideo.removeAttribute('src');
-                    preloadVideo.load();
                 });
                 
                 // If user interacts with the page, start preloading
