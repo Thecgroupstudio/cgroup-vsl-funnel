@@ -485,10 +485,15 @@
                                 Your browser does not support the video tag. Please <a href="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/686f82998994786cbaebafbf.mp4" target="_blank">click here</a> to view the video.
                             </video>
                             
+                            <!-- Debug overlay to check for click events -->
+                            <div id="debug-overlay" style="position: fixed; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 10px; border-radius: 5px; z-index: 1000;">
+                                Click status: <span id="click-status">Not clicked</span>
+                            </div>
+                            
                             <!-- Large Central Play Button Overlay -->
-                            <div class="play-overlay" id="play-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); cursor: pointer; transition: all 0.3s ease; border-radius: 12px; z-index: 10;">
-                                <button id="play-button" class="play-button" style="width: 80px; height: 80px; background: #e53e3e; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(229, 62, 62, 0.3); transition: all 0.3s ease; transform: scale(1); cursor: pointer; outline: none; padding: 0;">
-                                    <svg width="28" height="32" viewBox="0 0 28 32" fill="none" style="margin-left: 4px; pointer-events: none;">
+                            <div class="play-overlay" id="play-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); cursor: pointer; transition: all 0.3s ease; border-radius: 12px; z-index: 100; pointer-events: auto;">
+                                <button id="play-button" class="play-button" style="width: 80px; height: 80px; background: #e53e3e; border: 2px solid white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(229, 62, 62, 0.3); transition: all 0.3s ease; transform: scale(1); cursor: pointer; outline: none; padding: 0; position: relative; z-index: 101;">
+                                    <svg width="28" height="32" viewBox="0 0 28 32" fill="none" style="margin-left: 4px;">
                                         <path d="M2 2L26 16L2 30V2Z" fill="white" stroke="white" stroke-width="2" stroke-linejoin="round"/>
                                     </svg>
                                 </button>
@@ -699,33 +704,67 @@
                 togglePlayPause();
             });
 
+            // Debug click tracking
+            const clickStatus = document.getElementById('click-status');
+            
             // Get the actual play button element
             const playButton = document.getElementById('play-button');
+            
+            // Debug function to log element under cursor
+            function logElementUnderCursor(e) {
+                const element = document.elementFromPoint(e.clientX, e.clientY);
+                console.log('Element under cursor:', element);
+                console.log('Element classes:', element.className);
+                console.log('Element id:', element.id);
+                console.log('Element tag:', element.tagName);
+                clickStatus.textContent = `Clicked: ${element.tagName}${element.id ? '#' + element.id : ''}${element.className ? '.' + element.className.split(' ').join('.') : ''}`;
+            }
             
             // Play button click handler
             function handlePlayButtonClick(e) {
                 console.log('Play button clicked');
+                logElementUnderCursor(e);
+                e.preventDefault();
                 e.stopPropagation();
                 togglePlayPause();
                 return false;
             }
             
-            // Add event listeners to both the button and overlay for maximum compatibility
+            // Add event listeners with passive: false to ensure preventDefault works
             if (playButton) {
-                playButton.addEventListener('click', handlePlayButtonClick);
-                playButton.addEventListener('touchend', handlePlayButtonClick);
-                console.log('Added event listeners to play button');
+                console.log('Play button found, adding event listeners');
+                playButton.addEventListener('click', handlePlayButtonClick, { passive: false });
+                playButton.addEventListener('touchend', handlePlayButtonClick, { passive: false });
+                
+                // Add debug border on hover
+                playButton.addEventListener('mouseover', function() {
+                    this.style.boxShadow = '0 0 0 3px yellow';
+                });
+                playButton.addEventListener('mouseout', function() {
+                    this.style.boxShadow = '0 10px 30px rgba(229, 62, 62, 0.3)';
+                });
             } else {
                 console.error('Play button not found!');
+                clickStatus.textContent = 'Error: Play button not found!';
             }
             
-            // Keep overlay click as fallback
-            playOverlay.addEventListener('click', function(e) {
-                if (e.target === this) { // Only trigger if clicking directly on overlay, not button
-                    console.log('Play overlay clicked directly');
-                    togglePlayPause();
+            // Add click handler to document to see if events are being captured
+            document.addEventListener('click', function(e) {
+                console.log('Document click event:', e.target);
+            }, true);
+            
+            // Add debug styles to help identify the button
+            const style = document.createElement('style');
+            style.textContent = `
+                #play-button:hover {
+                    transform: scale(1.1) !important;
+                    box-shadow: 0 0 0 3px yellow !important;
                 }
-            });
+                #play-overlay {
+                    border: 2px dashed red !important;
+                }
+            `;
+            document.head.appendChild(style);
 
             // Spacebar to play/pause
             document.addEventListener('keydown', function(e) {
