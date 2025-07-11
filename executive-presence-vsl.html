@@ -476,8 +476,9 @@
                                 playsinline 
                                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px;"
                                 poster=""
-                                preload="metadata">
-                                <source src="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/686f82998994786cbaebafbf.mp4#t=0,10" type="video/mp4">
+                                preload="auto"
+                                onloadstart="this.volume=1.0">
+                                <source src="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/686f82998994786cbaebafbf.mp4" type="video/mp4">
                                 Your browser does not support the video tag. Please <a href="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/686f82998994786cbaebafbf.mp4" target="_blank">click here</a> to view the video.
                             </video>
                             
@@ -625,10 +626,12 @@
             
             // Track play time and show booking button after 30 seconds
             let hasShownButton = false;
-            let hasStartedPreload = false;
             
-            // Set video to preload the entire video
+            // Configure video for better streaming
             video.preload = 'auto';
+            
+            // Force browser to start loading the video
+            video.load();
             
             // Simple time update handler
             video.addEventListener('timeupdate', function() {
@@ -637,26 +640,33 @@
                     showBookingButton();
                     hasShownButton = true;
                 }
-                
-                // Start preloading more aggressively after 10 seconds
-                if (video.currentTime >= 10 && !hasStartedPreload) {
-                    hasStartedPreload = true;
-                    
-                    // Force the browser to buffer more of the video
-                    try {
-                        // This will make the browser start downloading the rest of the video
-                        video.load();
-                        video.play().catch(e => console.log('Continue playing:', e));
-                    } catch (e) {
-                        console.log('Error forcing buffer:', e);
-                    }
-                }
             });
             
-            // Ensure the video keeps playing when buffering
+            // Handle buffering
             video.addEventListener('waiting', function() {
                 console.log('Buffering...');
                 video.play().catch(e => console.log('Buffering play attempt:', e));
+            });
+            
+            // When enough data is loaded, ensure smooth playback
+            video.addEventListener('canplay', function() {
+                console.log('Enough data loaded for smooth playback');
+                if (video.paused) {
+                    video.play().catch(e => console.log('Auto-play after buffer:', e));
+                }
+            });
+            
+            // Force full video load when video starts playing
+            video.addEventListener('playing', function() {
+                // This helps ensure the browser continues buffering
+                try {
+                    // Force the video to buffer more aggressively
+                    video.pause();
+                    video.currentTime = 0.1; // Small seek to force buffering
+                    video.play().catch(e => console.log('Play after seek:', e));
+                } catch (e) {
+                    console.log('Error forcing buffer:', e);
+                }
             });
 
             // Video click to play/pause
