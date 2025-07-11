@@ -486,12 +486,12 @@
                             </video>
                             
                             <!-- Large Central Play Button Overlay -->
-                            <div class="play-overlay" id="play-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); cursor: pointer; transition: all 0.3s ease; border-radius: 12px;">
-                                <div class="play-button" style="width: 80px; height: 80px; background: #e53e3e; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(229, 62, 62, 0.3); transition: all 0.3s ease; transform: scale(1);">
-                                    <svg width="28" height="32" viewBox="0 0 28 32" fill="none" style="margin-left: 4px;">
+                            <div class="play-overlay" id="play-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); cursor: pointer; transition: all 0.3s ease; border-radius: 12px; z-index: 10;">
+                                <button id="play-button" class="play-button" style="width: 80px; height: 80px; background: #e53e3e; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(229, 62, 62, 0.3); transition: all 0.3s ease; transform: scale(1); cursor: pointer; outline: none; padding: 0;">
+                                    <svg width="28" height="32" viewBox="0 0 28 32" fill="none" style="margin-left: 4px; pointer-events: none;">
                                         <path d="M2 2L26 16L2 30V2Z" fill="white" stroke="white" stroke-width="2" stroke-linejoin="round"/>
                                     </svg>
-                                </div>
+                                </button>
                             </div>
                             
                             <!-- Custom Player Controls -->
@@ -699,20 +699,32 @@
                 togglePlayPause();
             });
 
-            // Large play button overlay click - using both click and mousedown for better compatibility
-            playOverlay.addEventListener('click', function(e) {
-                console.log('Play overlay clicked');
-                e.stopPropagation();
-                togglePlayPause();
-                return false;
-            });
+            // Get the actual play button element
+            const playButton = document.getElementById('play-button');
             
-            // Add touch support for mobile devices
-            playOverlay.addEventListener('touchend', function(e) {
-                console.log('Play overlay touched');
+            // Play button click handler
+            function handlePlayButtonClick(e) {
+                console.log('Play button clicked');
                 e.stopPropagation();
                 togglePlayPause();
                 return false;
+            }
+            
+            // Add event listeners to both the button and overlay for maximum compatibility
+            if (playButton) {
+                playButton.addEventListener('click', handlePlayButtonClick);
+                playButton.addEventListener('touchend', handlePlayButtonClick);
+                console.log('Added event listeners to play button');
+            } else {
+                console.error('Play button not found!');
+            }
+            
+            // Keep overlay click as fallback
+            playOverlay.addEventListener('click', function(e) {
+                if (e.target === this) { // Only trigger if clicking directly on overlay, not button
+                    console.log('Play overlay clicked directly');
+                    togglePlayPause();
+                }
             });
 
             // Spacebar to play/pause
