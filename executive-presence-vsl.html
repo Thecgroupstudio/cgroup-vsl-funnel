@@ -843,12 +843,18 @@
                     console.log('Video fully loaded and ready to play');
                 });
                 
-                // When main video is played, clean up the preload video
+                // Track if this is the first play
+                let isFirstPlay = true;
+                
+                // When main video is played
                 mainVideo.addEventListener('play', function() {
-                    // Transfer buffered data from preload video to main video if needed
-                    if (preloadVideo.buffered.length > 0) {
+                    // Only transfer time on first play
+                    if (isFirstPlay && preloadVideo.buffered.length > 0) {
                         mainVideo.currentTime = preloadVideo.currentTime;
+                        isFirstPlay = false;
                     }
+                    
+                    // Clean up preload video
                     preloadVideo.pause();
                     preloadVideo.removeAttribute('src');
                     preloadVideo.load();
