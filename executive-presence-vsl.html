@@ -626,34 +626,37 @@
 
             // Play/Pause functionality
             function togglePlayPause() {
+                console.log('Toggle play/pause called');
                 if (video.paused) {
+                    console.log('Attempting to play video');
+                    video.muted = true; // Ensure muted for autoplay
                     const playPromise = video.play();
+                    
                     if (playPromise !== undefined) {
-                        playPromise.catch(error => {
+                        playPromise.then(() => {
+                            console.log('Playback started successfully');
+                            isPlaying = true;
+                            playOverlay.style.display = 'none';
+                            playIcon.style.display = 'none';
+                            pauseIcon.style.display = 'block';
+                            startTrackingPlayTime();
+                        }).catch(error => {
                             console.error('Playback failed:', error);
-                            // Try unmuting and playing again
-                            video.muted = true;
-                            video.play().catch(e => console.error('Still failed:', e));
+                            // Show error to user
+                            alert('Please click the play button to start the video. Some browsers require user interaction.');
                         });
                     }
-                    isPlaying = true;
-                    playOverlay.style.display = 'none';
-                    playIcon.style.display = 'none';
-                    pauseIcon.style.display = 'block';
-                    
-                    // Start tracking time when video starts playing
-                    startTrackingPlayTime();
                 } else {
+                    console.log('Pausing video');
                     video.pause();
                     isPlaying = false;
                     playIcon.style.display = 'block';
                     pauseIcon.style.display = 'none';
-                    // Show play overlay when paused
                     playOverlay.style.display = 'flex';
                 }
             }
             
-            // Initialize video (load but don't autoplay)
+            // Initialize video
             video.load();
             
             // Show booking button immediately with animation
@@ -665,47 +668,29 @@
                 bookingButton.style.display = 'block';
             }
             
-            // Ensure play overlay is visible initially
+            // Set initial states
             playOverlay.style.display = 'flex';
-            
-            // Reset play/pause state
             isPlaying = false;
             playIcon.style.display = 'block';
             pauseIcon.style.display = 'none';
             
-            // Debug: Add error handling for video play
+            // Simple error logging
             video.addEventListener('error', function(e) {
                 console.error('Video error:', e);
-                console.log('Video error details:', {
-                    code: video.error.code,
-                    message: video.error.message
-                });
             });
-            
-            // Debug: Log play promise
-            function debugPlay() {
-                const playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(error => {
-                        console.error('Playback failed:', error);
-                        // Try again with user interaction
-                        document.addEventListener('click', function tryPlay() {
-                            video.play().catch(e => console.error('Still failed:', e));
-                            document.removeEventListener('click', tryPlay);
-                        }, { once: true });
-                    });
-                }
-            }
 
             // Video click to play/pause
             video.addEventListener('click', function() {
                 togglePlayPause();
             });
 
-            // Large play button overlay click
-            playOverlay.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevent triggering video click event
+            // Large play button overlay click - using mousedown for better mobile support
+            playOverlay.addEventListener('mousedown', function(e) {
+                e.preventDefault(); // Prevent any default behavior
+                e.stopPropagation(); // Stop event bubbling
+                console.log('Play overlay clicked');
                 togglePlayPause();
+                return false;
             });
 
             // Spacebar to play/pause
