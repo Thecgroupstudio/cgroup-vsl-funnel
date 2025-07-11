@@ -634,12 +634,7 @@
                 }
             });
             
-            // Auto-play when enough data is loaded
-            video.addEventListener('canplay', function() {
-                video.play().catch(e => console.log('Auto-play:', e));
-            });
-            
-            // Start loading the video
+            // Initialize video (load but don't autoplay)
             video.load();
 
             // Video click to play/pause
@@ -653,6 +648,9 @@
                 togglePlayPause();
             });
             
+            // Show play overlay by default
+            playOverlay.style.display = 'flex';
+
             // Spacebar to play/pause
             document.addEventListener('keydown', function(e) {
                 if (e.code === 'Space' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
