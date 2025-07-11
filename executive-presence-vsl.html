@@ -478,6 +478,7 @@
                             <video 
                                 id="custom-video"
                                 playsinline 
+                                muted
                                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px;"
                                 preload="auto">
                                 <source src="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/686f82998994786cbaebafbf.mp4" type="video/mp4">
@@ -626,7 +627,15 @@
             // Play/Pause functionality
             function togglePlayPause() {
                 if (video.paused) {
-                    video.play();
+                    const playPromise = video.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            console.error('Playback failed:', error);
+                            // Try unmuting and playing again
+                            video.muted = true;
+                            video.play().catch(e => console.error('Still failed:', e));
+                        });
+                    }
                     isPlaying = true;
                     playOverlay.style.display = 'none';
                     playIcon.style.display = 'none';
@@ -663,6 +672,30 @@
             isPlaying = false;
             playIcon.style.display = 'block';
             pauseIcon.style.display = 'none';
+            
+            // Debug: Add error handling for video play
+            video.addEventListener('error', function(e) {
+                console.error('Video error:', e);
+                console.log('Video error details:', {
+                    code: video.error.code,
+                    message: video.error.message
+                });
+            });
+            
+            // Debug: Log play promise
+            function debugPlay() {
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.error('Playback failed:', error);
+                        // Try again with user interaction
+                        document.addEventListener('click', function tryPlay() {
+                            video.play().catch(e => console.error('Still failed:', e));
+                            document.removeEventListener('click', tryPlay);
+                        }, { once: true });
+                    });
+                }
+            }
 
             // Video click to play/pause
             video.addEventListener('click', function() {
