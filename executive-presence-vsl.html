@@ -674,21 +674,43 @@
             playIcon.style.display = 'block';
             pauseIcon.style.display = 'none';
             
+            // Make sure video is muted for autoplay
+            video.muted = true;
+            
             // Simple error logging
             video.addEventListener('error', function(e) {
                 console.error('Video error:', e);
+                console.log('Video error details:', video.error);
+            });
+            
+            // Log when video can play
+            video.addEventListener('canplay', function() {
+                console.log('Video can play');
+            });
+            
+            // Log when play is called
+            video.addEventListener('play', function() {
+                console.log('Video play event fired');
             });
 
             // Video click to play/pause
             video.addEventListener('click', function() {
+                console.log('Video clicked');
                 togglePlayPause();
             });
 
-            // Large play button overlay click - using mousedown for better mobile support
-            playOverlay.addEventListener('mousedown', function(e) {
-                e.preventDefault(); // Prevent any default behavior
-                e.stopPropagation(); // Stop event bubbling
+            // Large play button overlay click - using both click and mousedown for better compatibility
+            playOverlay.addEventListener('click', function(e) {
                 console.log('Play overlay clicked');
+                e.stopPropagation();
+                togglePlayPause();
+                return false;
+            });
+            
+            // Add touch support for mobile devices
+            playOverlay.addEventListener('touchend', function(e) {
+                console.log('Play overlay touched');
+                e.stopPropagation();
                 togglePlayPause();
                 return false;
             });
