@@ -158,27 +158,22 @@
             console.log('Setting up button tracking...');
             
             function showBookingButton() {
-                // Button is now always visible via CSS, so we just ensure it has the fade-in animation
                 const bookingButton = document.getElementById('bookingButtonContainer');
-                bookingButton.style.animation = 'fadeIn 0.5s ease-in-out';
+                if (bookingButton) {
+                    bookingButton.style.animation = 'fadeIn 0.5s ease-in-out';
+                }
             }
             
             showBookingButton();
             
-            // Add click event listener
+            // Add click event listener and visual feedback
             const bookingButton = document.getElementById('bookingButton');
-            bookingButton.addEventListener('click', function(e) {
-                console.log('Booking button clicked');
-                
-                // Send Facebook Pixel event
-                fbq('track', 'InitiateCheckout', {
-                    content_name: 'Book Consultation',
-                    content_category: 'CTA Click',
-                    content_ids: ['impact_framework_vsl'],
-                    button_text: bookingButton.innerText.trim(),
-                    button_id: 'bookingButton',
-                    page_url: window.location.href,
-                    debug_timestamp: Date.now()
+            if (bookingButton) {
+                // Add click handler
+                bookingButton.addEventListener('click', function(e) {
+                    console.log('Booking button clicked');
+                    
+                    // Send Facebook Pixel event
                     fbq('track', 'InitiateCheckout', {
                         content_name: 'Book Consultation',
                         content_category: 'CTA Click',
@@ -188,11 +183,10 @@
                         page_url: window.location.href,
                         debug_timestamp: Date.now()
                     });
-                    
                     console.log('InitiateCheckout event sent');
                 });
                 
-                // Add visual feedback for testing
+                // Add visual feedback
                 bookingButton.style.transition = 'all 0.3s';
                 bookingButton.addEventListener('mousedown', () => {
                     bookingButton.style.transform = 'scale(0.98)';
@@ -203,7 +197,6 @@
                 bookingButton.addEventListener('mouseleave', () => {
                     bookingButton.style.transform = 'scale(1)';
                 });
-                
             } else {
                 console.warn('Booking button not found by ID, trying other selectors...');
                 
@@ -563,7 +556,25 @@
         </div>
         
         <!-- Booking Button with proper spacing -->
-        <div style="text-align: center; margin: 10px auto 20px; max-width: 800px; padding: 0 20px;" id="bookingButtonContainer">
+        <div style="text-align: center; margin: 30px auto; max-width: 800px; padding: 0 20px;" id="bookingButtonContainer">
+            <style>
+                .cta-button {
+                    display: inline-block;
+                    background: linear-gradient(135deg, #e53e3e, #c53030);
+                    color: white;
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    padding: 15px 30px;
+                    border-radius: 50px;
+                    text-decoration: none;
+                    box-shadow: 0 4px 15px rgba(229, 62, 62, 0.3);
+                    transition: all 0.3s ease;
+                }
+                .cta-button:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 20px rgba(229, 62, 62, 0.4);
+                }
+            </style>
             <a href="executive-presence-booking.html" class="cta-button" id="bookingButton">
                 Schedule my Free Career Strategy Call
             </a>
@@ -636,8 +647,14 @@
             // Initialize video (load but don't autoplay)
             video.load();
             
-            // Show booking button immediately
+            // Show booking button immediately with animation
             showBookingButton();
+            
+            // Make sure button is visible even if JavaScript is slow
+            const bookingButton = document.getElementById('bookingButtonContainer');
+            if (bookingButton) {
+                bookingButton.style.display = 'block';
+            }
 
             // Video click to play/pause
             video.addEventListener('click', function() {
