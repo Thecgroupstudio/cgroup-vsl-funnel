@@ -157,19 +157,13 @@
         function setupButtonTracking() {
             console.log('Setting up button tracking...');
             
-            function showBookingButton() {
-                const bookingButton = document.getElementById('bookingButtonContainer');
-                if (bookingButton) {
-                    bookingButton.style.animation = 'fadeIn 0.5s ease-in-out';
-                }
-            }
-            
-            showBookingButton();
-            
-            // Add click event listener and visual feedback
+            // Find the booking button by ID
             const bookingButton = document.getElementById('bookingButton');
+            
             if (bookingButton) {
-                // Add click handler
+                console.log('Found booking button:', bookingButton);
+                
+                // Add click event listener
                 bookingButton.addEventListener('click', function(e) {
                     console.log('Booking button clicked');
                     
@@ -183,10 +177,11 @@
                         page_url: window.location.href,
                         debug_timestamp: Date.now()
                     });
+                    
                     console.log('InitiateCheckout event sent');
                 });
                 
-                // Add visual feedback
+                // Add visual feedback for testing
                 bookingButton.style.transition = 'all 0.3s';
                 bookingButton.addEventListener('mousedown', () => {
                     bookingButton.style.transform = 'scale(0.98)';
@@ -197,6 +192,7 @@
                 bookingButton.addEventListener('mouseleave', () => {
                     bookingButton.style.transform = 'scale(1)';
                 });
+                
             } else {
                 console.warn('Booking button not found by ID, trying other selectors...');
                 
@@ -258,11 +254,6 @@
     });
     </script>
     <style>
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
         :root {
             --primary: #1a365d;
             --secondary: #2c5282;
@@ -478,29 +469,24 @@
                             <video 
                                 id="custom-video"
                                 playsinline 
-                                muted
                                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px;"
-                                preload="auto">
+                                poster=""
+                                preload="metadata">
                                 <source src="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/686f82998994786cbaebafbf.mp4" type="video/mp4">
                                 Your browser does not support the video tag. Please <a href="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/686f82998994786cbaebafbf.mp4" target="_blank">click here</a> to view the video.
                             </video>
                             
-                            <!-- Debug overlay to check for click events -->
-                            <div id="debug-overlay" style="position: fixed; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 10px; border-radius: 5px; z-index: 1000;">
-                                Click status: <span id="click-status">Not clicked</span>
-                            </div>
-                            
                             <!-- Large Central Play Button Overlay -->
-                            <div class="play-overlay" id="play-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); cursor: pointer; transition: all 0.3s ease; border-radius: 12px; z-index: 100; pointer-events: auto;">
-                                <button id="play-button" class="play-button" style="width: 80px; height: 80px; background: #e53e3e; border: 2px solid white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(229, 62, 62, 0.3); transition: all 0.3s ease; transform: scale(1); cursor: pointer; outline: none; padding: 0; position: relative; z-index: 101;">
+                            <div class="play-overlay" id="play-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); cursor: pointer; transition: all 0.3s ease; border-radius: 12px;">
+                                <div class="play-button" style="width: 80px; height: 80px; background: #e53e3e; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(229, 62, 62, 0.3); transition: all 0.3s ease; transform: scale(1);">
                                     <svg width="28" height="32" viewBox="0 0 28 32" fill="none" style="margin-left: 4px;">
                                         <path d="M2 2L26 16L2 30V2Z" fill="white" stroke="white" stroke-width="2" stroke-linejoin="round"/>
                                     </svg>
-                                </button>
+                                </div>
                             </div>
                             
                             <!-- Custom Player Controls -->
-                            <div class="custom-controls" id="custom-controls" style="position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 15px 20px 20px; opacity: 1; transition: opacity 0.3s ease; border-radius: 0 0 12px 12px;">
+                            <div class="custom-controls" id="custom-controls" style="position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 15px 20px 20px; opacity: 0; transition: opacity 0.3s ease; border-radius: 0 0 12px 12px;">
                                 <div style="display: flex; align-items: center; gap: 10px; width: 100%; padding: 0 10px; box-sizing: border-box;">
                                     <!-- Play/Pause Button -->
                                     <button class="control-btn" id="play-pause-btn" style="background: rgba(0,0,0,0.5); border: 2px solid white; border-radius: 50%; color: white; cursor: pointer; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; padding: 0; transition: all 0.2s ease; margin-right: 8px; flex-shrink: 0;">
@@ -562,25 +548,7 @@
         </div>
         
         <!-- Booking Button with proper spacing -->
-        <div style="text-align: center; margin: 30px auto; max-width: 800px; padding: 0 20px;" id="bookingButtonContainer">
-            <style>
-                .cta-button {
-                    display: inline-block;
-                    background: linear-gradient(135deg, #e53e3e, #c53030);
-                    color: white;
-                    font-size: 1.2rem;
-                    font-weight: 600;
-                    padding: 15px 30px;
-                    border-radius: 50px;
-                    text-decoration: none;
-                    box-shadow: 0 4px 15px rgba(229, 62, 62, 0.3);
-                    transition: all 0.3s ease;
-                }
-                .cta-button:hover {
-                    transform: translateY(-2px);
-                    box-shadow: 0 6px 20px rgba(229, 62, 62, 0.4);
-                }
-            </style>
+        <div style="text-align: center; margin: 10px auto 20px; max-width: 800px; padding: 0 20px;">
             <a href="executive-presence-booking.html" class="cta-button" id="bookingButton">
                 Schedule my Free Career Strategy Call
             </a>
@@ -631,151 +599,33 @@
 
             // Play/Pause functionality
             function togglePlayPause() {
-                console.log('Toggle play/pause called');
                 if (video.paused) {
-                    console.log('Attempting to play video');
-                    video.muted = true; // Ensure muted for autoplay
-                    const playPromise = video.play();
-                    
-                    if (playPromise !== undefined) {
-                        playPromise.then(() => {
-                            console.log('Playback started successfully');
-                            isPlaying = true;
-                            playOverlay.style.display = 'none';
-                            playIcon.style.display = 'none';
-                            pauseIcon.style.display = 'block';
-                            startTrackingPlayTime();
-                        }).catch(error => {
-                            console.error('Playback failed:', error);
-                            // Show error to user
-                            alert('Please click the play button to start the video. Some browsers require user interaction.');
-                        });
-                    }
+                    video.play();
+                    isPlaying = true;
+                    playOverlay.style.display = 'none';
+                    playIcon.style.display = 'none';
+                    pauseIcon.style.display = 'block';
                 } else {
-                    console.log('Pausing video');
                     video.pause();
                     isPlaying = false;
                     playIcon.style.display = 'block';
                     pauseIcon.style.display = 'none';
+                    // Show play overlay when paused
                     playOverlay.style.display = 'flex';
                 }
             }
-            
-            // Initialize video
-            video.load();
-            
-            // Make sure booking button is visible
-            const bookingButton = document.getElementById('bookingButtonContainer');
-            if (bookingButton) {
-                bookingButton.style.display = 'block';
-                bookingButton.style.opacity = '1';
-                bookingButton.style.visibility = 'visible';
-                console.log('Booking button should be visible');
-            } else {
-                console.error('Booking button container not found');
-            }
-            
-            // Set initial states
-            playOverlay.style.display = 'flex';
-            isPlaying = false;
-            playIcon.style.display = 'block';
-            pauseIcon.style.display = 'none';
-            
-            // Make sure video is muted for autoplay
-            video.muted = true;
-            
-            // Simple error logging
-            video.addEventListener('error', function(e) {
-                console.error('Video error:', e);
-                console.log('Video error details:', video.error);
-            });
-            
-            // Log when video can play
-            video.addEventListener('canplay', function() {
-                console.log('Video can play');
-            });
-            
-            // Log when play is called
-            video.addEventListener('play', function() {
-                console.log('Video play event fired');
-            });
 
             // Video click to play/pause
             video.addEventListener('click', function() {
-                console.log('Video clicked');
                 togglePlayPause();
             });
 
-            // Debug click tracking
-            const clickStatus = document.getElementById('click-status');
-            
-            // Get the actual play button element
-            const playButton = document.getElementById('play-button');
-            
-            // Debug function to log element under cursor
-            function logElementUnderCursor(e) {
-                const element = document.elementFromPoint(e.clientX, e.clientY);
-                console.log('Element under cursor:', element);
-                console.log('Element classes:', element.className);
-                console.log('Element id:', element.id);
-                console.log('Element tag:', element.tagName);
-                clickStatus.textContent = `Clicked: ${element.tagName}${element.id ? '#' + element.id : ''}${element.className ? '.' + element.className.split(' ').join('.') : ''}`;
-            }
-            
-            // Play button click handler
-            function handlePlayButtonClick(e) {
-                console.log('Play button clicked');
-                logElementUnderCursor(e);
-                e.preventDefault();
-                e.stopPropagation();
+            // Large play button overlay click
+            playOverlay.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent triggering video click event
                 togglePlayPause();
-                return false;
-            }
+            });
             
-            // Add event listeners with passive: false to ensure preventDefault works
-            if (playButton) {
-                console.log('Play button found, adding event listeners');
-                playButton.addEventListener('click', handlePlayButtonClick, { passive: false });
-                playButton.addEventListener('touchend', handlePlayButtonClick, { passive: false });
-                
-                // Add debug border on hover
-                playButton.addEventListener('mouseover', function() {
-                    this.style.boxShadow = '0 0 0 3px yellow';
-                });
-                playButton.addEventListener('mouseout', function() {
-                    this.style.boxShadow = '0 10px 30px rgba(229, 62, 62, 0.3)';
-                });
-            } else {
-                console.error('Play button not found!');
-                clickStatus.textContent = 'Error: Play button not found!';
-            }
-            
-            // Add click handler to document to see if events are being captured
-            document.addEventListener('click', function(e) {
-                console.log('Document click event:', e.target);
-            }, true);
-            
-            // Add debug styles to help identify the button
-            const style = document.createElement('style');
-            style.textContent = `
-                #play-button {
-                    position: relative;
-                    z-index: 1000 !important;
-                }
-                #play-button:hover {
-                    transform: scale(1.1) !important;
-                    box-shadow: 0 0 0 3px yellow !important;
-                }
-                #play-overlay {
-                    border: 2px dashed red !important;
-                    z-index: 999 !important;
-                }
-                #custom-video {
-                    z-index: 1 !important;
-                }
-            `;
-            document.head.appendChild(style);
-
             // Spacebar to play/pause
             document.addEventListener('keydown', function(e) {
                 if (e.code === 'Space' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
@@ -785,12 +635,9 @@
             });
 
             // Play/pause button click
-            if (playPauseBtn) {
-                playPauseBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    togglePlayPause();
-                });
-            }
+            playPauseBtn.addEventListener('click', function() {
+                togglePlayPause();
+            });
 
             // Hover effects for play overlay
             playOverlay.addEventListener('mouseenter', function() {
