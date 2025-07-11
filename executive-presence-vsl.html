@@ -824,6 +824,42 @@
     </video>
     
     <script>
+        // Debug function to log buffering information
+        function logBufferStatus(video, prefix = '') {
+            if (!video.buffered.length) return;
+            const buffered = [];
+            for (let i = 0; i < video.buffered.length; i++) {
+                buffered.push(`[${video.buffered.start(i).toFixed(2)}-${video.buffered.end(i).toFixed(2)}]`);
+            }
+            console.log(`${prefix} Buffered ranges: ${buffered.join(', ')}`);
+            console.log(`${prefix} Current time: ${video.currentTime.toFixed(2)}`);
+            console.log(`${prefix} Ready state: ${video.readyState} (${getReadyStateText(video.readyState)})`);
+            console.log(`${prefix} Network state: ${video.networkState} (${getNetworkStateText(video.networkState)})`);
+            console.log(`${prefix} Playback rate: ${video.playbackRate}`);
+            console.log(`${prefix} Paused: ${video.paused}`);
+        }
+
+        function getReadyStateText(state) {
+            const states = [
+                'HAVE_NOTHING',
+                'HAVE_METADATA',
+                'HAVE_CURRENT_DATA',
+                'HAVE_FUTURE_DATA',
+                'HAVE_ENOUGH_DATA'
+            ];
+            return states[state] || 'UNKNOWN';
+        }
+
+        function getNetworkStateText(state) {
+            const states = [
+                'NETWORK_EMPTY',
+                'NETWORK_IDLE',
+                'NETWORK_LOADING',
+                'NETWORK_NO_SOURCE'
+            ];
+            return states[state] || 'UNKNOWN';
+        }
+
         // Preload the entire video after page loads
         document.addEventListener('DOMContentLoaded', function() {
             // Start preloading after a short delay to prioritize page rendering
@@ -831,10 +867,40 @@
                 const preloadVideo = document.getElementById('preload-video');
                 const mainVideo = document.getElementById('custom-video');
                 
+                // Set up logging for main video events
+                mainVideo.addEventListener('waiting', () => {
+                    console.log('Main video: Waiting for more data');
+                    logBufferStatus(mainVideo, 'Main video (waiting)');
+                });
+
+                mainVideo.addEventListener('playing', () => {
+                    console.log('Main video: Playback started');
+                    logBufferStatus(mainVideo, 'Main video (playing)');
+                });
+
+                mainVideo.addEventListener('progress', () => {
+                    logBufferStatus(mainVideo, 'Main video (progress)');
+                });
+
+                mainVideo.addEventListener('stalled', () => {
+                    console.warn('Main video: Stalled - trying to recover');
+                    mainVideo.load();
+                });
+
+                // Set up logging for preload video events
+                preloadVideo.addEventListener('waiting', () => {
+                    console.log('Preload video: Waiting for more data');
+                    logBufferStatus(preloadVideo, 'Preload video (waiting)');
+                });
+
                 // Set the preload video source to match the main video
-                preloadVideo.src = mainVideo.querySelector('source').src;
+                const videoSrc = mainVideo.querySelector('source').src;
+                console.log('Setting video source:', videoSrc);
+                preloadVideo.src = videoSrc;
                 
-                // Start preloading
+                // Start preloading with range request for better performance
+                preloadVideo.preload = 'auto';
+                console.log('Starting video preload...');
                 preloadVideo.load();
                 
                 // Track if this is the first play
@@ -843,6 +909,7 @@
                 // When preload video is ready
                 preloadVideo.addEventListener('canplaythrough', function() {
                     console.log('Video fully loaded and ready to play');
+                    logBufferStatus(preloadVideo, 'Preload video (canplaythrough)');
                     
                     // Only set up the first play handler once
                     if (isFirstPlay) {
