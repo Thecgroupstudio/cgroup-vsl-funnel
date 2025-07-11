@@ -254,6 +254,11 @@
     });
     </script>
     <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         :root {
             --primary: #1a365d;
             --secondary: #2c5282;
@@ -472,7 +477,7 @@
                                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px;"
                                 poster=""
                                 preload="metadata">
-                                <source src="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/686f82998994786cbaebafbf.mp4" type="video/mp4">
+                                <source src="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/686f82998994786cbaebafbf.mp4#t=0,30" type="video/mp4">
                                 Your browser does not support the video tag. Please <a href="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/686f82998994786cbaebafbf.mp4" target="_blank">click here</a> to view the video.
                             </video>
                             
@@ -548,7 +553,7 @@
         </div>
         
         <!-- Booking Button with proper spacing -->
-        <div style="text-align: center; margin: 10px auto 20px; max-width: 800px; padding: 0 20px;">
+        <div style="text-align: center; margin: 10px auto 20px; max-width: 800px; padding: 0 20px; display: none;" id="bookingButtonContainer">
             <a href="executive-presence-booking.html" class="cta-button" id="bookingButton">
                 Schedule my Free Career Strategy Call
             </a>
@@ -605,6 +610,9 @@
                     playOverlay.style.display = 'none';
                     playIcon.style.display = 'none';
                     pauseIcon.style.display = 'block';
+                    
+                    // Start tracking time when video starts playing
+                    startTrackingPlayTime();
                 } else {
                     video.pause();
                     isPlaying = false;
@@ -613,6 +621,83 @@
                     // Show play overlay when paused
                     playOverlay.style.display = 'flex';
                 }
+            }
+            
+            // Track play time and show booking button after 30 seconds
+            let timeUpdateHandler;
+            let hasShownButton = false;
+            
+            function startTrackingPlayTime() {
+                // Only set up the timeupdate handler if we haven't shown the button yet
+                if (hasShownButton) return;
+                
+                // Clear any existing handler to prevent duplicates
+                if (timeUpdateHandler) {
+                    video.removeEventListener('timeupdate', timeUpdateHandler);
+                }
+                
+                timeUpdateHandler = function() {
+                    if (video.currentTime >= 30 && !hasShownButton) {
+                        showBookingButton();
+                    }
+                };
+                
+                video.addEventListener('timeupdate', timeUpdateHandler);
+            }
+            
+            function showBookingButton() {
+                if (!hasShownButton) {
+                    const bookingButton = document.getElementById('bookingButtonContainer');
+                    bookingButton.style.display = 'block';
+                    bookingButton.style.animation = 'fadeIn 0.5s ease-in-out';
+                    hasShownButton = true;
+                    
+                    // Remove the event listener to prevent multiple triggers
+                    if (timeUpdateHandler) {
+                        video.removeEventListener('timeupdate', timeUpdateHandler);
+                    }
+                    
+                    // Preload the rest of the video
+                    preloadRemainingVideo();
+                }
+            }
+            
+            function preloadRemainingVideo() {
+                // Create a new video element for preloading
+                const preloadVideo = document.createElement('video');
+                preloadVideo.preload = 'auto';
+                preloadVideo.style.display = 'none';
+                
+                // Set the source to the same as the main video
+                const source = document.createElement('source');
+                source.src = video.querySelector('source').src;
+                source.type = 'video/mp4';
+                preloadVideo.appendChild(source);
+                
+                // Add to document to start loading
+                document.body.appendChild(preloadVideo);
+                
+                // Clean up after loading
+                preloadVideo.onloadeddata = function() {
+                    // Keep the preloaded video in memory but hidden
+                    preloadVideo.volume = 0; // Mute the preload video
+                    preloadVideo.play().catch(e => console.log('Preload play attempt:', e));
+                    
+                    // Clean up after a while to free memory
+                    setTimeout(() => {
+                        if (document.body.contains(preloadVideo)) {
+                            document.body.removeChild(preloadVideo);
+                        }
+                    }, 30000); // Keep for 30 seconds after loading
+                };
+                
+                // Handle errors
+                preloadVideo.onerror = function() {
+                    console.error('Error preloading video');
+                    if (document.body.contains(preloadVideo)) {
+                        document.body.removeChild(preloadVideo);
+                    }
+                };
             }
 
             // Video click to play/pause
