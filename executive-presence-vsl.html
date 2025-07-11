@@ -823,6 +823,27 @@
         <source src="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/6870853b8c9ec70eef396f33.mp4" type="video/mp4">
     </video>
     
+    <style>
+        /* Add smooth transitions for the video element */
+        #custom-video {
+            transition: opacity 0.3s ease;
+        }
+        .buffering {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            background: rgba(0,0,0,0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            z-index: 10;
+            display: none;
+        }
+    </style>
+    <div id="buffering-indicator" class="buffering">Buffering...</div>
+    
     <script>
         // Debug function to log buffering information
         function logBufferStatus(video, prefix = '') {
@@ -860,6 +881,59 @@
             return states[state] || 'UNKNOWN';
         }
 
+        // Video buffering configuration
+        const BUFFER_AHEAD_SECONDS = 30; // Buffer 30 seconds ahead
+        const BUFFER_CHECK_INTERVAL = 1000; // Check buffer every second
+        let isBuffering = false;
+        let bufferCheckInterval;
+
+        // Show/hide buffering indicator
+        function setBuffering(state) {
+            const indicator = document.getElementById('buffering-indicator');
+            const video = document.getElementById('custom-video');
+            
+            if (state && !isBuffering) {
+                isBuffering = true;
+                indicator.style.display = 'block';
+                video.style.opacity = '0.8';
+            } else if (!state && isBuffering) {
+                isBuffering = false;
+                indicator.style.display = 'none';
+                video.style.opacity = '1';
+            }
+        }
+
+        // Check buffer and manage preloading
+        function checkBufferState(video) {
+            if (video.readyState < 3) { // If not enough data
+                setBuffering(true);
+                return;
+            }
+
+            const currentTime = video.currentTime;
+            const buffered = video.buffered;
+            let hasEnoughBuffer = false;
+
+            // Check if we have enough buffered data ahead
+            for (let i = 0; i < buffered.length; i++) {
+                if (currentTime >= buffered.start(i) && 
+                    currentTime < buffered.end(i) - 2) { // 2 second buffer threshold
+                    hasEnoughBuffer = true;
+                    break;
+                }
+            }
+
+            if (!hasEnoughBuffer) {
+                setBuffering(true);
+                // Try to force more aggressive buffering
+                if (video.networkState === 1) { // NETWORK_IDLE
+                    video.load();
+                }
+            } else {
+                setBuffering(false);
+            }
+        }
+
         // Preload the entire video after page loads
         document.addEventListener('DOMContentLoaded', function() {
             // Start preloading after a short delay to prioritize page rendering
@@ -867,10 +941,38 @@
                 const preloadVideo = document.getElementById('preload-video');
                 const mainVideo = document.getElementById('custom-video');
                 
+                // Set up buffer monitoring
+                bufferCheckInterval = setInterval(() => {
+                    checkBufferState(mainVideo);
+                }, BUFFER_CHECK_INTERVAL);
+
                 // Set up logging for main video events
                 mainVideo.addEventListener('waiting', () => {
                     console.log('Main video: Waiting for more data');
                     logBufferStatus(mainVideo, 'Main video (waiting)');
+                    setBuffering(true);
+                });
+
+                mainVideo.addEventListener('playing', () => {
+                    console.log('Main video: Playback started');
+                    logBufferStatus(mainVideo, 'Main video (playing)');
+                    setBuffering(false);
+                });
+
+                mainVideo.addEventListener('canplay', () => {
+                    console.log('Main video: Can play');
+                    setBuffering(false);
+                });
+
+                mainVideo.addEventListener('stalled', () => {
+                    console.warn('Main video: Stalled - trying to recover');
+                    setBuffering(true);
+                    mainVideo.load();
+                });
+
+                mainVideo.addEventListener('error', (e) => {
+                    console.error('Main video error:', mainVideo.error);
+                    setBuffering(false);
                 });
 
                 mainVideo.addEventListener('playing', () => {
@@ -896,12 +998,28 @@
                 // Set the preload video source to match the main video
                 const videoSrc = mainVideo.querySelector('source').src;
                 console.log('Setting video source:', videoSrc);
-                preloadVideo.src = videoSrc;
                 
-                // Start preloading with range request for better performance
+                // Add cache-busting parameter to force fresh load if needed
+                const cacheBuster = new Date().getTime();
+                const sourceWithCacheBust = `${videoSrc}${videoSrc.includes('?') ? '&' : '?'}_=${cacheBuster}`;
+                
+                // Set source and preload
+                preloadVideo.src = sourceWithCacheBust;
                 preloadVideo.preload = 'auto';
-                console.log('Starting video preload...');
-                preloadVideo.load();
+                
+                // Set preload to high priority
+                preloadVideo.setAttribute('preload', 'auto');
+                
+                console.log('Starting aggressive video preload...');
+                
+                // Force load start
+                const playPromise = preloadVideo.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log('Autoplay prevented, loading normally...');
+                        preloadVideo.load();
+                    });
+                }
                 
                 // Track if this is the first play
                 let isFirstPlay = true;
