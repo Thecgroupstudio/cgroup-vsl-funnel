@@ -462,7 +462,7 @@
 
         <!-- Video Section -->
         <div style="width: 100%; max-width: 1200px; margin: 0 auto 30px; padding: 0 10px;">
-            <div style="position: relative; width: 100%; padding-bottom: 56.25%; /* 16:9 Aspect Ratio */">
+            <div style="position: relative; width: 100%; padding-bottom: 60%; /* Slightly taller aspect ratio for better mobile viewing */">
                 <iframe 
                     src="https://yourpresenceisyourpower.com/vls-page-video?autoplay=0" 
                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
@@ -470,7 +470,8 @@
                     scrolling="no"
                     allowfullscreen
                     allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    referrerpolicy="strict-origin-when-cross-origin">
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    id="videoPlayer">
                 </iframe>
             </div>
         </div>
@@ -501,6 +502,12 @@
         </div>
         
         <style>
+            /* Base styles for all devices */
+            #videoPlayer {
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+            
             @media (max-width: 768px) {
                 /* Adjust container spacing for mobile */
                 .container > div:first-of-type {
@@ -517,26 +524,35 @@
                 }
                 
                 /* Video container adjustments */
-                #video-container {
-                    padding: 0 !important;
-                    margin: 0 auto 15px !important;
+                #videoPlayer {
+                    width: 100% !important;
+                    height: auto !important;
+                    min-height: 250px;
+                    max-height: 80vh;
+                    position: relative;
+                    top: 0;
+                    left: 0;
                 }
                 
-                /* Make iframe responsive */
+                /* Adjust the video wrapper */
                 .video-wrapper {
                     position: relative;
                     width: 100%;
-                    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+                    padding-bottom: 65%; /* Slightly taller for mobile */
                     margin: 0 auto;
+                    overflow: hidden;
                 }
                 
-                .video-wrapper iframe {
+                /* Ensure play button is visible */
+                .video-wrapper::before {
+                    content: '';
                     position: absolute;
                     top: 0;
                     left: 0;
-                    width: 100%;
-                    height: 100%;
-                    border: none;
+                    right: 0;
+                    bottom: 0;
+                    z-index: 1;
+                    pointer-events: none;
                 }
             }
             
@@ -549,6 +565,19 @@
                 /* Adjust spacing for very small screens */
                 .container > div:first-of-type {
                     margin-bottom: 10px;
+                    padding: 0 2px;
+                }
+                
+                /* Make the video container slightly smaller on very small screens */
+                .video-wrapper {
+                    padding-bottom: 70%;
+                }
+            }
+            
+            @media (max-width: 360px) {
+                /* Extra small device adjustments */
+                .video-wrapper {
+                    padding-bottom: 75%;
                 }
             }
         </style>
