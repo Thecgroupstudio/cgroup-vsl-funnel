@@ -504,172 +504,32 @@
             link.href = url.toString();
         });
 
-        // Custom Video Player Functionality
+        // Video player functionality removed - using iframe embed instead
         document.addEventListener('DOMContentLoaded', function() {
-            const video = document.getElementById('custom-video');
-            const playOverlay = document.getElementById('play-overlay');
-            const customControls = document.getElementById('custom-controls');
-            const playPauseBtn = document.getElementById('play-pause-btn');
-            const playIcon = document.getElementById('play-icon');
-            const pauseIcon = document.getElementById('pause-icon');
-            const progressBar = document.getElementById('progress-bar');
-            const progressHandle = document.getElementById('progress-handle');
-            const timeDisplay = document.getElementById('time-display');
-            const volumeBtn = document.getElementById('volume-btn');
-            const volumeOnIcon = document.getElementById('volume-on-icon');
-            const volumeOffIcon = document.getElementById('volume-off-icon');
-            const volumeSlider = document.getElementById('volume-slider');
-            const fullscreenBtn = document.getElementById('fullscreen-btn');
-            const videoContainer = document.querySelector('.custom-video-container');
-
-            let isPlaying = false;
-            let isDragging = false;
-
-            // Format time helper function
-            function formatTime(seconds) {
-                const mins = Math.floor(seconds / 60);
-                const secs = Math.floor(seconds % 60);
-                return `${mins}:${secs.toString().padStart(2, '0')}`;
-            }
-
-            // Play/Pause functionality
-            function togglePlayPause() {
-                if (video.paused) {
-                    video.play();
-                    isPlaying = true;
-                    playOverlay.style.display = 'none';
-                    playIcon.style.display = 'none';
-                    pauseIcon.style.display = 'block';
-                } else {
-                    video.pause();
-                    isPlaying = false;
-                    playIcon.style.display = 'block';
-                    pauseIcon.style.display = 'none';
-                    // Show play overlay when paused
-                    playOverlay.style.display = 'flex';
-                }
-            }
-
-            // Video click to play/pause
-            // Video player event listeners removed - using iframe embed instead
-
-            // Progress bar functionality
-            video.addEventListener('timeupdate', function() {
-                if (!isDragging) {
-                    const progress = (video.currentTime / video.duration) * 100;
-                    progressBar.style.width = progress + '%';
-                    progressHandle.style.left = progress + '%';
-                }
-                
-                // Update time display
-                if (video.duration) {
-                    timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
-                }
+            // Initialize Facebook Pixel
+            fbq('init', '1607445923276301', {
+                em: '', // Clear the email field to prevent warning
+                source_url: window.location.href,
+                plugin: 'AEM',
+                aem: 1
             });
-
-            // Progress bar click to seek
-            document.querySelector('.progress-container').addEventListener('click', function(e) {
-                const rect = this.getBoundingClientRect();
-                const pos = (e.clientX - rect.left) / rect.width;
-                video.currentTime = pos * video.duration;
-            });
-
-            // Progress handle drag functionality
-            progressHandle.addEventListener('mousedown', function(e) {
-                isDragging = true;
-                customControls.style.opacity = '1';
-                progressHandle.style.opacity = '1';
-            });
-
-            document.addEventListener('mousemove', function(e) {
-                if (isDragging) {
-                    const progressContainer = document.querySelector('.progress-container');
-                    const rect = progressContainer.getBoundingClientRect();
-                    const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-                    const progress = pos * 100;
-                    progressBar.style.width = progress + '%';
-                    progressHandle.style.left = progress + '%';
-                    video.currentTime = pos * video.duration;
-                }
-            });
-
-            document.addEventListener('mouseup', function() {
-                if (isDragging) {
-                    isDragging = false;
-                    // Hide controls after a delay if not hovering
-                    setTimeout(() => {
-                        if (!videoContainer.matches(':hover')) {
-                            customControls.style.opacity = '0';
-                            progressHandle.style.opacity = '0';
-                        }
-                    }, 2000);
-                }
-            });
-
-            // Volume control
-            volumeBtn.addEventListener('click', function() {
-                if (video.muted) {
-                    video.muted = false;
-                    volumeOnIcon.style.display = 'block';
-                    volumeOffIcon.style.display = 'none';
-                    volumeSlider.style.width = (video.volume * 100) + '%';
-                } else {
-                    video.muted = true;
-                    volumeOnIcon.style.display = 'none';
-                    volumeOffIcon.style.display = 'block';
-                    volumeSlider.style.width = '0%';
-                }
-            });
-
-            // Volume slider
-            document.querySelector('.volume-slider-container').addEventListener('click', function(e) {
-                const rect = this.getBoundingClientRect();
-                const pos = (e.clientX - rect.left) / rect.width;
-                video.volume = pos;
-                video.muted = false;
-                volumeSlider.style.width = (pos * 100) + '%';
-                volumeOnIcon.style.display = 'block';
-                volumeOffIcon.style.display = 'none';
-            });
-
-            // Fullscreen functionality
-            fullscreenBtn.addEventListener('click', function() {
-                if (!document.fullscreenElement) {
-                    videoContainer.requestFullscreen().catch(err => {
-                        console.log(`Error attempting to enable fullscreen: ${err.message}`);
+            
+            // Track page view
+            fbq('track', 'PageView');
+            
+            // Track video view
+            const videoIframe = document.querySelector('iframe');
+            if (videoIframe) {
+                videoIframe.addEventListener('load', function() {
+                    fbq('track', 'ViewContent', {
+                        content_name: 'Executive Presence VSL',
+                        content_category: 'Video',
+                        content_type: 'product',
+                        content_ids: ['executive_presence_vsl']
                     });
-                } else {
-                    document.exitFullscreen();
-                }
-            });
-
-            // Control button hover effects
-            document.querySelectorAll('.control-btn').forEach(btn => {
-                btn.addEventListener('mouseenter', function() {
-                    this.style.color = '#e53e3e';
+                    console.log('Video iframe loaded and tracking initiated');
                 });
-                btn.addEventListener('mouseleave', function() {
-                    this.style.color = 'white';
-                });
-            });
-
-            // Initialize volume slider
-            volumeSlider.style.width = (video.volume * 100) + '%';
-
-            // Auto-hide controls after video starts
-            video.addEventListener('play', function() {
-                setTimeout(() => {
-                    if (!videoContainer.matches(':hover')) {
-                        customControls.style.opacity = '0';
-                    }
-                }, 3000);
-            });
-
-            // Show controls when video is paused
-            video.addEventListener('pause', function() {
-                customControls.style.opacity = '1';
-                progressHandle.style.opacity = '1';
-            });
+            }
         });
     </script>
     <!-- Footer -->
@@ -677,7 +537,7 @@
         <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
             <div style="text-align: center;">
                 <p style="color: #4a5568; font-size: 0.9rem; line-height: 1.8; margin: 0;">
-                    © 2025 The C Group Studio, LLC. All rights reserved. | Privacy Policy | Terms & Conditions | Disclaimer
+                    2025 The C Group Studio, LLC. All rights reserved. | Privacy Policy | Terms & Conditions | Disclaimer
                 </p>
             </div>
         </div>
@@ -704,15 +564,26 @@
     </noscript>
     <!-- End LinkedIn Insight Tag -->
     
-    <!-- Hidden video element for preloading -->
-    <video id="preload-video" style="display: none;" preload="auto" muted playsinline>
-        <source src="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/6870853b8c9ec70eef396f33.mp4" type="video/mp4">
-    </video>
-    
     <style>
-        /* Add smooth transitions for the video element */
-        #custom-video {
-            transition: opacity 0.3s ease;
+        /* Styles for the iframe container */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
         .buffering {
             position: absolute;
@@ -820,6 +691,14 @@
                 content_category: 'Video',
                 content_type: 'product',
                 content_ids: ['executive_presence_vsl']
+            });
+            
+            // Fix for Facebook Pixel email warning
+            fbq('init', '1607445923276301', {
+                em: '', // Clear the email field to prevent warning
+                source_url: window.location.href,
+                plugin: 'AEM',
+                aem: 1
             });
         });
     </script>
