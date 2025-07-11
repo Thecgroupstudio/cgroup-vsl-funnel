@@ -157,17 +157,28 @@
         function setupButtonTracking() {
             console.log('Setting up button tracking...');
             
-            // Find the booking button by ID
-            const bookingButton = document.getElementById('bookingButton');
+            function showBookingButton() {
+                // Button is now always visible via CSS, so we just ensure it has the fade-in animation
+                const bookingButton = document.getElementById('bookingButtonContainer');
+                bookingButton.style.animation = 'fadeIn 0.5s ease-in-out';
+            }
             
-            if (bookingButton) {
-                console.log('Found booking button:', bookingButton);
+            showBookingButton();
+            
+            // Add click event listener
+            const bookingButton = document.getElementById('bookingButton');
+            bookingButton.addEventListener('click', function(e) {
+                console.log('Booking button clicked');
                 
-                // Add click event listener
-                bookingButton.addEventListener('click', function(e) {
-                    console.log('Booking button clicked');
-                    
-                    // Send Facebook Pixel event
+                // Send Facebook Pixel event
+                fbq('track', 'InitiateCheckout', {
+                    content_name: 'Book Consultation',
+                    content_category: 'CTA Click',
+                    content_ids: ['impact_framework_vsl'],
+                    button_text: bookingButton.innerText.trim(),
+                    button_id: 'bookingButton',
+                    page_url: window.location.href,
+                    debug_timestamp: Date.now()
                     fbq('track', 'InitiateCheckout', {
                         content_name: 'Book Consultation',
                         content_category: 'CTA Click',
@@ -552,7 +563,7 @@
         </div>
         
         <!-- Booking Button with proper spacing -->
-        <div style="text-align: center; margin: 10px auto 20px; max-width: 800px; padding: 0 20px; display: none;" id="bookingButtonContainer">
+        <div style="text-align: center; margin: 10px auto 20px; max-width: 800px; padding: 0 20px;" id="bookingButtonContainer">
             <a href="executive-presence-booking.html" class="cta-button" id="bookingButton">
                 Schedule my Free Career Strategy Call
             </a>
@@ -622,20 +633,11 @@
                 }
             }
             
-            // Track play time and show booking button after 30 seconds
-            let hasShownButton = false;
-            
-            // Simple time update handler
-            video.addEventListener('timeupdate', function() {
-                // Show button at 30 seconds
-                if (video.currentTime >= 30 && !hasShownButton) {
-                    showBookingButton();
-                    hasShownButton = true;
-                }
-            });
-            
             // Initialize video (load but don't autoplay)
             video.load();
+            
+            // Show booking button immediately
+            showBookingButton();
 
             // Video click to play/pause
             video.addEventListener('click', function() {
