@@ -11,53 +11,54 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Meta Pixel Code with AEM Configuration -->
+    <!-- Facebook Pixel Code -->
     <script>
-    // Configure AEM (Aggregated Event Measurement)
-    !function(f,b,e,v,n,t,s){
-    if(f.fbq)return;n=f.fbq=function(){n.callMethod ?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    
-    // Initialize Pixel with AEM configuration
-    fbq('init', '1607445923276301', {
-        em: 'your_email@example.com', // Replace with your email for AEM
-        external_id: false,           // Set to true if using external IDs
-        autoConfig: true,             // Enable automatic configuration
-        debug: true,                  // Enable debug mode
-        dataProcessingOptions: ['LDU'], // Enable Limited Data Use mode
-        dataProcessingOptionsCountry: 1, // 1 = US, 100 = worldwide
-        dataProcessingOptionsState: 100 // 100 = worldwide
-    });
-    
-    // Set data processing options for GDPR/CCPA compliance
-    fbq('dataProcessingOptions', ['LDU'], 1, 1000);
-    
-    // Track PageView with AEM parameters
-    fbq('track', 'PageView', {
-        eventID: 'pageview_' + Date.now(),
-        source_url: window.location.href,
-        plugin: 'AEM',
-        aem: 1
-    });
-    
-    // Configure Automatic Advanced Matching (AAM)
-    fbq('init', '1607445923276301', {
-        em: 'hashed_email',
-        ph: 'hashed_phone_number',
-        db: 'hashed_date_of_birth',
-        ge: 'hashed_gender',
-        fn: 'hashed_first_name',
-        ln: 'hashed_last_name',
-        external_id: 'hashed_user_id'
-    }, { 
-        autoConfig: true,
-        debug: true 
-    });
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1607445923276301');
+        fbq('track', 'PageView');
+        
+        // Track video views when the iframe loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const iframe = document.querySelector('iframe');
+            if (iframe) {
+                iframe.addEventListener('load', function() {
+                    console.log('Video iframe loaded, tracking view');
+                    fbq('track', 'ViewContent', {
+                        content_name: 'Executive Presence VSL',
+                        content_category: 'Video',
+                        content_type: 'product',
+                        content_ids: ['executive_presence_vsl']
+                    });
+                });
+            }
+        });
+        
+        // Set data processing options for GDPR/CCPA compliance
+        fbq('dataProcessingOptions', ['LDU'], 1, 1000);
+        
+        // Configure Automatic Advanced Matching (AAM)
+        fbq('init', '1607445923276301', {
+            em: 'hashed_email',
+            ph: 'hashed_phone_number',
+            db: 'hashed_date_of_birth',
+            ge: 'hashed_gender',
+            fn: 'hashed_first_name',
+            ln: 'hashed_last_name',
+            external_id: 'hashed_user_id',
+            source_url: window.location.href,
+            plugin: 'AEM',
+            aem: 1
+        }, { 
+            autoConfig: true,
+            debug: true 
+        });
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1607445923276301&ev=PageView&noscript=1"
@@ -547,56 +548,7 @@
             }
 
             // Video click to play/pause
-            video.addEventListener('click', function() {
-                togglePlayPause();
-            });
-
-            // Large play button overlay click
-            playOverlay.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevent triggering video click event
-                togglePlayPause();
-            });
-            
-            // Spacebar to play/pause
-            document.addEventListener('keydown', function(e) {
-                if (e.code === 'Space' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
-                    e.preventDefault();
-                    togglePlayPause();
-                }
-            });
-
-            // Play/pause button click
-            playPauseBtn.addEventListener('click', function() {
-                togglePlayPause();
-            });
-
-            // Hover effects for play overlay
-            playOverlay.addEventListener('mouseenter', function() {
-                const playButton = this.querySelector('.play-button');
-                playButton.style.transform = 'scale(1.1)';
-                this.style.background = 'rgba(0,0,0,0.4)';
-            });
-
-            playOverlay.addEventListener('mouseleave', function() {
-                const playButton = this.querySelector('.play-button');
-                playButton.style.transform = 'scale(1)';
-                this.style.background = 'rgba(0,0,0,0.3)';
-            });
-
-            // Show/hide controls on hover
-            videoContainer.addEventListener('mouseenter', function() {
-                if (isPlaying) {
-                    customControls.style.opacity = '1';
-                    progressHandle.style.opacity = '1';
-                }
-            });
-
-            videoContainer.addEventListener('mouseleave', function() {
-                if (!isDragging) {
-                    customControls.style.opacity = '0';
-                    progressHandle.style.opacity = '0';
-                }
-            });
+            // Video player event listeners removed - using iframe embed instead
 
             // Progress bar functionality
             video.addEventListener('timeupdate', function() {
@@ -853,312 +805,19 @@
             }
         }
 
-        // Get the amount of buffered time ahead of current position
-        function getBufferAhead(video) {
-            const currentTime = video.currentTime;
-            const buffered = video.buffered;
-            
-            for (let i = 0; i < buffered.length; i++) {
-                if (currentTime >= buffered.start(i) && currentTime < buffered.end(i)) {
-                    return buffered.end(i) - currentTime;
-                }
-            }
-            return 0;
-        }
-
-        // Adjust playback rate based on buffer health
-        function adjustPlaybackRate(video, bufferAhead) {
-            if (bufferAhead < BUFFER_CONFIG.MIN_BUFFER) {
-                // Buffer is low, slow down
-                if (video.playbackRate > BUFFER_CONFIG.SLOW_RATE) {
-                    video.playbackRate = Math.max(
-                        BUFFER_CONFIG.SLOW_RATE, 
-                        video.playbackRate - BUFFER_CONFIG.RATE_ADJUST_STEP
-                    );
-                    if (videoState.debug) console.log(`Reducing rate to ${video.playbackRate.toFixed(2)}`);
-                }
-            } else if (bufferAhead > BUFFER_CONFIG.TARGET_AHEAD) {
-                // Buffer is good, return to normal speed
-                if (video.playbackRate < BUFFER_CONFIG.NORMAL_RATE) {
-                    video.playbackRate = Math.min(
-                        BUFFER_CONFIG.NORMAL_RATE, 
-                        video.playbackRate + BUFFER_CONFIG.RATE_ADJUST_STEP
-                    );
-                    if (videoState.debug) console.log(`Increasing rate to ${video.playbackRate.toFixed(2)}`);
-                }
-            }
-        }
-
-        // Check buffer and manage preloading
-        function checkBufferState(video) {
-            if (!video || video.readyState === 0) return;
-            
-            const now = Date.now();
-            const currentBuffer = getBufferAhead(video);
-            
-            // Log buffer state periodically
-            if (now - videoState.lastBufferCheck > 2000) { // Log every 2 seconds
-                if (videoState.debug) {
-                    console.log(`Buffer: ${currentBuffer.toFixed(2)}s, ` +
-                               `Rate: ${video.playbackRate.toFixed(2)}, ` +
-                               `State: ${getReadyStateText(video.readyState)}`);
-                }
-                videoState.lastBufferCheck = now;
-            }
-            
-            // Check if we're making progress with buffering
-            if (Math.abs(currentBuffer - videoState.lastBufferProgress) < 0.1 && 
-                now - videoState.lastBufferProgressTime > BUFFER_CONFIG.BUFFER_FORCE_LOAD_MS) {
-                // No progress in buffering, force load
-                if (video.networkState === 1) { // NETWORK_IDLE
-                    if (videoState.debug) console.log('No buffer progress, forcing load');
-                    video.load();
-                }
-            } else {
-                videoState.lastBufferProgress = currentBuffer;
-                videoState.lastBufferProgressTime = now;
-            }
-            
-            // Adjust playback based on buffer
-            if (currentBuffer < BUFFER_CONFIG.MIN_BUFFER) {
-                setBuffering(true);
-                adjustPlaybackRate(video, currentBuffer);
-            } else {
-                setBuffering(false);
-                adjustPlaybackRate(video, currentBuffer);
-            }
-            
-            // If we're very low on buffer, pause briefly to let it recover
-            if (currentBuffer < 1 && !video.paused) {
-                video.pause();
-                setTimeout(() => {
-                    if (getBufferAhead(video) > 2) video.play().catch(e => console.error('Play failed:', e));
-                }, 500);
-            }
-        }
-
-        // Initialize video buffering and preloading
-        function initVideoBuffering() {
-            const preloadVideo = document.getElementById('preload-video');
-            const mainVideo = document.getElementById('custom-video');
-            
-            if (!mainVideo) {
-                console.error('Main video element not found');
-                return;
-            }
-            
-            // Clear any existing interval
-            if (videoState.bufferCheckInterval) {
-                clearInterval(videoState.bufferCheckInterval);
-            }
-            
-            // Initialize state
-            videoState.lastBufferCheck = Date.now();
-            videoState.lastBufferProgress = 0;
-            videoState.lastBufferProgressTime = Date.now();
-            
-            // Set up buffer monitoring
-            videoState.bufferCheckInterval = setInterval(() => {
-                checkBufferState(mainVideo);
-            }, BUFFER_CONFIG.CHECK_INTERVAL);
-
-            // Set up event listeners for main video
-            function setupVideoListeners() {
-                // Remove any existing listeners to prevent duplicates
-                const newVideo = mainVideo.cloneNode(true);
-                mainVideo.parentNode.replaceChild(newVideo, mainVideo);
-                const video = document.getElementById('custom-video');
-                
-                // Buffer state events
-                video.addEventListener('waiting', () => {
-                    console.log('Main video: Waiting for more data');
-                    logBufferStatus(video, 'Main video (waiting)');
-                    setBuffering(true);
-                });
-
-                video.addEventListener('playing', () => {
-                    console.log('Main video: Playback started');
-                    logBufferStatus(video, 'Main video (playing)');
-                    setBuffering(false);
-                });
-
-                video.addEventListener('canplay', () => {
-                    console.log('Main video: Can play');
-                    setBuffering(false);
-                });
-
-                video.addEventListener('stalled', () => {
-                    console.warn('Main video: Stalled - trying to recover');
-                    setBuffering(true);
-                    video.load();
-                });
-
-                video.addEventListener('error', (e) => {
-                    console.error('Main video error:', video.error);
-                    setBuffering(false);
-                });
-
-                video.addEventListener('progress', () => {
-                    logBufferStatus(video, 'Main video (progress)');
-                    checkBufferState(video);
-                });
-                
-                // Optimize for mobile
-                video.playsInline = true;
-                video.setAttribute('playsinline', '');
-                video.setAttribute('webkit-playsinline', '');
-                
-                return video;
-            }
-            
-            // Set up preload video if it exists
-            if (preloadVideo) {
-                preloadVideo.addEventListener('waiting', () => {
-                    console.log('Preload video: Waiting for more data');
-                    logBufferStatus(preloadVideo, 'Preload video (waiting)');
-                });
-                
-                // Set preload attributes for better performance
-                preloadVideo.preload = 'auto';
-                preloadVideo.muted = true;
-                preloadVideo.playsInline = true;
-                preloadVideo.setAttribute('playsinline', '');
-                preloadVideo.setAttribute('webkit-playsinline', '');
-            }
-            
-            // Initialize video listeners
-            const video = setupVideoListeners();
-            
-            // Start preloading after a short delay
-            setTimeout(() => {
-                if (preloadVideo) {
-                    const videoSrc = video.querySelector('source').src;
-                    console.log('Starting preload with source:', videoSrc);
-                    
-                    // Add cache-busting parameter to prevent caching issues
-                    const preloadSource = preloadVideo.querySelector('source');
-                    if (preloadSource) {
-                        preloadSource.src = videoSrc + (videoSrc.includes('?') ? '&' : '?') + 'preload=' + Date.now();
-                        preloadVideo.load();
-                        
-                        // Try to start playback (may be blocked by autoplay policies)
-                        const playPromise = preloadVideo.play();
-                        if (playPromise !== undefined) {
-                            playPromise.catch(() => {
-                                // Autoplay was prevented, just load the video
-                                preloadVideo.load();
-                            });
-                        }
-                    }
-                }
-            }, 1000); // Wait 1 second before starting preload
-            
-            return video;
-        }
+        // Video player functionality removed - using iframe embed instead
         
-        // Initialize video buffering when DOM is ready
+        // Initialize tracking when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
-            // Start with a small delay to prioritize page rendering
-            setTimeout(initVideoBuffering, 500);
+            console.log('Page loaded with embedded video player');
             
-            // Re-initialize on window focus in case of tab switching
-            window.addEventListener('focus', () => {
-                if (document.visibilityState === 'visible') {
-                    console.log('Window focused, reinitializing video buffering');
-                    initVideoBuffering();
-                }
+            // Track video view in Facebook Pixel
+            fbq('track', 'ViewContent', {
+                content_name: 'Executive Presence VSL',
+                content_category: 'Video',
+                content_type: 'product',
+                content_ids: ['executive_presence_vsl']
             });
-
-            // Set up preload video handling
-            const preloadVideo = document.getElementById('preload-video');
-            const mainVideo = document.getElementById('custom-video');
-            
-            if (!preloadVideo || !mainVideo) return;
-
-            // Set the preload video source to match the main video
-            const videoSource = mainVideo.querySelector('source');
-            if (!videoSource) return;
-            
-            const videoSrc = videoSource.src;
-            console.log('Setting video source:', videoSrc);
-            
-            // Add cache-busting parameter to force fresh load if needed
-            const cacheBuster = new Date().getTime();
-            const sourceWithCacheBust = `${videoSrc}${videoSrc.includes('?') ? '&' : '?'}_=${cacheBuster}`;
-            
-            // Set source and preload
-            preloadVideo.src = sourceWithCacheBust;
-            preloadVideo.preload = 'auto';
-            preloadVideo.setAttribute('preload', 'auto');
-            
-            console.log('Starting aggressive video preload...');
-            
-            // Track if this is the first play
-            let isFirstPlay = true;
-            
-            // When preload video is ready
-            const canPlayThroughHandler = function() {
-                console.log('Video fully loaded and ready to play');
-                logBufferStatus(preloadVideo, 'Preload video (canplaythrough)');
-                
-                // Only set up the first play handler once
-                if (isFirstPlay) {
-                    // When main video is played for the first time
-                    const firstPlayHandler = function() {
-                        if (preloadVideo.buffered.length > 0) {
-                            // Only set the time if not already set
-                            if (mainVideo.currentTime === 0) {
-                                mainVideo.currentTime = preloadVideo.currentTime;
-                            }
-                        }
-                        // Clean up preload video after first play
-                        preloadVideo.pause();
-                        preloadVideo.removeAttribute('src');
-                        preloadVideo.load();
-                        // Remove this event listener after first play
-                        mainVideo.removeEventListener('play', firstPlayHandler);
-                    };
-                    
-                    // Set up the first play handler
-                    mainVideo.addEventListener('play', firstPlayHandler, { once: true });
-                    isFirstPlay = false;
-                }
-            };
-            
-            // Set up preload video event listeners
-            preloadVideo.addEventListener('canplaythrough', canPlayThroughHandler);
-            
-            // If user interacts with the page, start preloading
-            const userInteractionEvents = ['mousedown', 'touchstart', 'keydown'];
-            const handleUserInteraction = function() {
-                if (preloadVideo.readyState < 2) { // If not already loaded
-                    console.log('User interaction detected, starting video preload');
-                    preloadVideo.load();
-                }
-                userInteractionEvents.forEach(event => {
-                    document.removeEventListener(event, handleUserInteraction);
-                });
-            };
-            
-            userInteractionEvents.forEach(event => {
-                document.addEventListener(event, handleUserInteraction, { once: true });
-            });
-            
-            // Add error handling
-            preloadVideo.addEventListener('error', function(e) {
-                console.error('Error preloading video:', e);
-                // Fallback to main video loading if preload fails
-                mainVideo.load();
-            });
-            
-            // Start preloading
-            const playPromise = preloadVideo.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    console.log('Autoplay prevented, loading normally...');
-                    preloadVideo.load();
-                });
-            }
         });
     </script>
 </body>
