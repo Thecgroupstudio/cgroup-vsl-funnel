@@ -461,11 +461,11 @@
         </div>
 
         <!-- Video Section -->
-        <div style="width: 100%; max-width: 1200px; margin: 0 auto 40px; padding: 0 20px;">
+        <div style="width: 100%; max-width: 1200px; margin: 0 auto 30px; padding: 0 15px;">
             <div style="margin: 0 auto; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                 <iframe 
                     src="https://yourpresenceisyourpower.com/vls-page-video?autoplay=0" 
-                    style="width: 100%; height: 80vh; min-height: 700px; border: none; overflow: hidden;"
+                    style="width: 100%; height: 70vh; min-height: 500px; border: none; overflow: hidden;"
                     title="Executive Presence Training"
                     scrolling="no"
                     allowfullscreen
@@ -475,12 +475,66 @@
             </div>
         </div>
         
-        <!-- Booking Button with proper spacing -->
-        <div style="text-align: center; margin: 10px auto 20px; max-width: 800px; padding: 0 20px;">
-            <a href="executive-presence-booking.html" class="cta-button" id="bookingButton">
+        <!-- Booking Button with improved mobile styling -->
+        <div style="text-align: center; margin: 20px auto 40px; max-width: 800px; padding: 0 15px;">
+            <a href="executive-presence-booking.html" 
+               class="cta-button" 
+               id="bookingButton"
+               style="display: inline-block; 
+                      background: linear-gradient(135deg, #e53e3e, #c53030);
+                      color: white; 
+                      padding: 15px 25px; 
+                      border-radius: 6px; 
+                      text-decoration: none; 
+                      font-weight: 600; 
+                      font-size: 18px;
+                      transition: all 0.3s ease;
+                      width: 100%;
+                      max-width: 400px;
+                      box-sizing: border-box;
+                      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                      border: none;
+                      cursor: pointer;
+                      text-align: center;">
                 Schedule my Free Career Strategy Call
             </a>
         </div>
+        
+        <style>
+            @media (max-width: 768px) {
+                /* Adjust iframe for mobile */
+                .container > div:first-of-type {
+                    padding: 0 10px;
+                    margin-bottom: 20px;
+                }
+                
+                /* Adjust button for mobile */
+                #bookingButton {
+                    font-size: 16px !important;
+                    padding: 12px 20px !important;
+                    margin: 0 auto !important;
+                }
+                
+                /* Ensure iframe is properly sized on mobile */
+                iframe {
+                    min-height: 50vh !important;
+                    height: 60vh !important;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                /* Further adjustments for very small screens */
+                iframe {
+                    min-height: 40vh !important;
+                    height: 50vh !important;
+                }
+                
+                #bookingButton {
+                    font-size: 15px !important;
+                    padding: 12px 15px !important;
+                }
+            }
+        </style>
     </div>
 
     <script>
