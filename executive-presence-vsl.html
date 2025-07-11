@@ -523,39 +523,58 @@
             #videoPlayer {
                 border-radius: 8px;
                 box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                display: block;
+                margin: 0 auto;
+            }
+            
+            /* Video container */
+            .video-container {
+                width: 100%;
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 0 10px;
+                box-sizing: border-box;
             }
             
             @media (max-width: 768px) {
                 /* Adjust container spacing for mobile */
                 .container > div:first-of-type {
-                    padding: 0 5px;
-                    margin-bottom: 5px;
+                    padding: 0 10px;
+                    margin-bottom: 15px;
                 }
                 
                 /* Adjust button for mobile */
                 #bookingButton {
                     font-size: 16px !important;
-                    padding: 12px 15px !important;
-                    margin: 0 auto 5px !important;
-                    max-width: 100% !important;
+                    padding: 14px 20px !important;
+                    margin: 20px auto 10px !important;
+                    max-width: 95% !important;
+                    display: block;
                 }
                 
                 /* Video container adjustments */
+                .video-container {
+                    padding: 0 5px;
+                    margin-bottom: 25px;
+                }
+                
                 #videoPlayer {
                     width: 100% !important;
                     height: auto !important;
-                    min-height: 250px;
-                    max-height: 80vh;
+                    min-height: 200px;
+                    max-height: 50vh;
                     position: relative;
                     top: 0;
                     left: 0;
+                    margin: 0 auto;
+                    display: block;
                 }
                 
                 /* Adjust the video wrapper */
                 .video-wrapper {
                     position: relative;
                     width: 100%;
-                    padding-bottom: 65%; /* Slightly taller for mobile */
+                    padding-bottom: 56.25%; /* 16:9 aspect ratio */
                     margin: 0 auto;
                     overflow: hidden;
                 }
