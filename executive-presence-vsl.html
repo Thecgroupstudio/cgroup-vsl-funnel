@@ -820,11 +820,11 @@
     
     <!-- Hidden video element for preloading -->
     <video id="preload-video" style="display: none;" preload="auto" muted playsinline>
-        <source src="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/686f82998994786cbaebafbf.mp4#t=0,30" type="video/mp4">
+        <source src="https://storage.googleapis.com/msgsndr/r7vdbllzigm1PUnS2x7I/media/686f82998994786cbaebafbf.mp4" type="video/mp4">
     </video>
     
     <script>
-        // Preload the first 30 seconds of the video after page loads
+        // Preload the entire video after page loads
         document.addEventListener('DOMContentLoaded', function() {
             // Start preloading after a short delay to prioritize page rendering
             setTimeout(function() {
@@ -832,18 +832,23 @@
                 const mainVideo = document.getElementById('custom-video');
                 
                 // Set the preload video source to match the main video
-                preloadVideo.src = mainVideo.querySelector('source').src + '#t=0,30';
+                preloadVideo.src = mainVideo.querySelector('source').src;
                 
                 // Start preloading
                 preloadVideo.load();
                 
                 // When preloaded, set the current time of main video to 0
-                preloadVideo.addEventListener('loadeddata', function() {
+                preloadVideo.addEventListener('canplaythrough', function() {
                     mainVideo.currentTime = 0;
+                    console.log('Video fully loaded and ready to play');
                 });
                 
                 // When main video is played, clean up the preload video
                 mainVideo.addEventListener('play', function() {
+                    // Transfer buffered data from preload video to main video if needed
+                    if (preloadVideo.buffered.length > 0) {
+                        mainVideo.currentTime = preloadVideo.currentTime;
+                    }
                     preloadVideo.pause();
                     preloadVideo.removeAttribute('src');
                     preloadVideo.load();
@@ -853,6 +858,7 @@
                 const userInteractionEvents = ['mousedown', 'touchstart', 'keydown'];
                 const handleUserInteraction = function() {
                     if (preloadVideo.readyState < 2) { // If not already loaded
+                        console.log('User interaction detected, starting video preload');
                         preloadVideo.load();
                     }
                     userInteractionEvents.forEach(event => {
@@ -862,6 +868,13 @@
                 
                 userInteractionEvents.forEach(event => {
                     document.addEventListener(event, handleUserInteraction, { once: true });
+                });
+                
+                // Add error handling
+                preloadVideo.addEventListener('error', function(e) {
+                    console.error('Error preloading video:', e);
+                    // Fallback to main video loading if preload fails
+                    mainVideo.load();
                 });
                 
             }, 1000); // 1 second delay before starting preload
