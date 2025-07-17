@@ -25,7 +25,7 @@
     
     // Initialize Pixel with AEM configuration
     fbq('init', '1607445923276301', {
-        em: 'your_email@example.com', // Replace with your email for AEM
+        em: 'thecgroupstudio@gmail.com', // Email for AEM
         external_id: false,           // Set to true if using external IDs
         autoConfig: true,             // Enable automatic configuration
         debug: true,                  // Enable debug mode
@@ -524,11 +524,22 @@
     <script>
     // Track when the page loads as this is the thank you page after booking
     document.addEventListener('DOMContentLoaded', function() {
+        console.log('Thank you page loaded, tracking CompleteRegistration...');
+        
+        // Track CompleteRegistration event
         fbq('track', 'CompleteRegistration', {
             content_name: 'Executive Presence Consultation',
             content_category: 'Booking',
-            status: 'completed'
+            content_ids: ['executive_presence_consultation'],
+            value: 0,
+            currency: 'USD',
+            status: 'completed',
+            eventID: 'complete_registration_' + Date.now(),
+            aem: 1,
+            debug_timestamp: Date.now()
         });
+        
+        console.log('CompleteRegistration event tracked on thank you page');
         
         // Also track a Purchase event with $0 value for conversion tracking
         fbq('track', 'Purchase', {
