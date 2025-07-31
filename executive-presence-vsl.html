@@ -480,12 +480,11 @@
         <!-- Video Section -->
         <div style="width: 100%; max-width: 1200px; margin: 0 auto 5px; padding: 0 10px;">
             <div style="position: relative; width: 100%; padding-bottom: 60%; /* Slightly taller aspect ratio for better mobile viewing */">
-                <div id="videoWrapper" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #000; cursor: pointer;">
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
                     <iframe 
                         src="https://yourpresenceisyourpower.com/vls-page-video?autoplay=0" 
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                        style="width: 100%; height: 100%; border: none;"
                         title="Executive Presence Training"
-                        scrolling="no"
                         allowfullscreen
                         allow="autoplay; fullscreen; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         referrerpolicy="strict-origin-when-cross-origin"
@@ -495,44 +494,13 @@
                     </iframe>
                 </div>
                 <script>
+                    // Minimal initialization - let the video player handle playback
                     document.addEventListener('DOMContentLoaded', function() {
-                        const videoWrapper = document.getElementById('videoWrapper');
                         const videoIframe = document.getElementById('videoPlayer');
-                        let hasInteracted = false;
-
-                        function playVideo() {
-                            if (!hasInteracted) {
-                                hasInteracted = true;
-                                // Update the iframe source with autoplay=1 when first clicked
-                                const newSrc = videoIframe.src.replace('autoplay=0', 'autoplay=1');
-                                videoIframe.src = newSrc;
-                                
-                                // Focus the iframe to help with autoplay
-                                videoIframe.focus();
-                                
-                                // Try to force play using postMessage
-                                if (videoIframe.contentWindow) {
-                                    videoIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                                }
-                                
-                                // Also try the play() method if available
-                                if (videoIframe.contentWindow && videoIframe.contentWindow.document.querySelector('video')) {
-                                    videoIframe.contentWindow.document.querySelector('video').play().catch(e => console.log('Auto-play prevented:', e));
-                                }
-                            }
-                        }
-
-                        // Add click event listener to the wrapper
-                        videoWrapper.addEventListener('click', playVideo);
                         
-                        // Also handle touch events for mobile
-                        videoWrapper.addEventListener('touchstart', playVideo, { once: true });
-                        
-                        // Try to autoplay when the iframe loads
+                        // Just log when the iframe loads
                         videoIframe.addEventListener('load', function() {
-                            if (hasInteracted) {
-                                videoIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                            }
+                            console.log('Video iframe loaded, ready for playback');
                         });
                     });
                 </script>
