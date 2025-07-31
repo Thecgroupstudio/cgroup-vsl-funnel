@@ -482,12 +482,23 @@
             <div style="position: relative; width: 100%; padding-bottom: 60%; /* Slightly taller aspect ratio for better mobile viewing */">
                 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
                     <iframe 
-                        src="https://yourpresenceisyourpower.com/vls-page-video" 
+                        src="https://yourpresenceisyourpower.com/vls-page-video?nobackend=1" 
                         style="width: 100%; height: 100%; border: none;"
                         title="Executive Presence Training"
-                        allowfullscreen>
+                        allowfullscreen
+                        sandbox="allow-same-origin allow-scripts allow-popups allow-forms">
                     </iframe>
                 </div>
+                <script>
+                // Prevent double initialization of video player
+                window.videojs = window.videojs || {};
+                window.videojs.log = window.videojs.log || function() {}; // Disable video.js logs
+                
+                // Disable LeadConnector tracking if it exists
+                if (window.LeadConnector) {
+                    window.LeadConnector.track = function() {};
+                }
+                </script>
             </div>
         </div>
         
