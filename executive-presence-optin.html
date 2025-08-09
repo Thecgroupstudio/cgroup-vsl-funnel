@@ -95,6 +95,28 @@
     /></noscript>
     <!-- End Meta Pixel Code -->
     <style>
+        /* Mobile-First Hero Grid Styles */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Stack columns by default */
+            gap: 40px; /* Adjust gap for mobile */
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+            background: #000;
+            color: #fff;
+            padding: 40px 20px; /* Reduced mobile padding */
+        }
+
+        /* Desktop Styles - Applied only on screens wider than 992px */
+        @media (min-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr 1fr; /* Two columns on desktop */
+                gap: 60px; /* Widen gap for desktop */
+                padding: 60px 40px; /* Reduced desktop padding */
+            }
+        }
+
         :root {
             --primary: #1a365d;
             --secondary: #2c5282;
@@ -189,15 +211,22 @@
             .hero-container {
                 flex-direction: column !important;
                 gap: 40px !important;
-                padding: 40px 20px 20px !important;
+                padding: 30px 20px !important;
+                min-height: auto !important;
             }
             .hero-left-column {
                 max-width: 100% !important;
-                padding-right: 0 !important;
+                padding: 40px 20px !important;
+                text-align: center;
+            }
+            .hero-left-column > div {
+                max-width: 100% !important;
+                margin: 0 auto;
             }
             .hero-right-column {
                 flex: 1 1 auto !important;
                 max-width: 100% !important;
+                width: 100%;
             }
             .hero-container h1 {
                 font-size: 1.8rem !important;
@@ -451,7 +480,34 @@
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
-                padding: 20px;
+                padding: 0;
+                max-width: 100%;
+            }
+            .hero-container {
+                padding: 20px 15px !important;
+                gap: 30px !important;
+            }
+            .hero-left-column {
+                padding: 20px 15px !important;
+            }
+            .hero-left-column h1 {
+                font-size: 1.8rem !important;
+                line-height: 1.2 !important;
+                margin-bottom: 15px !important;
+            }
+            .subheadline {
+                font-size: 1.1rem !important;
+                margin-bottom: 20px !important;
+            }
+            .hero-right-column > div:first-child {
+                height: 50vh !important;
+                min-height: 300px !important;
+            }
+            .hero-right-column > div:last-child {
+                padding: 20px 15px !important;
+            }
+            .form-container {
+                max-width: 100% !important;
             }
             .header h1 {
                 font-size: 1.9rem !important;
@@ -491,39 +547,92 @@
                 max-width: 90% !important;
             }
         }
+        /* Responsive styles for the learn-grid */
+        @media (min-width: 768px) {
+            .learn-grid {
+                grid-template-columns: repeat(3, 1fr); /* 3 columns on tablet and desktop */
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header hero-container" style="align-items: flex-start;">
-            <div class="hero-left-column">
-                <div style="margin-bottom: 20px; color: #4a5568; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">For High-Performers Who Feel Overlooked:</div>
-                <h1 style="font-size: 2.4rem; line-height: 1.2; margin-bottom: 20px; font-weight: 800; color: #1a365d;">How to Be Seen as <span style="color: #e53e3e;">Unshakeable, Confident, and Executive Ready</span> (Even If You're Already Doing Everything Right)</h1>
-                <p class="subheadline" style="font-size: 1.2rem; font-weight: 500; margin: 10px 0 25px; color: #4a5568; line-height: 1.5;">The proven framework to get the promotion and recognition you deserve—without performing a fake confidence or burning out.</p>
-            </div>
+    <!-- Hero Section with CSS Grid -->
+    <div class="hero-grid">
+        <!-- Left Column: Content and Form -->
+        <div class="hero-content" style="padding: 40px; display: flex; flex-direction: column; justify-content: center;">
+            <h1 style="font-size: 2.3rem; font-weight: 800; margin: 0 0 20px 0; line-height: 1.2; color: #fff; letter-spacing: -0.5px;">
+                Master Class: Why Imposter Syndrome Isn't the Problem—And What Actually Is
+            </h1>
+            <p class="subheadline" style="font-size: 1.2rem; font-weight: 400; margin: 0 0 25px 0; color: #e2e8f0; line-height: 1.5;">
+                You don't need another confidence boost. You need to understand what's really happening behind the scenes when you feel like a fraud—even though you're brilliant.
+            </p>
             
-            <div class="hero-right-column" style="min-height: 580px; display: flex; align-items: flex-start;">
-                <div class="form-container" id="form-section" style="padding: 0; overflow: visible; min-height: 558px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); flex: 1;">
-                    <iframe
-                        src="https://api.leadconnectorhq.com/widget/form/B2Z7bWPx9D8DF4UuNYlq"
-                        style="width:100%;min-height:558px;border:none;border-radius:10px;overflow:visible"
-                        id="inline-B2Z7bWPx9D8DF4UuNYlq" 
-                        data-layout="{'id':'INLINE'}"
-                        data-trigger-type="alwaysShow"
-                        data-trigger-value=""
-                        data-activation-type="alwaysActivated"
-                        data-activation-value=""
-                        data-deactivation-type="neverDeactivate"
-                        data-deactivation-value=""
-                        data-form-name="VSL Form Opt In"
-                        data-height="558"
-                        data-layout-iframe-id="inline-B2Z7bWPx9D8DF4UuNYlq"
-                        data-form-origin="https://api.leadconnectorhq.com"
-                        loading="lazy">
-                    </iframe>
-                </div>
+            <div class="form-container" style="max-width: 650px; max-height: 480px; background: #fff; padding: 0; border-radius: 12px; margin: 0 auto; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                <iframe
+                    src="https://api.leadconnectorhq.com/widget/form/B2Z7bWPx9D8DF4UuNYlq"
+                    style="width:100%;border:none;"
+                    id="inline-B2Z7bWPx9D8DF4UuNYlq" 
+                    data-layout="{'id':'INLINE'}"
+                    data-trigger-type="alwaysShow"
+                    data-trigger-value=""
+                    data-activation-type="alwaysActivated"
+                    data-activation-value=""
+                    data-deactivation-type="neverDeactivate"
+                    data-deactivation-value=""
+                    data-form-name="VSL Form Opt In"
+                    data-layout-iframe-id="inline-B2Z7bWPx9D8DF4UuNYlq"
+                    data-form-origin="https://api.leadconnectorhq.com"
+                    loading="lazy">
+                </iframe>
             </div>
         </div>
+        
+        <!-- Right Column: Stacked Image and Bio -->
+        <div class="hero-sidebar" style="padding: 40px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);">
+            <img 
+                src="images/Katryn-optin.jpg" 
+                alt="Kathryn Ficarra" 
+                style="width: 100%; max-width: 450px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);"
+            >
+            
+            <div style="width: 100%; max-width: 450px; background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 8px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <p style="margin: 0 0 5px 0; font-size: 1.2rem; font-weight: 600; color: #fff;">Kathryn Ficarra</p>
+                <p style="margin: 10px 0 0 0; font-size: 1rem; color: #e53e3e; font-weight: 600; line-height: 1.4;">
+                    <span style="display: block; margin-bottom: 6px;">Creator of the Presence Recalibration™ Method</span>
+                    <span>Author of <em>Your Presence Is Your Power</em> & Creator of the IMPACT Method™</span>
+                </p>
+                <p style="margin: 15px 0 0 0; font-size: 0.95rem; color: #fff; font-weight: 500; letter-spacing: 0.3px; opacity: 0.9;">Founder/CEO, The C Group Studio, LLC</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- What You'll Learn Section -->
+    <section class="learn-section" style="background-color: #fff; padding: 60px 20px; text-align: center;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="font-size: 2rem; font-weight: 800; margin: 0 0 10px 0; color: #1a202c;">What you'll learn</h2>
+            <p style="font-size: 1.1rem; margin: 0 0 40px 0; color: #4a5568;">Stop managing imposter syndrome. Start mastering your presence.</p>
+            
+            <div class="learn-grid" style="display: grid; grid-template-columns: 1fr; gap: 20px; text-align: left;">
+                
+                <!-- Grid Item 1 -->
+                <div class="learn-item" style="background-color: #c53030; color: #fff; padding: 30px; border-radius: 8px;">
+                    <p style="font-size: 1.25rem; font-weight: 600; line-height: 1.4; margin: 0;">Why imposter syndrome is a symptom, not the root cause</p>
+                </div>
+                
+                <!-- Grid Item 2 -->
+                <div class="learn-item" style="background-color: #c53030; color: #fff; padding: 30px; border-radius: 8px;">
+                    <p style="font-size: 1.25rem; font-weight: 600; line-height: 1.4; margin: 0;">The internal shift that separates overlooked leaders from unshakable ones</p>
+                </div>
+                
+                <!-- Grid Item 3 -->
+                <div class="learn-item" style="background-color: #c53030; color: #fff; padding: 30px; border-radius: 8px;">
+                    <p style="font-size: 1.25rem; font-weight: 600; line-height: 1.4; margin: 0;">A simple framework to lead with presence—even when you're under pressure</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
         
         <script src="https://link.msgsndr.com/js/form_embed.js"></script>
         <script>
@@ -609,44 +718,17 @@
             fbq('track', 'PageView');
         })();
         </script>
-        
-        <div class="content" style="display: flex; gap: 60px; align-items: flex-start; max-width: 1200px; margin: 0 auto; padding: 60px 20px;">
-            <div class="left-column" style="flex: 0 0 500px; max-width: 500px;">
-                <div class="image-container">
-                    <div class="main-image" style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
-                        <img src="images/kathryn-ficarra.jpg" alt="Kathryn Ficarra - Executive Presence Coach" style="width: 100%; height: 400px; display: block; object-fit: cover;">
-                    </div>
-                    <div style="max-width: 100%; margin: 4px auto 0; text-align: center;">
-                        <p style="margin: 0 0 5px 0; font-size: 1.1rem; color: #2d3748; font-weight: 600; font-style: italic;">Kathryn Ficarra</p>
-                        <p style="margin: 0 0 10px 0; font-size: 0.95rem; color: #e53e3e; font-weight: 600; line-height: 1.4;">
-                            <span style="display: block; margin-bottom: 3px;">Creator of the Presence Recalibration™ Method</span>
-                            <span style="display: block;">Author of <em>Your Presence Is Your Power</em> & Creator of the IMPACT Method™</span>
-                        </p>
-                        <div style="margin: 0; padding: 0; text-align: center;">
-                            <p style="margin: 0 0 4px 0; font-size: 0.9rem; color: #4a5568; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600;">As Seen On</p>
-                            <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1200,h=175,fit=crop/AMqawWPOy9f82Wjp/clients-Aq2WKWD6jaCr7v45.png" 
-                                 alt="Featured in: Apple TV, Morning News, Wall Street Select, Starbucks" 
-                                 style="width: 100%; max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 6px;">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="right-column" style="flex: 1; max-width: 600px;">
-                <div style="background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-left: 4px solid #e53e3e;">
-                    <p style="font-size: 1.4rem; font-weight: 700; color: #2d3748; margin-bottom: 30px; text-align: center;">In this exclusive briefing, you will discover:</p>
-                    <div style="text-align: left; font-size: 1.1rem; line-height: 1.8; color: #4a5568;">
-                        <p style="margin-bottom: 20px; display: flex; align-items: flex-start;"><span style="color: #e53e3e; font-size: 1.2rem; margin-right: 12px; flex-shrink: 0;">✅</span> <span>The real reason you feel like a "fraud" (It's a biological capacity issue, not a skill issue).</span></p>
-                        <p style="margin-bottom: 20px; display: flex; align-items: flex-start;"><span style="color: #e53e3e; font-size: 1.2rem; margin-right: 12px; flex-shrink: 0;">✅</span> <span>The "Presence Recalibration™" method for hardwiring authentic confidence at the neurological level.</span></p>
-                        <p style="margin-bottom: 20px; display: flex; align-items: flex-start;"><span style="color: #e53e3e; font-size: 1.2rem; margin-right: 12px; flex-shrink: 0;">✅</span> <span>How to stop speaking like an individual contributor and start communicating in a way that signals "Executive Material."</span></p>
-                        <p style="margin-bottom: 0; display: flex; align-items: flex-start;"><span style="color: #e53e3e; font-size: 1.2rem; margin-right: 12px; flex-shrink: 0;">✅</span> <span>A proven system to command respect in high-stakes meetings and become the obvious choice for senior roles.</span></p>
-                    </div>
-                </div>
-            </div>
+    </div>
+
+    <!-- As Seen On Section -->
+    <div style="background: #fff; padding: 50px 20px; text-align: center; border-top: 1px solid #eee;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <p style="margin: 0 0 15px 0; font-size: 1rem; color: #666; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600;">As Seen On</p>
+            <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1200,h=175,fit=crop/AMqawWPOy9f82Wjp/clients-Aq2WKWD6jaCr7v45.png" 
+                 alt="Featured in: Apple TV, Morning News, Wall Street Select, Starbucks" 
+                 style="width: 100%; height: auto; max-width: 700px; display: block; margin: 0 auto; filter: grayscale(100%) contrast(0.8);">
         </div>
     </div>
-    
-
     
     <!-- Footer -->
     <footer style="background: #f8f9fa; padding: 40px 0 0; margin-top: 40px; border-top: 1px solid #e2e8f0;">
@@ -715,6 +797,32 @@
                 });
             }
         }
+        
+        // iFrameSizer-compatible resizing for LeadConnector form
+        const iframe_B2Z7bWPx9D8DF4UuNYlq = document.getElementById("inline-B2Z7bWPx9D8DF4UuNYlq");
+
+        window.addEventListener("message", function(event) {
+            // Keep the origin check for security
+            if (event.origin !== "https://api.leadconnectorhq.com") return;
+
+            // Check if the message is a string and matches the iFrameSizer format
+            if (typeof event.data === 'string' && event.data.startsWith('[iFrameSizer]')) {
+                try {
+                    // The iFrameSizer message format is typically "[iFrameSizer]id:height:width:type"
+                    const parts = event.data.split(':');
+                    
+                    // We only care about the height, which is the second part
+                    if (parts.length >= 2) {
+                        const newHeight = parts[1];
+                        if (!isNaN(newHeight)) {
+                            iframe_B2Z7bWPx9D8DF4UuNYlq.style.height = newHeight + 'px';
+                        }
+                    }
+                } catch (e) {
+                    console.error("Error parsing iFrameSizer message:", e);
+                }
+            }
+        }, false);
         
         // Form handling now managed by LeadConnector embedded form
         // All tracking and form submission is handled through their platform
