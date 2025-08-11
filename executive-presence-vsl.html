@@ -479,14 +479,19 @@
 
         <!-- Video Section -->
         <div style="width: 100%; max-width: 1200px; margin: 0 auto 5px; padding: 0 10px;">
-            <div style="position: relative; width: 100%; padding-bottom: 60%; /* Slightly taller aspect ratio for better mobile viewing */">
+            <div style="position: relative; width: 100%; padding-bottom: 56.25%; /* 16:9 Aspect Ratio */">
                 <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
                     <iframe 
-                        src="https://yourpresenceisyourpower.com/vls-page-video?nobackend=1" 
+                        src="https://yourpresenceisyourpower.com/vsl-video-page" 
                         style="width: 100%; height: 100%; border: none;"
                         title="Executive Presence Training"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen
-                        sandbox="allow-same-origin allow-scripts allow-popups allow-forms">
+                        webkitallowfullscreen
+                        mozallowfullscreen
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        loading="eager">
                     </iframe>
                 </div>
                 <script>
