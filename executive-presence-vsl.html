@@ -477,26 +477,27 @@
             </p>
         </div>
 
-        <!-- Video Section - Compact -->
-        <div style="width: 100%; max-width: 350px; margin: 0 auto 5px; padding: 0 10px; overflow: hidden;">
-            <div style="position: relative; width: 100%; max-width: 350px; margin: 0 auto; padding-bottom: 177.78%; /* 16:9 aspect ratio */">
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                    <div style="width: 100%; height: 100%; overflow: hidden; position: relative; border-radius: 6px; box-shadow: 0 3px 8px rgba(0,0,0,0.08);">
-                        <iframe 
-                            src="https://yourpresenceisyourpower.com/vsl-video-page" 
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; overflow: hidden;"
-                            title="Executive Presence Training"
-                            frameborder="0"
-                            scrolling="no"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen
-                            webkitallowfullscreen
-                            mozallowfullscreen
-                            referrerpolicy="strict-origin-when-cross-origin"
-                            loading="eager">
-                        </iframe>
-                    </div>
-                </div>
+        <!-- Wistia Video Player -->
+        <div style="width: 100%; max-width: 600px; margin: 0 auto 15px; padding: 0 15px;">
+            <script src="https://fast.wistia.com/player.js" async></script>
+            <script src="https://fast.wistia.com/embed/livkhqzciu.js" async type="module"></script>
+            <style>
+                wistia-player[media-id='livkhqzciu']:not(:defined) { 
+                    background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/livkhqzciu/swatch'); 
+                    display: block; 
+                    filter: blur(5px); 
+                    padding-top: 86.56%; 
+                    border-radius: 8px;
+                    overflow: hidden;
+                }
+                wistia-player {
+                    border-radius: 8px;
+                    overflow: hidden;
+                    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+                }
+            </style>
+            <wistia-player media-id="livkhqzciu" aspect="0.8653846153846154" style="width: 100%; height: 100%;"></wistia-player>
+        </div>
                 <script>
                 // Prevent double initialization of video player
                 window.videojs = window.videojs || {};
